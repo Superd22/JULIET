@@ -1,3 +1,11 @@
+import { RouterConfig } from './config/router.config';
+import { UIRouterModule } from 'ui-router-ng2';
+import { StatsModule } from './stats/stats.module';
+import { ShipsModule } from './ships/ships.module';
+import { RightsModule } from './rights/rights.module';
+import { RanksModule } from './ranks/ranks.module';
+import { NotifsModule } from './notifs/notifs.module';
+import { DefaultModule } from './default/default.module';
 import { JulietCommonModule } from './juliet-common/juliet-common.module';
 import { CalendarModule } from './calendar/calendar.module';
 import { UserModule } from './user/user.module';
@@ -7,6 +15,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { MaterialModule } from '@angular/material';
+
 
 import { AppComponent } from './app.component';
 
@@ -19,10 +29,21 @@ import { AppComponent } from './app.component';
     FormsModule,
     HttpModule,
     CalendarModule,
+    DefaultModule,
     GroupsModule,
     JulietCommonModule,
+    NotifsModule,
+    RanksModule,
+    RightsModule,
+    ShipsModule,
+    StatsModule,
     TagsModule,
-    UserModule
+    UserModule,
+    MaterialModule.forRoot(),
+    UIRouterModule.forRoot({
+      configClass: RouterConfig,
+      useHash:true,
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]

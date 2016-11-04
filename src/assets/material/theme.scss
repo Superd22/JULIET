@@ -1,0 +1,70 @@
+@import "~@angular/material/core/theming/all-theme";
+// Plus imports for other components in your app.
+
+// Include the base styles for Angular Material core. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+@include md-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue.
+
+
+$custom-blue-grey: (
+  50: #d2dce0,
+  100: #a5b8c1,
+  200: #849eaa,
+  300: #5e7b88,
+  400: #516a76,
+  500: #455a64,
+  600: #384a52,
+  700: #2c3940,
+  800: #20292e,
+  900: #13191c,
+  A100: #d2dce0,
+  A200: #a5b8c1,
+  A400: #516a76,
+  A700: #2c3940,
+  contrast: (
+    50: $black-87-opacity,
+    100: $black-87-opacity,
+    200: $black-87-opacity,
+    300: $black-87-opacity,
+    400: white,
+    500: white,
+    600: $white-87-opacity,
+    700: $white-87-opacity,
+    800: $white-87-opacity,
+    900: $white-87-opacity,
+    A100: $black-87-opacity,
+    A200: $black-87-opacity,
+    A400: white,
+    A700: $white-87-opacity,
+  )
+);
+
+
+ $dark-primary: md-palette($custom-blue-grey);
+ $dark-accent:  md-palette($md-light-blue, A200, A100, A400);
+ $dark-warn:    md-palette($md-deep-orange);
+
+
+$md-dark-theme-background: (
+  status-bar: black,
+  app-bar:    map_get($md-grey, 900),
+  background: #1a1c22,
+  hover:      rgba(white, 0.04), // TODO(kara): check style with Material Design UX
+  card:       map_get($md-grey, 800),
+  dialog:     map_get($md-grey, 800),
+  disabled-button: rgba(white, 0.12)
+);
+
+
+ $dark-theme: md-dark-theme($dark-primary, $dark-accent, $dark-warn);
+
+
+ @include angular-material-theme($dark-theme);   
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.

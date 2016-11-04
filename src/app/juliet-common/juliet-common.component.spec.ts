@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { JulietCommonComponent } from './juliet-common.component';
+import { JulietCommonComponent } from './components/juliet-common.component';
 
 describe('JulietCommonComponent', () => {
   let component: JulietCommonComponent;

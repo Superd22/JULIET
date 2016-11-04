@@ -1,5 +1,5 @@
 import { environment } from './../../../../environments/environment';
-import { HttpModule } from '@angular/http';
+import { Http } from '@angular/http';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -11,14 +11,14 @@ export class DefaultComponent implements OnInit {
 
   private motr:string;
 
-  constructor(private http: HttpModule) {
+  constructor(private http: Http) {
 
   }
 
   ngOnInit() {
     this.http.get(environment.julietAPI+'Default/welcome').subscribe(
       data => {
-        var words = data.data.split(/\r?\n/);
+        var words = data.json().split(/\r?\n/);
         var n = Math.floor(Math.random() * (words.length));
 
         this.motr = words[n];

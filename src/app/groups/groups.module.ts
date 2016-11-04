@@ -1,11 +1,18 @@
+import { STATES } from './states/_.states';
+import { UIRouterModule } from 'ui-router-ng2';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { GroupsComponent } from './groups.component';
+import { GroupsComponent } from './components/groups/groups.component';
+import { GroupComponent } from './components/group/group.component';
+import { ListeComponent } from './components/liste/liste.component';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    UIRouterModule.forChild({
+      states: STATES
+    })
   ],
-  declarations: [GroupsComponent]
+  declarations: [GroupsComponent, GroupComponent, ListeComponent]
 })
 export class GroupsModule { }
