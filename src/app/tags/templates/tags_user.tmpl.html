@@ -1,0 +1,35 @@
+<div class="ju_tag_list" ng-init="getTagsUser(userid)">
+    <div class="ju_tag_heading"><h3>Liste des T.A.G.S personnel de {{currentUsername}}</h3></div>
+    <div class="ju_tag_heading">
+        <form  ng-show="has_the_rights" ng-submit="createTag( newTag , userid )" ng-init='newTag={}' novalidate autocomplete="off">
+
+          <input type="text" ng-model="newTag.title" class="form-control"  id="newTagTitle" placeholder="Taper le nom d'un tag pour faire une recherche." autocomplete="off">
+
+            <div class="tagResults" ng-if="newTag.title && showResult">
+              <div class="results">
+                <div class="maina ju_tag" ng-repeat="tag in tagR" ng-click="selecNewTag(tag.name)"><img src="{{tag.img}}"><span >{{tag.name}}</span></div>
+              </div>
+            </div>
+
+            <div class="ju_tag_create_option" ng-hide="tagsFiltered.length">
+            <p class="warning" ng-if="hasnotags">Oups ... {{currentUsername}} n'a pas encore de T.A.G.</p>
+            <p class="info" ng-if="!hasnotags">Oups... {{currentUsername}} n'est pas indiqué comme étant admirateur de #{{newTag.title}}.<br />
+                Ajoute le en validant.</p>
+            </div>
+
+        </form>
+    </div>
+
+        <div ng-class="{ship: isAShip(tag.type), auto_tag: isAutoType(tag)}" class="ju_tag"  dir-paginate="tag in tagsFiltered = (tags | filter:newTag.title ) | itemsPerPage: 16 ">
+        <a href="{{generateUrl(tag)}}" class="maina" >
+            <img src="{{tag.img}}">  <span >{{tag.name}}</span>
+                </a>
+            <span ng-click='remove(tag)' class='del glyphicon glyphicon-remove' aria-hidden="true" ng-if="has_the_rights && !isAutoType(tag)"></span>
+        </div>
+
+    <div style="clear:both"></div>
+
+    <div class='ju_chargement' ng-if='isasync'><img src='https://starcitizen.fr/Flotte/images/ajax-loader.gif'> Accès au serveur en cours ... </div>
+    <dir-pagination-controls>
+    </dir-pagination-controls>
+</div>

@@ -1,0 +1,15 @@
+<div class='ju-cal-date-picker'>
+  <div class='col-md-6'>
+    <uib-datepicker ng-model="day" starting-day="1" min-date="(hasRights) && today || day" max-date="(hasRights) && 'null' || day" show-weeks="true" class="well well-sm DatePicker" custom-class="getDayClass(date, mode)"></uib-datepicker>
+  </div>
+  <div class='col-md-6'>
+    <div class="pickers picksec">
+      {{EVENT.title}} prévu pour <em>{{FullDate | date:"EEEE d MMMM 'à' HH'h'mm" }}</em>.
+    </div>
+    <div class="pickers pickone">
+      <span class="picker"><h3 uib-popover="Heure de début de l'évenement." popover-trigger="mouseenter" >Départ</h3><br /><uib-timepicker ng-model="start" ng-class="{disabledInput: !hasRights}" hour-step="(hasRights) && 1 || 0" minute-step="(hasRights) && 1 || 0" show-meridian="ismeridian" class="TimePicker" ng-class=""></uib-timepicker></span>
+      <span class="picker"><h3 uib-popover="Durée estimée de l'évenement." popover-trigger="mouseenter">Durée</h3><br /><uib-timepicker ng-model="end" ng-class="{disabledInput: !hasRights}" hour-step="(hasRights) && 1 || 0" minute-step="(hasRights) && 1 || 0" show-meridian="ismeridian" class="TimePicker"></uib-timepicker></span>
+      </div>
+  </div>
+  <div class="clear"></div>
+</div>

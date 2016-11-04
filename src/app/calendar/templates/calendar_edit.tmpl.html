@@ -1,0 +1,98 @@
+<button class="btn btn-default ju_save_v2" type="submit" ng-click="" ui-sref="Calendar"><span class="glyphicon glyphicon-calendar"></span> Retour au calenrier</button>
+<div style="clear:both;"></div>
+
+<div class="ju_tag_list ju_cal_main">
+    <div class="ju_tag_heading"><h3>{{language.EventPrefix}} evenement</h3></div>
+    <div class ="ju_cal_single">
+
+      <p class="info" ng-if='needToSave && done && hasRights'>Vous avez modifié votre évenement, n'oubliez pas de le sauvegarder avant de quitter !<br />
+      <em>Je rigole pas hein, si tu perd ton taf c'pas de ma faute.</em></p>
+
+
+      <input type="text" id="Title" placeholder="Titre de l'evenement" ng-model="EVENT.title" ng-disabled="!hasRights"/>
+      <div class="btn-group" id="Private">
+        <label uib-popover="Seuls les membres ayant été invités peuvent rejoindre l'évenement. Ce dernier reste néanmoins visible de tous." popover-trigger="mouseenter" class="btn btn-success clos" ng-model="EVENT.private" uib-btn-radio="'2'" uncheckable  ng-disabled="!hasRights">Fermé</label>
+        <label uib-popover="Les membres peuvent demander à s'inscrire dans l'évenement, et doivent ensuite être valider par un organisateur." popover-trigger="mouseenter" class="btn btn-success rsvp" ng-model="EVENT.private" uib-btn-radio="'1'" uncheckable  ng-disabled="!hasRights">RSVP</label>
+        <label uib-popover="Les membres peuvent s'inscrire librement à l'évenement sans validation." popover-trigger="mouseenter" popover-placement="bottom" class="btn btn-success open" ng-model="EVENT.private" uib-btn-radio="'0'" uncheckable  ng-disabled="!hasRights">ouvert</label>
+      </div>
+
+      <cal-topic></cal-topic>
+      <cal-desc></cal-desc>
+
+      <ui-select multiple ng-model="PERMTEMP" theme="bootstrap" class="ju_ppl_search ju_ppl_perm" on-remove="delPerm($item,$model)" on-select="addPerm($item,$model)"  ng-disabled="!hasRights">
+        <ui-select-match placeholder="Tapez le nom d'un joueur pour le rendre organisateur."><div class='apep'><img src="{{$item.avatar}}" class='minAvatar'> {{$item.text}}</div></ui-select-match>
+        <ui-select-choices repeat="pseudo in pseudos | filter: $select.search track by pseudo.id"  refresh="refreshPseudos($select.search)" refresh-delay="0">
+           <img src="{{pseudo.avatar}}" class='minAvatar'> {{pseudo.text}}
+        </ui-select-choices>
+      </ui-select>
+
+      <cal-select-date></cal-select-date>
+
+      <div class="ju_tag_heading"><h3>Membres inscrits</h3></div>
+
+
+      <div class="ju_ppl_search">
+        <ul>
+          <li  class='apep actualmembers' ng-repeat="member in INVITS.members" ng-class="{petre:member.confirm=='2'}"><img src="{{mbrinfo[member.target].avatar}}" class='minAvatar'>{{mbrinfo[member.target].text}}
+            <span ng-if="hasRights" class="delM glyphicon glyphicon-remove" ng-click="delInvit(mbrinfo[member.target],true,$index)"></span>
+          </li>
+        </ul>
+      </div>
+
+      <cal-invit-stats></cal-invit-stats>
+
+      <div class="ju_tag_heading"><h3>Invitations en attente</h3></div>
+
+      <ui-select multiple ng-model="invitations" theme="bootstrap" class="ju_ppl_search ju_ppl_left" on-remove="delInvit($item,$model)" on-select="addInvit($item,$model)"  ng-disabled="!hasRights">
+        <ui-select-match placeholder="Inviter des joueurs.">
+          <div class='apep' ng-class="{demande: demande[$item.id]}"><img src="{{$item.avatar}}" class='minAvatar'> {{$item.text}}
+
+            <span class="validate glyphicon glyphicon-ok" ng-click="valDemande($item,$model)" href="#" ng-if="demande[$item.id] && hasRights"></span>
+          </div>
+        </ui-select-match>
+
+        <ui-select-choices repeat="pseudo in pseudos | filter: $select.search track by pseudo.id"  refresh="refreshPseudos($select.search)" refresh-delay="0">
+          <img src="{{pseudo.avatar}}" class='minAvatar'> {{pseudo.text}}
+        </ui-select-choices>
+      </ui-select>
+
+      <ui-select multiple ng-model="groups" theme="bootstrap" class="ju_ppl_search ju_ppl_right" on-remove="delGrp($item,$model)" on-select="addGrp($item,$model)"  ng-disabled="!hasRights">
+        <ui-select-match placeholder="Inviter des groupes entiers.">
+          <div class='agrp'><img src="{{$item.logo}}" class='minAvatar'> {{$item.nom}}</div>
+        </ui-select-match>
+
+        <ui-select-choices repeat="groupe in groupes | filter: $select.search track by groupe.nom"  refresh="refreshGrp($select.search)" refresh-delay="0">
+          <img src="{{groupe.logo}}" class='minAvatar'> {{groupe.nom}}
+        </ui-select-choices>
+      </ui-select>
+
+      <ui-select multiple ng-model="tags" theme="bootstrap" class="ju_ppl_search" on-remove="delTag($item,$model)" on-select="addTag($item,$model)"  ng-disabled="!hasRights">
+        <ui-select-match placeholder="Inviter via les tags">
+          <div class='apep atag'><img src="{{$item.img}}" class='minAvatar'> {{$item.name}}</div>
+        </ui-select-match>
+
+        <ui-select-choices repeat="tag in tages | filter: $select.search track by tagTracking(tag)"  refresh="refreshTag($select.search)" refresh-delay="0">
+          <img src="{{tag.img}}" class='minAvatar'> {{tag.name}}
+        </ui-select-choices>
+      </ui-select>
+
+      <br /> <br />
+      <hr>
+            <p class="info" ng-if='needToSave && done && hasRights'>Vous avez modifié votre évenement, n'oubliez pas de le sauvegarder avant de quitter !<br />
+      <em>Je rigole pas hein, si tu perd ton taf c'pas de ma faute.</em></p>
+
+
+        <button id="save" class="btn btn-default ju_save_v2" type="submit" ng-if="needToSave && hasRights && !loading && done" ng-click="eventPush()"><span class="glyphicon glyphicon-floppy-open"></span> Sauvegarder</button>
+        <div ng-if="loading" class='loading'><img src='https://starcitizen.fr/Flotte/images/ajax-loader.gif'>  Accès au serveur en cours ... </div>
+        <div style="clear:both;"></div>
+
+        <span class="del_event" ng-if="hasRights && !newEvent" ng-click="del_event()"><img src='https://starcitizen.fr/Forum/styles/scfr/theme/images/Delete-icon.png' style='float:left;'> supprimer cet evenement (DEFINITIF)</span>
+
+      </div>
+</div>
+
+
+<br /> <br />
+
+
+      <ng-include src="'Calendar/templates/calendar_register.tmpl.html'"></ng-include>

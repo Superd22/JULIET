@@ -1,0 +1,24 @@
+<div class="ju_tag_list ju_notif_list_big">
+  <div class='col-md-8'>
+    <ul class='ju_tag_list'>
+      <div class="ju_tag_heading"><h3>L.O.G.S Admins {{models.filter}}</h3></div>
+      <li dir-paginate="notif in models.FILTEREDNOTIFS | itemsPerPage: 25" ng-click='setSeen(notif)' class="notif" toggle-class="big">
+        <ju-notif-inner></ju-notif-inner>
+      </li>
+      <dir-pagination-controls></dir-pagination-controls>
+    </ul>
+  </div>
+  <div class='col-md-4'>
+    <div class='filters ju_tag_list'>
+      <div class="ju_tag_heading"><h3 class="ng-binding">Filtres</h3></div>
+      <ul>
+        <li ng-click="selectOnly(0)"  ng-class="{active: '' == models.filter}">Tous</li>
+        <li ng-repeat="type in models.TYPES" ng-click="selectOnly(type)" ng-class="{active: type == models.filter}">{{type}}</li>
+      </ul>
+    </div>
+
+
+  </div>
+
+  <div class='clear'></div>
+</div>

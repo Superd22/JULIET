@@ -1,0 +1,9 @@
+<div id="CalDescriptionContainer">
+
+  <textarea ng-model="EVENT.text" id="description"  ng-disabled="!hasRights" ng-if="hasRights && !displayPreview"></textarea>
+  <div id="description" ng-if='!hasRights || (hasRights && displayPreview)' class='preview' ng-bind-html='EVENT.prettyText'></div>
+
+  <button class='toggleDescription btn btn-default' ng-if='hasRights' ng-click='toggleDescription()'>{{displayPreview ? "Edit" : "Preview"}}</button>
+
+  <div style="clear:both;"></div>
+</div>

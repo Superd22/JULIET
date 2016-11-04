@@ -1,0 +1,4 @@
+<div id="calTopic">
+  <input type="text" ng-model="EVENT.topic" placeholder="ID Forum (JUSTE l'ID SVP)" ng-if="hasRights" ng-dblclick="goToTopic()" />
+  <a href='https://starcitizen.fr/Forum/t={{EVENT.topic}}' ng-if="!hasRights && EVENT.topic > 0">Lien vers le topic Forum de l'évenement</a>
+</div>

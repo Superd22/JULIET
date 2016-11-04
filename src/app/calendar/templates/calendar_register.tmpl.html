@@ -1,0 +1,21 @@
+<div class="ju_tag_list ju_cal_main">
+  <div class="ju_tag_heading"><h3>S'inscrire à <a href='https://starcitizen.fr/Flotte/?page=calendar#/view/{{EVENT.id}}'>{{EVENT.title}} !</a></h3>
+  <em>#{{EVENT.id}} [{{INVITS.members.length}}/{{EVENT.membersMax}} Inscrits] <span>{{FullDate | date:"EEEE d MMMM 'à' HH'h'mm" }}</span></em>.
+</div>
+    <div class ="ju_cal_single">
+      <div class ="ju_cal_single">
+
+      <p class="warning" ng-if="!CANASK.canSendInv">Malheuresement vous ne pouvez pas vous inscrire à cet evenement fermé sans invitation...<br />
+        <em>Si ce dernier vous interesse vraiment, contactez directement le créateur de l'event, où l'un des responsables !</em>
+      </p>
+
+      <p class="info" ng-if="CANASK.canSendInv">Cet evenement est {{CANASK.EVENT.private == 0 ? "ouvert" : "sur invitation"}} ! <br /> {{displayExplanation()}}</p>
+
+      <button class="btn btn-default ju_save_v2" type="submit" ng-if="!loading && MY.confirm" ng-click="addMyInv(true)"><span class="glyphicon glyphicon-ok"></span> Confirmer ma présence !</button>
+      <button class="btn btn-default ju_save_v2" type="submit" ng-if="!loading && MY.del" ng-click="delMyInv()"><span class="glyphicon glyphicon-remove"></span> Supprimer ma demande</button>
+      <button class="btn btn-default ju_save_v2" type="submit" ng-if="!loading && MY.send" ng-click="addMyInv()"><span class="glyphicon glyphicon-ok"></span> Je participe !</button>
+      <div style='clear:both;'></div>
+    </div>
+
+        </div>
+    </div>

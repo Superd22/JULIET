@@ -1,0 +1,54 @@
+<button
+  class="btn btn-primary btn-cal-ju"
+  mwl-date-modifier
+  date="calendarDay"
+  decrement="calendarView">
+  Précédent
+</button>
+
+<button
+  class="btn btn-default btn-cal-ju"
+  mwl-date-modifier
+  date="calendarDay"
+  set-to-today>
+  Aujourd'hui
+</button>
+
+<button
+  class="btn btn-primary btn-cal-ju"
+  mwl-date-modifier
+  date="calendarDay"
+  increment="calendarView">
+  Suivant
+</button>
+
+<button ng-click="calendarView='month'"
+  class="btn btn-primary btn-cal-ju righty">Mois</button>
+<button ng-click="calendarView='week'"
+  class="btn btn-primary btn-cal-ju righty">Semaine</button>
+<button ng-click="calendarView='day'"
+  class="btn btn-primary btn-cal-ju righty">Jour</button>
+
+
+<div class="ju_tag_heading"><h2 style="margin: 10px 0px;">{{calendarTitle}}</h2></div>
+<mwl-calendar
+    view="calendarView"
+    current-day="calendarDay"
+    events="events"
+    view-title="calendarTitle"
+    on-event-click="eventClicked(calendarEvent)"
+    on-event-times-changed="calendarEvent.startsAt = calendarNewEventStart; calendarEvent.endsAt = calendarNewEventEnd"
+    edit-event-html="'<i class=\'glyphicon glyphicon-pencil\'></i>'"
+    delete-event-html="'<i class=\'glyphicon glyphicon-remove\'></i>'"
+    on-edit-event-click="eventEdited(calendarEvent)"
+    on-delete-event-click="eventDeleted(calendarEvent)"
+    cell-is-open="true">
+</mwl-calendar>
+
+<div ng-if="loading" class='loading'><img src='images/ajax-loader.gif'>  Accès au serveur en cours ... </div>
+<div style="clear:both;"></div>
+
+<button class="btn btn-default ju_save_v2" type="submit" ui-sref="Calendar.single"><span class="glyphicon glyphicon-calendar"></span> Nouvel évenement</button>
+<button class="btn btn-default ju_save_v2" type="submit" ng-click="" ui-sref="Calendar.export"><span class="glyphicon glyphicon-export"></span> Exporter le calendrier</button>
+
+<div style="clear:both;"></div>

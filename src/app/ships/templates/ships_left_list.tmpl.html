@@ -1,0 +1,37 @@
+<div class='ju_ShipsAside ju_tag_list'>
+  <div class='ju_tag_heading'><h3>Liste des vaisseaux</h3></div>
+  <ul>
+
+    <li ng-repeat="ship in data.owned" ng-controller="shipList">
+
+      <div ng-if="blur">
+        <span ng-click='remove(ship.id)' class='del' aria-hidden="true" ng-if="Rights">
+          <img src="https://starcitizen.fr/Forum/styles/scfr/theme/images/Delete-icon.png"> Supprimer le vaisseau
+        </span>
+      </div>
+
+      <div class='ju_ship_left' ng-class="{selected: ship.id == try, blurred: blur, change: changed}" ng-dblclick="ShowDel()">
+
+            <div class="blurred_lines" ng-if="blur">
+            </div>
+
+        <a ui-sref="Ships.single({shipId: ship.id})">
+          <div class='text'>
+            <span class='shipName'>
+
+              {{ship.prefix}} <div class='inputhelper' ng-class="{empty: !ship.name.length && Rights}"><input type="text" class="hidden-input" ng-model="ship.name" ng-disabled="!Rights" ng-keypress="updateName($event, ship)"></div>
+              </span>
+
+            <span class='shipType'>{{data.details[ship.type_id].name}}</span>
+            </div>
+          <div class='ju_s_ico'><img src='{{data.details[ship.type_id].ico}}'></div>
+        </a>
+      </div>
+    </li>
+  </ul>
+  <select name="newShip" class='addShip' ng-class="{change: selectChanged}" ng-model="addShip.sel" ng-options="ship as ship.name for ship in shipList | orderBy : 'name'" ng-change="newShip()" ng-if="Rights">
+  <!--  <option ng-selected="{{adding == addShip}}"
+            ng-repeat="adding in shipList | orderBy : 'name'"
+            ng-attr-value="adding.id">{{adding.name}}</option>-->
+  </select>
+</div>

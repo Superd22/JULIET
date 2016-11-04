@@ -1,0 +1,51 @@
+<div class="ju_tag_list" ng-init="get_current_tag(tagid,cat)">
+
+    <div class="ju_tag_heading"><h3># {{currentTag.name}}</h3> <span class='count'>- {{currentTag.list.length}} Joueurs</span></div>
+
+    	<div class='ju_tag_ship' ng-if="cat == 'ship'">
+    		<p class='info'>Ceci est un TAG "Vaisseau", et décrit les possesseurs de ce dernier.<br />
+    			Il est impossible d'ajouter manuellement ce tag, <br />
+    			<strong>Obtenez ce vaisseau et ajoutez le dans votre fiche pour avoir le tag</strong></p>
+
+    		<img src='{{currentTag.img}}' class='ship'>
+
+    		<div style='clear:both'></div>
+    	</div>
+
+        <div class='ju_tag_ship' ng-if="currentTag.type == -1">
+            <p class='info'>Ceci est un TAG Automatique restreint.<br />
+                Il est impossible d'ajouter ou de supprimer ce tag, c'est J.U.L.I.E.T qui s'en charge pour vous.</p>
+        </div>
+
+    	<div class='ju_tag_ship' ng-if="cat == 'rank'">
+    		<p class='info'>Ceci est un TAG "Rang", et décrit les possesseurs de ce dernier.<br />
+    			Il est impossible d'ajouter manuellement ce tag.</p>
+    		<img src='{{currentTag.img}}'>
+
+    		<div style='clear:both'></div>
+    	</div>
+
+      <div ng-if="cat == 'ship' && currentTag.hasChildren == true">
+        <hr>
+          <p class='shipModHelp'>Ce vaisseau est parent d'une catégorie de vaisseaux.<br />
+          {{text.toggleText}}
+          <button ng-click='toggleParentMod()' class='ju_save_v2 btn btn-default'><span class='glyphicon glyphicon-arrow-right'></span> Changer de mode</button>
+          </p>
+          <hr>
+      </div>
+
+        <div ng-class="" class="ju_tag anUser"  dir-paginate="player in currentTag.list | itemsPerPage: 40 ">
+          <a href="?page=user&id={{player.id_forum}}" class="maina">
+              <img src="{{player.avatar}}">  <span>{{player.name}}</span> <a class='tousertags' href='{{BaseUrl}}?page=Tags#/user/{{player.id_forum}}'>T.A.G.S</a>
+          </a>
+        </div>
+
+
+    <div style="clear:both"></div>
+    <div class='ju_chargement' ng-if='isasync'><img src='images/ajax-loader.gif'> Accès au serveur en cours ... </div>
+
+    <dir-pagination-controls>
+    </dir-pagination-controls>
+
+
+</div>

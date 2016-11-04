@@ -1,0 +1,29 @@
+<div class="ju_tag_list" ng-init="getTags()">
+
+    <div class="ju_tag_heading"><h3>Listes des T.A.G.S</h3></div>
+    <div class="ju_tag_heading">
+        <form ng-submit="createTag(newTag)" ng-init='newTag={}' novalidate>
+            <input type="text" class="form-control" id="newTagTitle" ng-model="newTag.title" placeholder="Chercher un tag...">
+            <div class="ju_tag_create_option" ng-hide="tagsFiltered.length">
+            <p class="info">Oups... Il semblerait que ce tag n'éxiste pas... Tu peux l'ajouter en validant.</p>
+
+            </div>
+
+        </form>
+    </div>
+
+        <div ng-class="{ship: isAShip(tag.type) }" class="ju_tag"  dir-paginate="tag in tagsFiltered = (tags | filter:newTag.title ) | itemsPerPage: 40 "> 
+        
+        <a href="{{ generateUrl(tag) }}" class="maina" >
+            <img src="{{tag.img}}" ng-if="tag.img">  <span>{{tag.name}}</span>
+        </a>
+        
+        </div>
+
+    <div style="clear:both"></div>
+
+    <div class='ju_chargement' ng-if='isasync'><img src='images/ajax-loader.gif'> Accès au serveur en cours ... </div>
+
+    <dir-pagination-controls>
+    </dir-pagination-controls>
+</div>

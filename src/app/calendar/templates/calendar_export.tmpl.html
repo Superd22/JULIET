@@ -1,0 +1,26 @@
+<button class="btn btn-default ju_save_v2" type="submit" ng-click="" ui-sref="Calendar"><span class="glyphicon glyphicon-calendar"></span> Retour au calenrier</button>
+<div style="clear:both;"></div>
+
+<div class="ju_tag_list ">
+<div class="ju_tag_heading"><h2 style="margin: 10px 0px;">Exporter le calendrier</h2></div><br />
+  <p>Vous pouvez ici exporter le calendrier juliet vers votre calendrier personel. Qu'il s'agisse d'outlook, iCalendrier, Google Agenda, ect...</p>
+  <p>Copiez collez simplement le calendrier désiré dans votre application. "Tous les evenements" affichera tous les evenements du calendrier,
+  tandis que "inscrits" n'affichera que les evenements pour lesquels vous vous êtes engagé à participer.</p>
+  <p>Merci de noter que vous ne pouvez pas encore vous inscrire depuis une application externe, et que cette dernière peut mettre jusqu'a 24h pour raffraichir le calendrier.
+    Il est donc nécéssaire de continuer à utiliser JULIET principalement pour la gestion d'évenement, et votre application externe comme simple rappel.</p>
+<div class="bbcode">
+  <div class="input-group" style="margin-bottom:0px;">
+    <span class="input-group-addon" ng-click="showAll = !showAll">Tous les evenements</span>
+    <input type="text" class="form-control" ng-model="models.allEvents" ng-class="{active:showAll}">
+  </div>
+  <div style="clear:both;"></div>
+  <div class="input-group" style="margin-bottom:0px;">
+    <span class="input-group-addon" ng-click="showSub = !showSub">Evenements inscrits</span>
+    <input type="text" class="form-control" ng-model="models.subEvents" ng-class="{active:showSub}">
+  </div>
+  <div style="clear:both;"></div>
+</div>
+
+<div ng-if="loading" class='loading'><img src='images/ajax-loader.gif'>  Accès au serveur en cours ... </div>
+<div style="clear:both;"></div>
+</div>

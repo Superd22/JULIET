@@ -1,0 +1,72 @@
+<div class="ju_tag_list">
+  <div class="ju_tag_heading"><h3>Recherche de ressource.</h3></div><br />
+  <div class="controls">
+    <ui-select multiple ng-model="models.query" theme="bootstrap" class="ju_ppl_search ju_tag_query" on-remove="delPerm($item,$model)"  reset-search-input="true" on-select="selected($item,$model)" ng-disabled="!canEdit">
+      <ui-select-match placeholder="Tapez votre recherche ici !">
+        <div><span class='queryText queryTag_{{$item.type}}'> <img src="{{$item.img}}"> <span>{{$item.name}}</span></span></div>
+      </ui-select-match>
+      <ui-select-choices repeat="tag in models.queryWrite | orderBy:'+name' track by $index"  refresh="refreshTags($select.search)" refresh-delay="0">
+        <span class="tagtype">[{{tag.pretty_type}}]</span> {{tag.name}}
+      </ui-select-choices>
+    </ui-select>
+
+    <div class='bbcode'>
+      <div class="input-group">
+        <span class="input-group-addon" id="basic-addon3" ng-click="showBbcode = !showBbcode" uib-popover="BBcode à copier/coller sur le forum pour intégrer les résultats de cette recherche!" popover-trigger="mouseenter" >BBCode Forum</span>
+        <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" disabled ng-model="models.bbcode" ng-class='{active:showBbcode}'>
+      </div>
+    </div>
+
+    <label>Afficher les joueurs
+      <input type="checkbox" ng-model="models.displayUsers" ng-true-value="1" ng-false-value="0"  ng-disabled="!canEdit">
+    </label>
+
+    <label>Afficher les vaisseaux
+      <input type="checkbox" ng-model="models.displayShips" ng-true-value="1" ng-false-value="0"  ng-disabled="!canEdit">
+    </label>
+    <div style="clear:both"></div>
+  </div>
+<hr>
+
+<div class='users' ng-show='models.result.LISTS.USERS && models.displayUsers'>
+  <div class="ju_tag_heading"><h3>Joueurs trouvés ({{models.result.LISTS.USERS.length}})</h3></div>
+  <div class='etiquettesContainer'>
+    <div ng-class="" class="ju_tag anUser"  dir-paginate="player in  models.result.LISTS.USERS | itemsPerPage: 40 "  pagination-id="users">
+      <a href="?page=user&id={{player.id_forum}}" class="maina">
+          <img src="{{player.avatar}}">  <span>{{player.name}}</span> <a class='tousertags' href='{{tagUrl(player.id_forum)}}'>T.A.G.S</a>
+      </a>
+    </div>
+    <div style="clear:both"></div>
+  </div>
+  <dir-pagination-controls pagination-id="users"></dir-pagination-controls>
+
+  <hr>
+</div>
+
+<div class='ships' ng-show='models.result.LISTS.SHIPS && models.displayShips'>
+  <div class="ju_tag_heading"><h3>Vaisseaux trouvés ({{models.result.LISTS.SHIPS.length}})</h3></div>
+
+  <div class='etiquettesContainer'>
+    <div class="ju_tag ship"  dir-paginate="ship in models.result.LISTS.SHIPS | itemsPerPage: 40 "  pagination-id="ships">
+
+    <div class="mask" >
+          <p class='owner'>Propriétaire : <span><a href='{{ownerUrl(ship.owner)}}'>{{ship.owner_name}}</a></span></p>
+          <p class='type'>Type : <span>{{ship.type}}</span></p>
+      </div>
+    <a href="{{shipUrl(ship)}}">
+      <div class="content">
+        <div class="maina">
+            <img src="{{ship.img}}">  <span><em>#SIB.{{ship.id}}</em> {{ship.name || "Unnamned"}}</span>
+        </div>
+      </div>
+    </a>
+    </div>
+    <div style="clear:both"></div>
+  </div>
+
+  <dir-pagination-controls pagination-id="ships"></dir-pagination-controls>
+
+  <hr>
+</div>
+
+</div>

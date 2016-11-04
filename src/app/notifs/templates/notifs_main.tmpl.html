@@ -1,0 +1,43 @@
+<div class="ju_tag_list ju_notif_list_big">
+  <div class='col-md-8'>
+    <ul class='ju_tag_list'>
+      <div class="ju_tag_heading"><h3>Notifications {{models.filter}}</h3><span class="badge">{{models.count}}</span></div>
+      <li dir-paginate="notif in models.FILTEREDNOTIFS | itemsPerPage: 25" ng-class='{unseen: notif.seen == 0}' ng-click='setSeen(notif)' class="notif" toggle-class="big">
+          <ju-notif-inner></ju-notif-inner>
+      </li>
+      <dir-pagination-controls></dir-pagination-controls>
+    </ul>
+  </div>
+  <div class='col-md-4'>
+    <div class='filters ju_tag_list'>
+      <div class="ju_tag_heading"><h3 class="ng-binding">Filtres</h3></div>
+      <ul>
+        <li ng-click="selectOnly(0)"  ng-class="{active: '' == models.filter}">Tous</li>
+        <li ng-repeat="type in models.TYPES" ng-click="selectOnly(type)" ng-class="{active: type == models.filter}">{{type}}</li>
+      </ul>
+    </div>
+
+    <div class='params ju_tag_list'>
+      <div class="ju_tag_heading"><h3 class="ng-binding">Paramètres</h3></div>
+
+      <div class="btn-group" id="mod">
+          <label class="btn btn-primary" ng-model="models.PARAMS.mp" uib-btn-checkbox>M.P</label>
+          <label class="btn btn-primary" ng-model="models.PARAMS.mail" uib-btn-checkbox>Mail</label>
+          <label class="btn btn-primary" ng-model="models.PARAMS.ts" uib-btn-checkbox>TS</label>
+      </div>
+
+      <div class="btn-group" id="frequency">
+        <label uib-popover="Recevoir les notifications immédiatement. (défaut pour TS)" popover-trigger="mouseenter" popover-placement="bottom"  class="btn btn-success" ng-model="models.PARAMS.frequency" uib-btn-radio="'2'" uncheckable>Instant</label>
+        <label uib-popover="Recevoir les notifications (HORS TS) tous les jours." popover-trigger="mouseenter" popover-placement="bottom"  class="btn btn-success" ng-model="models.PARAMS.frequency" uib-btn-radio="'1'" uncheckable>24h</label>
+        <label uib-popover="Recevoir les notifications (HORS TS) toutes les semaines." popover-trigger="mouseenter" popover-placement="bottom" class="btn btn-success" ng-model="models.PARAMS.frequency" uib-btn-radio="'0'" uncheckable>7j</label>
+          <div class='clear'></div>
+      </div>
+
+<br >
+          <label class="btn btn-primary" id="all" ng-click='setSeen(0)'>Tout marquer comme vu</label>
+    </div>
+
+  </div>
+
+  <div class='clear'></div>
+</div>

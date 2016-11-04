@@ -1,0 +1,19 @@
+<?php
+  $try = file_get_contents("https://starcitizen.fr/API/RSI/?api_source=live&system=organizations&action=organization_members&target_id=Sibylla&start_page=1&end_page=100&expedite=1&format=json");
+
+  $try = json_decode($try);
+
+  foreach($try->data as $memb) {
+
+    $d = array(
+        "handle" => $memb->handle,
+        "type" => $memb->type,
+        "visibility" => $memb->visibility
+      );
+    $members[] = $d;
+  }
+
+  file_put_contents("list_RSI.txt", json_encode($members));
+
+  echo "done";
+?>

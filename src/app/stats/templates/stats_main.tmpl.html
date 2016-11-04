@@ -1,0 +1,31 @@
+<div class="playerList"  ts-wrapper>
+    <table id="members_stats">
+      <thead>
+        <tr>
+          <th ts-criteria="id_forum|parseInt">#</th>
+          <th ts-criteria="name|lowercase" ts-default>Pseudo</th>
+          <th ts-criteria="handle|lowercase" >Handle</th>
+          <th ts-criteria="squadname|lowercase" >Groupe</th>
+          <th ts-criteria="juliet" >IN JULIET</th>
+          <th ts-criteria="rsi">IN RSI</th>
+          <th ts-criteria="err">Statut</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="member in members" ts-repeat>
+          <td><a href="https://starcitizen.fr/Flotte/?page=user&id={{member.id_forum}}">#{{member.id_forum}}</a></td>
+          <td><a href="https://starcitizen.fr/Forum/memberlist.php?mode=viewprofile&u={{member.id_forum}}">{{member.name}}</a></td>
+          <td><a href="https://robertsspaceindustries.com/citizens/{{member.handle}}">{{member.handle}}</a></td>
+          <td><a href="https://starcitizen.fr/Flotte/?page=squad&m=view&id={{member.squad}}">{{member.squadname}}</a></td>
+          <td>{{member.juliet}}</td>
+          <td>{{member.rsi}}</td>
+          <td class="righty"><span class='statut e{{member.err}}'>{{member.stat}}</span></td>
+        </tr>
+      </tbody>
+    </table>
+</div>
+
+<h3> Membre RSI n'ayant pas de correspondance JULIET </h3>
+<ul id="noJoy">
+  <li ng-repeat="member in RSI"><a href="https://robertsspaceindustries.com/citizens/{{member.handle}}">{{member.handle}}</a></li>
+</ul>

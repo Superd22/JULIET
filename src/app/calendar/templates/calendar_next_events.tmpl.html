@@ -1,0 +1,13 @@
+<div class='col-md-6'>
+<div class="ju_notif_list_big">
+    <ul class='ju_tag_list'>
+      <div class="ju_tag_heading"><a ng-href='?page=calendar'><h3>Prochains Evenements</h3></a></div>
+      <li class="notif eventmini" dir-paginate="event in events | itemsPerPage: 5 | orderBy: event.start" >
+      <time>[{{event.startsAt | date:'dd/MM/yy HH:mm'}}]</time>  <span class='title'><a href='https://starcitizen.fr/Flotte/?page=calendar#/view/{{event.id}}'>{{event.title}}</a></span>
+      </li>
+      <dir-pagination-controls></dir-pagination-controls>
+    </ul>
+  </div>
+
+  <div class='clear'></div>
+</div>

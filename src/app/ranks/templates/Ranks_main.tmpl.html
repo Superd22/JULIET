@@ -1,0 +1,40 @@
+<div style='width:100%;text-align:center'><button ui-sref="Ranks" class="btn btn-primary btn-cal-ju">Main</button><br />
+<button ui-sref="Ranks.oneWing({wing: 'Militaire'})" class="btn btn-secondary btn-cal-ju">Militaire</button><button ui-sref="Ranks.oneWing({wing: 'Consortium'})" class="btn btn-secondary btn-cal-ju">Consortium</button><button ui-sref="Ranks.oneWing({wing: 'Syndicat'})" class="btn btn-secondary btn-cal-ju">Syndicat</button>
+</div>
+
+<div class='ju_RanksMain ju_tag_list'>
+
+  <div class="stars" ng-repeat="(key,star) in models.RANKS | orderBy:'id_STAR':true track by key" >
+      <div class="branche br{{$index}}" ng-repeat="branche in star.branches"  ng-class="{'full': (FULL[$index] && isMakeFull), 'empty': (isMakeFull && !FULL[$index]) }">
+          <div class="helpDrop" ng-click="addPosInStar(branche.poses)"  ng-if="models.HasRights"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></div>
+          <div class="aRankPos" ng-repeat="pos in branche.poses | orderBy:'-id_POS'"
+            dnd-list="pos.ranks" dnd-allowed-types="[{{branche.id_TYPE}}]" dnd-drop="updatePosRank(index, item, star, pos)" dnd-disable-if="!models.HasRights" >
+            <em>{{star.id_STAR}}.{{pos.id_POS}}</em>
+            <div class="aRank" ng-repeat="rank in pos.ranks" dnd-draggable="rank" dnd-type="{{rank.type}}"  ng-class="{selected: models.rankSelected.ID === rank.ID}"
+            dnd-moved="pos.ranks.splice($index, 1)" dnd-effect-allowed="move" dnd-disable-if="!models.HasRights">
+              <img ng-click="models.rankSelected = rank" src="{{rank.url}}">
+
+
+              <div ng-if="(models.rankSelected.ID === rank.ID)" class="editCard" dnd-type="none">
+                <img src="{{rank.url}}">
+                <input type="text" ng-model="models.rankSelected.name" class="hidden-input editInput rankName" ng-disabled="!models.HasRights">
+                <input type="text" ng-model="models.rankSelected.url"  class="hidden-input editInput" ng-disabled="!models.HasRights">
+
+                <div class="bottomButton">
+                  <div class="bGreen" ng-if="models.HasRights" ng-click="validateRank(models.rankSelected)"><span class="glyphicon glyphicon-ok"></span></div>
+                  <div class="bRed"   ng-if="models.HasRights" ng-click="deleteRank(models.rankSelected)"><span class="glyphicon glyphicon-trash"></span></div>
+                </div>
+
+                <span class="glyphicon glyphicon-remove bRem" ng-click="models.rankSelected = 0"></span>
+              </div>
+
+            </div>
+
+
+            <div class="helpDrop lateral" ng-if="models.HasRights" ng-click="addRankInStar(pos,star.id_STAR,branche.id_TYPE)"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></div>
+          </div>
+      </div>
+  </div>
+
+
+</div>

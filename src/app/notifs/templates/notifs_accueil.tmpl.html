@@ -1,0 +1,14 @@
+
+  <div class='col-md-6'><div class="ju_notif_list_big">
+    <ul class='ju_tag_list'>
+      <div class="ju_tag_heading"><a ng-href='?page=Notifs'><h3>Notifications {{models.filter}}</h3><span class="badge">{{models.count}}</span></a></div>
+      <li dir-paginate="notif in models.FILTEREDNOTIFS | itemsPerPage: 5" ng-class='{unseen: notif.seen == 0}' ng-click='setSeen(notif)' class="notif" toggle-class="big">
+        <span class='id'>#{{notif.id}}</span>
+        <span class="msg" ng-bind-html="notif.msg"></span>
+      </li>
+      <dir-pagination-controls></dir-pagination-controls>
+    </ul>
+  </div>
+
+  <div class='clear'></div>
+</div>
