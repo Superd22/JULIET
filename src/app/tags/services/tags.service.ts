@@ -1,3 +1,5 @@
+import { Observable } from 'rxjs/Observable';
+import { StateService } from 'ui-router-ng2';
 import { CompleterData } from 'ng2-completer';
 import { CompleterService } from 'ng2-completer';
 import { tags } from './../states/tags.state';
@@ -9,16 +11,17 @@ import { Injectable } from '@angular/core';
 export class TagsService {
 
   public tags: ATag[];
-  public selectedTag;
+  public selectedTag: ATag;
   public isLad;
   private apiNamespace = "Tags/";
   private $http;
 
-  constructor(private api: JulietAPIService, public completerService: CompleterService) {
+  constructor(private api: JulietAPIService, public completerService: CompleterService, public state: StateService) {
     //this.isLad = false;
+    console.log(state);
   }
 
-  public buildCompleter():CompleterData {
+  public buildCompleter(): CompleterData {
     var completer = this.completerService.remote(null, "name", "name");
     completer.urlFormater(term => this.api.api + this.apiNamespace + `tags_search.php?f=${term}`);
     completer.dataField("data");
@@ -33,21 +36,43 @@ export class TagsService {
     );
   }
 
-  public getTag(tag: String, _cat?: String);
-  public getTag(tag: ATag, _cat?: String);
-  public getTag(tag, _cat?) {
+
+
+  public getTag(tag: String, _cat?: String):Observable<ATag>;
+  public getTag(tag: ATag, _cat?: String):Observable<ATag>;
+  public getTag(tag, _cat?):Observable<ATag> {
     if (typeof tag == "undefined" || tag == null) return;
     if (tag.id) var _tagId = tag.name;
     else var _tagId = tag;
 
-    this.api.get(this.apiNamespace + "tags_get_single.php", { name: _tagId, category: _cat }).subscribe(
-      data => {
-        console.log(data.data);
-        this.selectedTag = data.data;
-      }
+    return this.api.get(this.apiNamespace + "tags_get_single.php", { name: _tagId, category: _cat }).map(
+      data => data.data
     );
   }
 
+  public getTagNameById(id: Number) {
+    return this.api.get(this.apiNamespace + "getNameById", { id: id }).map(
+      data => {
+        if (data.data) return data.data.name;
+        return false;
+      }
+    )
+  }
+
+  public updateTag(tag: ATag) {
+    console.log("updating");
+    tag.restricted = Number(tag.restricted);
+    this.api.get(this.apiNamespace + "update", tag).subscribe(
+      data => {
+        if (this.state.is("secure.Tags.view") && !this.state.is("secure.Tags.view", { tag_name: tag.name }))
+          this.state.go("secure.Tags.view", { tag_name: tag.name });
+      }
+    )
+  }
+
+  public updateCurrentSingleTag() {
+    return this.updateTag(this.selectedTag);
+  }
 
   // Get the specified tag
   // @param (ATag | Number) : The ATag object or its id.

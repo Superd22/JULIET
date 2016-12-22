@@ -40,6 +40,7 @@ export let tags = {
                 token: '_tagName',
                 deps: [Transition],
                 resolveFn: function (trans) {
+                    console.log(trans.params().tag_name);
                     return trans.params().tag_name;
                 }
             },

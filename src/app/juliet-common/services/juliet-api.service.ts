@@ -12,7 +12,7 @@ export class JulietAPIService {
   constructor(private http: Http) { }
 
   // Builds custom parameters for a get 
-  public buildParameters(arrayOfParam?: {}): string {
+  public buildParameters(arrayOfParam?: {}): URLSearchParams {
     let urlParam = new URLSearchParams();
 
     for (let paramKey in arrayOfParam) {
@@ -20,8 +20,8 @@ export class JulietAPIService {
         urlParam.append(paramKey, arrayOfParam[paramKey]);
       }
     }
-
-    return urlParam.toString();
+    console.log(urlParam);
+    return urlParam;
   }
 
   public get(url: string, params?: {}) {

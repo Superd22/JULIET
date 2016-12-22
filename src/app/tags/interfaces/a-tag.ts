@@ -5,4 +5,5 @@ export interface ATag {
     restricted:Number;
     type:Number;
     parent?:Number;
+    rights_from?:Number;
 }
