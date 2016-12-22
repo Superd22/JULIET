@@ -1,0 +1,25 @@
+<app-ju-v3-pannel>
+  <ju-v3-pannel-title class="ju_tag_heading" fxFlex="100">
+    <span class='right'>v3.0</span>
+    <h2>T.A.G.S</h2>
+  </ju-v3-pannel-title>
+  <div fxLayout="row" fxLayoutWrap>
+    {{Tags.selectedTag | json}}
+    <app-ju-v3-sub-pannel *ngIf="Tags.selectedTag" fxFlex="70">
+      <md-input [(ngModel)]="Tags.selectedTag.name"></md-input>
+    </app-ju-v3-sub-pannel>
+
+    <app-ju-v3-sub-pannel *ngIf="Tags.selectedTag" fxFlex="30">
+
+      <ng2-completer [(ngModel)]="parentSearch" [dataService]="tagsList" [minSearchLength]="0" (selected)="setParent($event)"></ng2-completer>
+
+      <md-checkbox [checked]="Tags.selectedTag.restricted === 1" (change)="!Tags.selectedTag.restricted ? Tags.selectedTag.restricted=1 : Tags.selectedTag.restricted=0">
+        T.A.G Restreint
+      </md-checkbox>
+      <md-select placeholder="Type de T.A.G" [(ngModel)]="Tags.selectedTag.type">
+        <md-option *ngFor="let type of tagTypes | enumKeys" [value]="type.key" [disabled]="type.key < 0"> {{ type.value }} </md-option>
+      </md-select>
+
+    </app-ju-v3-sub-pannel>
+  </div>
+</app-ju-v3-pannel>

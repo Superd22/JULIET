@@ -1,0 +1,9 @@
+@import '~@angular/material/core/theming/theming';
+@import 'src/assets/material/theme.scss';
+
+.ju-v3-pannel {
+    background-color: #313237;
+    font-family:"Electrolize";    
+    box-shadow: 0px 0px 10px rgba(255,255,255,0.2) inset;
+    padding: 5px 10px;
+}

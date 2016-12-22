@@ -1,4 +1,10 @@
-import { MaterialModule } from '@angular/material';
+import { EnumKeysPipe } from './pipes/enum-keys.pipe';
+import { JulietAPIService } from './services/juliet-api.service';
+import { JuV3TabComponent } from './components/_exports/ju-v3-tab/ju-v3-tab.component';
+import { JuV3SubPannelComponent } from './components/_exports/ju-v3-sub-pannel/ju-v3-sub-pannel.component';
+import { V3PannelTitle } from './components/_exports/ju-v3-pannel/title/title.component';
+import { JuV3PannelComponent } from './components/_exports/ju-v3-pannel/ju-v3-pannel.component';
+import { MdProgressBarModule } from '@angular/material';
 import { STATES } from './states/_.states';
 import { UIRouterModule } from 'ui-router-ng2';
 import { NgModule } from '@angular/core';
@@ -14,10 +20,19 @@ import { GoComponent } from './components/go/go.component';
   imports: [
     CommonModule,
     UIRouterModule.forChild({
-      states:STATES
+      states: STATES
     }),
-    MaterialModule,
+    MdProgressBarModule
   ],
-  declarations: [JulietCommonComponent, AuthComponent, LoadingComponent, LoginComponent, SecureComponent, GoComponent]
+  exports: [
+    JuV3PannelComponent, V3PannelTitle, JuV3SubPannelComponent, JuV3TabComponent, EnumKeysPipe
+  ],
+  declarations: [
+    JulietCommonComponent, AuthComponent, LoadingComponent, LoginComponent, SecureComponent,
+    GoComponent, JuV3PannelComponent, V3PannelTitle, JuV3SubPannelComponent, JuV3TabComponent, EnumKeysPipe
+  ],
+  providers: [
+    JulietAPIService,
+  ]
 })
 export class JulietCommonModule { }

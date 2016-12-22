@@ -1,0 +1,18 @@
+<p>
+    <md-toolbar>
+        <h2>Recherche</h2>
+        <md-input>
+            <span md-prefix><md-icon>search</md-icon> </span>
+        </md-input>
+        <button md-button [md-menu-trigger-for]="menu" aria-label="Open basic menu">
+            Filtres
+        </button>
+    </md-toolbar>
+    <md-menu #menu="mdMenu">
+        <button md-menu-item> test </button>
+    </md-menu>
+
+    <a-tag *ngFor="let tag of tagsAPI.tags | paginate: { itemsPerPage: 20,  currentPage: page, totalItems: total }" [tag]="tag"></a-tag>
+
+    <pagination-controls (pageChange)="page = $event" autoHide="true"></pagination-controls>
+</p>

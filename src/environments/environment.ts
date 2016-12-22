@@ -5,5 +5,5 @@
 
 export const environment = {
   production: false,
-  julietAPI: "http://www.scfr.fr/api/juliet/",
+  julietAPI: "http://www.scfr.fr/API/Juliet/",
 };

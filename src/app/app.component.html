@@ -1,6 +1,9 @@
 <md-sidenav-layout class="app-layout">
-	<md-sidenav #sidenav #start mode="side">
-	</md-sidenav>
 
-	<ui-view></ui-view>
+	<md-sidenav #sidenav #start mode="side" opened="true">
+		<app-main-sidenav></app-main-sidenav>
+	</md-sidenav>
+	<div class="content">
+		<ui-view></ui-view>
+	</div>
 </md-sidenav-layout>
