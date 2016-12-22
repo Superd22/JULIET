@@ -41,7 +41,7 @@ export let tags = {
                 deps: [Transition],
                 resolveFn: function (trans) {
                     console.log(trans.params().tag_name);
-                    return trans.params().tag_name;
+                    return decodeURIComponent(trans.params().tag_name);
                 }
             },
             {

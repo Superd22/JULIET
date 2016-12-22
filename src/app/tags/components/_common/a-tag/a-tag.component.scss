@@ -1,0 +1,22 @@
+:host() {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    position: relative;
+    font-size: 15px;
+    margin: 5px;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-family: 'Electrolize' !important;
+    color: #FFFFFF;
+    background-color: rgba(20,32,40,0.64);
+    border: none;
+    border-left: solid 4px #2A485E;
+    display: block;
+    padding: 10px 15px;
+    margin-bottom: 1px;
+    transition: all .1s ease-in-out;
+    &:hover {
+        border-left: solid 4px #44a6d5;
+    }
+}

@@ -1,3 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 @import 'assets/material/theme';
 @import 'assets/main';
+
+[layoutPadding] {
+    padding: 5px 20px;
+} 
+
+[layoutMargin] {
+    margin: 10px;
+    display: block;
+}

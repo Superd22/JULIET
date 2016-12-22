@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs/Observable';
 import { tags } from './../../states/tags.state';
 import { TagsService } from './../../services/tags.service';
 import { ATag } from './../../interfaces/a-tag';
@@ -20,12 +21,13 @@ export class SingleComponent implements OnInit {
   public _tag: ATag;
 
   public tag: ATag;
+  public tagBackup: ATag;
   public tagInfo: {
     parentSelect: String,
     rightsFromSelect: String,
-  } = {parentSelect: null, rightsFromSelect: null};
+  } = { parentSelect: null, rightsFromSelect: null };
 
-  public tagTypes = TagsType;
+  public shouldTransf:ATag = null;
 
   private tagsList0;
   private tagsList1;
@@ -33,11 +35,25 @@ export class SingleComponent implements OnInit {
   constructor(private Tags: TagsService) {
     this.tagsList0 = Tags.buildCompleter();
     this.tagsList1 = Tags.buildCompleter();
-    this.tagInfo
+  }
+
+  public nameChanged(newName) {
+    if(newName != this.tagBackup.name)
+      this.Tags.getTag(newName, this._tagCat).subscribe(
+        data => this.shouldTransf = data ? data : null
+      );
+  }
+
+  public doMigrate() {
+    this.Tags.migrateTag(this.tagBackup, this.shouldTransf);
+  }
+
+  public doDelete() {
+
   }
 
   public updateTag() {
-    this.Tags.updateCurrentSingleTag();
+    this.Tags.updateTag(this.tag);
   }
 
   public setParent($event) {
@@ -57,6 +73,7 @@ export class SingleComponent implements OnInit {
       this.Tags.getTag(this._tagName, this._tagCat).subscribe(
         data => {
           this.tag = data;
+          this.tagBackup = Object.assign({}, data);
 
           this.Tags.getTagNameById(data.parent).subscribe(
             data => data ? this.tagInfo.parentSelect = data : null

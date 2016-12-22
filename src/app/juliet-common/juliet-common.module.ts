@@ -1,3 +1,5 @@
+import { FilterPipe } from './pipes/filter.pipe';
+import { JuV3HeadingComponent } from './components/_exports/ju-v3-heading/ju-v3-heading.component';
 import { EnumKeysPipe } from './pipes/enum-keys.pipe';
 import { JulietAPIService } from './services/juliet-api.service';
 import { JuV3TabComponent } from './components/_exports/ju-v3-tab/ju-v3-tab.component';
@@ -25,11 +27,12 @@ import { GoComponent } from './components/go/go.component';
     MdProgressBarModule
   ],
   exports: [
-    JuV3PannelComponent, V3PannelTitle, JuV3SubPannelComponent, JuV3TabComponent, EnumKeysPipe
+    JuV3PannelComponent, V3PannelTitle, JuV3SubPannelComponent, JuV3TabComponent, EnumKeysPipe, JuV3HeadingComponent, FilterPipe
   ],
   declarations: [
     JulietCommonComponent, AuthComponent, LoadingComponent, LoginComponent, SecureComponent,
-    GoComponent, JuV3PannelComponent, V3PannelTitle, JuV3SubPannelComponent, JuV3TabComponent, EnumKeysPipe
+    GoComponent, JuV3PannelComponent, V3PannelTitle, JuV3SubPannelComponent, JuV3TabComponent, EnumKeysPipe,
+    JuV3HeadingComponent, FilterPipe
   ],
   providers: [
     JulietAPIService,

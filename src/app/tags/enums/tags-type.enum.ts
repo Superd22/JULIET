@@ -1,6 +1,4 @@
 export enum TagsType {
-    "ship",
-    "rank",
     special = -1,
     tag = 0,
     officiel = 1,

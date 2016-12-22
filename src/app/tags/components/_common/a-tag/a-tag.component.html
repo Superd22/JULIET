@@ -1,1 +1,1 @@
-<div class="ju-a-tag">{{tag.name}}</div>
+<div class="ju-a-tag" uiSref="secure.Tags.view" [uiParams]="{cat_name: tag.cat ? tag.cat : 'tag', tag_name: tag.name}">{{tag.name}}</div>

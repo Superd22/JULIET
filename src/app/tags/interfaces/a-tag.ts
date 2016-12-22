@@ -4,6 +4,7 @@ export interface ATag {
     img:String;
     restricted:Number;
     type:Number;
+    cat?:String;
     parent?:Number;
     rights_from?:Number;
 }
