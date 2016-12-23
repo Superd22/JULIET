@@ -73,67 +73,75 @@ export class TagsService {
           this.state.go("secure.Tags.view", { tag_name: data.data.name });
       }
     )
-}
+  }
+
+  public deleteTag(tag: ATag) {
+    this.api.get(this.apiNamespace + "delete", {id: tag.id}).subscribe(
+      data => {
+        if (this.state.is("secure.Tags.view")) this.state.go("secure.Tags.list");
+      }
+    )
+  }
 
   public updateTag(tag: ATag) {
-  tag.restricted = Number(tag.restricted);
-  this.api.get(this.apiNamespace + "update", tag).subscribe(
-    data => {
-      if (this.state.is("secure.Tags.view") && !this.state.is("secure.Tags.view", { tag_name: tag.name }))
-        this.state.go("secure.Tags.view", { tag_name: tag.name });
-    }
-  )
-}
+    tag.restricted = Number(tag.restricted);
+    this.api.get(this.apiNamespace + "update", tag).subscribe(
+      data => {
+        if (this.state.is("secure.Tags.view") && !this.state.is("secure.Tags.view", { tag_name: tag.name }))
+          this.state.go("secure.Tags.view", { tag_name: tag.name });
+      }
+    )
+  }
 
   public updateCurrentSingleTag() {
-  return this.updateTag(this.selectedTag);
-}
+    return this.updateTag(this.selectedTag);
+  }
 
   // Get the specified tag
   // @param (ATag | Number) : The ATag object or its id.
   // @param (string) : The category of tag
-  public generateUrl(tag, BaseUrl ?) {
-  var cat = tag.type;
-  if (cat == 0 || cat == -1) {
-    cat = "tag";
+  public generateUrl(tag, BaseUrl?) {
+    var cat = tag.type;
+    if (cat == 0 || cat == -1) {
+      cat = "tag";
+    }
+    var prepend = "";
+    if (this.isLad) {
+      prepend = "?page=Tags";
+    }
+    return BaseUrl + prepend + "#/view/" + cat + "/" + encodeURIComponent(tag.name);
   }
-  var prepend = "";
-  if (this.isLad) {
-    prepend = "?page=Tags";
-  }
-  return BaseUrl + prepend + "#/view/" + cat + "/" + encodeURIComponent(tag.name);
-}
 
   public isAutoType(tag) {
-  if (tag) {
-    return (tag.type != 0 && tag.type != 1);
+    if (tag) {
+      return (tag.type != 0 && tag.type != 1);
+    }
   }
-}
 
   public has_admin(userid) {
-  var promise = this.api.post('Rights/index.php', { right: "USER_CAN_ADMIN_TAGS", test: "lol", user: userid }).subscribe(function (data) {
-    var hasR = false;
-    if (data == "1" || data == "true") hasR = true;
-    return hasR;
-  });
+    var promise = this.api.post('Rights/index.php', { right: "USER_CAN_ADMIN_TAGS", test: "lol", user: userid }).subscribe(function (data) {
+      var hasR = false;
+      if (data == "1" || data == "true") hasR = true;
+      return hasR;
+    });
 
-  return promise;
-}
+    return promise;
+  }
 
   public sendQuery(query) {
-  var p = this.api.post('Tags/tags_resolveQuery.php', { query: query }).subscribe(function (data) {
-    return data;
-  });
+    var p = this.api.post('Tags/tags_resolveQuery.php', { query: query }).subscribe(function (data) {
+      return data;
+    });
 
-  return p;
-}
+    return p;
+  }
 
   public getName(id, type) {
-  var p = this.api.post('Tags/tags_getNameById.php', { id: id, type: type }).subscribe(function (data) {
-    return data;
-  });
+    var p = this.api.post('Tags/tags_getNameById.php', { id: id, type: type }).subscribe(function (data) {
+      return data;
+    });
 
-  return p;
-}
+    return p;
+  }
 
 }

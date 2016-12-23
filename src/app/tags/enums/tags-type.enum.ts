@@ -4,5 +4,4 @@ export enum TagsType {
     officiel = 1,
     competence = 2,
     recompense = 3,
-
 }

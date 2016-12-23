@@ -1,1 +1,9 @@
-<div class="ju-a-tag" uiSref="secure.Tags.view" [uiParams]="{cat_name: tag.cat ? tag.cat : 'tag', tag_name: tag.name}">{{tag.name}}</div>
+<div *ngIf="tag" class="ju-a-tag" 
+    uiSref="secure.Tags.view" 
+    [uiParams]="{cat_name: tag.cat ? tag.cat : 'tag', tag_name: tag.name}"
+    [ngClass]="{
+        'restreint': tag.restricted == 1,
+        'competence': tag.type == tagType.competence,
+        'officiel': tag.type == tagType.officiel,
+        'recompense': tag.type == tagType.recompense
+    }">{{tag.name}}</div>

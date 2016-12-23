@@ -6,6 +6,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { TagsType } from './../../enums/tags-type.enum';
 import { CompleterService, CompleterData, CompleterItem, RemoteData } from "ng2-completer";
 import { StateService } from "ui-router-ng2";
+
 @Component({
   selector: 'tag-single',
   templateUrl: './single.component.html',
@@ -27,10 +28,13 @@ export class SingleComponent implements OnInit {
     rightsFromSelect: String,
   } = { parentSelect: null, rightsFromSelect: null };
 
-  public shouldTransf:ATag = null;
+  public shouldTransf: ATag = null;
 
   private tagsList0;
   private tagsList1;
+
+  private tagTypes = TagsType;
+  private dialogRef;
 
   constructor(private Tags: TagsService) {
     this.tagsList0 = Tags.buildCompleter();
@@ -38,7 +42,7 @@ export class SingleComponent implements OnInit {
   }
 
   public nameChanged(newName) {
-    if(newName != this.tagBackup.name)
+    if (newName != this.tagBackup.name)
       this.Tags.getTag(newName, this._tagCat).subscribe(
         data => this.shouldTransf = data ? data : null
       );
@@ -49,7 +53,7 @@ export class SingleComponent implements OnInit {
   }
 
   public doDelete() {
-
+    this.Tags.deleteTag(this.tagBackup);
   }
 
   public updateTag() {
@@ -65,6 +69,12 @@ export class SingleComponent implements OnInit {
   public setRights($event) {
     let right = $event.originalObject.id;
     this.Tags.selectedTag.rights_from = right;
+  }
+
+  public deleteTag() {
+    if(confirm("Êtes vous sur de vouloir supprimer ce T.A.G ?")) {
+      this.doDelete();
+    }
   }
 
   ngOnInit() {

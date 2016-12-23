@@ -1,20 +1,21 @@
 <md-toolbar fxFlex="100">
-    <md-input [(ngModel)]="searchTag" >
+    <md-input [(ngModel)]="filter.name">
         <span md-prefix><md-icon>search</md-icon> </span>
     </md-input>
-    <button md-button [md-menu-trigger-for]="menu" aria-label="Open basic menu">
-            Filtres
-        </button>
+    <button md-button [md-menu-trigger-for]="menu" aria-label="Open basic menu">Filtres</button>
 </md-toolbar>
 <md-menu #menu="mdMenu">
-    <button md-menu-item> test </button>
+    <button md-menu-item (click)='toggleFilter("restricted")'> <md-icon>{{iconForFilter('restricted')}}</md-icon> <span>Restreint</span></button>
+    <button md-menu-item disabled class="separator"></button>
+    <button md-menu-item (click)='toggleFilter("tag")'> <md-icon>{{iconForFilter('tag')}}</md-icon> <span>Normal</span></button>
+    <button md-menu-item (click)='toggleFilter("officiel")'> <md-icon>{{iconForFilter('officiel')}}</md-icon> <span>Officiel</span></button>
+    <button md-menu-item (click)='toggleFilter("competence")'> <md-icon>{{iconForFilter('competence')}}</md-icon> <span>Compétence</span></button>
+    <button md-menu-item (click)='toggleFilter("recompense")'> <md-icon>{{iconForFilter('recompense')}}</md-icon> <span>Récompense</span></button>
 </md-menu>
-
 <div fxLayout fxLayoutWrap fxFlex="100">
-    <div fxFlex="20" *ngFor="let tag of tagsAPI.tags | Filter:{name: searchTag} | paginate: { itemsPerPage: 40,  currentPage: page, totalItems: total }">
-        <a-tag  [tag]="tag"></a-tag>
+    <div #tagList fxFlex="20" *ngFor="let tag of tagsAPI.tags | Filter: filter | paginate: { itemsPerPage: 40,  currentPage: page, totalItems: totalFiltered }; let last = last">
+        <a-tag [tag]="tag"></a-tag>
     </div>
 </div>
-
 
 <pagination-controls (pageChange)="page = $event" autoHide="true"></pagination-controls>

@@ -20,3 +20,33 @@
         border-left: solid 4px #44a6d5;
     }
 }
+
+.ju-a-tag {
+    &.officiel {
+        color: lightblue;
+        font-weight: bolder;
+    }
+    &.recompense {
+        color: lightgoldenrodyellow;
+        font-weight: bolder;
+    }
+    &.competence {
+        color: lightcoral;
+        font-weight: bolder;
+    }
+    &.restreint {
+        &:after {
+            content: '';
+            display: block;
+            background: rgba(255,0,0,0);
+            border-left: 4px double rgba(255,0,0,0.79);
+            width: 30px;
+            z-index: 50;
+            position: absolute;
+            transform: rotateZ(-45deg);
+            height: 58px;
+            top: -30px;
+            right: -20px;
+        }
+    }
+}
