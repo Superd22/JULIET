@@ -36,7 +36,13 @@ export class TagsService {
     );
   }
 
-
+  public createTag(tagName:String):Observable<ATag> {
+    if(tagName) {
+      return this.api.get(this.apiNamespace + "create", {name: tagName}).map(
+        data => data.data ? data.data : null
+      );
+    }
+  }
 
   public getTag(tag: String, _cat?: String): Observable<ATag>;
   public getTag(tag: ATag, _cat?: String): Observable<ATag>;
