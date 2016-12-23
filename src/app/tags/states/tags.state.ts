@@ -12,7 +12,7 @@ export let tags = {
         name: "secure.Tags",
         url: "Tags/",
         views: {
-            'content': { component: SingleComponent },
+            'content': { component: TagsComponent },
         },
         abstract: true,
     },
@@ -35,7 +35,7 @@ export let tags = {
         name: "secure.Tags.view",
         url: "view/:cat_name/:tag_name",
         views: {
-            'content': { component: SingleComponent },
+            '@': { component: SingleComponent },
         },
         resolve: [
             {

@@ -1,9 +1,10 @@
 <md-toolbar fxFlex="100">
-    <md-input [(ngModel)]="filter.name">
+    <md-input-container>
+        <input md-input [(ngModel)]="filter.name">
         <span md-prefix><md-icon>search</md-icon> </span>
-    </md-input>
-    <button md-button [md-menu-trigger-for]="filterMenu" aria-label="Open basic menu">Filtres</button>
-    <button md-button [md-menu-trigger-for]="typeMenu" aria-label="Open basic menu">Types</button>
+    </md-input-container>
+    <button md-button [mdMenuTriggerFor]="filterMenu" aria-label="Open basic menu">Filtres</button>
+    <button md-button [mdMenuTriggerFor]="typeMenu" aria-label="Open basic menu">Types</button>
     <button md-button disabled>{{filteredTags.count}} {{filteredTags.count > 1 ? "résultats" : "résultat"}}</button>
 </md-toolbar>
 <md-menu #filterMenu="mdMenu">
