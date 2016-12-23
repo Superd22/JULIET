@@ -1,3 +1,4 @@
+import { TagsIndexComponent } from './../components/main/tag-index.component';
 import { ATag } from './../interfaces/a-tag';
 import { TagsService } from './../services/tags.service';
 import { Transition } from 'ui-router-ng2';
@@ -16,18 +17,25 @@ export let tags = {
         },
         abstract: true,
     },
+    index: {
+        name: "secure.Tags.index",
+        abstract: true,
+        views: {
+            'tag': { component: TagsIndexComponent },
+        },
+    },
     list: {
-        name: "secure.Tags.list",
+        name: "secure.Tags.index.list",
         url: "list",
         component: ListComponent,
     },
     owner: {
-        name: "secure.Tags.owner",
+        name: "secure.Tags.index.owner",
         url: "self",
         component: OwnerComponent,
     },
     search: {
-        name: "secure.Tags.search",
+        name: "secure.Tags.index.search",
         url: "search",
         component: SearchComponent
     },
@@ -35,7 +43,7 @@ export let tags = {
         name: "secure.Tags.view",
         url: "view/:cat_name/:tag_name",
         views: {
-            '@': { component: SingleComponent },
+            'tag': { component: SingleComponent },
         },
         resolve: [
             {

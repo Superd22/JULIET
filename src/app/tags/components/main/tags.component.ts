@@ -4,8 +4,7 @@ import { Transition } from 'ui-router-ng2';
 
 @Component({
   selector: 'app-tags',
-  templateUrl: './tags.component.html',
-  styleUrls: ['./tags.component.scss']
+  template: `Tags <div ui-view="tag"></div>`,
 })
 export class TagsComponent implements OnInit {
 
