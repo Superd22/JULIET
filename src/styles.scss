@@ -7,8 +7,7 @@
 } 
 
 [layoutMargin] {
-    margin: 10px;
-    display: block;
+    margin: 14px !important;
 }
 
 .md-menu-content {
@@ -20,4 +19,13 @@
         margin-top: 5px;
         height: 5px;
     }
+}
+.completer-input {
+    width: 100%;
+    padding: 5px;
+    background: transparent;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid #404144;
+    color: white;
 }
