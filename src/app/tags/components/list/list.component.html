@@ -2,16 +2,22 @@
     <md-input [(ngModel)]="filter.name">
         <span md-prefix><md-icon>search</md-icon> </span>
     </md-input>
-    <button md-button [md-menu-trigger-for]="menu" aria-label="Open basic menu">Filtres</button>
+    <button md-button [md-menu-trigger-for]="filterMenu" aria-label="Open basic menu">Filtres</button>
+    <button md-button [md-menu-trigger-for]="typeMenu" aria-label="Open basic menu">Types</button>
     <button md-button disabled>{{filteredTags.count}} {{filteredTags.count > 1 ? "résultats" : "résultat"}}</button>
 </md-toolbar>
-<md-menu #menu="mdMenu">
+<md-menu #filterMenu="mdMenu">
     <button md-menu-item (click)='toggleFilter("restricted")'> <md-icon>{{iconForFilter('restricted')}}</md-icon> <span>Restreint</span></button>
     <button md-menu-item disabled class="separator"></button>
     <button md-menu-item (click)='toggleFilter("tag")'> <md-icon>{{iconForFilter('tag')}}</md-icon> <span>Normal</span></button>
     <button md-menu-item (click)='toggleFilter("officiel")'> <md-icon>{{iconForFilter('officiel')}}</md-icon> <span>Officiel</span></button>
     <button md-menu-item (click)='toggleFilter("competence")'> <md-icon>{{iconForFilter('competence')}}</md-icon> <span>Compétence</span></button>
     <button md-menu-item (click)='toggleFilter("recompense")'> <md-icon>{{iconForFilter('recompense')}}</md-icon> <span>Récompense</span></button>
+</md-menu>
+<md-menu #typeMenu="mdMenu">
+    <button md-menu-item (click)='toggleCat("tag")'> <md-icon>{{iconForCat('tag')}}</md-icon> <span>Normal</span></button>
+    <button md-menu-item (click)='toggleCat("ship")'> <md-icon>{{iconForCat('ship')}}</md-icon> <span>Vaisseau</span></button>
+    <button md-menu-item (click)='toggleCat("rank")'> <md-icon>{{iconForCat('rank')}}</md-icon> <span>Grade</span></button>
 </md-menu>
 <div fxLayout fxLayoutWrap fxFlex="100">
     <div #tagList fxFlex="20" *ngFor="let tag of tagsAPI.tags | Filter: filter | Count: filteredTags | paginate: { itemsPerPage: 40,  currentPage: page, totalItems: totalFiltered }; let last = last">
