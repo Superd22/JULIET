@@ -1,3 +1,4 @@
+import { MainSidenavComponent } from './juliet-common/components/main-sidenav/main-sidenav.component';
 import { RouterConfig } from './config/router.config';
 import { UIRouterModule } from 'ui-router-ng2';
 import { StatsModule } from './stats/stats.module';
@@ -15,16 +16,20 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { MaterialModule } from '@angular/material';
+import { MaterialModule, MdMenuModule, MdMenuTrigger } from '@angular/material';
+import { FlexLayoutModule } from '@angular/flex-layout'
 
 
 import { AppComponent } from './app.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MainSidenavComponent,
   ],
   imports: [
+    MaterialModule.forRoot(),
+    MdMenuModule,
     BrowserModule,
     FormsModule,
     HttpModule,
@@ -39,7 +44,7 @@ import { AppComponent } from './app.component';
     StatsModule,
     TagsModule,
     UserModule,
-    MaterialModule.forRoot(),
+    FlexLayoutModule.forRoot(),
     UIRouterModule.forRoot({
       configClass: RouterConfig,
       useHash:true,

@@ -1,3 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
 @import 'assets/material/theme';
 @import 'assets/main';
+
+[layoutPadding] {
+    padding: 5px 20px;
+} 
+
+[layoutMargin] {
+    margin: 10px;
+    display: block;
+}
+
+.md-menu-content {
+    & > div {
+        overflow: hidden;
+    }
+    & > .separator {
+        border-top: 1px solid rgba(197, 197, 197, 0.23);
+        margin-top: 5px;
+        height: 5px;
+    }
+}
