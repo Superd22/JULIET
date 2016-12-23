@@ -16,8 +16,9 @@ export class ListComponent implements OnInit {
   };
 
   private tagType = TagsType;
-
-  @ViewChildren('tagList') filteredTags;
+  public filteredTags = {
+    count:0,
+  };
 
 
   constructor(private tagsAPI: TagsService) { }
@@ -25,11 +26,6 @@ export class ListComponent implements OnInit {
   ngOnInit() {
     console.log(this.tagsAPI);
     this.tagsAPI.getTags();
-  }
-
-  private filteredTagCount() {
-    if(this.filteredTags) return this.filteredTags.toArray().length;
-    return 0
   }
 
   private iconForFilter(filterName) {
