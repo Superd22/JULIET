@@ -21,6 +21,7 @@
         </div>
 
         <pagination-controls (pageChange)="page = $event" autoHide="true"></pagination-controls>
+        <button md-button (click)="assignTagToSelf()" color="accent">Prendre ce TAG</button>
       </app-ju-v3-sub-pannel>
     </div>
     <div fxFlex="30">
@@ -40,6 +41,7 @@
 
     <div fxFlex="100"></div>
 
+    <div fxFlex="100"></div>
     <button md-raised-button (click)="updateTag()">Mettre à jour le tag</button>
     <button md-button color="warn" md-tooltip="Supprimer définitivement ce tag" tooltip-position="below" (click)="deleteTag()"><md-icon>delete_forever</md-icon> Supprimer le tag</button>
 

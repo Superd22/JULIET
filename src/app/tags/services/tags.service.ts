@@ -76,9 +76,18 @@ export class TagsService {
   }
 
   public deleteTag(tag: ATag) {
-    this.api.get(this.apiNamespace + "delete", {id: tag.id}).subscribe(
+    this.api.get(this.apiNamespace + "delete", { id: tag.id }).subscribe(
       data => {
         if (this.state.is("secure.Tags.view")) this.state.go("secure.Tags.list");
+      }
+    )
+  }
+
+  public assignTag(tag: ATag, target?: Number) {
+    if(!target) target = 0;
+    this.api.get(this.apiNamespace + "affect", { id: tag.id, user_id: target }).subscribe(
+      data => {
+        if (this.state.is("secure.Tags.view")) this.state.reload();
       }
     )
   }

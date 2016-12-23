@@ -71,6 +71,10 @@ export class SingleComponent implements OnInit {
     this.Tags.selectedTag.rights_from = right;
   }
 
+  public assignTagToSelf() {
+    this.Tags.assignTag(this.tagBackup);
+  }
+
   public deleteTag() {
     if(confirm("Êtes vous sur de vouloir supprimer ce T.A.G ?")) {
       this.doDelete();
