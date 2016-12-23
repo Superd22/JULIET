@@ -11,7 +11,9 @@ export let tags = {
     main: {
         name: "secure.Tags",
         url: "Tags/",
-        component: TagsComponent,
+        views: {
+            'content': { component: SingleComponent },
+        },
         abstract: true,
     },
     list: {
@@ -33,7 +35,7 @@ export let tags = {
         name: "secure.Tags.view",
         url: "view/:cat_name/:tag_name",
         views: {
-            '@': { component: SingleComponent },
+            'content': { component: SingleComponent },
         },
         resolve: [
             {
@@ -47,7 +49,7 @@ export let tags = {
             {
                 token: '_tagCat',
                 deps: [Transition],
-                resolveFn: function(trans) {
+                resolveFn: function (trans) {
                     return trans.params().cat_name;
                 }
             }

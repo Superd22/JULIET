@@ -1,1 +1,2 @@
-<ui-view></ui-view>
+<app-loading *ngIf="displaySplash"></app-loading>
+<div ui-view="content" *ngIf="authed"></div>

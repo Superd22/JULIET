@@ -1,0 +1,33 @@
+:host() {
+    text-align: center;
+    display: block;
+}
+h1 {
+    font-family: "Electrolize";
+    font-size: 8vw;
+    letter-spacing: 2vw;
+    margin-bottom: 0px;
+    display: inline-block;
+    margin-top:0px;
+}
+h2 {
+    color: grey;
+    font-family: "Electrolize";
+    font-size: 2vw;
+    letter-spacing: 0.3vw;
+    margin-top: 0px;
+    position:relative;
+    display:inline-block;
+    &:after {
+        content: "V3!";
+        padding: 2px 6px;
+        vertical-align: sub;
+        color: red;
+        font-size: 1vw;
+        position: absolute;
+        right: -1vw;
+        bottom: -0.5vw;
+        transform: rotateZ(-45deg);
+        letter-spacing: normal;
+    }
+}
