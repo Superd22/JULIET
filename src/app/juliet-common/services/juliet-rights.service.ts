@@ -32,4 +32,8 @@ export class JulietRightsService {
     );
   }
 
+  public doLogin() {
+    
+  }
+
 }
