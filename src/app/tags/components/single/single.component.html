@@ -4,15 +4,17 @@
     <h2>T.A.G.S</h2>
   </ju-v3-pannel-title>
 
-  <button uiSref="secure.Tags.list" style="margin: 5px;margin-top: 20px;" md-mini-fab md-tooltip="Retour à la liste des T.A.G.S" tooltip-position="below" ><md-icon>arrow_back</md-icon></button>
+  <button uiSref="secure.Tags.index.list" style="margin: 5px;margin-top: 20px;" md-mini-fab mdTooltip="Retour à la liste des T.A.G.S" tooltip-position="below" ><md-icon>arrow_back</md-icon></button>
 
   <div fxLayout="row" fxLayoutWrap>
     <div fxFlex="70">
       <app-ju-v3-sub-pannel *ngIf="tag" layoutMargin layoutPadding fxLayoutWrap>
 
         <ju-v3-heading layoutPadding fxLayout fxLayoutWrap>
-          <md-input [(ngModel)]="tag.name" (ngModelChange)="nameChanged($event)"></md-input>
-          <button md-button *ngIf="shouldTransf" md-tooltip="{{shouldTransf.name}} existe déjà, clickez ici pour tout transferer."
+          <md-input-container>
+            <input md-input [(ngModel)]="tag.name" (ngModelChange)="nameChanged($event)">
+          </md-input-container>
+          <button md-button *ngIf="shouldTransf" mdTooltip="{{shouldTransf.name}} existe déjà, clickez ici pour tout transferer."
             tooltip-position="below" (click)="doMigrate()"> Transferer {{tagBackup.name}} vers {{shouldTransf.name}} </button>
         </ju-v3-heading>
 
@@ -43,7 +45,7 @@
 
     <div fxFlex="100"></div>
     <button md-raised-button (click)="updateTag()">Mettre à jour le tag</button>
-    <button md-button color="warn" md-tooltip="Supprimer définitivement ce tag" tooltip-position="below" (click)="deleteTag()"><md-icon>delete_forever</md-icon> Supprimer le tag</button>
+    <button md-button color="warn" mdTooltip="Supprimer définitivement ce tag" tooltip-position="below" (click)="deleteTag()"><md-icon>delete_forever</md-icon> Supprimer le tag</button>
 
 
   </div>

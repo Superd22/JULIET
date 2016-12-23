@@ -1,3 +1,4 @@
+import { TagsIndexComponent } from './components/main/tag-index.component';
 import { FormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { SingleComponent } from './components/single/single.component';
@@ -31,7 +32,8 @@ import { Ng2CompleterModule } from "ng2-completer";
     FormsModule,
     Ng2CompleterModule
   ],
-  declarations: [TagsComponent, OwnerComponent, SearchComponent, ListComponent, ATagComponent, SingleComponent],
+  declarations: [TagsComponent, OwnerComponent, SearchComponent, ListComponent, ATagComponent, SingleComponent,
+  TagsIndexComponent],
   providers: [TagsService]
 })
 export class TagsModule { }
