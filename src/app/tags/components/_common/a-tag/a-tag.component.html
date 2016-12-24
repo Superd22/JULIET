@@ -1,9 +1,10 @@
-<div *ngIf="tag" class="ju-a-tag" 
-    uiSref="secure.Tags.view" 
-    [uiParams]="{cat_name: tag.cat ? tag.cat : 'tag', tag_name: tag.name}"
+<div *ngIf="tag" class="ju-a-tag {{tag.cat}}" uiSref="secure.Tags.view" [uiParams]="{cat_name: tag.cat ? tag.cat : 'tag', tag_name: tag.name}"
     [ngClass]="{
-        'restreint': tag.restricted == 1,
+        'restreint': tag.restricted == 1 || tag.cat != 'tag',
         'competence': tag.type == tagType.competence,
         'officiel': tag.type == tagType.officiel,
         'recompense': tag.type == tagType.recompense
-    }">{{tag.name}}</div>
+    }">
+    <img src="{{tag.img}}" *ngIf="tag.img">
+    <span fxFlex>{{tag.name}}</span>
+</div>
