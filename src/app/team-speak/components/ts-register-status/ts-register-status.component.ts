@@ -23,10 +23,10 @@ export class TsRegisterStatusComponent implements OnInit {
   }
 
   public checkUserStatus(update?: Boolean) {
+    this.busy = true;
     this.ts3.getCurrentUserStatus().subscribe(
       data => {
         this.status = data.STATUS;
-        console.log(data);
         // User is registered on TS
         if (this.status)
           this.user = data.tsUser;
@@ -36,10 +36,12 @@ export class TsRegisterStatusComponent implements OnInit {
         }
 
         if (update) {
-          this.snackBar.open(this.snackMessage(),null,{
+          this.snackBar.open(this.snackMessage(), null, {
             duration: 5000,
           });
         }
+
+          this.busy = false;
       }
     )
   }
