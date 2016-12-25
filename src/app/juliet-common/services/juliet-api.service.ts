@@ -20,7 +20,7 @@ export class JulietAPIService {
         urlParam.append(paramKey, arrayOfParam[paramKey]);
       }
     }
-    if(environment.production) urlParam.append('UseDevDb', 'true');
+    if(!environment.production) urlParam.append('UseDevDb', 'true');
     console.log(urlParam);
     return urlParam;
   }

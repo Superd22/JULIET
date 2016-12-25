@@ -29,3 +29,15 @@
     border-bottom: 1px solid #404144;
     color: white;
 }
+
+a {
+    color: #9a9a9a;
+    text-decoration: none;
+    &[aButton] {
+        display: inline-block;
+        border-radius:5px;
+        &:hover {
+            background-color: rgba(144, 144, 144, 0.1);
+        }
+    }
+}
