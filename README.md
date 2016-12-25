@@ -5,8 +5,9 @@ Q.G de developement pour la V3 de JULIET.
 
 | Feature          | Status                              | Docs         | Issue          |
 |------------------|-------------------------------------|--------------|----------------|
-| T.A.G.S          |                        Started (V3) |            - |    [#02][0002] |
-| User             |                         Not Started |            - |              - |
+| T.A.G.S          |                            RC1 (V3) |            - |   [#02][0002]- |
+| Accueil          |                             Started |            - |   [#11][0011]- |
+| User             |                             Started |            - |   [#12][0012]- |
 | Calendrier       |                         Not Started |            - |              - |
 | Ships            |                         Not Started |            - |              - |
 | Groupes          |                         Not Started |            - |              - |
