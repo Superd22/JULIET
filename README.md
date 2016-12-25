@@ -17,3 +17,5 @@ Q.G de developement pour la V3 de JULIET.
 
 
  [0002]: https://github.com/Superd22/JULIET/issues/2
+ [0011]: https://github.com/Superd22/JULIET/issues/11
+ [0012]: https://github.com/Superd22/JULIET/issues/12
