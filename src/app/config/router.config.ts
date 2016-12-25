@@ -5,6 +5,9 @@ import * as vis from 'ui-router-visualizer';
 @Injectable()
 export class RouterConfig {
     constructor(router: UIRouter) {
+
+
+        router.urlRouterProvider.otherwise("/");
         // Dev StateTree Debug    
         vis.visualizer(router);
     }
