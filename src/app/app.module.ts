@@ -49,7 +49,6 @@ import { AppComponent } from './app.component';
     FlexLayoutModule.forRoot(),
     UIRouterModule.forRoot({
       configClass: RouterConfig,
-      useHash:true,
     }),
   ],
   providers: [],
