@@ -9,7 +9,7 @@ import { RanksModule } from './ranks/ranks.module';
 import { NotifsModule } from './notifs/notifs.module';
 import { DefaultModule } from './default/default.module';
 import { JulietCommonModule } from './juliet-common/juliet-common.module';
-import { CalendarModule } from './calendar/calendar.module';
+import { JuCalendarModule } from './calendar/calendar.module';
 import { UserModule } from './user/user.module';
 import { TagsModule } from './tags/tags.module';
 import { GroupsModule } from './groups/groups.module';
@@ -34,7 +34,7 @@ import { AppComponent } from './app.component';
     BrowserModule,
     FormsModule,
     HttpModule,
-    CalendarModule,
+    JuCalendarModule,
     DefaultModule,
     GroupsModule,
     JulietCommonModule,
