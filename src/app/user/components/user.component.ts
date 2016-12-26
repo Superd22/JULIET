@@ -1,3 +1,4 @@
+import { AUserExtended } from './../interfaces/a-user-extended';
 import { Component, OnInit, Input } from '@angular/core';
 import { JulietUserService } from '../services/juliet-user.service';
 import { AUser } from '../interfaces/a-user';
@@ -5,7 +6,7 @@ import { AUser } from '../interfaces/a-user';
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
-  styleUrls: ['./user.component.css']
+  styleUrls: ['./user.component.scss']
 })
 export class UserComponent implements OnInit {
 
@@ -14,12 +15,12 @@ export class UserComponent implements OnInit {
 
   private busy:Boolean=false;
   
-  protected user:AUser;
+  protected user:AUserExtended;
   constructor(protected api:JulietUserService) { }
 
   ngOnInit() {
     this.busy = true;
-    this.api.getUserInfo(this._userId).subscribe(
+    this.api.getUserFiche(this._userId).subscribe(
       data => {this.user = data; this.busy = false;}
     );
   }

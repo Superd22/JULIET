@@ -1,3 +1,6 @@
+import { StarsComponent } from './components/rank-big/stars/stars.component';
+import { RankSelectorComponent } from './components/rank-selector/rank-selector.component';
+import { RankBigComponent } from './components/rank-big/rank-big.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -23,6 +26,8 @@ import { FormsModule } from '@angular/forms';
     FormsModule,
   ],
   providers: [JulietUserService],
-  declarations: [UserComponent]
+  declarations: [
+    UserComponent, RankBigComponent, RankSelectorComponent, StarsComponent
+    ]
 })
 export class UserModule { }

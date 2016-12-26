@@ -1,0 +1,10 @@
+<div class="rank-big" *ngIf="rank" fxLayout="row" fxLayoutWrap>
+  <div class="imgs">
+    <img src="{{rank.url}}" class="rankimg">
+    <ju-rank-stars [stars]="rank.stars"></ju-rank-stars>
+  </div>
+  <div fxFlex fxLayout fxLayoutWrap layoutPadding>
+    <span class="rankname" fxFlex="100">{{rank.name}}</span>
+    <span class="username" fxFlex="100" *ngIf="pseudo">{{pseudo}}</span>
+  </div>
+</div>
