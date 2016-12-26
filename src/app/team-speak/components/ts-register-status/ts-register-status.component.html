@@ -5,11 +5,11 @@
     <div *ngIf="status">
       <button md-button disabled> <md-icon>checkbox</md-icon> Vous êtes bien inscrit sur T.S</button>
       <br />
-      <div fxLayoutWrap layoutPadding class="userDetails" fxFlex="50" fxFlex.sm="100">
-        <span fxFlex="50" fxFlex.sm="100">Dernier pseudo utilisé :</span> <span>{{ user.client_nickname }}</span>
-        <span fxFlex="50" fxFlex.sm="100">Compte enregistré le :</span> <span>{{ user.client_created*1000 | date:'mediumDate' }}</span>
-        <span fxFlex="50" fxFlex.sm="100">Dernière connection :</span> <span>{{ user.client_lastconnected*1000 | date:'mediumDate' }}</span>
-        <span fxFlex="50" fxFlex.sm="100">Dernière IP Utilisée :</span> <span>{{ user.client_lastip }}</span>
+      <div fxLayoutWrap layoutPadding class="userDetails" fxFlex="50" fxFlex.xs="100">
+        <span fxFlex="50" fxFlex.xs="100">Dernier pseudo utilisé :</span> <span>{{ user.client_nickname }}</span>
+        <span fxFlex="50" fxFlex.xs="100">Compte enregistré le :</span> <span>{{ user.client_created*1000 | date:'mediumDate' }}</span>
+        <span fxFlex="50" fxFlex.xs="100">Dernière connection :</span> <span>{{ user.client_lastconnected*1000 | date:'mediumDate' }}</span>
+        <span fxFlex="50" fxFlex.xs="100">Dernière IP Utilisée :</span> <span>{{ user.client_lastip }}</span>
       </div>
 
       <button md-button color="warn" mdTooltip="Supprimer ce compte permet d'en recréer un autre, par exemple en cas de changement de PC"
