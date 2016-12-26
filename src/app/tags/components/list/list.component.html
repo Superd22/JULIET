@@ -1,11 +1,11 @@
-<md-toolbar fxFlex="100">
-    <md-input-container>
+<md-toolbar fxFlex="100" fxLayout fxLayoutWrap>
+    <md-input-container fxFlex fxFlex.xs="100">
         <input md-input [(ngModel)]="filter.name">
         <span md-prefix><md-icon>search</md-icon> </span>
     </md-input-container>
-    <button md-button [mdMenuTriggerFor]="filterMenu" aria-label="Open basic menu">Filtres</button>
-    <button md-button [mdMenuTriggerFor]="typeMenu" aria-label="Open basic menu">Types</button>
-    <button md-button disabled>{{filteredTags.count}} {{filteredTags.count > 1 ? "résultats" : "résultat"}}</button>
+    <button fxFlex fxFlex.xs="50" md-button [mdMenuTriggerFor]="filterMenu" aria-label="Open basic menu">Filtres</button>
+    <button fxFlex fxFlex.xs="50" md-button [mdMenuTriggerFor]="typeMenu" aria-label="Open basic menu">Types</button>
+    <button fxFlex fxFlex="100" md-button disabled>{{filteredTags.count}} {{filteredTags.count > 1 ? "résultats" : "résultat"}}</button>
 </md-toolbar>
 <md-menu #filterMenu="mdMenu">
     <button md-menu-item (click)='toggleFilter("restricted")'> <md-icon>{{iconForFilter('restricted')}}</md-icon> <span>Restreint</span></button>
@@ -21,7 +21,7 @@
     <button md-menu-item (click)='toggleCat("rank")'> <md-icon>{{iconForCat('rank')}}</md-icon> <span>Grade</span></button>
 </md-menu>
 <div fxLayout fxLayoutWrap fxFlex="100">
-    <div #tagList fxFlex="20" *ngFor="let tag of tagsAPI.tags | Filter: filter | Count: filteredTags | paginate: { itemsPerPage: 40,  currentPage: page, totalItems: totalFiltered }; let last = last">
+    <div #tagList fxFlex="20" fxFlex.xs='100' *ngFor="let tag of tagsAPI.tags | Filter: filter | Count: filteredTags | paginate: { itemsPerPage: 40,  currentPage: page, totalItems: totalFiltered }; let last = last">
         <a-tag [tag]="tag"></a-tag>
     </div>
 </div>
