@@ -1,0 +1,41 @@
+<app-ju-v3-pannel>
+    <ju-v3-pannel-title class="ju_tag_heading">
+        <span class='right'>v3.0</span>
+        <h2>Fiche Administrative</h2>
+        <em>Car je sais tout de toiiii.</em>
+    </ju-v3-pannel-title>
+
+    <div class="user-section" fxFlex="100" fxLayoutMargin fxLayoutPadding>
+      <img class="avatar" />
+
+      <md-input-container>
+        <input md-input ngModel="user.handle" placeholder="Handle RSI" />
+      </md-input-container>
+
+      <md-input-container>
+        <input md-input ngModel="user.prenom" placeholder="Prenom" />
+      </md-input-container>
+
+      <md-input-container>
+        <input md-input ngModel="user.nom" placeholder="Nom" />
+      </md-input-container>
+
+      <md-input-container>
+        <input md-input ngModel="user.callsign" placeholder="Callsign" />
+      </md-input-container>
+
+      <md-input-container>
+        <textarea md-input ngModel="user.description" placeholder="Description"></textarea>
+      </md-input-container>
+    </div>
+
+
+    <div class="user-section" fxFlex="30" fxFlex.sm="100" fxLayoutMargin fxLayoutPadding></div>
+
+    <div class="user-section" fxFlex fxFlex.sm="100" fxLayoutMargin fxLayoutPadding></div>
+
+    <div class="user-section" fxFlex="100" fxLayoutMargin>
+      <ju-tag-owner userId="user.id"></ju-tag-owner>
+    </div>
+
+</app-ju-v3-pannel>

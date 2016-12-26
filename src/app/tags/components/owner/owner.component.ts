@@ -1,12 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-owner',
+  selector: 'ju-tag-owner',
   templateUrl: './owner.component.html',
   styleUrls: ['./owner.component.scss']
 })
 export class OwnerComponent implements OnInit {
 
+  @Input()
+  protected userId;
+  
   constructor() { }
 
   ngOnInit() {

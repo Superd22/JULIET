@@ -32,8 +32,13 @@ import { Ng2CompleterModule } from "ng2-completer";
     FormsModule,
     Ng2CompleterModule
   ],
-  declarations: [TagsComponent, OwnerComponent, SearchComponent, ListComponent, ATagComponent, SingleComponent,
-  TagsIndexComponent],
+  declarations: [
+    TagsComponent, OwnerComponent, SearchComponent, ListComponent, ATagComponent, SingleComponent,
+    TagsIndexComponent  
+  ],
+  exports: [
+    OwnerComponent,
+  ],
   providers: [TagsService]
 })
 export class TagsModule { }
