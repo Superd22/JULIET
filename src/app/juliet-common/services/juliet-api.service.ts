@@ -1,4 +1,4 @@
-import { environment } from './../../../environments/environment.prod';
+import { environment } from './../../../environments/environment';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Http, Response, Headers, URLSearchParams } from '@angular/http';
@@ -20,6 +20,7 @@ export class JulietAPIService {
         urlParam.append(paramKey, arrayOfParam[paramKey]);
       }
     }
+    console.log(environment);
     if(!environment.production) urlParam.append('UseDevDb', 'true');
     console.log(urlParam);
     return urlParam;

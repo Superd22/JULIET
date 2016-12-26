@@ -7,6 +7,8 @@ import { UIRouterModule } from 'ui-router-ng2';
 import { STATES } from './states/_.states';
 import { UserComponent } from './components/user.component';
 import { TagsModule } from '../tags/tags.module';
+import { JulietUserService } from './services/juliet-user.service';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -18,7 +20,9 @@ import { TagsModule } from '../tags/tags.module';
       states:STATES
     }),
     TagsModule,
+    FormsModule,
   ],
+  providers: [JulietUserService],
   declarations: [UserComponent]
 })
 export class UserModule { }
