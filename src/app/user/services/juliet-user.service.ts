@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { JulietAPIService } from '../../juliet-common/services/juliet-api.service';
 import { AUser } from '../interfaces/a-user';
 import { Observable } from 'rxjs/Observable';
+import { JuWing } from '../enums/ju-wing.enum';
 
 @Injectable()
 export class JulietUserService {
@@ -27,6 +28,11 @@ export class JulietUserService {
       data => data.data
     );
 
+  }
+
+  // Fetches the list of ranks for the given fleet
+  public fetchRanksOfFleet(fleetId:JuWing, stars?:Number) {
+    
   }
 
 }

@@ -1,0 +1,8 @@
+.stars-holder {
+    .star {
+        cursor: pointer;
+        &:hover {
+            text-shadow: 0px 0px 10px black;
+        }
+    }
+}
