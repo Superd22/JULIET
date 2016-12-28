@@ -6,9 +6,9 @@
   </ju-v3-pannel-title>
   <div *ngIf="user">
 {{user | json}}
-    <div class="user-section" fxLayout fxLayoutWrap>
-      <ju-user-rank-big  [rank]="user.rank" (rank)="rankChanged($event)" [pseudo]="user.pseudo"></ju-user-rank-big>
-      <div class="avatar">
+    <div class="user-section" fxLayout>
+      <ju-user-rank-big  [rank]="user.rank" (rank)="rankChanged($event)" [pseudo]="user.pseudo" fxFlex="100"></ju-user-rank-big>
+      <div class="avatar" fxFlex="100px">
         <img src="{{user.avatar}}" />
       </div>
     </div>

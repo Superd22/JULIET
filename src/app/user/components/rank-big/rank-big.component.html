@@ -3,9 +3,13 @@
     <img src="{{rank.url}}" class="rankimg">
     <ju-rank-stars [(stars)]="rank.stars"></ju-rank-stars>
   </div>
-  <div fxFlex fxLayout fxLayoutWrap layoutPadding>
-    <span class="rankname" fxFlex="100">{{rank.name}}</span>
+  <div fxFlex fxLayout fxLayoutWrap layoutPadding style="position: relative;">
+    <span class="rankname" fxFlex="100">{{rank.name}} 
+      <button md-icon-button (click)="showSelect = !showSelect">
+        <md-icon>{{showSelect ? 'arrow_drop_up' : 'arrow_drop_down'}}</md-icon>
+      </button> 
+    </span>
     <span class="username" fxFlex="100" *ngIf="pseudo">{{pseudo}}</span>
-    <ju-rank-selector [(rank)]="rank"></ju-rank-selector>
+    <ju-rank-selector [(rank)]="rank" *ngIf="showSelect"></ju-rank-selector>
   </div>
 </div>

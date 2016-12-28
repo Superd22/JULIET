@@ -19,6 +19,7 @@ export class RankBigComponent implements OnInit {
   protected pseudo:String;
 
   protected rank:ARank;
+  protected showSelect:Boolean=false;
 
   constructor(protected api:JulietUserService) { 
     

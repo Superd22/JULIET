@@ -13,6 +13,10 @@
         font-family: "Electrolize";
         font-weight:bolder;
         align-self: flex-end;
+        display:flex;
+        button {
+            margin-top: 0px;
+        }
     }
     .username {
         color: #fecb00;
