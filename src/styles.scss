@@ -46,8 +46,17 @@ a {
 }
 body {
     background: #1a1c22;
+    font-family: "Electrolize";
 }
 
 md-sidenav {
     width:100%;
+}
+
+[hidden] {
+   display: none !important;
+}
+
+input {
+    font-family: "Electrolize";
 }
