@@ -6,5 +6,6 @@
   <div fxFlex fxLayout fxLayoutWrap layoutPadding>
     <span class="rankname" fxFlex="100">{{rank.name}}</span>
     <span class="username" fxFlex="100" *ngIf="pseudo">{{pseudo}}</span>
+    <ju-rank-selector [(rank)]="rank"></ju-rank-selector>
   </div>
 </div>

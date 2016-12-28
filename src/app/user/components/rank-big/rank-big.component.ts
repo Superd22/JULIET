@@ -19,29 +19,31 @@ export class RankBigComponent implements OnInit {
   protected pseudo:String;
 
   protected rank:ARank;
-  protected _currentStars:Number;
+
   constructor(protected api:JulietUserService) { 
     
   }
+
   ngOnInit() {
     if(this._rank) this.rank = this._rank;
-    this._currentStars = this.rank.stars;
     this._rankChange.emit(this.rank);
   }
 
   ngOnChanges(changes) {
     console.log(changes);
   }
-
+  
+  
   ngDoCheck() {
-    if(this.rank.stars != this._currentStars) {
-      this._currentStars = this.rank.stars;
-      this.fetchRelevantRanks();
+    if(this.rank) {
+      if(this.rank.ID != this._rank.ID) {
+        this._rank = this.rank;
+        console.log("emmiting");
+        console.log(this.rank);
+        this._rankChange.emit(this.rank);
+      }
     }
-  }
+  }  
 
-  protected fetchRelevantRanks() {
-    
-  }
 
 }

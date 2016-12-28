@@ -30,4 +30,9 @@ export class UserComponent implements OnInit {
     );
   }
 
+  protected rankChanged(rank?) {
+    this.user.rank = rank;
+    this.user.grade = this.user.rank.ID;
+  }
+
 }

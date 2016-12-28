@@ -1,0 +1,29 @@
+.rank-list {
+    > li {
+        display:inline-block;
+        list-style:none;
+    }
+}
+
+.arank {
+    clear: both;
+    margin: 0px 5px;
+    display: inline-block;
+
+    img {
+        height:35px;
+        float:left;
+    }
+    span {
+        color: darkgoldenrod;
+        font-weight: bold;
+        margin: 5px;
+        line-height: 40px;
+
+        em {
+            font-style: none;
+            color:grey;
+            font-size:12px;
+        }
+    }
+}

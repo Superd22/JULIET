@@ -7,7 +7,7 @@
   <div *ngIf="user">
 {{user | json}}
     <div class="user-section" fxLayout fxLayoutWrap>
-      <ju-user-rank-big  [(rank)]="user.rank" [pseudo]="user.pseudo"></ju-user-rank-big>
+      <ju-user-rank-big  [rank]="user.rank" (rank)="rankChanged($event)" [pseudo]="user.pseudo"></ju-user-rank-big>
       <div class="avatar">
         <img src="{{user.avatar}}" />
       </div>

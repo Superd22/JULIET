@@ -9,6 +9,7 @@ import { JuWing } from '../enums/ju-wing.enum';
 export class JulietUserService {
 
   protected _namespace = "Users/";
+  protected _rankNameSpace = "Ranks/";
 
   constructor(protected api: JulietAPIService) { }
 
@@ -32,7 +33,9 @@ export class JulietUserService {
 
   // Fetches the list of ranks for the given fleet
   public fetchRanksOfFleet(fleetId:JuWing, stars?:Number) {
-    
+    return this.api.get(this._rankNameSpace + "GET_FLEET_STAR", {fleet: fleetId, star: stars}).map(
+      data => data.data
+    );
   }
 
 }
