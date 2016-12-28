@@ -23,7 +23,7 @@ export class TagsService {
 
   public buildCompleter(): CompleterData {
     var completer = this.completerService.remote(null, "name", "name");
-    completer.urlFormater(term => this.api.api + this.apiNamespace + `tags_search.php?f=${term}`);
+    completer.urlFormater(term => this.api.api + this.apiNamespace + `tags_searchphp?f=${term}`);
     completer.dataField("data");
 
     return completer;
@@ -31,7 +31,7 @@ export class TagsService {
 
   // Gets all tags 
   public getTags() {
-    this.api.get(this.apiNamespace + "tags_get.php").subscribe(
+    this.api.get(this.apiNamespace + "tags_getphp").subscribe(
       data => this.tags = data.data
     );
   }
@@ -51,7 +51,7 @@ export class TagsService {
     if (tag.id) var _tagId = tag.name;
     else var _tagId = tag;
 
-    return this.api.get(this.apiNamespace + "tags_get_single.php", { name: _tagId, category: _cat }).map(
+    return this.api.get(this.apiNamespace + "tags_get_singlephp", { name: _tagId, category: _cat }).map(
       data => data.data
     );
   }
@@ -134,7 +134,7 @@ export class TagsService {
   }
 
   public has_admin(userid) {
-    var promise = this.api.post('Rights/index.php', { right: "USER_CAN_ADMIN_TAGS", test: "lol", user: userid }).subscribe(function (data) {
+    var promise = this.api.post('Rights/indexphp', { right: "USER_CAN_ADMIN_TAGS", test: "lol", user: userid }).subscribe(function (data) {
       var hasR = false;
       if (data == "1" || data == "true") hasR = true;
       return hasR;
@@ -144,7 +144,7 @@ export class TagsService {
   }
 
   public sendQuery(query) {
-    var p = this.api.post('Tags/tags_resolveQuery.php', { query: query }).subscribe(function (data) {
+    var p = this.api.post('Tags/tags_resolveQueryphp', { query: query }).subscribe(function (data) {
       return data;
     });
 
@@ -152,7 +152,7 @@ export class TagsService {
   }
 
   public getName(id, type) {
-    var p = this.api.post('Tags/tags_getNameById.php', { id: id, type: type }).subscribe(function (data) {
+    var p = this.api.post('Tags/tags_getNameByIdphp', { id: id, type: type }).subscribe(function (data) {
       return data;
     });
 

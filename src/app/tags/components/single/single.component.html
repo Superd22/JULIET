@@ -9,7 +9,7 @@
 </button>
 
 <div fxLayout="row" fxLayoutWrap>
-  <div fxFlex="70">
+  <div fxFlex="70" fxFlex.xs="100">
     <app-ju-v3-sub-pannel *ngIf="tag" layoutMargin fxLayoutWrap>
       <md-toolbar fxFlex="100">T.A.G {{tagBackup.name}}</md-toolbar>
       <div layoutPadding>
@@ -30,7 +30,7 @@
       </div>
     </app-ju-v3-sub-pannel>
   </div>
-  <div fxFlex="30">
+  <div fxFlex="30" fxFlex.xs="100">
     <app-ju-v3-sub-pannel *ngIf="tag" layoutMargin fxLayout fxLayoutWrap>
       <md-toolbar fxFlex="100">Informations supplémentaires</md-toolbar>
       <div layoutPadding fxLayout="row" fxFlex="100" fxLayoutWrap>

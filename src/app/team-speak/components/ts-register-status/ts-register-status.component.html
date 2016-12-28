@@ -1,0 +1,32 @@
+<app-ju-v3-sub-pannel layoutMargin fxLayoutWrap fxLayout>
+  <md-toolbar fxFlex="100">STATUT TEAMSPEAK</md-toolbar>
+  <div fxFlex="100" layoutPadding *ngIf="!busy">
+
+    <div *ngIf="status">
+      <button md-button disabled> <md-icon>checkbox</md-icon> Vous êtes bien inscrit sur T.S</button>
+      <br />
+      <div fxLayoutWrap layoutPadding class="userDetails" fxFlex="50" fxFlex.xs="100">
+        <span fxFlex="50" fxFlex.xs="100">Dernier pseudo utilisé :</span> <span>{{ user.client_nickname }}</span>
+        <span fxFlex="50" fxFlex.xs="100">Compte enregistré le :</span> <span>{{ user.client_created*1000 | date:'mediumDate' }}</span>
+        <span fxFlex="50" fxFlex.xs="100">Dernière connection :</span> <span>{{ user.client_lastconnected*1000 | date:'mediumDate' }}</span>
+        <span fxFlex="50" fxFlex.xs="100">Dernière IP Utilisée :</span> <span>{{ user.client_lastip }}</span>
+      </div>
+
+      <button md-button color="warn" mdTooltip="Supprimer ce compte permet d'en recréer un autre, par exemple en cas de changement de PC"
+        [disabled]="busy" (click)="deleteUser()"> <md-icon>delete</md-icon> Supprimer ce compte </button>
+    </div>
+
+    <div *ngIf="!status">
+      <button md-button color="warn" disabled> <md-icon>warning</md-icon> Vous n'êtes pas inscrit sur T.S</button>
+      <div>
+        <p> Lier vos comptes JULIET et TS permet de récupérer votre "macaron" de couleur et d'accèder aux espaces privés.</p>
+        <p> En cas de problème, n'hesitez pas à contactez un G.O sur TS</p>
+        <md-input-container layoutMargin>
+          <input md-input disabled [(ngModel)]="token" placeholder="Votre Token">
+        </md-input-container>
+      </div>
+      <a [href]="tokenUrl" target="_blank" color="accent" LayoutMargin layoutPadding aButton>Clickez ici pour vous inscrire sur TS.</a>
+    </div>
+  </div>
+  <md-progress-bar mode="indeterminate" class='loading' fxFlex="100" *ngIf="busy"></md-progress-bar>
+</app-ju-v3-sub-pannel>

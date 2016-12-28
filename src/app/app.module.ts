@@ -1,3 +1,4 @@
+import { TeamSpeakModule } from './team-speak/team-speak.module';
 import { MainSidenavComponent } from './juliet-common/components/main-sidenav/main-sidenav.component';
 import { RouterConfig } from './config/router.config';
 import { UIRouterModule } from 'ui-router-ng2';
@@ -42,12 +43,12 @@ import { AppComponent } from './app.component';
     RightsModule,
     ShipsModule,
     StatsModule,
+    TeamSpeakModule,
     TagsModule,
     UserModule,
     FlexLayoutModule.forRoot(),
     UIRouterModule.forRoot({
       configClass: RouterConfig,
-      useHash:true,
     }),
   ],
   providers: [],

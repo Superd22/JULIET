@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  julietAPI: "http://www.scfr.fr/API/Juliet/",
+  julietAPI: "https://starcitizen.fr/API/Juliet/",
 };

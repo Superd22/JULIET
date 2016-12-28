@@ -5,8 +5,11 @@ Q.G de developement pour la V3 de JULIET.
 
 | Feature          | Status                              | Docs         | Issue          |
 |------------------|-------------------------------------|--------------|----------------|
-| T.A.G.S          |                        Started (V3) |            - |    [#02][0002] |
-| User             |                         Not Started |            - |              - |
+| T.A.G.S          |                            RC1 (V3) |            - |    [#02][0002] |
+| Accueil          |                             Started |            - |    [#11][0011] |
+| User             |                             Started |            - |    [#12][0012] |
+| Spectrum         |                         Not Started |            - |              - |
+| Teamspeak        |                             Started |            - |              - |
 | Calendrier       |                         Not Started |            - |              - |
 | Ships            |                         Not Started |            - |              - |
 | Groupes          |                         Not Started |            - |              - |
@@ -16,3 +19,5 @@ Q.G de developement pour la V3 de JULIET.
 
 
  [0002]: https://github.com/Superd22/JULIET/issues/2
+ [0011]: https://github.com/Superd22/JULIET/issues/11
+ [0012]: https://github.com/Superd22/JULIET/issues/12

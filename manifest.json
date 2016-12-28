@@ -1,0 +1,15 @@
+{
+  "manifest_version": 2,
+  "name": "JULIET",
+  "version": "0.0.1alpha",
+  "default_locale": "fr",
+  "description": "Interface de gestion JULIET pour Sibylla sur Star Citizen",
+  "short_name": "JULIET",
+  "start_url": "index.html",
+  "display": "standalone",
+  "icons": [{
+    "src": "favicon.png",
+    "sizes": "512x512",
+    "type": "image/png"
+  }]
+}
