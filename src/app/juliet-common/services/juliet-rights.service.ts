@@ -1,11 +1,13 @@
 import { Observable } from 'rxjs/Observable';
 import { JulietAPIService } from './juliet-api.service';
 import { Injectable } from '@angular/core';
+import { RemoteData } from 'ng2-completer';
 
 @Injectable()
 export class JulietRightsService {
 
   public userIsAuthorized: Boolean = false;
+  public userIsAdmin: Boolean = false;
   private _authorizePacket;
 
   constructor(public api: JulietAPIService) { }
@@ -25,10 +27,17 @@ export class JulietRightsService {
           console.log("setting okay");
           this.userIsAuthorized = true;
           this._authorizePacket = data;
+          this.can_admin_juliet();
         }
 
         return data;
       }
+    );
+  }
+
+  public can_admin_juliet() {
+    this.userIsAdmin === true ? Observable.of(true) : this.user_can("USER_IS_ADMIN").subscribe(
+      data => this.userIsAdmin = data.data
     );
   }
 

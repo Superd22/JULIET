@@ -1,0 +1,52 @@
+<ju-v3-pannel>
+  <ju-v3-pannel-title class="ju_tag_heading">
+    <span class='right'>v3.0</span>
+    <h2>Fiche Administrative</h2>
+    <em>Car je sais tout de toiiii.</em>
+  </ju-v3-pannel-title>
+  <div *ngIf="user">
+
+    <ju-v3-sub-pannel class="user-section" fxLayout LayoutPadding LayoutMargin>
+      <ju-user-rank-big  [rank]="user.rank" (rank)="rankChanged($event)" [pseudo]="user.pseudo" fxFlex="100"></ju-user-rank-big>
+      <div class="avatar" fxFlex="100px">
+        <img src="{{user.avatar}}" />
+      </div>
+    </ju-v3-sub-pannel>
+    
+    <ju-v3-sub-pannel class="user-section" fxFlex="100" LayoutPadding LayoutMargin>
+
+      <md-input-container>
+        <input md-input [(ngModel)]="user.handle" placeholder="Handle RSI" />
+      </md-input-container>
+
+      <md-input-container>
+        <input md-input [(ngModel)]="user.prenom" placeholder="Prenom" />
+      </md-input-container>
+
+      <md-input-container>
+        <input md-input [(ngModel)]="user.nom" placeholder="Nom" />
+      </md-input-container>
+
+      <md-input-container>
+        <input md-input [(ngModel)]="user.callsign" placeholder="Callsign" />
+      </md-input-container>
+
+      <md-input-container>
+        <textarea md-input [(ngModel)]="user.description" placeholder="Description"></textarea>
+      </md-input-container>²
+    </ju-v3-sub-pannel>
+
+
+    <div class="user-section" fxFlex="30" fxFlex.sm="100" fxLayoutMargin fxLayoutPadding></div>
+
+    <div class="user-section" fxFlex fxFlex.sm="100" fxLayoutMargin fxLayoutPadding></div>
+
+    <ju-v3-sub-pannel class="user-section" fxFlex="100" LayoutMargin>
+      <ju-tag-owner [user]="user"></ju-tag-owner>
+    </ju-v3-sub-pannel>
+  </div>
+
+  <button md-button color="accent"><md-icon>save</md-icon> Mettre à jour </button>
+  <button md-button color="warn"><md-icon>delete_forever</md-icon> Suprimer le joueur de la guilde </button>
+  <md-progress-bar mode="indeterminate" class='loading' fxFlex="100" *ngIf="busy"></md-progress-bar>
+</ju-v3-pannel>
