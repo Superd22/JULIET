@@ -16,6 +16,7 @@ import { OwnerComponent } from './components/owner/owner.component';
 import { SearchComponent } from './components/search/search.component';
 import { Ng2PaginationModule }  from 'ng2-pagination';
 import { Ng2CompleterModule } from "ng2-completer";
+import { TagListComponent } from './components/_common/tag-list/tag-list.component';
 
 
 
@@ -32,8 +33,10 @@ import { Ng2CompleterModule } from "ng2-completer";
     FormsModule,
     Ng2CompleterModule
   ],
-  declarations: [TagsComponent, OwnerComponent, SearchComponent, ListComponent, ATagComponent, SingleComponent,
-  TagsIndexComponent],
+  declarations: [
+    TagsComponent, OwnerComponent, SearchComponent, ListComponent, ATagComponent, SingleComponent,
+    TagsIndexComponent, TagListComponent,
+  ],
   providers: [TagsService]
 })
 export class TagsModule { }
