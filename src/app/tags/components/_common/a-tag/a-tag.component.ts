@@ -18,7 +18,7 @@ export class ATagComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.tag.restricted = Number(this.tag.restricted);
+    if(this.tag.restricted) this.tag.restricted = Number(this.tag.restricted);
   }
 
 }

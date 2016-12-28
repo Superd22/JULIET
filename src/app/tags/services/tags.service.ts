@@ -36,6 +36,20 @@ export class TagsService {
     );
   }
 
+  // Fetches all the tag for a given user
+  public getUserTags(user?: Number):Observable<ATag[]> {
+    if(!user) user = 0;
+    return this.api.post(this.apiNamespace + "tags_getphp",{user: user}).map(
+      data => data.data
+    );
+  }
+
+  public searchTags(search?:String, all?:Boolean):Observable<ATag[]> {
+    return this.api.post(this.apiNamespace + "tags_searchphp",{f: search, mod: all ? "ALL" : ""}).map(
+      data => data.data
+    );
+  }
+
   public createTag(tagName:String):Observable<ATag> {
     if(tagName) {
       return this.api.get(this.apiNamespace + "create", {name: tagName}).map(
