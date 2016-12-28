@@ -1,7 +1,7 @@
 <div class="rank-big" *ngIf="rank" fxLayout="row" fxLayoutWrap>
   <div class="imgs">
     <img src="{{rank.url}}" class="rankimg">
-    <ju-rank-stars [(stars)]="rank.stars"></ju-rank-stars>
+    <ju-rank-stars [(stars)]="rank.stars" (starChange)="showSelect = true"></ju-rank-stars>
   </div>
   <div fxFlex fxLayout fxLayoutWrap layoutPadding style="position: relative;">
     <span class="rankname" fxFlex="100">{{rank.name}} 

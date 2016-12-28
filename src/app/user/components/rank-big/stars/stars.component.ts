@@ -12,6 +12,8 @@ export class StarsComponent implements OnInit {
   private stars:Number=0;
   @Output()
   private starsChange = new EventEmitter();
+  @Output("starChange")
+  protected _showSelect = new EventEmitter();
 
   private _lastStarSelected:Number;
   constructor(protected api:JulietUserService) { }
@@ -22,6 +24,8 @@ export class StarsComponent implements OnInit {
   public changeStars(star:Number) {
     // Double click on first star means no star.
     if(star === 1 && this._lastStarSelected === 1) star = 0;
+
+    if(star != this._lastStarSelected) this._showSelect.emit(true);
 
     this._lastStarSelected = star;
     this.stars = star;
