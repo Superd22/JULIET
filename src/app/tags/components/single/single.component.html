@@ -1,4 +1,4 @@
-<app-ju-v3-pannel fxLayoutMargin>
+<ju-v3-pannel fxLayoutMargin>
   <ju-v3-pannel-title class="ju_tag_heading" fxFlex="100">
     <span class='right'>v3.0</span>
     <h2>T.A.G.S</h2>
@@ -10,7 +10,7 @@
 
 <div fxLayout="row" fxLayoutWrap>
   <div fxFlex="70" fxFlex.xs="100">
-    <app-ju-v3-sub-pannel *ngIf="tag" layoutMargin fxLayoutWrap>
+    <ju-v3-sub-pannel *ngIf="tag" layoutMargin fxLayoutWrap>
       <md-toolbar fxFlex="100">T.A.G {{tagBackup.name}}</md-toolbar>
       <div layoutPadding>
         <ju-v3-heading layoutPadding fxLayout fxLayoutWrap>
@@ -28,10 +28,10 @@
         <pagination-controls (pageChange)="page = $event" autoHide="true"></pagination-controls>
         <button md-button (click)="assignTagToSelf()" color="accent">Prendre ce TAG</button>
       </div>
-    </app-ju-v3-sub-pannel>
+    </ju-v3-sub-pannel>
   </div>
   <div fxFlex="30" fxFlex.xs="100">
-    <app-ju-v3-sub-pannel *ngIf="tag" layoutMargin fxLayout fxLayoutWrap>
+    <ju-v3-sub-pannel *ngIf="tag" layoutMargin fxLayout fxLayoutWrap>
       <md-toolbar fxFlex="100">Informations supplémentaires</md-toolbar>
       <div layoutPadding fxLayout="row" fxFlex="100" fxLayoutWrap>
         <div fxFlex="100" fxLayout fxLayoutWrap fxLayoutGap="10px">
@@ -48,7 +48,7 @@
 <md-option *ngFor="let type of tagTypes | enumKeys" [value]="type.key" [disabled]="type.key < 0"> {{ type.value }} </md-option>
 </md-select>
 </div>
-</app-ju-v3-sub-pannel>
+</ju-v3-sub-pannel>
 </div>
 
 <div fxFlex="100"></div>
@@ -59,4 +59,4 @@
 
 
 </div>
-</app-ju-v3-pannel>
+</ju-v3-pannel>

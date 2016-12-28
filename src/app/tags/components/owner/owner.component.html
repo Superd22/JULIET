@@ -2,8 +2,8 @@
 <ju-tags-list #tagList [tags]="tagsList"></ju-tags-list>
 
 <div style="clear:both;"></div>
-<hr />
-<div class='suggested' fxLayout fxLayoutWrap fxFlex="100" *ngIf="api.tags && tagsList" [hidden]="filteredTags.count > 20 && filteredTags.count == 0 ">    
+<div class='suggested' fxLayout fxLayoutWrap fxFlex="100" *ngIf="api.tags && tagsList" [hidden]="filteredTags.count > 20 || filteredTags.count == 0">    
+  <hr />
   <h3 fxFlex="100">Suggestions</h3>
   <div #tagList fxFlex="20" fxFlex.xs='100' 
       *ngFor="let tag of api.tags | ExcludeTags: tagsList | Filter: tagList.filter | Count: filteredTags">
