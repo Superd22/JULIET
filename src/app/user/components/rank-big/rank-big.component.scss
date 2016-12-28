@@ -1,0 +1,30 @@
+.rank-big {
+    display:inline-block;
+    .imgs {
+    text-align:center;
+        .rankimg {
+            height:80px;
+        }
+    }
+    .rankname {
+        text-transform: uppercase;
+        color: darkgoldenrod;
+        font-size: 2em;
+        font-family: "Electrolize";
+        font-weight:bolder;
+        align-self: flex-end;
+        display:flex;
+        button {
+            margin-top: 0px;
+        }
+    }
+    .username {
+        color: #fecb00;
+        font-size: 4em;
+        letter-spacing: 7px;
+        white-space: nowrap;
+        font-family: "Electrolize" !important;
+        text-transform:uppercase;
+        align-self: flex-start;
+    }
+}

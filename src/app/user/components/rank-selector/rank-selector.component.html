@@ -1,0 +1,10 @@
+<div class="rank-selector">
+  <md-progress-spinner mode="indeterminate" color="primary" *ngIf="busy"></md-progress-spinner>
+  <ul *ngIf="possibleRanks && !busy" class="rank-list">
+    <li *ngFor="let aRank of possibleRanksFiltered" (click)="selectRank(aRank)">
+      <div *ngIf="aRank.pos == rank.pos || rights.userIsAdmin" class="arank" [ngClass]="{selected: aRank.ID === rank.ID}">
+        <img src="{{aRank.url}}"> <span><em *ngIf="rights.userIsAdmin">[{{aRank.stars}}.{{aRank.pos}}]</em> {{aRank.name}}</span>
+      </div>
+    </li>
+  </ul>
+</div>

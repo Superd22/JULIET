@@ -22,6 +22,7 @@ import { FlexLayoutModule } from '@angular/flex-layout'
 
 
 import { AppComponent } from './app.component';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { AppComponent } from './app.component';
     FlexLayoutModule.forRoot(),
     UIRouterModule.forRoot({
       configClass: RouterConfig,
+      useHash: !environment.production,
     }),
   ],
   providers: [],

@@ -2,8 +2,10 @@ import { Component, OnInit, Input } from '@angular/core';
 import { TagsService } from '../../services/tags.service';
 import { ATag } from '../../interfaces/a-tag';
 
+
+
 @Component({
-  selector: 'tags-owner',
+  selector: 'ju-tag-owner',
   templateUrl: './owner.component.html',
   styleUrls: ['./owner.component.scss']
 })
@@ -18,6 +20,7 @@ export class OwnerComponent implements OnInit {
   };
 
   constructor(public api:TagsService) { }
+
 
   ngOnInit() {
     this.api.getUserTags(this._userId).subscribe(

@@ -38,6 +38,9 @@ import { ExcludeTagsPipe } from './pipes/exclude-tags.pipe';
     TagsComponent, OwnerComponent, SearchComponent, ListComponent, ATagComponent, SingleComponent,
     TagsIndexComponent, TagListComponent, ExcludeTagsPipe,
   ],
+  exports: [
+    OwnerComponent,
+  ],
   providers: [TagsService]
 })
 export class TagsModule { }
