@@ -21,7 +21,7 @@
     <button md-menu-item (click)='toggleCat("rank")'> <md-icon>{{iconForCat('rank')}}</md-icon> <span>Grade</span></button>
 </md-menu>
 
-<div fxLayout fxLayoutWrap fxFlex="100">
+<div fxLayout fxLayoutWrap fxFlex="100" *ngIf="tagList">
     <div #tagList fxFlex="20" fxFlex.xs='100' *ngFor="let tag of tagList | Filter: filter | Count: filteredTags | paginate: { itemsPerPage: 40,  currentPage: page, totalItems: totalFiltered }; let last = last">
         <a-tag [tag]="tag"></a-tag>
     </div>
