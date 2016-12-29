@@ -5,11 +5,11 @@
   </div>
   <div fxFlex fxLayout fxLayoutWrap layoutPadding style="position: relative;">
     <span class="rankname" fxFlex="100">{{rank.name}} 
-      <button md-icon-button (click)="showSelect = !showSelect">
+      <button md-icon-button (click)="showSelect = !showSelect" *ngIf="canEdit">
         <md-icon>{{showSelect ? 'arrow_drop_up' : 'arrow_drop_down'}}</md-icon>
       </button> 
     </span>
-    <span class="username" fxFlex="100" *ngIf="pseudo">{{pseudo}}</span>
-    <ju-rank-selector [(rank)]="rank" *ngIf="showSelect"></ju-rank-selector>
+    <span class="username" fxFlex="100" *ngIf="user && user.pseudo">{{user.pseudo}}</span>
+    <ju-rank-selector [(rank)]="rank" *ngIf="showSelect" [canEdit]="canEdit"></ju-rank-selector>
   </div>
 </div>

@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { JulietUserService } from '../services/juliet-user.service';
 import { AUser } from '../interfaces/a-user';
 import { AUserExtended } from '../interfaces/a-user-extended';
+import { JulietRightsService } from '../../juliet-common/services/juliet-rights.service';
 
 @Component({
   selector: 'app-user',
@@ -12,12 +13,13 @@ export class UserComponent implements OnInit {
 
   @Input()
   private _userId:Number;
-
   private busy:Boolean=false;
-  
+  private canEdit:Boolean=false;
+
   protected user:AUserExtended;
   protected userBackup:AUserExtended;
-  constructor(protected api:JulietUserService) { }
+
+  constructor(protected api:JulietUserService, protected rights:JulietRightsService) { }
 
   ngOnInit() {
     this.busy = true;
@@ -25,6 +27,8 @@ export class UserComponent implements OnInit {
       data => {
         this.user = data;
         this.userBackup = Object.assign({}, data);
+
+        this.canEdit = this.rights.userIsAdmin || this.rights.userId === this.user.id_forum;
         this.busy = false;
       }
     );
@@ -63,7 +67,7 @@ export class UserComponent implements OnInit {
   }
 
   protected updateUser() {
-    
+
   }
 
 }

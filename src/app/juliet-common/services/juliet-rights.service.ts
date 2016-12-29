@@ -8,6 +8,7 @@ export class JulietRightsService {
 
   public userIsAuthorized: Boolean = false;
   public userIsAdmin: Boolean = false;
+  public userId: Number = 0;
   private _authorizePacket;
 
   constructor(public api: JulietAPIService) { }
@@ -24,13 +25,23 @@ export class JulietRightsService {
     return this.userIsAuthorized === true ? Observable.of(this._authorizePacket) : this.user_can("USER_CAN_SEE_JULIET").map(
       data => {
         if (data.data === true) {
-          console.log("setting okay");
           this.userIsAuthorized = true;
           this._authorizePacket = data;
-          this.can_admin_juliet();
+          this.hydrateUserRights();
         }
 
         return data;
+      }
+    );
+  }
+
+  public hydrateUserRights() {
+    this.user_can("HYDRATE_USER").subscribe(
+      data => {
+        if(data.data) {
+          this.userId = data.data.userId;
+          this.userIsAdmin = data.data.isAdmin;
+        }
       }
     );
   }

@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { JulietUserService } from '../../../services/juliet-user.service';
+import { JulietRightsService } from '../../../../juliet-common/services/juliet-rights.service';
 
 @Component({
   selector: 'ju-rank-stars',
@@ -14,14 +15,17 @@ export class StarsComponent implements OnInit {
   private starsChange = new EventEmitter();
   @Output("starChange")
   protected _showSelect = new EventEmitter();
-
   private _lastStarSelected:Number;
-  constructor(protected api:JulietUserService) { }
+
+  constructor(protected api:JulietUserService, protected rights:JulietRightsService) { }
 
   ngOnInit() {
+
   }
 
   public changeStars(star:Number) {
+    if(!this.rights.userIsAdmin) return;
+
     // Double click on first star means no star.
     if(star === 1 && this._lastStarSelected === 1) star = 0;
 

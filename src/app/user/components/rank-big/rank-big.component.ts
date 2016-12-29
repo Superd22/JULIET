@@ -1,6 +1,9 @@
 import { ARank } from './../../interfaces/a-rank';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { JulietUserService } from '../../services/juliet-user.service';
+import { AUserExtended } from '../../interfaces/a-user-extended';
+import { AUser } from '../../interfaces/a-user';
+import { JulietRightsService } from '../../../juliet-common/services/juliet-rights.service';
 
 @Component({
   selector: 'ju-user-rank-big',
@@ -16,24 +19,23 @@ export class RankBigComponent implements OnInit {
   @Output("rank")
   protected _rankChange= new EventEmitter();
   @Input()
-  protected pseudo:String;
+  protected user:AUser;
 
   protected rank:ARank;
   protected showSelect:Boolean=false;
 
-  constructor(protected api:JulietUserService) { 
+  private canEdit:Boolean=false;
+
+  constructor(protected api:JulietUserService, protected rights:JulietRightsService) { 
     
   }
 
   ngOnInit() {
     if(this._rank) this.rank = this._rank;
     this._rankChange.emit(this.rank);
-  }
 
-  ngOnChanges(changes) {
-    console.log(changes);
-  }
-  
+    this.canEdit = this.rights.userIsAdmin || this.rights.userId == this.user.id_forum;
+  }  
   
   ngDoCheck() {
     if(this.rank) {

@@ -30,8 +30,8 @@ export class TagsService {
   }
 
   // Gets all tags 
-  public getTags() {
-    this.api.get(this.apiNamespace + "tags_getphp").subscribe(
+  public getTags(update?:Boolean) {
+    if(!this.tags || update) this.api.get(this.apiNamespace + "tags_getphp").subscribe(
       data => this.tags = data.data
     );
   }
