@@ -21,8 +21,13 @@
             (click)="doMigrate()"> Transferer {{tagBackup.name}} vers {{shouldTransf.name}} </button>
         </ju-v3-heading>
 
-        <div layoutMargin fxFlex="100">
-          <div *ngFor="let user of tag.count | paginate: { itemsPerPage: 20,  currentPage: page, totalItems: total }">{{user.name}}</div>
+        <div layoutMargin fxFlex="100" fxLayout fxLayoutWrap fxLayoutAlign="space-between">
+          <div *ngFor="let user of tag.count | paginate: { itemsPerPage: 20,  currentPage: page, totalItems: total }" 
+          fxFlex="25" fxFlex.sm="50" fxFlex.xs="100" style="padding:0px 5px">
+            <div class="aUser" uiSref="secure.user" [uiParams]="{user_id: user.id_forum}">
+              <img src="{{user.avatar}}"> <span>{{user.name}}</span>
+            </div>
+          </div>
         </div>
 
         <pagination-controls (pageChange)="page = $event" autoHide="true"></pagination-controls>
@@ -41,8 +46,7 @@
             (selected)="setRights($event)"></ng2-completer>
         </div>
 
-        <md-checkbox [(ngModel)]="tag.restricted" fxFlex="100" style="margin-top: 20px;" > T.A.G Restreint
-</md-checkbox>
+        <md-checkbox [(ngModel)]="tag.restricted" fxFlex="100" style="margin-top: 20px;" > T.A.G Restreint </md-checkbox>
 
 <md-select style="margin-top: 35px;" fxFlex='100' placeholder="Type de T.A.G" [(ngModel)]="tag.type">
 <md-option *ngFor="let type of tagTypes | enumKeys" [value]="type.key" [disabled]="type.key < 0"> {{ type.value }} </md-option>

@@ -21,4 +21,8 @@ export class ATagComponent implements OnInit {
     if(this.tag.restricted) this.tag.restricted = Number(this.tag.restricted);
   }
 
+  protected isRestricted() {
+    return this.tag.restricted == 1 || this.tag.cat != 'tag'
+  }
+
 }
