@@ -31,8 +31,39 @@ export class UserComponent implements OnInit {
   }
 
   protected rankChanged(rank?) {
-    this.user.rank = rank;
-    this.user.grade = this.user.rank.ID;
+    window.setTimeout(() => {
+      this.user.rank = rank;
+      this.user.grade = this.user.rank.ID;
+    });
+  }
+
+  protected hasMadeChanges():Boolean {
+    if(!this.user || !this.userBackup) return false;
+    
+    var r = false;
+    let u = this.user;
+    let b = this.userBackup;
+
+    if(
+      u.callsign != b.callsign ||
+      u.description != b.description ||
+      u.fleet != b.fleet ||
+      u.grade != b.grade ||
+      u.handle != b.handle ||
+      u.nom != b.nom ||
+      u.pending != b.pending ||
+      u.prenom != b.prenom 
+    ) r = true;
+
+    return r;
+  }
+
+  protected revertChanges() {
+    this.user = Object.assign({}, this.userBackup);
+  }
+
+  protected updateUser() {
+    
   }
 
 }

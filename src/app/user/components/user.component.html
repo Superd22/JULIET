@@ -33,7 +33,7 @@
 
       <md-input-container>
         <textarea md-input [(ngModel)]="user.description" placeholder="Description"></textarea>
-      </md-input-container>²
+      </md-input-container>
     </ju-v3-sub-pannel>
 
 
@@ -45,8 +45,10 @@
       <ju-tag-owner [user]="user"></ju-tag-owner>
     </ju-v3-sub-pannel>
   </div>
-
-  <button md-button color="accent"><md-icon>save</md-icon> Mettre à jour </button>
+  <div *ngIf="hasMadeChanges() && !busy" fxFlex="100">
+    <button md-button color="accent" fxFlex="50" (click)="updateUser()"><md-icon>save</md-icon> Mettre à jour </button>
+    <button md-button (click)="revertChanges()"><md-icon>settings_backup_restore</md-icon> Supprimer les changements </button>
+  </div>
   <button md-button color="warn"><md-icon>delete_forever</md-icon> Suprimer le joueur de la guilde </button>
   <md-progress-bar mode="indeterminate" class='loading' fxFlex="100" *ngIf="busy"></md-progress-bar>
 </ju-v3-pannel>
