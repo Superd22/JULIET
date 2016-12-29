@@ -1,0 +1,32 @@
+.aUser {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    position: relative;
+    font-size: 15px;
+    margin: 5px 0px;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-family: 'Electrolize' !important;
+    color: #FFFFFF;
+    background-color: #1a1c22;
+    border: none;
+    border-left: solid 4px #2A485E;
+    display: block;
+    padding: 10px 15px;
+    margin-bottom: 1px;
+    transition: all .1s ease-in-out;
+    img {
+        height:25px;
+        width:25px;
+        float:left;
+    }
+    span {
+        line-height: 25px;
+        padding-left: 10px;
+    }
+
+    &:hover {
+        border-left: solid 4px #44a6d5;
+    }
+}

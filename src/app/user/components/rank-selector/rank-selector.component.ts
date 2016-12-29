@@ -14,6 +14,8 @@ export class RankSelectorComponent implements OnInit {
   protected rank:ARank;
   @Output()
   protected rankChange= new EventEmitter();
+  @Input()
+  private canEdit:Boolean=false;
 
   protected possibleRanks:ARank[];
   protected possibleRanksFiltered:ARank[];

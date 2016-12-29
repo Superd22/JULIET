@@ -1,4 +1,4 @@
-<div class="rank-selector">
+<div class="rank-selector" *ngIf="canEdit">
   <md-progress-spinner mode="indeterminate" color="primary" *ngIf="busy"></md-progress-spinner>
   <ul *ngIf="possibleRanks && !busy" class="rank-list">
     <li *ngFor="let aRank of possibleRanksFiltered" (click)="selectRank(aRank)">

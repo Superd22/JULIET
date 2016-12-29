@@ -11,8 +11,8 @@ import { AUser } from '../../../user/interfaces/a-user';
   styleUrls: ['./owner.component.scss']
 })
 export class OwnerComponent implements OnInit {
-  @Input("user")
-  protected _userId:Number; 
+  @Input("userId")
+  protected _userId:Number=0; 
   @Input("user")
   protected _user:AUser;
   protected tagsList:ATag[];
@@ -22,17 +22,31 @@ export class OwnerComponent implements OnInit {
     count: null
   };
 
-  constructor(public api:TagsService) {
-    if(this._user) this._userId = this._user.id_forum;
-  }
+  private _fetchedFor:Number=-1;
+
+  constructor(public api:TagsService) {}
 
 
   ngOnInit() {
-    this.api.getUserTags(this._userId).subscribe(
-      data => this.tagsList = data
-    );
+    this.init();
+  }
 
-    this.api.getTags();
+  ngOnChanges() {
+    this.init();
+  }
+
+  protected init() {
+    if(this._user && this._user.id_forum) this._userId = this._user.id_forum;
+
+    if(this._fetchedFor == -1) this.api.getTags();
+    if(this._userId != this._fetchedFor) {
+      this.api.getUserTags(this._userId).subscribe(
+        data => this.tagsList = data
+      );
+
+      this._fetchedFor = this._userId;
+    }
+    
   }
 
 }
