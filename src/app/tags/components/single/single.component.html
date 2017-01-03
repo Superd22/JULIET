@@ -11,15 +11,14 @@
 <div fxLayout="row" fxLayoutWrap>
   <div fxFlex="70" fxFlex.xs="100">
     <ju-v3-sub-pannel *ngIf="tag" layoutMargin fxLayoutWrap>
-      <md-toolbar fxFlex="100">T.A.G {{tagBackup.name}}</md-toolbar>
-      <div layoutPadding>
-        <ju-v3-heading layoutPadding fxLayout fxLayoutWrap>
+      <ju-v3-heading layoutPadding fxLayout fxLayoutWrap style="margin:0px">
           <md-input-container>
-            <input md-input [(ngModel)]="tag.name" (ngModelChange)="nameChanged($event)">
+            <input md-input [(ngModel)]="tag.name" (ngModelChange)="nameChanged($event)" placeholder="T.A.G {{displayTagType()}}">
           </md-input-container>
           <button md-button *ngIf="shouldTransf" mdTooltip="{{shouldTransf.name}} existe déjà, clickez ici pour tout transferer." tooltip-position="below"
             (click)="doMigrate()"> Transferer {{tagBackup.name}} vers {{shouldTransf.name}} </button>
         </ju-v3-heading>
+      <div layoutPadding>
 
         <div layoutMargin fxFlex="100" fxLayout fxLayoutWrap fxLayoutAlign="space-between">
           <div *ngFor="let user of tag.count | paginate: { itemsPerPage: 20,  currentPage: page, totalItems: total }" 

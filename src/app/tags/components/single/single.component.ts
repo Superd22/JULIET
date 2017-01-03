@@ -48,6 +48,12 @@ export class SingleComponent implements OnInit {
       );
   }
 
+  public displayTagType() {
+    let type = this.tag.type;
+    let cat = this.tag.cat;
+    return cat != "tag" ? cat : type == 0 ? "" : this.tagTypes[type];
+  }
+
   public doMigrate() {
     this.Tags.migrateTag(this.tagBackup, this.shouldTransf);
   }
