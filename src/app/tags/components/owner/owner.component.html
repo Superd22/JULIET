@@ -1,5 +1,5 @@
 <h3>T.A.G.S Personels</h3>
-<ju-tags-list #tagList [tags]="tagsList"></ju-tags-list>
+<ju-tags-list #tagList [tags]="tagsList" [mainList]="false" ></ju-tags-list>
 
 <div style="clear:both;"></div>
 <div class='suggested' fxLayout fxLayoutWrap fxFlex="100" *ngIf="api.tags && tagsList" [hidden]="filteredTags.count > 20 || filteredTags.count == 0">    

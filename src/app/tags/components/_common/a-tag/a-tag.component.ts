@@ -10,8 +10,14 @@ import { TagsType } from './../../../enums/tags-type.enum'
 export class ATagComponent implements OnInit {
 
   @Input()
+  /* The main TAG object */
   public tag:ATag;
 
+  @Input()
+  /* The tag is in a non-user specific list  */
+  protected mainList:Boolean = true;
+
+  /* Enum of TagsTypes */
   public tagType = TagsType;
 
   constructor() { 
@@ -23,6 +29,10 @@ export class ATagComponent implements OnInit {
 
   protected isRestricted() {
     return this.tag.restricted == 1 || this.tag.cat != 'tag'
+  }
+
+  protected shouldDisplayDelete() {
+    return !this.isRestricted() && !this.mainList;
   }
 
 }
