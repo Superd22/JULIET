@@ -51,7 +51,12 @@ export class SingleComponent implements OnInit {
   public displayTagType() {
     let type = this.tag.type;
     let cat = this.tag.cat;
-    return cat != "tag" ? cat : type == 0 ? "" : this.tagTypes[type];
+    
+    if(cat != "tag") return cat;
+    if(type == 0) return "";
+    if(this.tagTypes[type]) return this.tagTypes[type];
+
+    return type;
   }
 
   public doMigrate() {
@@ -85,6 +90,10 @@ export class SingleComponent implements OnInit {
     if(confirm("Êtes vous sur de vouloir supprimer ce T.A.G ?")) {
       this.doDelete();
     }
+  }
+
+  public isEditable() {
+    return this.tag && this.tag.cat == "tag";
   }
 
   ngOnInit() {
