@@ -12,7 +12,12 @@ import { TagsType } from '../../../enums/tags-type.enum';
 export class TagListComponent implements OnInit {
 
   @Input("tags")
+  /* The main tags list */
   protected tagList:ATag[];
+
+  @Input()
+  /* The tag is in a non-user specific list  */
+  protected mainList:Boolean = true;
 
   public filter = {
     name: null,

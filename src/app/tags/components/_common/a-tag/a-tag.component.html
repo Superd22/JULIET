@@ -7,7 +7,7 @@
     }">
     <img src="{{tag.img}}" *ngIf="tag.img">
     <span fxFlex>{{tag.name}}</span>
-    <button md-icon-button color="warn" class="removetag" *ngIf="!isRestricted()">
+    <button md-icon-button color="warn" class="removetag" *ngIf="shouldDisplayDelete()" mdTooltip="Enlever ce T.A.G">
         <md-icon>clear</md-icon>
     </button>
 </div>

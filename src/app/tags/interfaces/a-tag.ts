@@ -3,7 +3,7 @@ export interface ATag {
     name:String;
     img:String;
     restricted:Number;
-    type:Number;
+    type:number;
     cat?:String;
     parent?:Number;
     rights_from?:Number;

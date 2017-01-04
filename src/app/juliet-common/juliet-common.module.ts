@@ -1,3 +1,4 @@
+import { JuV3BluePannelComponent } from './components/_exports/ju-v3-blue-pannel/ju-v3-blue-pannel.component';
 import { FormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { SplashComponent } from './components/_common/splash/splash.component';
@@ -36,12 +37,12 @@ import { GoComponent } from './components/go/go.component';
   ],
   exports: [
     JuV3PannelComponent, V3PannelTitle, JuV3SubPannelComponent, JuV3TabComponent, EnumKeysPipe, JuV3HeadingComponent, FilterPipe, CountPipe,
-    SplashComponent,
+    SplashComponent, JuV3BluePannelComponent
   ],
   declarations: [
     JulietCommonComponent, AuthComponent, LoadingComponent, LoginComponent, SecureComponent,
     GoComponent, JuV3PannelComponent, V3PannelTitle, JuV3SubPannelComponent, JuV3TabComponent, EnumKeysPipe,
-    JuV3HeadingComponent, FilterPipe, CountPipe, UnauthorizedComponent, SplashComponent
+    JuV3HeadingComponent, FilterPipe, CountPipe, UnauthorizedComponent, SplashComponent, JuV3BluePannelComponent
   ],
   providers: [
     JulietAPIService, JulietRightsService

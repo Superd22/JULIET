@@ -30,3 +30,16 @@
         border-left: solid 4px #44a6d5;
     }
 }
+
+.big-abs {
+    position: absolute;
+    height: 150px;
+    right: 20px;
+    top:10px;
+    z-index:0;
+}
+
+#top-info {
+    min-height: 150px;
+    padding: 10px 20px;
+}
