@@ -6,6 +6,7 @@ import { tags } from './../states/tags.state';
 import { ATag } from './../interfaces/a-tag';
 import { JulietAPIService } from './../../juliet-common/services/juliet-api.service';
 import { Injectable } from '@angular/core';
+import { JulietRightsService } from '../../juliet-common/services/juliet-rights.service';
 
 @Injectable()
 export class TagsService {
@@ -16,7 +17,9 @@ export class TagsService {
   private apiNamespace = "Tags/";
   private $http;
 
-  constructor(private api: JulietAPIService, public completerService: CompleterService, public state: StateService) {
+  constructor(private api: JulietAPIService, 
+    public completerService: CompleterService, public state: StateService,
+    public rights: JulietRightsService) {
     //this.isLad = false;
     console.log(state);
   }
@@ -112,9 +115,12 @@ export class TagsService {
     )
   }
 
-  public updateTag(tag: ATag) {
-    tag.restricted = Number(tag.restricted);
-    this.api.get(this.apiNamespace + "update", tag).subscribe(
+  public updateTag(tag:ATag) {
+    let t = Object.assign({}, tag);
+    t.restricted = Number(tag.restricted);
+    t.count = null;
+    t.INFO = null;
+    this.api.get(this.apiNamespace + "update", t).subscribe(
       data => {
         if (this.state.is("secure.Tags.view") && !this.state.is("secure.Tags.view", { tag_name: tag.name }))
           this.state.go("secure.Tags.view", { tag_name: tag.name });
@@ -147,14 +153,14 @@ export class TagsService {
     }
   }
 
-  public has_admin(userid) {
-    var promise = this.api.post('Rights/indexphp', { right: "USER_CAN_ADMIN_TAGS", test: "lol", user: userid }).subscribe(function (data) {
+  public has_admin(userid):Observable<Boolean> {
+    if(userid == this.rights.userId) return Observable.of(true);
+    
+    return this.api.post('Rights/indexphp', { right: "USER_CAN_ADMIN_TAGS", test: "lol", user: userid }).map(function (data) {
       var hasR = false;
       if (data == "1" || data == "true") hasR = true;
       return hasR;
     });
-
-    return promise;
   }
 
   public sendQuery(query) {

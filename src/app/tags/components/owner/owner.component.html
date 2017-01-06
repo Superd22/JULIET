@@ -1,5 +1,5 @@
 <h3>T.A.G.S Personels</h3>
-<ju-tags-list #tagList [tags]="tagsList" [mainList]="false" ></ju-tags-list>
+<ju-tags-list #tagList [tags]="tagsList" [mainList]="false" [userHas]="true" [editable]="currentUserCan" ></ju-tags-list>
 
 <div style="clear:both;"></div>
 <div class='suggested' fxLayout fxLayoutWrap fxFlex="100" *ngIf="api.tags && tagsList" [hidden]="filteredTags.count > 20 || filteredTags.count == 0">    
@@ -7,6 +7,6 @@
   <h3 fxFlex="100">Suggestions</h3>
   <div #tagList fxFlex="20" fxFlex.xs='100' 
       *ngFor="let tag of api.tags | ExcludeTags: tagsList | Filter: tagList.filter | Count: filteredTags">
-      <a-tag [tag]="tag"></a-tag>
+      <a-tag [tag]="tag" (takeTag)="tookTag(tag)" [mainList]="false" [editable]="currentUserCan" [userHas]="false"></a-tag>
   </div>
 </div>

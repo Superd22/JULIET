@@ -33,7 +33,9 @@ export class JulietAPIService {
   }
 
   public post(url: string, params?: any) {
-    return this.http.post(environment.julietAPI + url, params, { withCredentials: true })
+    let payload = params || {};
+    if(!environment.production) payload["UseDevDb"] = true;
+    return this.http.post(environment.julietAPI + url, payload, { withCredentials: true })
       .map((res) => res.json())
       .catch((error: any) => Observable.throw(error.json().error || 'Server Error'));
   }

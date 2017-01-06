@@ -16,8 +16,15 @@ export class TagListComponent implements OnInit {
   protected tagList:ATag[];
 
   @Input()
-  /* The tag is in a non-user specific list  */
+  /* Defined in a-tag.component.ts  */
   protected mainList:Boolean = true;
+  @Input() 
+  /* Defined in a-tag.component.ts  */
+  protected editable:Boolean = false;
+  @Input() 
+  /* Defined in a-tag.component.ts  */
+  protected userHas:Boolean = false;
+
 
   public filter = {
     name: null,
