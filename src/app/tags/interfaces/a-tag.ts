@@ -7,4 +7,6 @@ export interface ATag {
     cat?:String;
     parent?:Number;
     rights_from?:Number;
+    count?: any;
+    INFO?: any;
 }

@@ -1,3 +1,4 @@
+import { JulietCommonHelperService } from './services/juliet-common-helper.service';
 import { JuV3BluePannelComponent } from './components/_exports/ju-v3-blue-pannel/ju-v3-blue-pannel.component';
 import { FormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -45,7 +46,7 @@ import { GoComponent } from './components/go/go.component';
     JuV3HeadingComponent, FilterPipe, CountPipe, UnauthorizedComponent, SplashComponent, JuV3BluePannelComponent
   ],
   providers: [
-    JulietAPIService, JulietRightsService
+    JulietAPIService, JulietRightsService, JulietCommonHelperService
   ]
 })
 export class JulietCommonModule { }

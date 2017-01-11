@@ -17,6 +17,14 @@ export class ATagComponent implements OnInit {
   /* The tag is in a non-user specific list  */
   protected mainList:Boolean = true;
 
+  @Input()
+  /* the current user can edit (take/untake/remove) this tag */
+  protected editable:Boolean = false;
+
+  @Input() 
+  /* the current user has this tag. ONLY USED if mainlist is false. */
+  protected userHas:Boolean = false;
+
   /* Enum of TagsTypes */
   public tagType = TagsType;
 
@@ -31,8 +39,13 @@ export class ATagComponent implements OnInit {
     return this.tag.restricted == 1 || this.tag.cat != 'tag'
   }
 
-  protected shouldDisplayDelete() {
-    return !this.isRestricted() && !this.mainList;
+  protected shouldDisplayUnTake() {
+    return !this.isRestricted() && !this.mainList && this.editable && this.userHas;
   }
+
+  protected shouldDisplayTake() {
+    return !this.isRestricted() && !this.mainList && this.editable && !this.userHas;
+  }
+
 
 }
