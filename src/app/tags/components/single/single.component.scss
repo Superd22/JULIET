@@ -29,6 +29,19 @@
     &:hover {
         border-left: solid 4px #44a6d5;
     }
+    .removetag {
+        position: absolute;
+        bottom: 2px;
+        right: -30px;
+        z-index:2;
+        transition:0.5s;
+    }
+    &:hover {
+        border-left: solid 4px #44a6d5;
+        .removetag {
+            right:0px;
+        }
+    }
 }
 
 .big-abs {

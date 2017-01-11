@@ -34,15 +34,20 @@ export class SingleComponent implements OnInit {
 
   private tagsList0;
   private tagsList1;
+  private userList;
 
   private tagTypes = TagsType;
   private dialogRef;
+
+  private addingUser:String;
 
   private hasR:Boolean = false;
 
   constructor(private Tags: TagsService, private rights:JulietRightsService, private helper: JulietCommonHelperService) {
     this.tagsList0 = Tags.buildCompleter();
     this.tagsList1 = Tags.buildCompleter();
+    this.userList = helper.buildCompleter("username", `Common/UserSearch/?f=`);
+    // this.apiNamespace + `tags_searchphp?f=${term}`
   }
 
   public nameChanged(newName) {
@@ -87,6 +92,15 @@ export class SingleComponent implements OnInit {
 
   public assignTagToSelf() {
     this.Tags.assignTag(this.tagBackup);
+  }
+
+  public addUser($event) {
+    this.Tags.assignTag(this.tag, Number($event.originalObject.user_id));
+  }
+
+  public removeUser(userId:Number, $event) {
+    this.Tags.unAssignTag(this.tag, Number(userId));
+    if($event) $event.stopPropagation();
   }
 
   public deleteTag() {
