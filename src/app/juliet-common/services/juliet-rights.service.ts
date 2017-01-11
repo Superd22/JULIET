@@ -16,7 +16,7 @@ export class JulietRightsService {
   public user_can(right: String, userId?: Number, target?: Number) {
     if (!userId) userId = 0;
 
-    return this.api.get("Rights/" + right).map(
+    return this.api.get("Rights/" + right, {user_id: userId, target: target}).map(
       data => data
     );
   }

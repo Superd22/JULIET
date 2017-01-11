@@ -7,7 +7,7 @@ import { Http, Response, Headers, URLSearchParams } from '@angular/http';
 export class JulietAPIService {
 
   // To do env.
-  public api = "http://www.scfr.fr/API/Juliet/";
+  public api = environment.julietAPI;
 
   constructor(private http: Http) { }
 

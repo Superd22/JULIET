@@ -1,3 +1,5 @@
+import { JulietCommonHelperService } from './../../../juliet-common/services/juliet-common-helper.service';
+import { JulietRightsService } from './../../../juliet-common/services/juliet-rights.service';
 import { Observable } from 'rxjs/Observable';
 import { tags } from './../../states/tags.state';
 import { TagsService } from './../../services/tags.service';
@@ -36,7 +38,9 @@ export class SingleComponent implements OnInit {
   private tagTypes = TagsType;
   private dialogRef;
 
-  constructor(private Tags: TagsService) {
+  private hasR:Boolean = false;
+
+  constructor(private Tags: TagsService, private rights:JulietRightsService, private helper: JulietCommonHelperService) {
     this.tagsList0 = Tags.buildCompleter();
     this.tagsList1 = Tags.buildCompleter();
   }
@@ -73,13 +77,12 @@ export class SingleComponent implements OnInit {
 
   public setParent($event) {
     let parent = $event.originalObject.id;
-    this.Tags.selectedTag.parent = parent;
-    console.log($event);
+    this.tag.parent = parent;
   }
 
   public setRights($event) {
     let right = $event.originalObject.id;
-    this.Tags.selectedTag.rights_from = right;
+    this.tag.rights_from = right;
   }
 
   public assignTagToSelf() {
@@ -92,8 +95,15 @@ export class SingleComponent implements OnInit {
     }
   }
 
-  public isEditable() {
-    return this.tag && this.tag.cat == "tag";
+  public isEditable(doNotcheckR?:Boolean) {
+    let test = this.tag && this.tag.cat == "tag";
+
+    if(doNotcheckR) return test;
+    return test && this.hasR;
+  }
+
+  public hasTagChanged() {
+    return this.helper.hasChangedObj(this.tag, this.tagBackup, ["name", "img","restricted","type","cat","parent","rights_from"]);
   }
 
   ngOnInit() {
@@ -110,6 +120,11 @@ export class SingleComponent implements OnInit {
 
           this.Tags.getTagNameById(data.rights_from).subscribe(
             data => data ? this.tagInfo.rightsFromSelect = data : null
+          );
+
+          // Get rights
+          if(this.isEditable(true)) this.rights.user_can("USER_CAN_ADMIN_TAG", 0, this.tag.id).subscribe(
+            data => this.hasR = data.data
           );
         }
       );

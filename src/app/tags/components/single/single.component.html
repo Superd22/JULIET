@@ -68,7 +68,7 @@
 <div fxFlex="100"></div>
 
 <div fxFlex="100"></div>
-<button layoutMargin md-raised-button (click)="updateTag()" color="primary" *ngIf="isEditable()"><md-icon>done</md-icon> Mettre à jour le tag</button>
+<button layoutMargin md-raised-button (click)="updateTag()" color="primary" *ngIf="isEditable() && hasTagChanged()"><md-icon>done</md-icon> Mettre à jour le tag</button>
 <button layoutMargin md-button color="warn" mdTooltip="Supprimer définitivement ce tag" tooltip-position="below" (click)="deleteTag()" *ngIf="isEditable()"><md-icon>delete_forever</md-icon> Supprimer le tag</button>
 
 
