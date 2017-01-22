@@ -74,4 +74,16 @@ export class TagListComponent implements OnInit {
     this.unTakeChange.emit(tag);
   }
 
+  /* 
+    checks if there is a tag with a name strictly matching the search 
+    @return if there is a strict name match 
+  */
+  public searchHasExactMatch():Boolean {
+    return this.tagList && this.tagList.filter( 
+      tag => tag.name && 
+             this.filter.name && 
+             tag.name.toLowerCase() === this.filter.name.toLowerCase().trim()
+      ).length > 0
+  }
+
 }
