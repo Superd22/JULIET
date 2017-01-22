@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ATag } from '../../../interfaces/a-tag';
 import { TagsService } from '../../../services/tags.service';
 import { TagsType } from '../../../enums/tags-type.enum';
@@ -24,6 +24,11 @@ export class TagListComponent implements OnInit {
   @Input() 
   /* Defined in a-tag.component.ts  */
   protected userHas:Boolean = false;
+
+  @Output("take")
+  protected takeChange = new EventEmitter();
+  @Output("unTake")
+  protected unTakeChange = new EventEmitter();
 
 
   public filter = {
@@ -59,6 +64,26 @@ export class TagListComponent implements OnInit {
   protected toggleFilter(filterName) {
     if (filterName == "restricted") this.filter.restricted = this.filter.restricted === null ? 1 : null;
     else this.filter.type = this.filter.type == this.tagType[filterName] ? null : this.tagType[filterName];
+  }
+
+  protected takeTag(tag:ATag) {
+    this.takeChange.emit(tag);
+  }
+
+  protected unTakeTag(tag:ATag) {
+    this.unTakeChange.emit(tag);
+  }
+
+  /* 
+    checks if there is a tag with a name strictly matching the search 
+    @return if there is a strict name match 
+  */
+  public searchHasExactMatch():Boolean {
+    return this.tagList && this.tagList.filter( 
+      tag => tag.name && 
+             this.filter.name && 
+             tag.name.toLowerCase() === this.filter.name.toLowerCase().trim()
+      ).length > 0
   }
 
 }

@@ -7,6 +7,7 @@ export class CountPipe implements PipeTransform {
 
   transform(value: any, args?: any): any {
       args.count = value.length;
+      args.original = value;
       return value;
   }
 
