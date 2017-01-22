@@ -49,8 +49,8 @@ export class OwnerComponent implements OnInit {
       );
 
       // Check whever we can edit those tags.
-      this.api.has_admin(this._userId).subscribe(
-        data => this.currentUserCan = data
+      this.rights.user_can("USER_CAN_ADMIN_TAGS", this._userId).subscribe(
+        data => this.currentUserCan = data.data
       );
 
       this._fetchedFor = this._userId;
@@ -58,8 +58,15 @@ export class OwnerComponent implements OnInit {
   }
   
   /* Triggered when a given tag is taken by the user. */
-  protected tookTag(tag:ATag) {
+  protected tagTaken(tag:ATag) {
+    console.log(tag);
+    this.api.assignTag(tag,this._userId);
     this.tagsList.push(tag);
+  }
+
+  protected tagUnTaken(tag:ATag) {
+    this.api.unAssignTag(tag, this._userId);
+    this.tagsList.splice(this.tagsList.findIndex( cur => cur.id === tag.id ), 1);
   }
 
 }
