@@ -18,10 +18,7 @@ export class LoginComponent implements OnInit {
 
   constructor(protected rights: JulietRightsService, protected snackBar: MdSnackBar, protected states:StateService) { }
 
-  ngOnInit() {
-    console.log("target:");
-    console.log(this._targetState);
-  }
+  ngOnInit() {  }
 
   private doLogin() {
     this.busy = true;
@@ -30,7 +27,7 @@ export class LoginComponent implements OnInit {
         this.rights.can_see_juliet().subscribe(
           data => {
             this.busy = false;
-            
+
             if (data.data) {
               this.snackBar.open("Vous êtes maintenant connecté", null, { duration: 5000 });
               this.states.go(this._targetState);
