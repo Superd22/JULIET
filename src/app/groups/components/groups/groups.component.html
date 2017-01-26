@@ -1,5 +1,17 @@
-<p>
-  groups works!
-</p>
+<ju-v3-pannel>
+    <ju-v3-pannel-title class="ju_tag_heading">
+        <span class='right'>v3.0</span>
+        <h2>GROUPES</h2>
+        <em>{{motr}}</em>
+    </ju-v3-pannel-title>
 
-<ui-view></ui-view>
+    <div fxLayout="row">
+        <app-ju-v3-tab uiSref=".list" uiSrefActive="active">Listes des groupes</app-ju-v3-tab>
+        <app-ju-v3-tab uiSref=".search" uiSrefActive="active" class="hidden">Recherche</app-ju-v3-tab>
+    </div>
+
+    <ju-v3-sub-pannel>
+        <ui-view fxFlex="100"></ui-view>
+    </ju-v3-sub-pannel>
+
+</ju-v3-pannel>
