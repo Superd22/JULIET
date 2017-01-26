@@ -1,9 +1,12 @@
 import { JulietAPIService } from './juliet-api.service';
 import { CompleterData, CompleterService } from 'ng2-completer';
 import { Injectable } from '@angular/core';
+import { MdSidenav } from '@angular/material';
 
 @Injectable()
 export class JulietCommonHelperService {
+
+  protected sideNav: MdSidenav;
 
   constructor(private completerService: CompleterService, private api: JulietAPIService) { }
   /**
@@ -37,4 +40,27 @@ export class JulietCommonHelperService {
 
     return completer;
   }
+
+  /**
+ * Closes the main sidenav
+ */
+  public closeSideNav() {
+    if(this.sideNav) this.sideNav.close();
+  }
+
+  public toggleSideNav() {
+    if(this.sideNav) this.sideNav.toggle();
+  }
+
+  public openSideNav() {
+    if(this.sideNav) this.sideNav.open();
+  }
+
+  /**
+   * Registers the main side-nav app-wide.
+   */
+  public registerSideNav(sidenav: MdSidenav) {
+    this.sideNav = sidenav;
+  }
+
 }
