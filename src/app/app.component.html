@@ -1,12 +1,17 @@
-<button md-icon-button (click)="sidenav.toggle()" color="accent"> <md-icon>menu</md-icon></button>
 <md-sidenav-container class="app-layout">
 	<md-sidenav #sidenav mode="side" fxFlex="10" fxFlex.xs="100">
 		<app-main-sidenav></app-main-sidenav>
 	</md-sidenav>
 
 
+<button md-icon-button (click)="sidenav.toggle()" color="accent"> <md-icon>menu</md-icon></button>
 
-	<div class="content">
+	<div class="content" style="
+    margin-bottom: 10px;">
 		<ui-view></ui-view>
+		
+  		<div style="clear:both"></div>
 	</div>
+
+  <div style="clear:both"></div>
 </md-sidenav-container>
