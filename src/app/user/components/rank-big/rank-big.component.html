@@ -1,14 +1,17 @@
 <div class="rank-big" *ngIf="rank" fxLayout="row" fxLayoutWrap>
-  <div class="imgs">
+  <div class="imgs" fxFlex="150px" fxFlexOrder="1">
     <img src="{{rank.url}}" class="rankimg">
     <ju-rank-stars [(stars)]="rank.stars" (starChange)="showSelect = true"></ju-rank-stars>
   </div>
-  <div fxFlex fxLayout fxLayoutWrap layoutPadding style="position: relative;">
+  <div class="avatar" fxFlex="100px" fxFlexOrder="3" fxFlexOrder.xs="2" LayoutMargin>
+    <img src="{{user.avatar}}" />
+  </div>
+  <div fxFlex fxFlex.xs="100" fxLayout fxLayoutWrap layoutPadding style="position: relative;" fxFlexOrder="2" fxFlexOrder.xs="3">
     <span class="rankname" fxFlex="100">{{rank.name}} 
-      <button md-icon-button (click)="showSelect = !showSelect" *ngIf="canEdit">
-        <md-icon>{{showSelect ? 'arrow_drop_up' : 'arrow_drop_down'}}</md-icon>
-      </button> 
-    </span>
+          <button md-icon-button (click)="showSelect = !showSelect" *ngIf="canEdit">
+            <md-icon>{{showSelect ? 'arrow_drop_up' : 'arrow_drop_down'}}</md-icon>
+          </button> 
+        </span>
     <span class="username" fxFlex="100" *ngIf="user && user.pseudo">{{user.pseudo}}</span>
     <ju-rank-selector [(rank)]="rank" *ngIf="showSelect" [canEdit]="canEdit"></ju-rank-selector>
   </div>

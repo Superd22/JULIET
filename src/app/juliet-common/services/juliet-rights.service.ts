@@ -52,8 +52,13 @@ export class JulietRightsService {
     );
   }
 
-  public doLogin() {
-    
+  public doLogin(pseudo:string, password:string):Observable<any> {
+    return this.api.post("../../Forum/ucp.php?mode=login", {username: pseudo, password: password, autologin: 'on', login:"Connexion"}, false).map(
+      data => true
+    ).catch(
+      // The ucp is returning html so catch it and return true for completion to be checked.
+      err => Observable.of(true)
+    );
   }
 
 }
