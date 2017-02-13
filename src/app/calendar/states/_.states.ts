@@ -1,4 +1,5 @@
-import { calendarListStates } from './list.states';
-import { calendarIndexState } from './index.state';
+import { CalendarStates } from './calendar.state';
 
-export let STATES = [calendarIndexState, calendarListStates.day, calendarListStates.month, calendarListStates.week]
+export let STATES = [
+        CalendarStates.calendar,CalendarStates.day, CalendarStates.week, CalendarStates.month
+    ];

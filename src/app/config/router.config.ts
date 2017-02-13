@@ -11,7 +11,7 @@ export class RouterConfig {
 
         router.urlRouterProvider.otherwise("/");
         // Dev StateTree Debug    
-        //if(!environment.production) vis.visualizer(router);
+        if(!environment.production) vis.visualizer(router);
 
         router.transitionService.onBefore({ to: "**" }, () => juCommon.closeSideNav());
     }
