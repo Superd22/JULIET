@@ -6,6 +6,7 @@ import { tags } from './../states/tags.state';
 import { ATag } from './../interfaces/a-tag';
 import { JulietAPIService } from './../../juliet-common/services/juliet-api.service';
 import { Injectable } from '@angular/core';
+import { JulietRightsService } from '../../juliet-common/services/juliet-rights.service';
 
 @Injectable()
 export class TagsService {
@@ -16,7 +17,9 @@ export class TagsService {
   private apiNamespace = "Tags/";
   private $http;
 
-  constructor(private api: JulietAPIService, public completerService: CompleterService, public state: StateService) {
+  constructor(private api: JulietAPIService,
+    public completerService: CompleterService, public state: StateService,
+    public rights: JulietRightsService) {
     //this.isLad = false;
     console.log(state);
   }
@@ -30,15 +33,29 @@ export class TagsService {
   }
 
   // Gets all tags 
-  public getTags() {
-    this.api.get(this.apiNamespace + "tags_getphp").subscribe(
+  public getTags(update?: Boolean) {
+    if (!this.tags || update) this.api.get(this.apiNamespace + "tags_getphp").subscribe(
       data => this.tags = data.data
     );
   }
 
-  public createTag(tagName:String):Observable<ATag> {
-    if(tagName) {
-      return this.api.get(this.apiNamespace + "create", {name: tagName}).map(
+  // Fetches all the tag for a given user
+  public getUserTags(user?: Number): Observable<ATag[]> {
+    if (!user) user = 0;
+    return this.api.post(this.apiNamespace + "tags_getphp", { user: user }).map(
+      data => data.data
+    );
+  }
+
+  public searchTags(search?: String, all?: Boolean): Observable<ATag[]> {
+    return this.api.post(this.apiNamespace + "tags_searchphp", { f: search, mod: all ? "ALL" : "" }).map(
+      data => data.data
+    );
+  }
+
+  public createTag(tagName: String): Observable<ATag> {
+    if (tagName) {
+      return this.api.get(this.apiNamespace + "create", { name: tagName }).map(
         data => data.data ? data.data : null
       );
     }
@@ -90,7 +107,7 @@ export class TagsService {
   }
 
   public assignTag(tag: ATag, target?: Number) {
-    if(!target) target = 0;
+    if (!target) target = 0;
     this.api.get(this.apiNamespace + "affect", { id: tag.id, user_id: target }).subscribe(
       data => {
         if (this.state.is("secure.Tags.view")) this.state.reload();
@@ -98,9 +115,21 @@ export class TagsService {
     )
   }
 
+  public unAssignTag(tag: ATag, target?: Number) {
+    if (!target) target = 0;
+    this.api.get(this.apiNamespace + "unaffect", { id: tag.id, user_id: target }).subscribe(
+      data => {
+        if (this.state.is("secure.Tags.view")) this.state.reload();
+      }
+    )
+  }
+
   public updateTag(tag: ATag) {
-    tag.restricted = Number(tag.restricted);
-    this.api.get(this.apiNamespace + "update", tag).subscribe(
+    let t = Object.assign({}, tag);
+    t.restricted = Number(tag.restricted);
+    t.count = null;
+    t.INFO = null;
+    this.api.get(this.apiNamespace + "update", t).subscribe(
       data => {
         if (this.state.is("secure.Tags.view") && !this.state.is("secure.Tags.view", { tag_name: tag.name }))
           this.state.go("secure.Tags.view", { tag_name: tag.name });
@@ -133,14 +162,14 @@ export class TagsService {
     }
   }
 
-  public has_admin(userid) {
-    var promise = this.api.post('Rights/indexphp', { right: "USER_CAN_ADMIN_TAGS", test: "lol", user: userid }).subscribe(function (data) {
+  public has_admin(userid): Observable<Boolean> {
+    if (userid == this.rights.userId) return Observable.of(true);
+
+    return this.api.post('Rights/indexphp', { right: "USER_CAN_ADMIN_TAGS", test: "lol", user: userid }).map(function (data) {
       var hasR = false;
       if (data == "1" || data == "true") hasR = true;
       return hasR;
     });
-
-    return promise;
   }
 
   public sendQuery(query) {

@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { JulietCommonHelperService } from './juliet-common/services/juliet-common-helper.service';
+import { MdSidenav } from '@angular/material';
+import { Component, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'ju-root',
@@ -6,5 +8,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'app works!';
+
+
+  @ViewChild(MdSidenav)
+  protected sideNav: MdSidenav;
+  constructor(protected juCommon: JulietCommonHelperService) { }
+
+  ngOnInit() {
+    console.log(this.sideNav);
+    this.juCommon.registerSideNav(this.sideNav);
+  }
+
 }

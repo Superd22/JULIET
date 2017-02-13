@@ -1,0 +1,5 @@
+<div class="stars-holder">
+  <span *ngFor="let number of [0,1,2,3,4]">
+    <md-icon color="accent" (click)="changeStars(number+1)" class='star' [ngClass]="{editable: rights.userIsAdmin}">{{number >= stars ? 'star_border' : 'star'}}</md-icon>
+  </span>
+</div>

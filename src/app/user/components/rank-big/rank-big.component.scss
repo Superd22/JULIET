@@ -1,0 +1,42 @@
+@import '../../../../assets/mixins';
+
+.rank-big {
+    display:inline-block;
+    .imgs {
+    text-align:center;
+        .rankimg {
+            height:80px;
+        }
+    }
+    .rankname {
+        text-transform: uppercase;
+        color: darkgoldenrod;
+        @include responsive-font(20vw,10px,40px);
+        font-family: "Electrolize";
+        font-weight:bolder;
+        align-self: flex-end;
+        display:flex;
+        button {
+            margin-top: 0px;
+        }
+    }
+    .username {
+        color: #fecb00;
+        @include responsive-font(10vw,20px,80px);
+        letter-spacing: 7px;
+        white-space: nowrap;
+        font-family: "Electrolize" !important;
+        text-transform:uppercase;
+        align-self: flex-start;
+    }
+}
+
+.avatar {
+    align-self: center;
+    padding: 2px;
+    background: #46474c;
+        
+    img {
+        height: 100px;
+    }
+}

@@ -1,0 +1,5 @@
+{
+  "name"    : "juliet",
+  "version" : "0.1.0",
+  "main"    : "assets/electron.js"
+}

@@ -1,10 +1,19 @@
 <div *ngIf="tag" class="ju-a-tag {{tag.cat}}" uiSref="secure.Tags.view" [uiParams]="{cat_name: tag.cat ? tag.cat : 'tag', tag_name: tag.name}"
     [ngClass]="{
-        'restreint': tag.restricted == 1 || tag.cat != 'tag',
+        'restreint': isRestricted(),
         'competence': tag.type == tagType.competence,
         'officiel': tag.type == tagType.officiel,
         'recompense': tag.type == tagType.recompense
     }">
     <img src="{{tag.img}}" *ngIf="tag.img">
     <span fxFlex>{{tag.name}}</span>
+
+
+    <button md-icon-button color="warn" class="removetag" *ngIf="shouldDisplayUnTake()" (click)="unTakeTag($event)" mdTooltip="Enlever ce T.A.G">
+        <md-icon>clear</md-icon>
+    </button>
+
+    <button md-icon-button color="accent" class="removetag" *ngIf="shouldDisplayTake()" (click)="takeTag($event)" mdTooltip="Prendre ce TAG">
+        <md-icon>check</md-icon>
+    </button>
 </div>

@@ -1,62 +1,81 @@
-<app-ju-v3-pannel fxLayoutMargin>
+<ju-v3-pannel fxLayoutMargin>
   <ju-v3-pannel-title class="ju_tag_heading" fxFlex="100">
     <span class='right'>v3.0</span>
     <h2>T.A.G.S</h2>
   </ju-v3-pannel-title>
 
-  <button uiSref="secure.Tags.index.list" style="margin: 5px;margin-top: 20px;" md-mini-fab mdTooltip="Retour à la liste des T.A.G.S" tooltip-position="below" >
+  <button uiSref="secure.Tags.index.list" style="margin: 5px;margin-top: 20px;" mdTooltip="Retour à la liste des T.A.G.S" md-mini-fab>
 <md-icon>arrow_back</md-icon>
 </button>
 
+<ju-v3-blue-pannel *ngIf="tag && tag.cat != 'tag'" id="top-info" LayoutMargin>
+  <div style="z-index:1; position: relative;">
+<h3>T.A.G {{displayTagType()}}</h3>
+<md-icon color="primary" style="float: left; margin: 10px;">info</md-icon>
+<p>Ce tag est un tag généré automatiquement. Cette page décrit tous les joueurs affectés par ce dernier.<br /> Vous ne pouvez
+  donc ni ajouter, ni modifier, ni supprimer ce T.A.G sans directement modifier la ressource qu'il concerne.</p>
+</div>
+<img src="{{tag.img}}" class="big-abs">
+</ju-v3-blue-pannel>
+
 <div fxLayout="row" fxLayoutWrap>
-  <div fxFlex="70">
-    <app-ju-v3-sub-pannel *ngIf="tag" layoutMargin fxLayoutWrap>
-      <md-toolbar fxFlex="100">T.A.G {{tagBackup.name}}</md-toolbar>
-      <div layoutPadding>
-        <ju-v3-heading layoutPadding fxLayout fxLayoutWrap>
-          <md-input-container>
-            <input md-input [(ngModel)]="tag.name" (ngModelChange)="nameChanged($event)">
-          </md-input-container>
-          <button md-button *ngIf="shouldTransf" mdTooltip="{{shouldTransf.name}} existe déjà, clickez ici pour tout transferer." tooltip-position="below"
-            (click)="doMigrate()"> Transferer {{tagBackup.name}} vers {{shouldTransf.name}} </button>
-        </ju-v3-heading>
+  <div fxFlex="70" fxFlex.xs="100">
+    <ju-v3-sub-pannel *ngIf="tag" layoutMargin fxLayoutWrap>
+      <ju-v3-heading layoutPadding fxLayout style="margin:0px">
+<md-input-container fxFlex>
+  <input md-input [(ngModel)]="tag.name" (ngModelChange)="nameChanged($event)" placeholder="T.A.G {{displayTagType()}}" [disabled]="!isEditable()">
+</md-input-container>
+<button md-button disabled>{{tag.count.length}} joueurs</button>
+<button md-button *ngIf="shouldTransf" mdTooltip="{{shouldTransf.name}} existe déjà, clickez ici pour tout transférer." tooltip-position="below"
+  (click)="doMigrate()"> Transferer {{tagBackup.name}} vers {{shouldTransf.name}} </button>
+</ju-v3-heading>
+<div fxFlex="100" layoutPadding>
 
-        <div layoutMargin fxFlex="100">
-          <div *ngFor="let user of tag.count | paginate: { itemsPerPage: 20,  currentPage: page, totalItems: total }">{{user.name}}</div>
-        </div>
+  <div layoutMargin fxFlex="100" fxLayout fxLayoutWrap fxLayoutAlign="space-between">
+    <div *ngFor="let user of tag.count | paginate: { itemsPerPage: 20,  currentPage: page, totalItems: total }" fxFlex="25" fxFlex.sm="50"
+      fxFlex.xs="100" style="padding:0px 5px">
+<div class="aUser" uiSref="secure.user" [uiParams]="{user_id: user.id_forum}">
+  <img src="{{user.avatar}}"> <span>{{user.name}}</span>
+  <button md-icon-button color="warn" class="removetag" *ngIf="isEditable()" mdTooltip="Enlever ce T.A.G" (click)="removeUser(user.id_forum, $event)">
+        <md-icon>clear</md-icon>
+    </button>
+</div>
+</div>
+</div>
 
-        <pagination-controls (pageChange)="page = $event" autoHide="true"></pagination-controls>
-        <button md-button (click)="assignTagToSelf()" color="accent">Prendre ce TAG</button>
+<pagination-controls (pageChange)="page = $event" autoHide="true"></pagination-controls>
+<button md-button (click)="assignTagToSelf()" color="accent">Prendre ce TAG</button>
+<ng2-completer *ngIf="isEditable()" fxFlex="50" fxFlex.sm="100" placeholder="Ajouter le tag à un joueur" [(ngModel)]="addingUser"
+  [dataService]="userList" [minSearchLength]="0" (selected)="addUser($event)"></ng2-completer>
+</div>
+</ju-v3-sub-pannel>
+</div>
+<div fxFlex="30" fxFlex.xs="100">
+  <ju-v3-sub-pannel *ngIf="tag" layoutMargin fxLayout fxLayoutWrap>
+    <md-toolbar fxFlex="100">Informations supplémentaires</md-toolbar>
+    <div layoutPadding fxLayout="row" fxFlex="100" fxLayoutWrap *ngIf="isEditable()">
+      <div fxFlex="100" fxLayout fxLayoutWrap fxLayoutGap="10px">
+        <ng2-completer fxFlex="50" fxFlex.sm="100" placeholder="Parent" [(ngModel)]="tagInfo.parentSelect" [dataService]="tagsList0"
+          [minSearchLength]="0" (selected)="setParent($event)"></ng2-completer>
+        <ng2-completer fxFlex placeholder="Droits depuis" [(ngModel)]="tagInfo.rightsFromSelect" [dataService]="tagsList1" [minSearchLength]="0"
+          (selected)="setRights($event)"></ng2-completer>
       </div>
-    </app-ju-v3-sub-pannel>
-  </div>
-  <div fxFlex="30">
-    <app-ju-v3-sub-pannel *ngIf="tag" layoutMargin fxLayout fxLayoutWrap>
-      <md-toolbar fxFlex="100">Informations supplémentaires</md-toolbar>
-      <div layoutPadding fxLayout="row" fxFlex="100" fxLayoutWrap>
-        <div fxFlex="100" fxLayout fxLayoutWrap fxLayoutGap="10px">
-          <ng2-completer fxFlex="50" fxFlex.sm="100" placeholder="Parent" [(ngModel)]="tagInfo.parentSelect" [dataService]="tagsList0"
-            [minSearchLength]="0" (selected)="setParent($event)"></ng2-completer>
-          <ng2-completer fxFlex placeholder="Droits depuis" [(ngModel)]="tagInfo.rightsFromSelect" [dataService]="tagsList1" [minSearchLength]="0"
-            (selected)="setRights($event)"></ng2-completer>
-        </div>
 
-        <md-checkbox [(ngModel)]="tag.restricted" fxFlex="100" style="margin-top: 20px;" > T.A.G Restreint
-</md-checkbox>
+      <md-checkbox [(ngModel)]="tag.restricted" fxFlex="100" style="margin-top: 20px;" > T.A.G Restreint </md-checkbox>
 
 <md-select style="margin-top: 35px;" fxFlex='100' placeholder="Type de T.A.G" [(ngModel)]="tag.type">
 <md-option *ngFor="let type of tagTypes | enumKeys" [value]="type.key" [disabled]="type.key < 0"> {{ type.value }} </md-option>
 </md-select>
 </div>
-</app-ju-v3-sub-pannel>
+</ju-v3-sub-pannel>
 </div>
 
 <div fxFlex="100"></div>
 
 <div fxFlex="100"></div>
-<button layoutMargin md-raised-button (click)="updateTag()"><md-icon>done</md-icon> Mettre à jour le tag</button>
-<button layoutMargin md-button color="warn" mdTooltip="Supprimer définitivement ce tag" tooltip-position="below" (click)="deleteTag()"><md-icon>delete_forever</md-icon> Supprimer le tag</button>
-
+<button layoutMargin md-raised-button (click)="updateTag()" color="primary" *ngIf="isEditable() && hasTagChanged()"><md-icon>done</md-icon> Mettre à jour le tag</button>
+<button layoutMargin md-button color="warn" mdTooltip="Supprimer définitivement ce tag" tooltip-position="below" (click)="deleteTag()"
+  *ngIf="isEditable()"><md-icon>delete_forever</md-icon> Supprimer le tag</button>
 
 </div>
-</app-ju-v3-pannel>
+</ju-v3-pannel>

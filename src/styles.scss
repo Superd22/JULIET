@@ -41,3 +41,31 @@ a {
         }
     }
 }
+.md-sidenav-content {
+    padding-top: 0px;
+}
+body {
+    background: #1a1c22;
+    font-family: "Electrolize";
+    overflow: hidden;
+}
+
+md-sidenav {
+    width:100%;
+}
+
+[hidden] {
+   display: none !important;
+   visibility: hidden !important;
+}
+
+input {
+    font-family: "Electrolize";
+}
+
+h3 {
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    font-weight: 100;
+    text-shadow: 0px 0px 6px white;
+}

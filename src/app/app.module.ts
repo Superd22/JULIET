@@ -21,7 +21,9 @@ import { MaterialModule, MdMenuModule, MdMenuTrigger } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout'
 
 
+import { IonicApp, IonicModule } from 'ionic-angular';
 import { AppComponent } from './app.component';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,7 @@ import { AppComponent } from './app.component';
   imports: [
     MaterialModule.forRoot(),
     MdMenuModule,
-    BrowserModule,
+    IonicModule.forRoot(AppComponent),
     FormsModule,
     HttpModule,
     JuCalendarModule,
@@ -49,9 +51,10 @@ import { AppComponent } from './app.component';
     FlexLayoutModule.forRoot(),
     UIRouterModule.forRoot({
       configClass: RouterConfig,
+      useHash: !environment.production,
     }),
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [IonicApp]
 })
 export class AppModule { }

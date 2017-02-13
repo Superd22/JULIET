@@ -1,3 +1,17 @@
-<p>
-  owner works!
-</p>
+<h3>T.A.G.S Personels</h3>
+<ju-tags-list #tagList [tags]="tagsList" [mainList]="false" [userHas]="true" [editable]="currentUserCan" (take)="tagTaken($event)"
+  (unTake)="tagUnTaken($event)"></ju-tags-list>
+
+<div style="clear:both;"></div>
+
+<div class='suggested' fxLayout fxLayoutWrap fxFlex="100" *ngIf="api.tags && tagsList" [hidden]="!tagList.filter.name || filteredTags.count == 0">
+  <hr />
+  <h3 fxFlex="100">Suggestions</h3>
+  <div #tagList2 fxFlex="20" fxFlex.xs='100' *ngFor="let tag of api.tags | ExcludeTags: tagsList | Filter: tagList.filter | Count: filteredTags | paginate: { id: 'tag-suggest', itemsPerPage: 25,  currentPage: page, totalItems: totalFiltered };">
+    <a-tag [tag]="tag" (take)="tagTaken($event)" [mainList]="false" [editable]="currentUserCan" [userHas]="false"></a-tag>
+  </div>
+  <div fxFlex="100"></div>
+  <pagination-controls (pageChange)="page = $event" autoHide="true" id="tag-suggest"></pagination-controls>
+</div>
+
+<button md-button *ngIf="shouldAddTag()" color="primary" (click)="addTag()">Ajouter le tag {{tagList.filter.name}}</button>
