@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { GroupsComponent } from './components/groups/groups.component';
 import { GroupComponent } from './components/group/group.component';
 import { ListeComponent } from './components/liste/liste.component';
+import { JulietGroupsService } from './services/juliet-groups.service';
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { ListeComponent } from './components/liste/liste.component';
     }),
     JulietCommonModule
   ],
-  declarations: [GroupsComponent, GroupComponent, ListeComponent]
+  declarations: [GroupsComponent, GroupComponent, ListeComponent],
+  providers: [JulietGroupsService],
 })
 export class GroupsModule { }
