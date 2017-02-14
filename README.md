@@ -5,7 +5,7 @@ Q.G de developement pour la V3 de JULIET.
 
 | Feature          | Status                              | Docs         | Issue          |
 |------------------|-------------------------------------|--------------|----------------|
-| T.A.G.S          |                            RC1 (V3) |            - |    [#02][0002] |
+| T.A.G.S          |                            RC1 (V3) | [README][MDTAG] |    [#02][0002] |
 | Accueil          |                             Started |            - |    [#11][0011] |
 | User             |                             Started |            - |    [#12][0012] |
 | Groupes          |                             Started |            - |    [#33][0033] |
@@ -23,3 +23,5 @@ Q.G de developement pour la V3 de JULIET.
  [0012]: https://github.com/Superd22/JULIET/issues/12
  [0032]: https://github.com/Superd22/JULIET/issues/32
  [0033]: https://github.com/Superd22/JULIET/issues/33
+
+ [MDTAG]: https://github.com/Superd22/JULIET/blob/master/src/app/tags/readme.md
