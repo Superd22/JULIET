@@ -8,8 +8,8 @@ Q.G de developement pour la V3 de JULIET.
 | T.A.G.S          |                            RC1 (V3) |            - |    [#02][0002] |
 | Accueil          |                             Started |            - |    [#11][0011] |
 | User             |                             Started |            - |    [#12][0012] |
-| Groupes          |                             Started |            - |  [#33][0033] - |
-| Calendrier       |                             Started |            - |  [#32][0032] - |
+| Groupes          |                             Started |            - |    [#33][0033] |
+| Calendrier       |                             Started |            - |    [#32][0032] |
 | Teamspeak        |                             Started |            - |              - |
 | Spectrum         |                         Not Started |            - |              - |
 | Ships            |                         Not Started |            - |              - |
