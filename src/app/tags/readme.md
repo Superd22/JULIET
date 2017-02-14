@@ -1,6 +1,17 @@
 # T.A.G.S
 **Système d'étiquette pour joueurs**
 
+- [T.A.G.S](#)
+	- [Fonctionalités basiques](#)
+	- [Types de T.A.G.S](#)
+		- [TAGS](#)
+		- [TAGS SPECIAUX](#)
+	- [Hiearchie des T.A.G.S](#)
+- [Pages](#)
+	- [Index tag](#)
+	- [Single tag](#)
+	- [User Tag](#)
+
 ## Fonctionalités basiques
 - Chaque joueurs peux prendre entre 0 et N TAGS
 - Un joueur peut créer des tags inéxistants
