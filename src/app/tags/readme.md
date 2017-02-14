@@ -13,6 +13,7 @@ Tous les tags étant crées directement par des humains.
 - Tags Officiel - statut pour les tags désignant officiellement un gameplay. (ex : Interception)
 - Tags Compétence - statut pour les tags désignant une compétence officielle. (ex : Interception Lv1)
 - Tags Récompense - statut pour les tags désignant une récompense officielle. (ex : Ruban bravoure)
+
 ### TAGS SPECIAUX
 Les tags étant crées de façon automatique par JULIET
 - Tags Vaisseaux - désignant les propriétaire d'un vaisseau donné
