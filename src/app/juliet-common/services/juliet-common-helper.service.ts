@@ -40,7 +40,7 @@ export class JulietCommonHelperService {
 
     return completer;
   }
-
+  
   /**
  * Closes the main sidenav
  */

@@ -13,7 +13,18 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CalendarComponent } from './calendar.component';
 import { CalendarModule } from 'angular-calendar';
+import { ArchiveComponent } from './components/list/archive/archive.component';
+import { Ng2PaginationModule } from 'ng2-pagination';
+import { FormsModule } from '@angular/forms';
+import { MomentModule } from 'angular2-moment';
+import * as moment from 'moment';
+import 'moment/min/locales';
+import { PhpToJsTimeStampPipe } from './pipes/php-to-js-time-stamp.pipe';
+import { EventComponent } from './components/single/event/event.component';
+import { AEventComponent } from './components/single/event/a-event/a-event.component';
+import { EventInvitComponent } from './components/single/event/event-invit/event-invit.component';
 
+moment.locale('fr-fr');
 @NgModule({
   imports: [
     CommonModule,
@@ -24,10 +35,15 @@ import { CalendarModule } from 'angular-calendar';
       states: STATES,
     }),
     CalendarModule.forRoot(),
+    Ng2PaginationModule,
+    FormsModule,
+    MomentModule
   ],
   declarations: [
     CalendarComponent, MainComponent, ViewSelectorComponent, MonthComponent, DayComponent, WeekComponent,
+    ArchiveComponent, PhpToJsTimeStampPipe, EventComponent, AEventComponent, EventInvitComponent
   ],
   providers: [JulietCalendarService],
 })
+
 export class JuCalendarModule { }

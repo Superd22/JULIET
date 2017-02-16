@@ -25,6 +25,8 @@ import { LoadingComponent } from './components/loading/loading.component';
 import { LoginComponent } from './components/login/login.component';
 import { SecureComponent } from './components/secure/secure.component';
 import { GoComponent } from './components/go/go.component';
+import { UrlizePipe } from './pipes/urlize.pipe';
+import { JulietUserNamesConverterService } from './services/juliet-user-names-converter.service';
 
 @NgModule({
   imports: [
@@ -38,15 +40,16 @@ import { GoComponent } from './components/go/go.component';
   ],
   exports: [
     JuV3PannelComponent, V3PannelTitle, JuV3SubPannelComponent, JuV3TabComponent, EnumKeysPipe, JuV3HeadingComponent, FilterPipe, CountPipe,
-    SplashComponent, JuV3BluePannelComponent
+    SplashComponent, JuV3BluePannelComponent, UrlizePipe
   ],
   declarations: [
     JulietCommonComponent, AuthComponent, LoadingComponent, LoginComponent, SecureComponent,
     GoComponent, JuV3PannelComponent, V3PannelTitle, JuV3SubPannelComponent, JuV3TabComponent, EnumKeysPipe,
-    JuV3HeadingComponent, FilterPipe, CountPipe, UnauthorizedComponent, SplashComponent, JuV3BluePannelComponent
+    JuV3HeadingComponent, FilterPipe, CountPipe, UnauthorizedComponent, SplashComponent, JuV3BluePannelComponent, UrlizePipe,
+    
   ],
   providers: [
-    JulietAPIService, JulietRightsService, JulietCommonHelperService
+    JulietAPIService, JulietRightsService, JulietCommonHelperService, JulietUserNamesConverterService
   ]
 })
 export class JulietCommonModule { }

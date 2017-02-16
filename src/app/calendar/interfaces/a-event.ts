@@ -1,12 +1,11 @@
-import {CalendarEvent} from 'calendarUtils';
-
-export interface AEvent extends CalendarEvent {
+export interface AEvent {
   id:Number,
   start:Number
   end:Number,
   author:Number,
-  $perm,
-  $private:Number,
+  perm,
+  invitations,
+  private:Number,
   title:String,
   text:String,
   del:Boolean,

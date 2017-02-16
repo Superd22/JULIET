@@ -1,0 +1,31 @@
+<ju-v3-sub-pannel fxLayout="column">
+  <h3 layoutPadding>Archives evenements</h3>
+  <md-toolbar>
+    <div><pagination-controls (pageChange)="pageChanged($event)" autoHide="true"></pagination-controls></div>
+    <span><button md-button disabled>{{totalCount}} Résultats</button></span>
+  </md-toolbar>
+  <md-list dense>
+    <div *ngFor="let event of events | paginate: { itemsPerPage: postPerPage,  currentPage: page+1, totalItems: totalCount }; ">
+    <md-list-item class="archive-event" (click)="goToEvent(event)">
+        <h4 md-line> {{event.title}} </h4>
+        <p md-line> {{event.text}} </p>
+        <p md-line> 
+          <button md-button disabled>#ju-ev-{{event.id}}</button> 
+          <time md-button disabled>
+            <md-icon inlineIcon>access_time</md-icon> 
+            {{event.start | phpToJsTimeStamp | amDateFormat:'DD/MM/YYYY'}}
+          </time>
+          <button md-button disabled *ngIf="event.del == 1">
+            <md-icon inlineIcon>delete_forever</md-icon>
+            Evenement supprimé
+          </button>
+
+        </p>
+    </md-list-item>
+
+    <md-divider></md-divider>
+    </div>
+  </md-list>
+
+  <pagination-controls (pageChange)="pageChanged($event)" autoHide="true"></pagination-controls>
+</ju-v3-sub-pannel>
