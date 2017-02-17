@@ -23,6 +23,7 @@
     "@angular/material": "2.0.0-beta.0",
     "@angular/platform-browser": "2.4.0",
     "@angular/platform-browser-dynamic": "2.4.0",
+    "@ng-bootstrap/ng-bootstrap": "^1.0.0-alpha.20",
     "angular-calendar": "^0.6.0",
     "angular2-flex": "^1.0.3",
     "angular2-moment": "^1.2.0",

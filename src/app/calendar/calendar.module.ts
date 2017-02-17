@@ -23,6 +23,7 @@ import { PhpToJsTimeStampPipe } from './pipes/php-to-js-time-stamp.pipe';
 import { EventComponent } from './components/single/event/event.component';
 import { AEventComponent } from './components/single/event/a-event/a-event.component';
 import { EventInvitComponent } from './components/single/event/event-invit/event-invit.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 moment.locale('fr-fr');
 @NgModule({
@@ -37,7 +38,8 @@ moment.locale('fr-fr');
     CalendarModule.forRoot(),
     Ng2PaginationModule,
     FormsModule,
-    MomentModule
+    MomentModule,
+    NgbModule,
   ],
   declarations: [
     CalendarComponent, MainComponent, ViewSelectorComponent, MonthComponent, DayComponent, WeekComponent,

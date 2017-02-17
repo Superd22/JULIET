@@ -1,2 +1,46 @@
-<pre>
-    {{event | json}}</pre>
+<ju-v3-sub-pannel fxLayout="column">
+    <h3 layoutPadding>Evenement #{{event.id}}</h3>
+
+    <md-toolbar>
+        <md-input-container>
+            <input type="text" [(ngModel)]="event.title" md-input disabled="!hasR" />
+        </md-input-container>
+    </md-toolbar>
+
+    <md-input-container>
+        <textarea [(ngModel)]="event.text" disabled="!hasR" md-input></textarea>
+    </md-input-container>
+
+    <div layoutMargin fxLayout fxLayoutAlign="center center" fxFlex="100" fxLayoutWrap>
+        <ju-v3-heading fxFlex layoutMargin LayoutPadding>
+            Informations globales
+        </ju-v3-heading>
+        <div fxFlex="100"></div>
+        <ju-v3-dark-pannel fxFlex="100" fxLayoutWrap layoutMargin>
+            <ju-v3-heading fxFlex="100" layoutMargin LayoutPadding>
+                Organisateurs
+            </ju-v3-heading>
+
+        </ju-v3-dark-pannel>
+
+        <div fxFlex="50" fxFlex.xs="100">
+        <ju-v3-heading fxFlex="100" layoutMargin LayoutPadding>
+            {{event.title}} prévu {{event.start | phpToJsTimeStamp | amTimeAgo}}
+        </ju-v3-heading>
+
+        <ju-v3-dark-pannel layoutMargin fxLayoutWrap> 
+            <div class="dateTop" fxFlex="100" layoutPadding>
+                {{event.start | phpToJsTimeStamp | amDateFormat:'LL'}}
+            </div>
+            <ngb-datepicker layoutMargin  [startDate]="eventStart" [(ngModel)]="eventStart" (ngModelChange)="dateChanged($event)"></ngb-datepicker>
+        </ju-v3-dark-pannel>
+
+        </div>
+        <div fxFlex="50" fxFlex.xs="100">
+        <ju-v3-dark-pannel layoutMargin>
+            Départ/Durée
+        </ju-v3-dark-pannel>
+        </div>
+    </div>
+
+</ju-v3-sub-pannel>

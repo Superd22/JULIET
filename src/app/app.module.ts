@@ -24,6 +24,7 @@ import { FlexLayoutModule } from '@angular/flex-layout'
 import { IonicApp, IonicModule } from 'ionic-angular';
 import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { environment } from '../environments/environment';
       configClass: RouterConfig,
       useHash: !environment.production,
     }),
+    NgbModule.forRoot(),
   ],
   providers: [],
   bootstrap: [IonicApp]

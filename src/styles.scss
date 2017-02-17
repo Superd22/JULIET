@@ -75,3 +75,62 @@ h3 {
     font-weight: 100;
     text-shadow: 0px 0px 6px white;
 }
+
+ngb-datepicker {
+    display:flex;
+    width:100%;
+    flex-wrap: wrap;
+    font-family: "Roboto";
+    .btn-link {
+        flex:1 1;
+        background: transparent;
+        color: #bdbdbd;
+        border: 0px;
+    }
+    ngb-datepicker-navigation-select {
+        flex: 1 1 100%;
+    }
+    .d-flex {
+        flex:1 1 100%;
+    }
+    ngb-datepicker-navigation,.ngb-dp-header {
+        display:flex;
+        flex: 1 1 100%;
+    }
+    ngb-datepicker-navigation {
+        select {
+            background: transparent;
+            border:none;
+            outline:none;
+            font-weight: bolder;
+            color:white;
+            option {
+                background: #1c1f21;
+            }
+        }
+    }
+    .ngb-dp-week {
+        display:flex;
+        flex: 1 1 100%;
+        .ngb-dp-weekday,.ngb-dp-day {
+            > div {
+                width:auto;
+                border-radius:0px;
+            }  
+            text-align: center;
+            flex:1 1 100%;
+            .bg-primary {
+                position:relative;
+                background:#4a819a !important;
+                z-index:1;
+                cursor:pointer;
+            }
+            .btn-secondary {
+                cursor:pointer;
+                &:hover {
+                    background:#2f3035;
+                }
+            }
+        }
+    }
+}
