@@ -28,6 +28,7 @@ import { GoComponent } from './components/go/go.component';
 import { UrlizePipe } from './pipes/urlize.pipe';
 import { JulietUserNamesConverterService } from './services/juliet-user-names-converter.service';
 import { JuV3DarkPannelComponent } from './components/_exports/ju-v3-dark-pannel/ju-v3-dark-pannel.component';
+import { ASmallUserComponent } from './components/_exports/a-small-user/a-small-user.component';
 
 @NgModule({
   imports: [
@@ -41,13 +42,13 @@ import { JuV3DarkPannelComponent } from './components/_exports/ju-v3-dark-pannel
   ],
   exports: [
     JuV3PannelComponent, V3PannelTitle, JuV3SubPannelComponent, JuV3TabComponent, EnumKeysPipe, JuV3HeadingComponent, FilterPipe, CountPipe,
-    SplashComponent, JuV3BluePannelComponent, UrlizePipe, JuV3DarkPannelComponent
+    SplashComponent, JuV3BluePannelComponent, UrlizePipe, JuV3DarkPannelComponent, ASmallUserComponent
   ],
   declarations: [
     JulietCommonComponent, AuthComponent, LoadingComponent, LoginComponent, SecureComponent,
     GoComponent, JuV3PannelComponent, V3PannelTitle, JuV3SubPannelComponent, JuV3TabComponent, EnumKeysPipe,
     JuV3HeadingComponent, FilterPipe, CountPipe, UnauthorizedComponent, SplashComponent, JuV3BluePannelComponent, UrlizePipe,
-    JuV3DarkPannelComponent
+    JuV3DarkPannelComponent, ASmallUserComponent
     
   ],
   providers: [

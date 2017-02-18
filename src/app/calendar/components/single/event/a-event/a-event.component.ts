@@ -3,6 +3,9 @@ import { AEvent } from '../../../../interfaces/a-event';
 import { JulietUserNamesConverterService } from '../../../../../juliet-common/services/juliet-user-names-converter.service';
 import { JulietRightsService } from '../../../../../juliet-common/services/juliet-rights.service';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { JulietCommonHelperService } from '../../../../../juliet-common/services/juliet-common-helper.service';
+import { CompleterData } from 'ng2-completer';
+import { MdSnackBar } from '@angular/material';
 @Component({
   selector: 'ju-calendar-a-event',
   templateUrl: './a-event.component.html',
@@ -13,10 +16,19 @@ export class AEventComponent implements OnInit {
   @Input()
   protected event:AEvent;
   protected backupEvent:AEvent;
-  protected invitedMembers= {};
+  protected users={};
 
   /** If the current user has admin rights on current event */
   private hasR:boolean=false;
+
+  protected dsPerm:CompleterData;
+  protected dsInvit:CompleterData;
+  protected dsGroup:CompleterData;
+  protected dsTag:CompleterData;
+
+  protected ngc = {
+    perm: null,
+  }
 
   protected _minEventDate:NgbDateStruct={
     day: new Date().getDate(),
@@ -27,7 +39,12 @@ export class AEventComponent implements OnInit {
   protected eventStart;
 
   
-  constructor(protected juNames:JulietUserNamesConverterService, protected rights:JulietRightsService) { }
+  constructor(protected juNames:JulietUserNamesConverterService, 
+  protected rights:JulietRightsService, protected helper:JulietCommonHelperService,
+  protected mdSnack:MdSnackBar) {
+    this.dsPerm  = helper.buildCompleter("username", `Common/UserSearch/?f=`);
+    this.dsInvit = helper.buildCompleter("username", `Common/UserSearch/?f=`);
+  }
 
   ngOnInit() {
     this.handleNames();
@@ -72,10 +89,8 @@ export class AEventComponent implements OnInit {
    * @param id the id to watch
    */
   protected getNameById(id:number) {
-    this.juNames.getUserFromId(id).subscribe(
-      user => {
-        this.invitedMembers[id] = user
-      }
+    return this.juNames.getUserFromId(id).subscribe(
+      user => this.users[id] = user
     ); 
   }
 
@@ -85,7 +100,7 @@ export class AEventComponent implements OnInit {
    */
   protected getRights() {
     this.rights.user_can("USER_CAN_ADMIN_EVENT",0,this.event.id).subscribe(
-      data => this.hasR = data.data
+      data => {this.hasR = data.data; console.log('r:'+data.data);}
     )
   }
 
@@ -114,6 +129,38 @@ export class AEventComponent implements OnInit {
     a.text == b.text &&
     a.private == b.private &&
     a.membersMax == b.membersMax;
+  }
+
+  /** 
+   * EVENT SUB-MANAGMENT
+   */
+
+  /**
+   * PERMS (= Organisateur)
+   */
+
+  /**
+   * Add an organisateur (perm) to the event
+   * @param id the id of the user to make orga.
+   */
+  protected addPerm(id:number) {
+
+    // Reject if user already has perms
+    if(this.event.perm.indexOf(id) != -1) {
+      let username = this.users[id].username;
+      this.mdSnack.open(username+" est déjà organisateur.");
+
+      this.ngc.perm = "";
+      return false;
+    }
+
+    // Add the user
+    this.getNameById(id);
+    this.event.perm.push(id);
+
+
+    let username = this.users[id].username;
+    this.mdSnack.open(username+" est maintenant organisateur.");
   }
 
 }

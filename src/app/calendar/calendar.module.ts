@@ -24,6 +24,7 @@ import { EventComponent } from './components/single/event/event.component';
 import { AEventComponent } from './components/single/event/a-event/a-event.component';
 import { EventInvitComponent } from './components/single/event/event-invit/event-invit.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { Ng2CompleterModule } from 'ng2-completer';
 
 moment.locale('fr-fr');
 @NgModule({
@@ -40,6 +41,7 @@ moment.locale('fr-fr');
     FormsModule,
     MomentModule,
     NgbModule,
+    Ng2CompleterModule,
   ],
   declarations: [
     CalendarComponent, MainComponent, ViewSelectorComponent, MonthComponent, DayComponent, WeekComponent,

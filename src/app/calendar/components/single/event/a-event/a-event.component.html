@@ -3,12 +3,12 @@
 
     <md-toolbar>
         <md-input-container>
-            <input type="text" [(ngModel)]="event.title" md-input disabled="!hasR" />
+            <input type="text" [(ngModel)]="event.title" md-input [disabled]="!hasR" />
         </md-input-container>
     </md-toolbar>
 
     <md-input-container>
-        <textarea [(ngModel)]="event.text" disabled="!hasR" md-input></textarea>
+        <textarea [(ngModel)]="event.text" [disabled]="!hasR" md-input></textarea>
     </md-input-container>
 
     <div layoutMargin fxLayout fxLayoutAlign="center center" fxFlex="100" fxLayoutWrap>
@@ -18,9 +18,14 @@
         <div fxFlex="100"></div>
         <ju-v3-dark-pannel fxFlex="100" fxLayoutWrap layoutMargin>
             <ju-v3-heading fxFlex="100" layoutMargin LayoutPadding>
-                Organisateurs
+                Organisateur{{event.perm.length > 1 ? 's' : ''}}
             </ju-v3-heading>
+            <div fxFlex="100" fxLayoutWrap LayoutMargin>
+                <a-small-user *ngFor="let p of event.perm" [user]="users[p]" fxFlex="20" fxFlex.sm="33" LayoutPadding></a-small-user>
+            </div>
 
+            <ng2-completer *ngIf="hasR" fxFlex="100" placeholder="Ajouter un organisateur" [(ngModel)]="ngc.perm"
+  [dataService]="dsPerm" [minSearchLength]="0" (selected)="addPerm($event.originalObject.user_id)"></ng2-completer>
         </ju-v3-dark-pannel>
 
         <div fxFlex="50" fxFlex.xs="100">
@@ -32,7 +37,7 @@
             <div class="dateTop" fxFlex="100" layoutPadding>
                 {{event.start | phpToJsTimeStamp | amDateFormat:'LL'}}
             </div>
-            <ngb-datepicker layoutMargin  [startDate]="eventStart" [(ngModel)]="eventStart" (ngModelChange)="dateChanged($event)"></ngb-datepicker>
+            <ngb-datepicker layoutMargin [disabled]="!hasR" [startDate]="eventStart" [(ngModel)]="eventStart" (ngModelChange)="dateChanged($event)"></ngb-datepicker>
         </ju-v3-dark-pannel>
 
         </div>

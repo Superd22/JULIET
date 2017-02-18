@@ -1,0 +1,5 @@
+<div *ngIf="user" class="aSmallUser md-elevation-z2 " uiSref="secure.user" [uiParams]="{user_id: user.id}">
+  <img src="{{user.avatar}}">
+  <span>{{user.username}}</span>
+  <ng-content></ng-content>
+</div>
