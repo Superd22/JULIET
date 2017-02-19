@@ -5,7 +5,9 @@ import { JulietRightsService } from '../../../../../juliet-common/services/julie
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { JulietCommonHelperService } from '../../../../../juliet-common/services/juliet-common-helper.service';
 import { CompleterData } from 'ng2-completer';
-import { MdSnackBar } from '@angular/material';
+import { MdSnackBar, MdSnackBarConfig } from '@angular/material';
+import { Observable } from 'rxjs/Observable';
+import { JuLightUser } from '../../../../../juliet-common/interfaces/ju-light-user';
 @Component({
   selector: 'ju-calendar-a-event',
   templateUrl: './a-event.component.html',
@@ -37,6 +39,10 @@ export class AEventComponent implements OnInit {
   };
 
   protected eventStart;
+
+  protected snackConfig:MdSnackBarConfig = {
+    duration:5000
+  }
 
   
   constructor(protected juNames:JulietUserNamesConverterService, 
@@ -87,11 +93,19 @@ export class AEventComponent implements OnInit {
   /**
    * Subsribe and update given user id
    * @param id the id to watch
+   * @return an observable with the given user info
    */
-  protected getNameById(id:number) {
-    return this.juNames.getUserFromId(id).subscribe(
-      user => this.users[id] = user
-    ); 
+  protected getNameById(id:number):Observable<JuLightUser> {
+    var o = this.juNames.getUserFromId(id);
+
+    o.subscribe(
+      user => {
+        this.users[id] = user;
+        return user;
+      }
+    );
+
+    return o;
   }
 
   /**
@@ -148,19 +162,29 @@ export class AEventComponent implements OnInit {
     // Reject if user already has perms
     if(this.event.perm.indexOf(id) != -1) {
       let username = this.users[id].username;
-      this.mdSnack.open(username+" est déjà organisateur.");
+      this.mdSnack.open(username+" est déjà organisateur.","Ok", this.snackConfig);
 
       this.ngc.perm = "";
       return false;
     }
 
     // Add the user
-    this.getNameById(id);
-    this.event.perm.push(id);
+    this.getNameById(id).subscribe(
+      user => {
+        this.event.perm.push(id);
+        let username = this.users[id].username;
+        this.mdSnack.open(username+" est maintenant organisateur.","Ok", this.snackConfig);
+      }
+    );
+    
+  }
 
+  protected removePerm(id:number) {
+    let i = this.event.perm.indexOf(id);
+    this.event.perm.splice(i, 1);
 
     let username = this.users[id].username;
-    this.mdSnack.open(username+" est maintenant organisateur.");
+    this.mdSnack.open(username+" a été retiré de la liste des organisateurs.","Ok", this.snackConfig);
   }
 
 }

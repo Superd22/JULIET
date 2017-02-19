@@ -21,11 +21,15 @@
                 Organisateur{{event.perm.length > 1 ? 's' : ''}}
             </ju-v3-heading>
             <div fxFlex="100" fxLayoutWrap LayoutMargin>
-                <a-small-user *ngFor="let p of event.perm" [user]="users[p]" fxFlex="20" fxFlex.sm="33" LayoutPadding></a-small-user>
+                <a-small-user *ngFor="let p of event.perm" [user]="users[p]" fxFlex="20" fxFlex.sm="33" LayoutPadding>
+                    <button md-icon-button (click)="removePerm(p)">
+                        <md-icon>clear</md-icon>
+                    </button>
+                </a-small-user>
             </div>
 
             <ng2-completer *ngIf="hasR" fxFlex="100" placeholder="Ajouter un organisateur" [(ngModel)]="ngc.perm"
-  [dataService]="dsPerm" [minSearchLength]="0" (selected)="addPerm($event.originalObject.user_id)"></ng2-completer>
+  [dataService]="dsPerm" [minSearchLength]="0" (selected)="addPerm($event.originalObject.user_id)" [clearSelected]="true"></ng2-completer>
         </ju-v3-dark-pannel>
 
         <div fxFlex="50" fxFlex.xs="100">
