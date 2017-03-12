@@ -50,7 +50,7 @@ import { environment } from '../environments/environment';
     UserModule,
     FlexLayoutModule.forRoot(),
     UIRouterModule.forRoot({
-      configClass: RouterConfig,
+      config: RouterConfig,
       useHash: !environment.production,
     }),
   ],
