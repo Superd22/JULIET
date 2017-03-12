@@ -49,18 +49,21 @@ export let tags = {
             {
                 token: '_tagName',
                 deps: [Transition],
-                resolveFn: function (trans) {
-                    console.log(trans.params().tag_name);
-                    return decodeURIComponent(trans.params().tag_name);
-                }
+                resolveFn: resolveTagName
             },
             {
                 token: '_tagCat',
                 deps: [Transition],
-                resolveFn: function (trans) {
-                    return trans.params().cat_name;
-                }
+                resolveFn: resolveTagCat
             }
         ]
     },
+}
+
+export function resolveTagName(trans:Transition) {
+    return decodeURIComponent(trans.params().tag_name);
+}
+
+export function resolveTagCat(trans:Transition) {
+    return trans.params().cat_name;
 }

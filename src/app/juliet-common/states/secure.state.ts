@@ -6,8 +6,10 @@ export let secureState = {
     abstract: true,
     component: SecureComponent,
     resolve: {
-        "_auth": [JulietRightsService, function(auth) {
-            return auth.can_see_juliet();
-        }],
+        "_auth": [JulietRightsService, secureResolve],
     },
+}
+
+export function secureResolve(auth:JulietRightsService) {
+    return auth.can_see_juliet();
 }

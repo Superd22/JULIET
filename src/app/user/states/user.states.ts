@@ -12,10 +12,12 @@ export let user = {
             {
                 token: '_userId',
                 deps: [Transition],
-                resolveFn: function (trans) {
-                    return trans.params().user_id;
-                }
+                resolveFn: resolveUserId
             },
         ],
     }
+}
+
+export function resolveUserId(trans:Transition) {
+    return trans.params().user_id;
 }

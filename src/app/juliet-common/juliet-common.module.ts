@@ -25,6 +25,8 @@ import { LoadingComponent } from './components/loading/loading.component';
 import { LoginComponent } from './components/login/login.component';
 import { SecureComponent } from './components/secure/secure.component';
 import { GoComponent } from './components/go/go.component';
+import { LayoutMarginDirective } from './directives/layout-margin.directive';
+import { LayoutPaddingDirective } from './directives/layout-padding.directive';
 
 @NgModule({
   imports: [
@@ -43,7 +45,8 @@ import { GoComponent } from './components/go/go.component';
   declarations: [
     JulietCommonComponent, AuthComponent, LoadingComponent, LoginComponent, SecureComponent,
     GoComponent, JuV3PannelComponent, V3PannelTitle, JuV3SubPannelComponent, JuV3TabComponent, EnumKeysPipe,
-    JuV3HeadingComponent, FilterPipe, CountPipe, UnauthorizedComponent, SplashComponent, JuV3BluePannelComponent
+    JuV3HeadingComponent, FilterPipe, CountPipe, UnauthorizedComponent, SplashComponent, JuV3BluePannelComponent,
+    LayoutMarginDirective,LayoutPaddingDirective
   ],
   providers: [
     JulietAPIService, JulietRightsService, JulietCommonHelperService

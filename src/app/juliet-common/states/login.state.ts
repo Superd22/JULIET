@@ -9,8 +9,10 @@ export let loginState = {
         targetState: "secure.Default",
     },
     resolve: {
-        "_targetState": [Transition, function (trans) {
-            return trans.params().targetState;
-        }],
+        "_targetState": [Transition, loginTrans],
     },
+}
+
+export function loginTrans(trans:Transition) {
+    return trans.params().targetState;
 }
