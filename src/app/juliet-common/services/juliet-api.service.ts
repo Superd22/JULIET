@@ -21,7 +21,7 @@ export class JulietAPIService {
       }
     }
     console.log(environment);
-    if (!environment.production) urlParam.append('UseDevDb', 'true');
+    if (environment.useDevDb) urlParam.append('UseDevDb', 'true');
     console.log(urlParam);
     return urlParam;
   }
@@ -36,7 +36,7 @@ export class JulietAPIService {
     let payload = params || {};
 
     if(!raw) payload = this.buildParameters(payload);
-    if (!environment.production) payload["UseDevDb"] = true;
+    if (environment.useDevDb) payload["UseDevDb"] = true;
 
     // TO DO Add headers
 

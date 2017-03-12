@@ -19,7 +19,6 @@ export class SecureComponent implements OnInit {
   constructor(private states:StateService) { }
 
   ngOnInit() {
-    console.log(this._auth);
     this._auth.subscribe(
       data => {
         this.displaySplash = false;
