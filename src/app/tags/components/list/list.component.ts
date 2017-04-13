@@ -1,4 +1,3 @@
-import { StateService } from 'ui-router-ng2';
 import { FilterPipe } from './../../../juliet-common/pipes/filter.pipe';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { TagsType } from './../../enums/tags-type.enum';
@@ -14,7 +13,7 @@ export class ListComponent implements OnInit {
   @ViewChild("TagList") TagList:TagListComponent;
   private creating: Boolean = false;
 
-  constructor(public tagsAPI:TagsService, public state:StateService) {}
+  constructor(public tagsAPI:TagsService) {}
 
   private addTag() {
     if (this.TagList.filter && this.TagList.filter.name) {
@@ -22,8 +21,8 @@ export class ListComponent implements OnInit {
       let name = this.TagList.filter.name;
       this.tagsAPI.createTag(this.TagList.filter.name).subscribe(
         data => {
-          if (data) this.state.go("secure.Tags.view", { tag_name: name, cat_name: data.cat });
-          else this.creating = false;
+          /**if (data) this.state.go("secure.Tags.view", { tag_name: name, cat_name: data.cat });
+          else this.creating = false;**/
         }
       )
     }

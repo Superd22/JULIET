@@ -1,4 +1,3 @@
-import { StateService } from 'ui-router-ng2';
 import { MdSnackBar } from '@angular/material';
 import { JulietRightsService } from './../../services/juliet-rights.service';
 import { Component, OnInit, Input } from '@angular/core';
@@ -16,7 +15,7 @@ export class LoginComponent implements OnInit {
   @Input()
   protected _targetState;
 
-  constructor(protected rights: JulietRightsService, protected snackBar: MdSnackBar, protected states:StateService) { }
+  constructor(protected rights: JulietRightsService, protected snackBar: MdSnackBar) { }
 
   ngOnInit() {  }
 
@@ -30,7 +29,6 @@ export class LoginComponent implements OnInit {
 
             if (data.data) {
               this.snackBar.open("Vous êtes maintenant connecté", null, { duration: 5000 });
-              this.states.go(this._targetState);
               return;
             }
 

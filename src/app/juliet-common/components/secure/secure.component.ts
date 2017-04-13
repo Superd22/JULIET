@@ -1,5 +1,4 @@
 import { authState } from './../../states/auth.state';
-import { StateService } from 'ui-router-ng2';
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
@@ -16,7 +15,7 @@ export class SecureComponent implements OnInit {
   private error:Boolean = false;
   private errorMsg:String;
   
-  constructor(private states:StateService) { }
+  constructor() { }
 
   ngOnInit() {
     this._auth.subscribe(
@@ -33,12 +32,13 @@ export class SecureComponent implements OnInit {
 
   private handleEndAuth() {
     if(this.authed) return;
-    let targetState = this.states.$current;
+    //let targetState = this.states.$current;
 
-    if(this.errorMsg == "USER_NOT_LOGGED_IN")
+    /** if(this.errorMsg == "USER_NOT_LOGGED_IN")
       this.states.go("Login", {targetState: targetState});
     
-    else this.states.go("UnAuth", {errorMsg: this.errorMsg});
+    else this.states.go("UnAuth", {errorMsg: this.errorMsg}); **/
+    
   }
 
 }

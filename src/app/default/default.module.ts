@@ -14,9 +14,6 @@ import { DefaultComponent } from './components/default/default.component';
   imports: [
     CommonModule,
     JulietCommonModule,
-    UIRouterModule.forChild({
-      states: STATES,
-    }),
     MaterialModule,
     FlexLayoutModule,
     TeamSpeakModule

@@ -1,6 +1,5 @@
 import { TagsService } from './../../services/tags.service';
 import { Component, OnInit } from '@angular/core';
-import { Transition } from 'ui-router-ng2';
 
 @Component({
   selector: 'app-tags',
@@ -17,7 +16,7 @@ export class TagsComponent implements OnInit {
   userid;
   get_current_mod_slang;
 
-  constructor(private TagCommon: TagsService, private trans: Transition) {
+  constructor(private TagCommon: TagsService) {
     this.TagCommon.isLad = true;
     
   }

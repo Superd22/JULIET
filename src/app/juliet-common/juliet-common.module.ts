@@ -31,9 +31,6 @@ import { LayoutPaddingDirective } from './directives/layout-padding.directive';
 @NgModule({
   imports: [
     CommonModule,
-    UIRouterModule.forChild({
-      states: STATES
-    }),
     MaterialModule,
     FlexLayoutModule,
     FormsModule,

@@ -8,9 +8,6 @@ import {STATES} from './states/_.states';
 @NgModule({
   imports: [
     CommonModule,
-    UIRouterModule.forChild({
-            states: STATES,
-    }),
   ],
   declarations: [RanksComponent]
 })

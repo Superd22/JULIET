@@ -14,9 +14,6 @@ import { CommonModule } from '@angular/common';
 @NgModule({
   imports: [
     CommonModule,
-    UIRouterModule.forChild({
-      states: STATES,
-    }),
     JulietCommonModule,
     MaterialModule,
     FlexLayoutModule,
