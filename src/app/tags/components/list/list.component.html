@@ -1,4 +1,4 @@
-<ju-tags-list #TagList [tags]="tagsAPI.tags" [mainList]="true" ></ju-tags-list>
+<ju-tags-list #TagList [tags]="tagsAPI.tags" [mainList]="true" fxFlex="column" ></ju-tags-list>
 
 <button layoutMargin md-raised-button color="accent" 
     *ngIf="TagList.filter.name" (click)="addTag()"> Ajouter le T.A.G {{TagList.filter.name}} </button>

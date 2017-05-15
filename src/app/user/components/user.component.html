@@ -4,7 +4,7 @@
     <h2>Fiche Administrative</h2>
     <em>Car je sais tout de toiiii.</em>
   </div>
-  <div *ngIf="user && user.id">
+  <div *ngIf="user && user.id" fxLayout="column">
 
     <ju-v3-sub-pannel class="user-section" fxLayout fxLayoutWrapLayoutPadding LayoutMargin>
       <ju-user-rank-big fxFlex="100" [rank]="user.rank" (rank)="rankChanged($event)" [user]="user" fxFlex="100"></ju-user-rank-big>
