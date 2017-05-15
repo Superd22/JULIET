@@ -19,6 +19,9 @@ import { FormsModule } from '@angular/forms';
     JulietCommonModule,
     MaterialModule,
     FlexLayoutModule,
+    UIRouterModule.forChild({
+      states:STATES
+    }),
     TagsModule,
     FormsModule,
   ],

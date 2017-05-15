@@ -9,6 +9,9 @@ import { ListeComponent } from './components/liste/liste.component';
 @NgModule({
   imports: [
     CommonModule,
+    UIRouterModule.forChild({
+      states: STATES
+    })
   ],
   declarations: [GroupsComponent, GroupComponent, ListeComponent]
 })

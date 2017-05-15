@@ -1,4 +1,5 @@
 import { Observable } from 'rxjs/Observable';
+import { StateService } from 'ui-router-ng2';
 import { CompleterData } from 'ng2-completer';
 import { CompleterService } from 'ng2-completer';
 import { tags } from './../states/tags.state';
@@ -17,10 +18,10 @@ export class TagsService {
   private $http;
 
   constructor(private api: JulietAPIService,
-    public completerService: CompleterService,
+    public completerService: CompleterService, public state: StateService,
     public rights: JulietRightsService) {
     //this.isLad = false;
-    //console.log(state);
+    console.log(state);
   }
 
   public buildCompleter(): CompleterData {
@@ -91,8 +92,8 @@ export class TagsService {
 
     return this.api.get(this.apiNamespace + "migrate", { id: _tagId, target: _targetId }).subscribe(
       data => {
-        /** if (data.data && this.state.is("secure.Tags.view") && !this.state.is("secure.Tags.view", { tag_name: data.data.name }))
-          this.state.go("secure.Tags.view", { tag_name: data.data.name });**/
+        if (data.data && this.state.is("secure.Tags.view") && !this.state.is("secure.Tags.view", { tag_name: data.data.name }))
+          this.state.go("secure.Tags.view", { tag_name: data.data.name });
       }
     )
   }
@@ -100,7 +101,7 @@ export class TagsService {
   public deleteTag(tag: ATag) {
     this.api.get(this.apiNamespace + "delete", { id: tag.id }).subscribe(
       data => {
-        //if (this.state.is("secure.Tags.view")) this.state.go("secure.Tags.list");
+        if (this.state.is("secure.Tags.view")) this.state.go("secure.Tags.list");
       }
     )
   }
@@ -109,7 +110,7 @@ export class TagsService {
     if (!target) target = 0;
     this.api.get(this.apiNamespace + "affect", { id: tag.id, user_id: target }).subscribe(
       data => {
-        //if (this.state.is("secure.Tags.view")) this.state.reload();
+        if (this.state.is("secure.Tags.view")) this.state.reload();
       }
     )
   }
@@ -118,7 +119,7 @@ export class TagsService {
     if (!target) target = 0;
     this.api.get(this.apiNamespace + "unaffect", { id: tag.id, user_id: target }).subscribe(
       data => {
-        //if (this.state.is("secure.Tags.view")) this.state.reload();
+        if (this.state.is("secure.Tags.view")) this.state.reload();
       }
     )
   }
@@ -130,8 +131,8 @@ export class TagsService {
     t.INFO = null;
     this.api.get(this.apiNamespace + "update", t).subscribe(
       data => {
-          //if (this.state.is("secure.Tags.view") && !this.state.is("secure.Tags.view", { tag_name: tag.name }))
-          //this.state.go("secure.Tags.view", { tag_name: tag.name });
+        if (this.state.is("secure.Tags.view") && !this.state.is("secure.Tags.view", { tag_name: tag.name }))
+          this.state.go("secure.Tags.view", { tag_name: tag.name });
       }
     )
   }

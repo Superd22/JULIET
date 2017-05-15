@@ -25,6 +25,9 @@ import { ExcludeTagsPipe } from './pipes/exclude-tags.pipe';
   imports: [
     CommonModule,
     JulietCommonModule,
+    UIRouterModule.forChild({
+      states: STATES,
+    }),
     MaterialModule,
     FlexLayoutModule,
     Ng2PaginationModule,

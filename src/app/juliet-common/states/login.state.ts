@@ -14,5 +14,5 @@ export let loginState = {
 }
 
 export function loginTrans(trans:Transition) {
-    //return trans.params().targetState;
+    return trans.params().targetState;
 }

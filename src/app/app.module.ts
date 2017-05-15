@@ -1,6 +1,7 @@
 import { TeamSpeakModule } from './team-speak/team-speak.module';
 import { MainSidenavComponent } from './juliet-common/components/main-sidenav/main-sidenav.component';
 import { RouterConfig } from './config/router.config';
+import { UIRouterModule } from 'ui-router-ng2';
 import { StatsModule } from './stats/stats.module';
 import { ShipsModule } from './ships/ships.module';
 import { RightsModule } from './rights/rights.module';
@@ -47,7 +48,11 @@ import { environment } from '../environments/environment';
     TeamSpeakModule,
     TagsModule,
     UserModule,
-    FlexLayoutModule,
+    FlexLayoutModule.forRoot(),
+    UIRouterModule.forRoot({
+      config: RouterConfig,
+      useHash: !environment.production,
+    }),
   ],
   providers: [],
   bootstrap: [IonicApp]
