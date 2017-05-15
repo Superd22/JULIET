@@ -1,3 +1,4 @@
+import { JulietMaterialModule } from './../juliet-common/material/material.module';
 import { TeamSpeakModule } from './../team-speak/team-speak.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MaterialModule } from '@angular/material';
@@ -14,10 +15,11 @@ import { DefaultComponent } from './components/default/default.component';
   imports: [
     CommonModule,
     JulietCommonModule,
+    JulietMaterialModule,
     UIRouterModule.forChild({
       states: STATES,
     }),
-    MaterialModule,
+    
     FlexLayoutModule,
     TeamSpeakModule
   ],

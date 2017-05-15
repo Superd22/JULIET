@@ -12,15 +12,17 @@ import { UserComponent } from './components/user.component';
 import { TagsModule } from '../tags/tags.module';
 import { JulietUserService } from './services/juliet-user.service';
 import { FormsModule } from '@angular/forms';
+import { JulietMaterialModule } from './../juliet-common/material/material.module';
+
 
 @NgModule({
   imports: [
     CommonModule,
     JulietCommonModule,
-    MaterialModule,
+    JulietMaterialModule,
     FlexLayoutModule,
     UIRouterModule.forChild({
-      states:STATES
+      states: STATES
     }),
     TagsModule,
     FormsModule,
@@ -28,6 +30,6 @@ import { FormsModule } from '@angular/forms';
   providers: [JulietUserService],
   declarations: [
     UserComponent, RankBigComponent, RankSelectorComponent, StarsComponent
-    ]
+  ]
 })
 export class UserModule { }

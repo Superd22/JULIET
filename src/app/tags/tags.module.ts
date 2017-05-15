@@ -18,6 +18,7 @@ import { NgxPaginationModule }  from 'ngx-pagination';
 import { Ng2CompleterModule } from "ng2-completer";
 import { TagListComponent } from './components/_common/tag-list/tag-list.component';
 import { ExcludeTagsPipe } from './pipes/exclude-tags.pipe';
+import { JulietMaterialModule } from './../juliet-common/material/material.module';
 
 
 
@@ -25,10 +26,11 @@ import { ExcludeTagsPipe } from './pipes/exclude-tags.pipe';
   imports: [
     CommonModule,
     JulietCommonModule,
+    JulietMaterialModule,
     UIRouterModule.forChild({
       states: STATES,
     }),
-    MaterialModule,
+    
     FlexLayoutModule,
     NgxPaginationModule,
     FormsModule,

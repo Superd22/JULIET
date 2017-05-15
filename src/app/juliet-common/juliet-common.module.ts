@@ -1,3 +1,4 @@
+import { JulietMaterialModule } from './material/material.module';
 import { JulietCommonHelperService } from './services/juliet-common-helper.service';
 import { JuV3BluePannelComponent } from './components/_exports/ju-v3-blue-pannel/ju-v3-blue-pannel.component';
 import { FormsModule } from '@angular/forms';
@@ -34,7 +35,7 @@ import { LayoutPaddingDirective } from './directives/layout-padding.directive';
     UIRouterModule.forChild({
       states: STATES
     }),
-    MaterialModule,
+    JulietMaterialModule,
     FlexLayoutModule,
     FormsModule,
   ],

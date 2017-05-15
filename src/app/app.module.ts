@@ -1,3 +1,4 @@
+import { JulietMaterialModule } from './juliet-common/material/material.module';
 import { TeamSpeakModule } from './team-speak/team-speak.module';
 import { MainSidenavComponent } from './juliet-common/components/main-sidenav/main-sidenav.component';
 import { RouterConfig } from './config/router.config';
@@ -17,7 +18,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { MaterialModule, MdMenuModule, MdMenuTrigger } from '@angular/material';
+import {  MdMenuModule, MdMenuTrigger } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout'
 import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
@@ -29,8 +30,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     MainSidenavComponent,
   ],
   imports: [
-    MaterialModule,
-    MdMenuModule,
+    BrowserModule,
+    JulietMaterialModule,
     FormsModule,
     HttpModule,
     CalendarModule,
@@ -44,7 +45,6 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     StatsModule,
     TeamSpeakModule,
     TagsModule,
-    BrowserModule,
     UserModule,
     BrowserAnimationsModule,
     FlexLayoutModule,

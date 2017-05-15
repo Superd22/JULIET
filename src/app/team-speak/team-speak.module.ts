@@ -10,6 +10,7 @@ import { TsServerStatusComponent } from './components/ts-server-status/ts-server
 import { TsRegisterStatusComponent } from './components/ts-register-status/ts-register-status.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { JulietMaterialModule } from './../juliet-common/material/material.module';
 
 @NgModule({
   imports: [
@@ -18,7 +19,7 @@ import { CommonModule } from '@angular/common';
       states: STATES,
     }),
     JulietCommonModule,
-    MaterialModule,
+    JulietMaterialModule,
     FlexLayoutModule,
     FormsModule,
   ],
