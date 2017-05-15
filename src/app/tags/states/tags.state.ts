@@ -1,7 +1,7 @@
 import { TagsIndexComponent } from './../components/main/tag-index.component';
 import { ATag } from './../interfaces/a-tag';
 import { TagsService } from './../services/tags.service';
-import { Transition } from 'ui-router-ng2';
+import { Transition } from '@uirouter/angular';
 import { SingleComponent } from './../components/single/single.component';
 import { SearchComponent } from './../components/search/search.component';
 import { OwnerComponent } from './../components/owner/owner.component';

@@ -1,7 +1,7 @@
 import { TeamSpeakModule } from './team-speak/team-speak.module';
 import { MainSidenavComponent } from './juliet-common/components/main-sidenav/main-sidenav.component';
 import { RouterConfig } from './config/router.config';
-import { UIRouterModule } from 'ui-router-ng2';
+import { UIRouterModule } from '@uirouter/angular';
 import { StatsModule } from './stats/stats.module';
 import { ShipsModule } from './ships/ships.module';
 import { RightsModule } from './rights/rights.module';
@@ -19,11 +19,9 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { MaterialModule, MdMenuModule, MdMenuTrigger } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout'
-
-
-import { IonicApp, IonicModule } from 'ionic-angular';
 import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -31,9 +29,8 @@ import { environment } from '../environments/environment';
     MainSidenavComponent,
   ],
   imports: [
-    MaterialModule.forRoot(),
+    MaterialModule,
     MdMenuModule,
-    IonicModule.forRoot(AppComponent),
     FormsModule,
     HttpModule,
     CalendarModule,
@@ -47,14 +44,16 @@ import { environment } from '../environments/environment';
     StatsModule,
     TeamSpeakModule,
     TagsModule,
+    BrowserModule,
     UserModule,
-    FlexLayoutModule.forRoot(),
+    BrowserAnimationsModule,
+    FlexLayoutModule,
     UIRouterModule.forRoot({
       config: RouterConfig,
       useHash: !environment.production,
     }),
   ],
   providers: [],
-  bootstrap: [IonicApp]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

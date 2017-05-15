@@ -1,5 +1,5 @@
 import { authState } from './../../states/auth.state';
-import { StateService } from 'ui-router-ng2';
+import { StateService } from '@uirouter/angular';
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({

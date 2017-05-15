@@ -1,5 +1,5 @@
 import { STATES } from './states/_.states';
-import { UIRouterModule } from 'ui-router-ng2';
+import { UIRouterModule } from '@uirouter/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GroupsComponent } from './components/groups/groups.component';

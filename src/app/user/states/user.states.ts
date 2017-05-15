@@ -1,5 +1,5 @@
 import { UserComponent } from '../components/user.component';
-import { Transition } from 'ui-router-ng2';
+import { Transition } from '@uirouter/angular';
 export let user = {
     main: {
         name: "secure.user",

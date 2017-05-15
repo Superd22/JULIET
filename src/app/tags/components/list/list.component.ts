@@ -1,4 +1,4 @@
-import { StateService } from 'ui-router-ng2';
+import { StateService } from '@uirouter/angular';
 import { FilterPipe } from './../../../juliet-common/pipes/filter.pipe';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { TagsType } from './../../enums/tags-type.enum';

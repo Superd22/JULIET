@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MaterialModule } from '@angular/material';
 import { JulietCommonModule } from '../juliet-common/juliet-common.module';
-import { UIRouterModule } from 'ui-router-ng2';
+import { UIRouterModule } from '@uirouter/angular';
 import { STATES } from './states/_.states';
 import { UserComponent } from './components/user.component';
 import { TagsModule } from '../tags/tags.module';

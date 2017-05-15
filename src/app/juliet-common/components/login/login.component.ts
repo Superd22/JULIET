@@ -1,4 +1,4 @@
-import { StateService } from 'ui-router-ng2';
+import { StateService } from '@uirouter/angular';
 import { MdSnackBar } from '@angular/material';
 import { JulietRightsService } from './../../services/juliet-rights.service';
 import { Component, OnInit, Input } from '@angular/core';

@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs/Observable';
-import { StateService } from 'ui-router-ng2';
+import { StateService } from '@uirouter/angular';
 import { CompleterData } from 'ng2-completer';
 import { CompleterService } from 'ng2-completer';
 import { tags } from './../states/tags.state';

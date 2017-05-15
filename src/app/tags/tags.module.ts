@@ -8,13 +8,13 @@ import { TagsService } from './services/tags.service';
 import { ListComponent } from './components/list/list.component';
 import { JulietCommonModule } from './../juliet-common/juliet-common.module';
 import { STATES } from './states/_.states';
-import { UIRouterModule } from 'ui-router-ng2';
+import { UIRouterModule } from '@uirouter/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TagsComponent } from './components/main/tags.component';
 import { OwnerComponent } from './components/owner/owner.component';
 import { SearchComponent } from './components/search/search.component';
-import { Ng2PaginationModule }  from 'ng2-pagination';
+import { NgxPaginationModule }  from 'ngx-pagination';
 import { Ng2CompleterModule } from "ng2-completer";
 import { TagListComponent } from './components/_common/tag-list/tag-list.component';
 import { ExcludeTagsPipe } from './pipes/exclude-tags.pipe';
@@ -30,7 +30,7 @@ import { ExcludeTagsPipe } from './pipes/exclude-tags.pipe';
     }),
     MaterialModule,
     FlexLayoutModule,
-    Ng2PaginationModule,
+    NgxPaginationModule,
     FormsModule,
     Ng2CompleterModule
   ],

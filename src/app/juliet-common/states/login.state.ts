@@ -1,4 +1,4 @@
-import { Transition } from 'ui-router-ng2';
+import { Transition } from '@uirouter/angular';
 import { LoginComponent } from './../components/login/login.component';
 
 export let loginState = {

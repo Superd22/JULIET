@@ -1,8 +1,8 @@
 import { JulietCommonHelperService } from './../juliet-common/services/juliet-common-helper.service';
 import { environment } from './../../environments/environment';
-import { UIRouter } from "ui-router-ng2";  
+import { UIRouter } from "@uirouter/angular";  
 import {Injector} from "@angular/core"; 
-import * as vis from 'ui-router-visualizer';
+import * as vis from '@uirouter/visualizer';
 
 export function RouterConfig(router: UIRouter, injector: Injector) {
     // router.urlRouterProvider.otherwise("/");

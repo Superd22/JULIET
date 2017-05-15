@@ -16,7 +16,7 @@ import { V3PannelTitle } from './components/_exports/ju-v3-pannel/title/title.co
 import { JuV3PannelComponent } from './components/_exports/ju-v3-pannel/ju-v3-pannel.component';
 import { MdProgressBarModule, MaterialModule } from '@angular/material';
 import { STATES } from './states/_.states';
-import { UIRouterModule } from 'ui-router-ng2';
+import { UIRouterModule } from '@uirouter/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { JulietCommonComponent } from './components/juliet-common.component';
