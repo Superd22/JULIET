@@ -7,9 +7,10 @@ import { SearchComponent } from './../components/search/search.component';
 import { OwnerComponent } from './../components/owner/owner.component';
 import { ListComponent } from './../components/list/list.component';
 import { TagsComponent } from './../components/main/tags.component';
+import { Ng2StateDeclaration } from '@uirouter/angular';
 
-export let tags = {
-    main: {
+export let tags:Ng2StateDeclaration[]= [
+    {
         name: "secure.Tags",
         url: "Tags/",
         views: {
@@ -17,29 +18,29 @@ export let tags = {
         },
         abstract: true,
     },
-    index: {
+    {
         name: "secure.Tags.index",
         abstract: true,
         views: {
             'tag': { component: TagsIndexComponent },
         },
     },
-    list: {
+    {
         name: "secure.Tags.index.list",
         url: "list",
         component: ListComponent,
     },
-    owner: {
+    {
         name: "secure.Tags.index.owner",
         url: "self",
         component: OwnerComponent,
     },
-    search: {
+    {
         name: "secure.Tags.index.search",
         url: "search",
         component: SearchComponent
     },
-    single: {
+    {
         name: "secure.Tags.view",
         url: "view/:cat_name/:tag_name",
         views: {
@@ -58,7 +59,7 @@ export let tags = {
             }
         ]
     },
-}
+]
 
 export function resolveTagName(trans:Transition) {
     return decodeURIComponent(trans.params().tag_name);

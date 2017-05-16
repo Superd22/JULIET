@@ -1,7 +1,8 @@
 import { Transition } from '@uirouter/angular';
 import { LoginComponent } from './../components/login/login.component';
+import { Ng2StateDeclaration } from '@uirouter/angular';
 
-export let loginState = {
+export let loginState:Ng2StateDeclaration = {
     name: "Login",
     url: "login",
     component: LoginComponent,
