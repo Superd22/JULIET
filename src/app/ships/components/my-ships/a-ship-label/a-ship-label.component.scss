@@ -2,10 +2,8 @@
 display:block;
 .ship-wrapper {
     position:relative;
-    .remove {
+    .remove,.validate {
         position: absolute;
-        right: -8px;
-        top: -18px;
         z-index: 2;
         background: rgb(39, 51, 60);
         border: 2px solid rgba(255, 255, 255, 0.29);
@@ -14,8 +12,16 @@ display:block;
         opacity:0;
         transition:0.5s;
     }
+    .remove {
+        right: -8px;
+        top: -18px;
+    }
+    .validate {
+        right: 40px;
+        top:-18px;
+    }
     &:hover {
-        .remove {opacity:1;}
+        .remove, .validate {opacity:1;}
     }
 }
 .ship {
@@ -34,12 +40,51 @@ display:block;
     padding: 5px;
     flex-direction: column;
     display: flex;
+    &.unsaved {
+        &:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;    
+            z-index: 1;
+            pointer-events: none;
+            box-shadow: 0px 20px 20px -12px rgba(255, 100, 100, 0.4) inset;
+        }
+    }
+    &.busy {
+        &:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;    
+            z-index: 1;
+            pointer-events: none;
+            animation-name: pulse-busy;
+            animation-duration: 1s;
+            animation-iteration-count: infinite;
+        }
+    }
     .ship-name {
         color: #ffdb98;
         font-family: "Electrolize";
         text-align: left;
-        font-weight:bolder;
+        font-weight: bolder;
         font-size: 1.1rem;
+        input{
+            width: 60%;
+            background: none;
+            border: 0px;
+            color: #ffdb98;
+            font-family: "Electrolize";
+            text-align: left;
+            font-weight: bolder;
+            font-size: 1.1rem;
+            outline: none;
+        }
     }
     .ship-type {
         text-transform: uppercase;
@@ -66,4 +111,10 @@ display:block;
         }
     }
 }
+}
+
+@keyframes pulse-busy {
+    0%   {box-shadow: 0px 20px 20px -12px rgba(255, 100, 100, 0.4) inset;}
+    50%  {box-shadow: 5px 20px 30px -5px rgba(255, 100, 100, 0.5) inset;}
+    100% {box-shadow: 0px 20px 20px -12px rgba(255, 100, 100, 0.4) inset;}
 }

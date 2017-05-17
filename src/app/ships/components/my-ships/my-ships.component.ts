@@ -63,7 +63,7 @@ export class MyShipsComponent implements OnInit {
       this.busy = true;
       this.api.deleteShip(shipToDelete).subscribe(() => {
         this.busy = false;
-        this.hangar.ships.splice(this.hangar.ships.findIndex((ship) => ship.id == shipToDelete.id));
+        this.hangar.ships.splice(this.hangar.ships.findIndex((ship) => ship.id == shipToDelete.id), 1);
       });
     }
   }

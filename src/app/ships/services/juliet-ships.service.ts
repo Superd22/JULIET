@@ -127,5 +127,13 @@ export class JulietShipsService {
     );
   }
 
+  public updateShip(ship: AShip): Observable<any> {
+    return this.api.post(this.apiNamespace + "updateShip", { ship: ship }).map(
+      data => {
+        if (!data.error) return data.data;
+      }
+    );
+  }
+
 
 }
