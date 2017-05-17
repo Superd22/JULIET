@@ -4,5 +4,7 @@ import { AShip } from './a-ship';
  */
 export interface Hangar {
     /** array of ships held by this hangar */
-    ships:AShip[];
+    ships: AShip[];
+    /** if the current user has admin rights on this hangar */
+    canAdmin: boolean;
 }

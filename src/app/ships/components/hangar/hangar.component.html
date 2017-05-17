@@ -1,7 +1,10 @@
 <ju-v3-pannel>
-  <div class="ju_tag_heading title">
+  <div class="ju_tag_heading title" LayoutMargin>
     <span class='right'>v3.0</span>
-    <h2>Fiche Administrative</h2>
-    <em>Car je sais tout de toiiii.</em>
+    <h2>Hangar</h2>
+    <em>Gestion de flotte universelle</em>
   </div>
 </ju-v3-pannel>
+<div fxLayout fxLayoutWrap LayoutMargin>
+  <ju-my-ships [hangar]="hangar" *ngIf="hangar" fxFlex="35"></ju-my-ships>
+</div>

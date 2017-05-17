@@ -1,0 +1,12 @@
+<div *ngIf="ship" class="ship-wrapper">
+  <button md-icon-button color="warn" class="remove" (click)="deleteShip()" mdTooltip="Supprimer ce vaisseau">
+        <md-icon>clear</md-icon>
+ </button>
+  <div class="ship">
+    <span class="ship-name">{{ship.name}}</span>
+    <span class="ship-type">{{shipType.name}}</span>
+    <div class="ship-ico">
+      <img src="{{shipType.ico}}">
+    </div>
+  </div>
+</div>

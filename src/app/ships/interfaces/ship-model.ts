@@ -10,4 +10,6 @@ export interface ShipModel {
     ico: string;
     /** parent for this ship */
     parent: number;
+    /** name of this type */
+    name: string;
 }

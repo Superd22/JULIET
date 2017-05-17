@@ -1,0 +1,69 @@
+:host {
+display:block;
+.ship-wrapper {
+    position:relative;
+    .remove {
+        position: absolute;
+        right: -8px;
+        top: -18px;
+        z-index: 2;
+        background: rgb(39, 51, 60);
+        border: 2px solid rgba(255, 255, 255, 0.29);
+        line-height: 1px;
+        box-shadow: 0 0 15px black;
+        opacity:0;
+        transition:0.5s;
+    }
+    &:hover {
+        .remove {opacity:1;}
+    }
+}
+.ship {
+    background: rgba(29,43,54,0.73);
+    border-radius: 1.2px;
+    box-shadow: 0px 0px 30px rgba(0,0,0,0.81), inset 0px 0px 70px rgba(110,131,136,0.47);
+    border: solid 1.5px #6e8388;
+    height: 40px;
+    color: white;
+    max-width: 100%;
+    margin: 4px 10px;
+    transition: 0.5s;
+    overflow: hidden;
+    position: relative;
+    text-shadow: 0px 0px 2px black;
+    padding: 5px;
+    flex-direction: column;
+    display: flex;
+    .ship-name {
+        color: #ffdb98;
+        font-family: "Electrolize";
+        text-align: left;
+        font-weight:bolder;
+        font-size: 1.1rem;
+    }
+    .ship-type {
+        text-transform: uppercase;
+        letter-spacing: 0.1rem;
+        color: #d0d0d0;
+    }
+    .ship-ico {
+        width: auto;
+        max-width: 33%;
+        background: rgba(150, 150, 150, 0.7);
+        position: absolute;
+        right: 10px;
+        top: 0px;
+        transition: 1s;
+        z-index: 0;
+        padding: 0px;
+        box-shadow: -20px 0px 40px 10px #1A1C22, 20px 0px 40px 10px #1A1C22;
+        display: flex;
+        img {    
+            height: 100%;
+            margin: 0;
+            border: 5px solid #1a1c22;
+            padding: 0px;
+        }
+    }
+}
+}
