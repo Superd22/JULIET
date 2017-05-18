@@ -18,7 +18,7 @@ export class MyShipsComponent implements OnInit {
 
   @Input()
   private hangar: Hangar = null;
-  @Input("userid")
+  @Input("userId")
   private _userId: number = 0;
   private shipTypes: ShipModel[] = null;
   private filteredType: Observable<ShipModel[]> = null;
@@ -36,7 +36,6 @@ export class MyShipsComponent implements OnInit {
     let r = name ? this.shipTypes.filter(s => new RegExp(`${name}`, 'gi').test(s.name))
       : this.shipTypes;
 
-    console.log(r);
     return r;
   }
 

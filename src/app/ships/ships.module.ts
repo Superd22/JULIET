@@ -12,6 +12,9 @@ import { HangarComponent } from './components/hangar/hangar.component';
 import { MyShipsComponent } from './components/my-ships/my-ships.component';
 import { AShipLabelComponent } from './components/my-ships/a-ship-label/a-ship-label.component';
 import { MainViewComponent } from './components/main-view/main-view.component';
+import { AdminTypesComponent } from './components/admin-types/admin-types.component';
+import { HangarAdminATypeComponent } from './components/admin-types/a-type/a-type.component';
+import { HangarAdminTypesEditorComponent } from './components/admin-types/editor/editor.component';
 
 @NgModule({
   imports: [
@@ -26,7 +29,7 @@ import { MainViewComponent } from './components/main-view/main-view.component';
     }),
   ],
   providers: [JulietShipsService],
-  declarations: [ShipsComponent, HangarComponent, MyShipsComponent, AShipLabelComponent, MainViewComponent],
+  declarations: [ShipsComponent, HangarComponent, MyShipsComponent, AShipLabelComponent, MainViewComponent, AdminTypesComponent, HangarAdminTypesEditorComponent, HangarAdminATypeComponent],
   exports: [MyShipsComponent],
 })
 export class ShipsModule { }

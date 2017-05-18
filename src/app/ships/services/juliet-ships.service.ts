@@ -135,5 +135,25 @@ export class JulietShipsService {
     );
   }
 
+  /**
+   * Pushes a new/updated shipType to the db.
+   * will execute an UPDATE if shipType
+   */
+  public updateShipType(shipType: ShipModel): Observable<ShipModel> {
+    return this.api.post(this.apiNamespace + "adminShipType", { shipType: shipType }).map(
+      data => {
+        if (!data.error) return data.data;
+      }
+    );
+  }
+
+  public deleteShipType(shipType: ShipModel): Observable<any> {
+    return this.api.post(this.apiNamespace + "adminDeleteShipType", { shipTypeId: shipType.id }).map(
+      data => {
+        if (!data.error) return data.data;
+      }
+    );
+  }
+
 
 }

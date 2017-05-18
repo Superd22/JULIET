@@ -1,0 +1,25 @@
+<ju-v3-pannel>
+  <div class="ju_tag_heading title" LayoutMargin>
+    <span class='right'>v3.0</span>
+    <h2>Administration - Vaisseaux</h2>
+    <em>Ajouter/Supprimer/Editer des modèles de vaisseaux</em>
+  </div>
+
+  <div fxLayout fxLayoutWrap LayoutMargin>
+    <div fxFlex="35" LayoutPadding>
+      <ju-v3-sub-pannel fxLayoutWrap>
+
+        <ju-v3-heading layoutPadding layoutMargin fxLayout fxFlex="100">
+          <h3>Vaisseaux Existants</h3>
+        </ju-v3-heading>
+        <div class="ships-wraper">
+          <ju-hangar-admin-a-type fxFlex="100" *ngFor="let type of shipTypes" [type]="type" [(active)]="activeShip"></ju-hangar-admin-a-type>
+        </div>
+      </ju-v3-sub-pannel>
+    </div>
+    <ju-hangar-admin-editor fxFlex LayoutPadding [(ship)]="activeShip" (updated)="fetchTypes()"></ju-hangar-admin-editor>
+  </div>
+
+
+
+</ju-v3-pannel>

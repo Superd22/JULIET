@@ -47,7 +47,6 @@ a {
 body {
     background: #1a1c22;
     font-family: "Electrolize";
-    overflow: hidden;
 }
 
 md-sidenav {
@@ -112,3 +111,9 @@ h3 {
             float:right;
         }
     }
+
+.mat-input-subscript-wrapper {
+    color: #778c8b;
+    font-family: electrolize;
+    text-align: justify;
+}

@@ -1,0 +1,53 @@
+<ju-v3-sub-pannel fxLayoutWrap>
+
+  <ju-v3-heading layoutPadding layoutMargin fxLayout fxFlex="100">
+    <h3>Editeur</h3>
+  </ju-v3-heading>
+
+  <div layoutPadding fxFlex="100" fxLayout>
+    <md-input-container fxFlex="100" layoutMargin>
+      <input mdInput [(ngModel)]="shipForm.name" placeholder="Nom du vaisseau">
+      <md-hint>Nom du type de vaisseau, avec le constructeur en premier (eg: RSI Aurora, Anvil Hornet)</md-hint>
+    </md-input-container>
+  </div>
+
+
+  <div fxFlex="50" fxLayout="column" layoutPadding style="margin-bottom:30px;">
+
+    <md-input-container fxFlex layoutMargin>
+      <input mdInput [(ngModel)]="shipForm.ico" placeholder="URL de l'image">
+      <md-hint>Url pour l'icone à afficher, en cas de pépin utilisez celle du "Pas de vaisseau"</md-hint>
+    </md-input-container>
+
+    <md-input-container fxFlex layoutMargin>
+      <input mdInput [(ngModel)]="shipForm.type" placeholder="Type du vaisseau" [mdAutocomplete]="auto" [formControl]="typeCtrl">
+      <md-hint>Le type du vaisseau que vous ajoutez (n'hésitez pas à en rajouter vous même en tapant simplement ce que vous voulez)</md-hint>
+    </md-input-container>
+
+
+    <md-autocomplete #auto="mdAutocomplete">
+      <md-option *ngFor="let type of filteredshipTypesTypes | async" [value]="type">
+        {{ type }}
+      </md-option>
+    </md-autocomplete>
+
+  </div>
+
+  <md-input-container fxFlex layoutMargin style="align-self: baseline;">
+    <input mdInput [(ngModel)]="shipForm.parent" placeholder="Vaisseau parent">
+    <md-hint>Vaisseau parent s'il s'agit d'une variante (eg: le "parent" du RSI Hornet Ghost est le RSI Hornet)</md-hint>
+  </md-input-container>
+
+  <div fxFlex="100" fxLayout layoutPadding>
+    <button layoutMargin md-button *ngIf="displaySave()" color="accent" (click)="saveShip()"><md-icon>save</md-icon> Sauvegarder</button>
+    <button layoutMargin md-button *ngIf="displayReset()" color="primary" (click)="resetShip()"><md-icon>cancel</md-icon> Reset</button>
+    <div style="margin-left: auto;">
+      <button layoutMargin md-button *ngIf="displayDelete()" color="warn" (click)="deleteShip()">
+      <md-icon>delete_forever</md-icon> Supprimer ce type</button>
+      <button layoutMargin md-button color="primary" (click)="resetNewShip()"><md-icon>add</md-icon> Nouveau Type</button>
+    </div>
+  </div>
+
+  <md-progress-bar mode="indeterminate" *ngIf="busy"></md-progress-bar>
+
+</ju-v3-sub-pannel>

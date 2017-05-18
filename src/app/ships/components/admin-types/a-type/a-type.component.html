@@ -1,0 +1,3 @@
+<div class="ship" *ngIf="type" (click)="makeThisActive()" [ngClass]="{active: isActive(), dirty: isDirty}">
+  <span class="ship-type">{{type.name}}</span>
+</div>
