@@ -55,7 +55,7 @@ export class HangarAdminTypesEditorComponent implements OnInit {
   private init() {
     this.regenBackUp();
     this.api.getAllShipTypes().subscribe((ships) => {
-      this.shipTypes = ships;
+      this.shipTypes = ships.sort((a, b) => a.name.localeCompare(b.name));
       this.regenTypesTypes();
     });
   }

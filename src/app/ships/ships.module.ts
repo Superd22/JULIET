@@ -15,6 +15,7 @@ import { MainViewComponent } from './components/main-view/main-view.component';
 import { AdminTypesComponent } from './components/admin-types/admin-types.component';
 import { HangarAdminATypeComponent } from './components/admin-types/a-type/a-type.component';
 import { HangarAdminTypesEditorComponent } from './components/admin-types/editor/editor.component';
+import { ShipModelWithoutParentPipe } from './pipes/ship-model-without-parent.pipe';
 
 @NgModule({
   imports: [
@@ -29,7 +30,7 @@ import { HangarAdminTypesEditorComponent } from './components/admin-types/editor
     }),
   ],
   providers: [JulietShipsService],
-  declarations: [ShipsComponent, HangarComponent, MyShipsComponent, AShipLabelComponent, MainViewComponent, AdminTypesComponent, HangarAdminTypesEditorComponent, HangarAdminATypeComponent],
+  declarations: [ShipsComponent, HangarComponent, MyShipsComponent, AShipLabelComponent, MainViewComponent, AdminTypesComponent, HangarAdminTypesEditorComponent, HangarAdminATypeComponent, ShipModelWithoutParentPipe],
   exports: [MyShipsComponent],
 })
 export class ShipsModule { }
