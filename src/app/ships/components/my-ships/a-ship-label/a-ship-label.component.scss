@@ -104,7 +104,7 @@ display:block;
         max-width: 33%;
         background: rgba(150, 150, 150, 0.7);
         position: absolute;
-        right: 10px;
+        right: 0px;
         top: 0px;
         transition: 1s;
         z-index: 0;
@@ -112,10 +112,10 @@ display:block;
         box-shadow: -20px 0px 40px 10px #1A1C22, 20px 0px 40px 10px #1A1C22;
         display: flex;
         img {    
-            height: 100%;
+            max-height: 50px;
             margin: 0;
-            border: 5px solid #1a1c22;
             padding: 0px;
+            border-right: 300px solid #1A1C22;
         }
     }
 }
