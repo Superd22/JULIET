@@ -29,7 +29,7 @@ export class HangarAdminTypesEditorComponent implements OnInit {
   };
 
 
-  private shipTypes: ShipModel[] = [];
+  public shipTypes: ShipModel[] = [];
   private shipTypesTypes: string[] = [];
   public filteredshipTypesTypes: Observable<string[]> = null;
   public typeCtrl: FormControl;
