@@ -9,25 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminTypesComponent implements OnInit {
 
-  private shipTypes: ShipModel[] = [];
-  private activeShip: ShipModel = { id: -1, type: "", ico: "", parent: 0, name: "" };
+  public shipTypes: ShipModel[] = [];
+  public activeShip: ShipModel = { id: -1, type: "", ico: "", parent: 0, name: "" };
   constructor(private api: JulietShipsService) { }
 
   ngOnInit() {
     this.fetchTypes();
   }
 
-  private resetActiveShip() {
-    this.activeShip = {
-      name: "",
-      id: 0,
-      ico: "",
-      parent: 0,
-      type: "",
-    };
-  }
-
-  private fetchTypes() {
+  fetchTypes() {
     this.api.getAllShipTypes().subscribe((types) => this.shipTypes = types.sort((a, b) => a.name.localeCompare(b.name)));
   }
 

@@ -12,14 +12,14 @@ import { JulietRightsService } from '../../juliet-common/services/juliet-rights.
 export class UserComponent implements OnInit {
 
   @Input()
-  private _userId:Number;
-  private busy:Boolean=false;
-  private canEdit:Boolean=false;
+  private _userId: Number;
+  public busy: Boolean = false;
+  public canEdit: Boolean = false;
 
-  protected user:AUserExtended;
-  protected userBackup:AUserExtended;
+  public user: AUserExtended;
+  protected userBackup: AUserExtended;
 
-  constructor(protected api:JulietUserService, protected rights:JulietRightsService) { }
+  constructor(protected api: JulietUserService, public rights: JulietRightsService) { }
 
   ngOnInit() {
     this.busy = true;
@@ -41,14 +41,14 @@ export class UserComponent implements OnInit {
     });
   }
 
-  protected hasMadeChanges():Boolean {
-    if(!this.user || !this.userBackup) return false;
-    
+  public hasMadeChanges(): Boolean {
+    if (!this.user || !this.userBackup) return false;
+
     var r = false;
     let u = this.user;
     let b = this.userBackup;
 
-    if(
+    if (
       u.callsign != b.callsign ||
       u.description != b.description ||
       u.fleet != b.fleet ||
@@ -56,7 +56,7 @@ export class UserComponent implements OnInit {
       u.handle != b.handle ||
       u.nom != b.nom ||
       u.pending != b.pending ||
-      u.prenom != b.prenom 
+      u.prenom != b.prenom
     ) r = true;
 
     return r;

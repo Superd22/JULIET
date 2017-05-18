@@ -12,7 +12,7 @@ import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 export class AShipLabelComponent implements OnInit {
 
   @Input()
-  private ship: AShip = null;
+  public ship: AShip = null;
   private shipBack: AShip = null;
   private shipType: ShipModel = null;
   @Output("onDelete")

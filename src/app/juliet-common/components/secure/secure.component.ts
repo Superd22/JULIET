@@ -11,8 +11,8 @@ export class SecureComponent implements OnInit {
 
   @Input()
   private _auth;
-  private displaySplash:Boolean = true;
-  private authed:Boolean = false;
+  public displaySplash:Boolean = true;
+  public authed:Boolean = false;
   private error:Boolean = false;
   private errorMsg:String;
   

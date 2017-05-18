@@ -20,7 +20,7 @@ export class MyShipsComponent implements OnInit {
   private hangar: Hangar = null;
   @Input("userId")
   private _userId: number = 0;
-  private shipTypes: ShipModel[] = null;
+  public shipTypes: ShipModel[] = null;
   private filteredType: Observable<ShipModel[]> = null;
   private typeCtrl: FormControl;
   private busy: boolean = false;

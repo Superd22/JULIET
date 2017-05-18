@@ -10,9 +10,9 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  protected pseudo;
-  protected password;
-  protected busy: Boolean = false;
+  public pseudo;
+  public password;
+  public busy: Boolean = false;
   @Input()
   protected _targetState;
 
@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {  }
 
-  private doLogin() {
+  public doLogin() {
     this.busy = true;
     this.rights.doLogin(this.pseudo, this.password).subscribe(
       data => {

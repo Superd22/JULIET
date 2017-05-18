@@ -10,7 +10,7 @@ import { Component, OnInit, OnChanges, Input, EventEmitter, Output, SimpleChange
 export class HangarAdminATypeComponent implements OnInit, OnChanges {
 
   @Input()
-  private type: ShipModel;
+  public type: ShipModel;
   @Input()
   private active: HangarAdminATypeComponent;
   @Output()

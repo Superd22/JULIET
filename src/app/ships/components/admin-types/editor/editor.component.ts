@@ -18,7 +18,7 @@ export class HangarAdminTypesEditorComponent implements OnInit {
   @Output()
   private shipChange: EventEmitter<HangarAdminATypeComponent> = new EventEmitter<HangarAdminATypeComponent>();
 
-  private shipForm: ShipModel;
+  public shipForm: ShipModel;
 
   private newShip: ShipModel = {
     name: "",
@@ -31,9 +31,9 @@ export class HangarAdminTypesEditorComponent implements OnInit {
 
   private shipTypes: ShipModel[] = [];
   private shipTypesTypes: string[] = [];
-  private filteredshipTypesTypes: Observable<string[]> = null;
-  private typeCtrl: FormControl;
-  private busy: boolean = false;
+  public filteredshipTypesTypes: Observable<string[]> = null;
+  public typeCtrl: FormControl;
+  public busy: boolean = false;
   @Output("updated")
   private updatedEvent: EventEmitter<void> = new EventEmitter<void>();
 
@@ -60,11 +60,11 @@ export class HangarAdminTypesEditorComponent implements OnInit {
     });
   }
 
-  private displaySave() {
+  public displaySave() {
     return (this.ship === null && this.isDirty()) || this.displayReset();
   }
 
-  private displayReset() {
+  public displayReset() {
     return (this.ship != null && this.ship.isDirty)
   }
 
@@ -130,14 +130,14 @@ export class HangarAdminTypesEditorComponent implements OnInit {
     }
   }
 
-  private displayDelete() {
+  public displayDelete() {
     return this.shipForm.id > 0;
   }
 
   /**
    * Resets all our bidings and fills the editor with a new ship.
    */
-  private resetNewShip() {
+  resetNewShip() {
     this.ship = null;
     this.regenBackUp();
     this.shipChange.emit(null);

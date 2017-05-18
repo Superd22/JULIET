@@ -7,6 +7,7 @@ import { JulietAPIService } from './../../juliet-common/services/juliet-api.serv
 import { UserComponent } from './../../user/components/user.component';
 import { HangarComponent } from './../components/hangar/hangar.component';
 import { Ng2StateDeclaration, Resolvable, UIRouter, StateService, Transition } from '@uirouter/angular';
+import { userSlugResolve } from "./userSlugResolve.resolve";
 
 export let HangarViewOther: Ng2StateDeclaration = {
     name: "secure.Hangar.viewOther",
@@ -17,7 +18,7 @@ export let HangarViewOther: Ng2StateDeclaration = {
         user_slug: "",
     },
     resolve: [
-        new Resolvable("e", userSlugResolve, [JulietUserService, Transition], { when: "LAZY", async: "WAIT" }),
+        { token: "e", resolveFn: userSlugResolve, deps: [JulietUserService, Transition], policy: { when: "LAZY", async: "WAIT" } }
     ]
 }
 
@@ -36,19 +37,4 @@ export let HangarViewSelf: Ng2StateDeclaration = {
         user_id: 0,
     },
     reloadOnSearch: true,
-}
-
-export async function userSlugResolve(api: JulietUserService, transition: Transition) {
-    let params: { user_id: number, resolved: boolean, user_slug: string } = Object.assign({}, transition.params("to"));
-
-    //if (params.resolved) return true;
-    if (params.user_id == 0) {
-        return transition.router.stateService.go("secure.Hangar", null, { notify: false, reload: false });
-    }
-
-    return api.getUserNameFromId(params.user_id).subscribe((info) => {
-        params.user_slug = new SeoUrlPipe().transform(info.username);
-        params.resolved = true;
-        return transition.router.stateService.go(transition.$to().name, params, { notify: false, reload: false });
-    });
 }

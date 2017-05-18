@@ -17,9 +17,9 @@ export class OwnerComponent implements OnInit {
   protected _userId:Number=0; 
   @Input("user")
   protected _user:AUser;
-  protected tagsList:ATag[];
+  public tagsList:ATag[];
   protected searchList:ATag[];
-  protected currentUserCan:Boolean = false;
+  public currentUserCan:Boolean = false;
 
   @ViewChild(TagListComponent)
   protected tagList: TagListComponent;
@@ -67,13 +67,13 @@ export class OwnerComponent implements OnInit {
   }
 
   /* Triggered when a given tag is taken by the user. */
-  protected tagTaken(tag:ATag) {
+  public tagTaken(tag:ATag) {
     console.log(tag);
     this.api.assignTag(tag,this._userId);
     this.tagsList.push(tag);
   }
 
-  protected tagUnTaken(tag:ATag) {
+  public tagUnTaken(tag:ATag) {
     this.api.unAssignTag(tag, this._userId);
     this.tagsList.splice(this.tagsList.findIndex( cur => cur.id === tag.id ), 1);
   }
@@ -88,7 +88,7 @@ export class OwnerComponent implements OnInit {
     );
   }
 
-  protected shouldAddTag() {
+  public shouldAddTag() {
     if(this.tagList.searchHasExactMatch() || !(this.tagList.filter.name) ) return false;
 
     let filtered = this.filteredTags.original;

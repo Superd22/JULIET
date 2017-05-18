@@ -13,7 +13,7 @@ export class TagListComponent implements OnInit {
 
   @Input("tags")
   /* The main tags list */
-  protected tagList:ATag[];
+  public tagList:ATag[];
 
   @Input()
   /* Defined in a-tag.component.ts  */
@@ -48,20 +48,20 @@ export class TagListComponent implements OnInit {
   ngOnInit() {
   }
 
-  protected toggleCat(catName) {
+  public toggleCat(catName) {
     this.filter.cat = this.filter.cat == catName ? null : catName;
   }
 
-  protected iconForCat(catName) {
+  public iconForCat(catName) {
     return this.filter.cat == catName ? "check_box" : "check_box_outline_blank";
   }
 
-  protected iconForFilter(filterName) {
+  public iconForFilter(filterName) {
     if (filterName == "restricted") return this.filter.restricted == 1 ? "check_box" : "check_box_outline_blank";
     else return this.filter.type == this.tagType[filterName] ? "check_box" : "check_box_outline_blank";
   }
 
-  protected toggleFilter(filterName) {
+  public toggleFilter(filterName) {
     if (filterName == "restricted") this.filter.restricted = this.filter.restricted === null ? 1 : null;
     else this.filter.type = this.filter.type == this.tagType[filterName] ? null : this.tagType[filterName];
   }

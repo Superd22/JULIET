@@ -16,12 +16,12 @@ export class HangarComponent implements OnInit {
   /** the existing ship types */
   protected shipTypes: ShipModel[];
   /** our main holder */
-  protected hangar: Hangar;
+  public hangar: Hangar;
   @Input("userId")
   protected _userId: number;
   @Input("user")
-  protected _user: AUser;
-  protected currentUser: AUser;
+  public _user: AUser;
+  public currentUser: AUser;
 
   constructor(protected api: JulietShipsService, private userAPI: JulietUserService, private trans: Transition) {
     this.handleUser();
