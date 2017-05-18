@@ -5,8 +5,6 @@ import { Directive, ElementRef } from '@angular/core';
 })
 export class AlignShipIcoDirective {
 
-  private _ttl = 10;
-
   constructor(el: ElementRef) {
     this.render(el);
   }
@@ -17,9 +15,6 @@ export class AlignShipIcoDirective {
       let height = e.clientHeight;
 
       if (height >= 50) return;
-
-      console.log(height);
-      console.log(50 - height);
 
       let margin_top = (50 - height) / 2;
 
