@@ -55,6 +55,7 @@ export class AShipLabelComponent implements OnInit {
   }
 
   public deleteShip() {
+    if(confirm("Êtes vos sur de vouloir supprimer (définitivement) ce vaisseau ?"))
     this._deleteEmitter.emit(this.ship);
   }
 

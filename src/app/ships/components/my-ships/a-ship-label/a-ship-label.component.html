@@ -1,5 +1,5 @@
 <div *ngIf="ship" class="ship-wrapper" [ngClass]="{active:isActive()}">
-  <button md-icon-button color="warn" class="remove" (click)="deleteShip()" >
+  <button md-icon-button color="warn" class="remove" (click)="deleteShip()" mdTooltip="Supprimer ce vaisseau" >
         <md-icon>remove_forever</md-icon>
  </button>
  <button md-icon-button color="accent" class="validate" (click)="changeName()" *ngIf="isUnsaved()" mdTooltip="Valider le changement de nom">
