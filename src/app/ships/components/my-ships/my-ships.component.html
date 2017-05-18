@@ -1,8 +1,9 @@
 <ju-v3-sub-pannel *ngIf="shipTypes" fxLayoutWrap fxLayout="column">
   <ju-v3-heading layoutPadding layoutMargin>Liste des vaisseaux</ju-v3-heading>
 
-
-  <ju-a-ship-label *ngFor="let ship of hangar.ships" [ship]="ship" (onDelete)="deleteShip($event)"></ju-a-ship-label>
+  <div *ngIf="hangar">
+    <ju-a-ship-label *ngFor="let ship of hangar.ships" [ship]="ship" (onDelete)="deleteShip($event)"></ju-a-ship-label>
+  </div>
 
   <md-input-container LayoutMargin class="ship-add">
     <input mdInput placeholder="Ajouter un nouveau vaisseau" [mdAutocomplete]="auto" [formControl]="typeCtrl" [disabled]="busy">

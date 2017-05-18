@@ -33,10 +33,12 @@
 
   </div>
 
-  <md-input-container fxFlex layoutMargin style="align-self: baseline;">
-    <input mdInput [(ngModel)]="shipForm.parent" placeholder="Vaisseau parent">
-    <md-hint>Vaisseau parent s'il s'agit d'une variante (eg: le "parent" du RSI Hornet Ghost est le RSI Hornet)</md-hint>
-  </md-input-container>
+  <div fxFlex="50" fxLayout="column" layoutPadding >
+    <md-select placeholder="Vaisseau parent" [(ngModel)]="shipForm.parent" layoutMargin mdTooltip="Vaisseau parent s'il s'agit d'une variante (eg: le 'parent' du RSI Hornet Ghost est le RSI Hornet)">
+      <md-option [value]='0' selected>Pas de parent</md-option>
+      <md-option *ngFor="let ship of shipTypes | shipModelWithoutParent" [value]="ship.id">{{ ship.name }}</md-option>
+    </md-select>
+  </div>
 
   <div fxFlex="100" fxLayout layoutPadding>
     <button layoutMargin md-button *ngIf="displaySave()" color="accent" (click)="saveShip()"><md-icon>save</md-icon> Sauvegarder</button>
