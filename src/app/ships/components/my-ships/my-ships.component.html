@@ -1,5 +1,7 @@
 <ju-v3-sub-pannel *ngIf="shipTypes" fxLayoutWrap fxLayout="column">
-  <ju-v3-heading layoutPadding layoutMargin>Liste des vaisseaux</ju-v3-heading>
+  <ju-v3-heading layoutPadding layoutMargin>
+    <h3>Liste des vaisseaux</h3>
+  </ju-v3-heading>
 
   <div *ngIf="hangar">
     <ju-a-ship-label *ngFor="let ship of hangar.ships" [ship]="ship" (onDelete)="deleteShip($event)"></ju-a-ship-label>

@@ -19,6 +19,9 @@ export class JulietShipsService {
   /** all the ship types that exists */
   private shipTypes: ShipModel[] = [];
 
+  /** the currently selected ship in any view */
+  private selectedShip: AShip = null;
+
   constructor(private api: JulietAPIService) { }
 
 
@@ -32,7 +35,6 @@ export class JulietShipsService {
       data => 
     );*/
   }
-
 
   /**
    * Get the Hangar belonging to a player

@@ -1,4 +1,4 @@
-import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { JulietShipsService } from './services/juliet-ships.service';
 import { JulietCommonModule } from './../juliet-common/juliet-common.module';
@@ -16,6 +16,9 @@ import { AdminTypesComponent } from './components/admin-types/admin-types.compon
 import { HangarAdminATypeComponent } from './components/admin-types/a-type/a-type.component';
 import { HangarAdminTypesEditorComponent } from './components/admin-types/editor/editor.component';
 import { ShipModelWithoutParentPipe } from './pipes/ship-model-without-parent.pipe';
+import { SingleShipViewverComponent } from './components/single/single.component';
+import { JulietHangarService } from "./services/juliet-hangar.service";
+import { AlignShipIcoDirective } from './directives/align-ship-ico.directive';
 
 @NgModule({
   imports: [
@@ -29,8 +32,11 @@ import { ShipModelWithoutParentPipe } from './pipes/ship-model-without-parent.pi
       states: STATES,
     }),
   ],
-  providers: [JulietShipsService],
-  declarations: [ShipsComponent, HangarComponent, MyShipsComponent, AShipLabelComponent, MainViewComponent, AdminTypesComponent, HangarAdminTypesEditorComponent, HangarAdminATypeComponent, ShipModelWithoutParentPipe],
+  providers: [JulietShipsService, JulietHangarService],
+  declarations: [ShipsComponent, HangarComponent, MyShipsComponent, AShipLabelComponent, MainViewComponent,
+    AdminTypesComponent, HangarAdminTypesEditorComponent, HangarAdminATypeComponent, ShipModelWithoutParentPipe,
+    SingleShipViewverComponent,
+    AlignShipIcoDirective],
   exports: [MyShipsComponent],
 })
 export class ShipsModule { }

@@ -1,0 +1,20 @@
+<ju-v3-sub-pannel fxLayout="column" fxLayoutWrap>
+  <ju-v3-heading fxFlex="100" layoutPadding layoutMargin>
+    <h3>Vue détaillée</h3>
+  </ju-v3-heading>
+
+  <div *ngIf="hangarAPI.currentSingleShipType | async as type" layoutMargin layoutPadding>
+    <div *ngIf="hangarAPI.currentSingleShip.ship as ship">
+      <div class="ship-title" fxLayout="column" fxFlex>
+        <input type="text" [(ngModel)]="hangarAPI.currentSingleShip.ship.name" class="ship-name">
+        <em>SIBV-{{ship.id}} <span class="ship-type">{{type.name}}</span></em>
+        <div fxLayout="row">
+          <button md-button uiSref="secure.user" [uiParams]="{user_id: 9}">
+          <md-icon>account_circle</md-icon> Super d
+        </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</ju-v3-sub-pannel>
