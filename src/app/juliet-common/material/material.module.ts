@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MdButtonModule, MdSelectModule, MdSidenavModule, MdIconModule, MdProgressBarModule, MdInputModule, MdTooltipModule, MdMenuModule } from '@angular/material';
-import { MdProgressSpinnerModule, MdSnackBarModule,MdToolbarModule } from '@angular/material';
+import { MdProgressSpinnerModule, MdSnackBarModule, MdToolbarModule, MdAutocompleteModule } from '@angular/material';
+
 
 
 
@@ -16,7 +17,8 @@ let modules = [
   MdTooltipModule,
   MdProgressSpinnerModule,
   MdSnackBarModule,
-  MdToolbarModule
+  MdToolbarModule,
+  MdAutocompleteModule
 ];
 
 @NgModule({

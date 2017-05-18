@@ -1,3 +1,4 @@
+import { JulietRightsService } from './../../services/juliet-rights.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainSidenavComponent implements OnInit {
 
-  constructor() { }
+  private _isAdmin: boolean = false;
+
+  constructor(private rights: JulietRightsService) {
+    rights.can_admin_juliet().subscribe((canAdmin) => this._isAdmin = canAdmin);
+  }
 
   ngOnInit() {
   }

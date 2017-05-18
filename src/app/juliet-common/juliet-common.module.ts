@@ -1,3 +1,4 @@
+import { SeoUrlPipe } from './pipes/seo-url.pipe';
 import { JulietMaterialModule } from './material/material.module';
 import { JulietCommonHelperService } from './services/juliet-common-helper.service';
 import { JuV3BluePannelComponent } from './components/_exports/ju-v3-blue-pannel/ju-v3-blue-pannel.component';
@@ -41,13 +42,13 @@ import { LayoutPaddingDirective } from './directives/layout-padding.directive';
   ],
   exports: [
     JuV3PannelComponent, V3PannelTitle, JuV3SubPannelComponent, JuV3TabComponent, EnumKeysPipe, JuV3HeadingComponent, FilterPipe, CountPipe,
-    SplashComponent, JuV3BluePannelComponent
+    SplashComponent, JuV3BluePannelComponent, SeoUrlPipe
   ],
   declarations: [
     JulietCommonComponent, AuthComponent, LoadingComponent, LoginComponent, SecureComponent,
     GoComponent, JuV3PannelComponent, V3PannelTitle, JuV3SubPannelComponent, JuV3TabComponent, EnumKeysPipe,
     JuV3HeadingComponent, FilterPipe, CountPipe, UnauthorizedComponent, SplashComponent, JuV3BluePannelComponent,
-    LayoutMarginDirective,LayoutPaddingDirective
+    LayoutMarginDirective,LayoutPaddingDirective, SeoUrlPipe
   ],
   providers: [
     JulietAPIService, JulietRightsService, JulietCommonHelperService

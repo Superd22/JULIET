@@ -1,3 +1,4 @@
+import { ShipsModule } from './../ships/ships.module';
 import { StarsComponent } from './components/rank-big/stars/stars.component';
 import { RankSelectorComponent } from './components/rank-selector/rank-selector.component';
 import { RankBigComponent } from './components/rank-big/rank-big.component';
@@ -26,6 +27,7 @@ import { JulietMaterialModule } from './../juliet-common/material/material.modul
     }),
     TagsModule,
     FormsModule,
+    ShipsModule,
   ],
   providers: [JulietUserService],
   declarations: [

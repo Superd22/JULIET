@@ -4,10 +4,10 @@
     <h2>Fiche Administrative</h2>
     <em>Car je sais tout de toiiii.</em>
   </div>
-  <div *ngIf="user && user.id" fxLayout="column">
+  <div *ngIf="user && user.id" fxLayout="row" fxLayoutWrap>
 
-    <ju-v3-sub-pannel class="user-section" fxLayout fxLayoutWrapLayoutPadding LayoutMargin>
-      <ju-user-rank-big fxFlex="100" [rank]="user.rank" (rank)="rankChanged($event)" [user]="user" fxFlex="100"></ju-user-rank-big>
+    <ju-v3-sub-pannel class="user-section" fxLayout fxLayoutWrap LayoutPadding LayoutMargin fxFlex="100">
+      <ju-user-rank-big fxFlex="100" [rank]="user.rank" (rank)="rankChanged($event)" [user]="user"></ju-user-rank-big>
     </ju-v3-sub-pannel>
     
     <ju-v3-sub-pannel class="user-section" fxFlex="100" LayoutPadding LayoutMargin>
@@ -34,7 +34,9 @@
     </ju-v3-sub-pannel>
 
 
-    <div class="user-section" fxFlex="30" fxFlex.sm="100" fxLayoutMargin fxLayoutPadding></div>
+    <div class="user-section" fxFlex.gt-sm="30" fxFlex="100" LayoutMargin fxLayoutPadding>
+      <ju-my-ships [userId]="user.id_forum"></ju-my-ships>
+    </div>
 
     <div class="user-section" fxFlex fxFlex.sm="100" fxLayoutMargin fxLayoutPadding></div>
 
