@@ -42,18 +42,18 @@ export class JulietCommonHelperService {
   }
 
   /**
- * Closes the main sidenav
- */
+  * Closes the main sidenav  
+  */
   public closeSideNav() {
-    if(this.sideNav) this.sideNav.close();
+    if (this.sideNav) this.sideNav.close();
   }
 
   public toggleSideNav() {
-    if(this.sideNav) this.sideNav.toggle();
+    if (this.sideNav) this.sideNav.toggle();
   }
 
   public openSideNav() {
-    if(this.sideNav) this.sideNav.open();
+    if (this.sideNav) this.sideNav.open();
   }
 
   /**

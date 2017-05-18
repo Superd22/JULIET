@@ -1,3 +1,4 @@
+import { JulietUserService } from './../../../user/services/juliet-user.service';
 import { Observable } from 'rxjs/Observable';
 import { AUser } from './../../../user/interfaces/a-user';
 import { JulietShipsService } from './../../services/juliet-ships.service';

@@ -6,13 +6,13 @@ export interface AUser {
     id: number,
     fleet: JuWing,
     grade: number | ARank,
-    prenom?: String,
-    handle?: String,
-    nom?: String;
+    prenom?: string,
+    handle?: string,
+    nom?: string;
     squad?: number;
-    callsign?: String;
-    description?: String;
-    pending: Boolean;
+    callsign?: string;
+    description?: string;
+    pending: boolean;
     activite?: number;
     notif?: any;
 }

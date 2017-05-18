@@ -4,7 +4,16 @@
     <h2>Hangar</h2>
     <em>Gestion de flotte universelle</em>
   </div>
+  <ju-v3-heading layoutPadding layoutMargin fxLayout *ngIf="currentUser && _user">
+    <button md-button disabled>Hangar de </button>
+    <button md-button uiSref="secure.user" [uiParams]="{user_id: (_userId > 0 && _userId != currentUser.id_forum) ? _userId : null}">
+    <md-icon>account_circle</md-icon> {{_user.pseudo}}
+    </button>
+
+    <button *ngIf="_userId != currentUser.id_forum && _userId > 0" md-button color="primary" uiSref="secure.Hangar" style="margin-left: auto;">Voir mon Hangar</button>
+  </ju-v3-heading>
+
+  <div fxLayout fxLayoutWrap LayoutMargin>
+    <ju-my-ships [hangar]="hangar" *ngIf="hangar" fxFlex="35"></ju-my-ships>
+  </div>
 </ju-v3-pannel>
-<div fxLayout fxLayoutWrap LayoutMargin>
-  <ju-my-ships [hangar]="hangar" *ngIf="hangar" fxFlex="35"></ju-my-ships>
-</div>

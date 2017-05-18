@@ -11,6 +11,7 @@ import { ShipsComponent } from './ships.component';
 import { HangarComponent } from './components/hangar/hangar.component';
 import { MyShipsComponent } from './components/my-ships/my-ships.component';
 import { AShipLabelComponent } from './components/my-ships/a-ship-label/a-ship-label.component';
+import { MainViewComponent } from './components/main-view/main-view.component';
 
 @NgModule({
   imports: [
@@ -25,7 +26,7 @@ import { AShipLabelComponent } from './components/my-ships/a-ship-label/a-ship-l
     }),
   ],
   providers: [JulietShipsService],
-  declarations: [ShipsComponent, HangarComponent, MyShipsComponent, AShipLabelComponent],
+  declarations: [ShipsComponent, HangarComponent, MyShipsComponent, AShipLabelComponent, MainViewComponent],
   exports: [MyShipsComponent],
 })
 export class ShipsModule { }
