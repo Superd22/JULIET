@@ -2,6 +2,13 @@
 display:block;
 .ship-wrapper {
     position:relative;
+    transition:1s;
+    &.active {
+        .ship {
+            box-shadow: 0px 0px 30px 1px rgba(0, 0, 0, 0.81), 0px 0px 4px 1px rgba(0, 199, 255, 0.81), inset 0px 0px 70px rgba(160, 207, 218, 0.91);
+            border: 2px solid #c2eef9;
+        }
+    }
     .remove,.validate {
         position: absolute;
         z-index: 2;
@@ -23,8 +30,8 @@ display:block;
     &:hover {
         .remove, .validate {opacity:1;}
     }
-}
-.ship {
+
+    .ship {
     background: rgba(29,43,54,0.73);
     border-radius: 1.2px;
     box-shadow: 0px 0px 30px rgba(0,0,0,0.81), inset 0px 0px 70px rgba(110,131,136,0.47);
@@ -40,6 +47,7 @@ display:block;
     padding: 5px;
     flex-direction: column;
     display: flex;
+    cursor:pointer;
     &.unsaved {
         &:before {
             content: '';
@@ -111,6 +119,8 @@ display:block;
         }
     }
 }
+}
+
 }
 
 @keyframes pulse-busy {

@@ -14,6 +14,11 @@
   </ju-v3-heading>
 
   <div fxLayout fxLayoutWrap LayoutMargin>
-    <ju-my-ships [hangar]="hangar" *ngIf="hangar" fxFlex="35"></ju-my-ships>
+    <div fxFlex="35" fxFlex.lt-sm="100" LayoutPadding>
+      <ju-my-ships [hangar]="hangar" *ngIf="hangar" (activeShip)="setActiveShip($event)"></ju-my-ships>
+    </div>
+    <div fxFlex LayoutPadding style="position: relative; z-index: 2;">
+      <ju-ship-single [ship]="activeShip" fxFlex></ju-ship-single>
+    </div>
   </div>
 </ju-v3-pannel>

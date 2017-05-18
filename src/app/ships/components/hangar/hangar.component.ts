@@ -1,3 +1,5 @@
+import { SingleShipViewverComponent } from './../single/single.component';
+import { AShip } from './../../interfaces/a-ship';
 import { Transition } from '@uirouter/angular';
 import { JulietUserService } from './../../../user/services/juliet-user.service';
 import { AUser } from './../../../user/interfaces/a-user';
@@ -22,6 +24,7 @@ export class HangarComponent implements OnInit {
   @Input("user")
   public _user: AUser;
   public currentUser: AUser;
+  public activeShip: AShip;
 
   constructor(protected api: JulietShipsService, private userAPI: JulietUserService, private trans: Transition) {
     this.handleUser();
@@ -35,6 +38,10 @@ export class HangarComponent implements OnInit {
     });
 
 
+  }
+
+  public setActiveShip(ship: AShip) {
+    this.activeShip = ship;
   }
 
   ngOnInit() {
