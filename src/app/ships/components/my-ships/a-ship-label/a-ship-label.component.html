@@ -1,13 +1,15 @@
 <div *ngIf="ship" class="ship-wrapper" [ngClass]="{active:isActive()}">
-  <button md-icon-button color="warn" class="remove" (click)="deleteShip()" mdTooltip="Supprimer ce vaisseau" >
+  <div class="buttons" *ngIf="canAdmin">
+    <button md-icon-button color="warn" class="remove" (click)="deleteShip()" mdTooltip="Supprimer ce vaisseau">
         <md-icon>remove_forever</md-icon>
  </button>
- <button md-icon-button color="accent" class="validate" (click)="changeName()" *ngIf="isUnsaved()" mdTooltip="Valider le changement de nom">
+    <button md-icon-button color="accent" class="validate" (click)="changeName()" *ngIf="isUnsaved()" mdTooltip="Valider le changement de nom">
         <md-icon>done</md-icon>
  </button>
+  </div>
   <div class="ship" [ngClass]="{unsaved: isUnsaved() && !busy, busy:busy}" (click)="setActive()">
     <span class="ship-name">
-      <input type='text' [(ngModel)]="ship.name"  placeholder="Donner un nom à votre vaisseau" [disabled]="busy">
+      <input type='text' [(ngModel)]="ship.name"  placeholder="Donner un nom à votre vaisseau" [disabled]="busy || !canAdmin">
     </span>
     <span class="ship-type">{{shipType.name}}</span>
     <div class="ship-ico">

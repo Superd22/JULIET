@@ -41,7 +41,7 @@ import { JulietMaterialModule } from './../juliet-common/material/material.modul
     TagsIndexComponent, TagListComponent, ExcludeTagsPipe,
   ],
   exports: [
-    OwnerComponent,
+    OwnerComponent, TagListComponent, ExcludeTagsPipe, ATagComponent
   ],
   providers: [TagsService]
 })

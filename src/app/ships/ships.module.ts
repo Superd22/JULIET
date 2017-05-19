@@ -1,3 +1,5 @@
+import { NgxPaginationModule } from 'ngx-pagination';
+import { TagsModule } from './../tags/tags.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { JulietShipsService } from './services/juliet-ships.service';
@@ -28,6 +30,8 @@ import { AlignShipIcoDirective } from './directives/align-ship-ico.directive';
     FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
+    TagsModule,
+    NgxPaginationModule,
     UIRouterModule.forChild({
       states: STATES,
     }),

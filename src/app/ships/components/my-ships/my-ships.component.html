@@ -4,7 +4,7 @@
   </ju-v3-heading>
 
   <div *ngIf="hangar">
-    <ju-a-ship-label *ngFor="let ship of hangar.ships" [ship]="ship" (onDelete)="deleteShip($event)"></ju-a-ship-label>
+    <ju-a-ship-label *ngFor="let ship of hangar.ships" [ship]="ship" (onDelete)="deleteShip($event)" [edit]="hangar.canAdmin"></ju-a-ship-label>
   </div>
 
   <md-input-container LayoutMargin class="ship-add">

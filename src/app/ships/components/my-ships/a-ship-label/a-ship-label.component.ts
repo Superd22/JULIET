@@ -19,6 +19,8 @@ export class AShipLabelComponent implements OnInit {
   @Output("onDelete")
   private _deleteEmitter: EventEmitter<AShip> = new EventEmitter();
   private busy: boolean = false;
+  @Input("edit")
+  public canAdmin: boolean = false;
 
   private nameCtrl: FormControl;
 
@@ -55,8 +57,8 @@ export class AShipLabelComponent implements OnInit {
   }
 
   public deleteShip() {
-    if(confirm("Êtes vos sur de vouloir supprimer (définitivement) ce vaisseau ?"))
-    this._deleteEmitter.emit(this.ship);
+    if (confirm("Êtes vos sur de vouloir supprimer (définitivement) ce vaisseau ?"))
+      this._deleteEmitter.emit(this.ship);
   }
 
   public changeName() {
