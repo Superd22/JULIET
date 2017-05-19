@@ -7,7 +7,7 @@
         <md-icon>done</md-icon>
  </button>
   </div>
-  <div class="ship" [ngClass]="{unsaved: isUnsaved() && !busy, busy:busy}" (click)="setActive()">
+  <div class="ship align-parent" [ngClass]="{unsaved: isUnsaved() && !busy, busy:busy}" (click)="setActive()">
     <span class="ship-name">
       <input type='text' [(ngModel)]="ship.name"  placeholder="Donner un nom à votre vaisseau" [disabled]="busy || !canAdmin">
     </span>
