@@ -39,11 +39,11 @@ export class SingleComponent implements OnInit {
   private tagTypes = TagsType;
   private dialogRef;
 
-  private addingUser:String;
+  private addingUser: String;
 
-  private hasR:Boolean = false;
+  private hasR: Boolean = false;
 
-  constructor(private Tags: TagsService, private rights:JulietRightsService, private helper: JulietCommonHelperService) {
+  constructor(private Tags: TagsService, private rights: JulietRightsService, private helper: JulietCommonHelperService, public state: StateService) {
     this.tagsList0 = Tags.buildCompleter();
     this.tagsList1 = Tags.buildCompleter();
     this.userList = helper.buildCompleter("username", `Common/UserSearch/?f=`);
@@ -60,10 +60,10 @@ export class SingleComponent implements OnInit {
   public displayTagType() {
     let type = this.tag.type;
     let cat = this.tag.cat;
-    
-    if(cat != "tag") return cat;
-    if(type == 0) return "";
-    if(this.tagTypes[type]) return this.tagTypes[type];
+
+    if (cat != "tag") return cat;
+    if (type == 0) return "";
+    if (this.tagTypes[type]) return this.tagTypes[type];
 
     return type;
   }
@@ -91,33 +91,39 @@ export class SingleComponent implements OnInit {
   }
 
   public assignTagToSelf() {
-    this.Tags.assignTag(this.tagBackup);
+    this.Tags.assignTag(this.tagBackup).subscribe(() => {
+      /** @todo find a better way */
+      this.state.reload();
+    });
   }
 
   public addUser($event) {
     this.Tags.assignTag(this.tag, Number($event.originalObject.user_id)).subscribe();
   }
 
-  public removeUser(userId:Number, $event) {
-    this.Tags.unAssignTag(this.tag, Number(userId)).subscribe();
-    if($event) $event.stopPropagation();
+  public removeUser(userId: Number, $event) {
+    this.Tags.unAssignTag(this.tag, Number(userId)).subscribe(() => {
+      /** @todo find a better way */
+      this.state.reload();
+    });
+    if ($event) $event.stopPropagation();
   }
 
   public deleteTag() {
-    if(confirm("Êtes vous sur de vouloir supprimer ce T.A.G ?")) {
+    if (confirm("Êtes vous sur de vouloir supprimer ce T.A.G ?")) {
       this.doDelete();
     }
   }
 
-  public isEditable(doNotcheckR?:Boolean) {
+  public isEditable(doNotcheckR?: Boolean) {
     let test = this.tag && this.tag.cat == "tag";
 
-    if(doNotcheckR) return test;
+    if (doNotcheckR) return test;
     return test && this.hasR;
   }
 
   public hasTagChanged() {
-    return this.helper.hasChangedObj(this.tag, this.tagBackup, ["name", "img","restricted","type","cat","parent","rights_from"]);
+    return this.helper.hasChangedObj(this.tag, this.tagBackup, ["name", "img", "restricted", "type", "cat", "parent", "rights_from"]);
   }
 
   ngOnInit() {
@@ -137,7 +143,7 @@ export class SingleComponent implements OnInit {
           );
 
           // Get rights
-          if(this.isEditable(true)) this.rights.user_can("USER_CAN_ADMIN_TAG", 0, this.tag.id).subscribe(
+          if (this.isEditable(true)) this.rights.user_can("USER_CAN_ADMIN_TAG", 0, this.tag.id).subscribe(
             data => this.hasR = data.data
           );
         }
