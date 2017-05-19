@@ -95,11 +95,11 @@ export class SingleComponent implements OnInit {
   }
 
   public addUser($event) {
-    this.Tags.assignTag(this.tag, Number($event.originalObject.user_id));
+    this.Tags.assignTag(this.tag, Number($event.originalObject.user_id)).subscribe();
   }
 
   public removeUser(userId:Number, $event) {
-    this.Tags.unAssignTag(this.tag, Number(userId));
+    this.Tags.unAssignTag(this.tag, Number(userId)).subscribe();
     if($event) $event.stopPropagation();
   }
 

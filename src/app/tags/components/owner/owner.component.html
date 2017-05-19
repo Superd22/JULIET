@@ -1,9 +1,8 @@
-<h3>T.A.G.S Personels</h3>
+<h3>T.A.G.S</h3>
 <ju-tags-list #tagList [tags]="tagsList" [mainList]="false" [userHas]="true" [editable]="currentUserCan" (take)="tagTaken($event)"
-  (unTake)="tagUnTaken($event)"></ju-tags-list>
+  (unTake)="tagUnTaken($event)" [busy]="busy"></ju-tags-list>
 
 <div style="clear:both;"></div>
-
 <div class='suggested' fxLayout fxLayoutWrap fxFlex="100" *ngIf="api.tags && tagsList" [hidden]="!tagList.filter.name || filteredTags.count == 0">
   <hr />
   <h3 fxFlex="100">Suggestions</h3>

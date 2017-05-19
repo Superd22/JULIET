@@ -127,9 +127,9 @@ export class TagsService {
    */
   public assignTag(tag: ATag, target?: Number) {
     if (!target) target = 0;
-    this.api.get(this.apiNamespace + "affect", { id: tag.id, user_id: target }).subscribe(
+    return this.api.get(this.apiNamespace + "affect", { id: tag.id, user_id: target }).map(
       data => {
-        if (this.state.is("secure.Tags.view")) this.state.reload();
+        if(!data.error) return data.data;
       }
     )
   }
@@ -142,9 +142,9 @@ export class TagsService {
    */
   public unAssignTag(tag: ATag, target?: Number) {
     if (!target) target = 0;
-    this.api.post(this.apiNamespace + "unaffect", { id: tag.id, user_id: target }).subscribe(
+    return this.api.post(this.apiNamespace + "unaffect", { id: tag.id, user_id: target }).map(
       data => {
-        if (this.state.is("secure.Tags.view")) this.state.reload();
+        if(!data.error) return data.data;
       }
     )
   }

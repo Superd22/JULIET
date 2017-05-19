@@ -41,7 +41,7 @@
     <div class="user-section" fxFlex fxFlex.sm="100" fxLayoutMargin fxLayoutPadding></div>
 
     <ju-v3-sub-pannel class="user-section" fxFlex="100" LayoutMargin *ngIf="user">
-      <ju-tag-owner [userId]="user.id_forum"></ju-tag-owner>
+      <ju-tag-owner [user]="user"></ju-tag-owner>
     </ju-v3-sub-pannel>
   </div>
   <div *ngIf="canEdit && hasMadeChanges() && !busy" fxFlex="100">

@@ -9,7 +9,7 @@ import { ListComponent } from './../components/list/list.component';
 import { TagsComponent } from './../components/main/tags.component';
 import { Ng2StateDeclaration } from '@uirouter/angular';
 
-export let tags:Ng2StateDeclaration[]= [
+export let tags: Ng2StateDeclaration[] = [
     {
         name: "secure.Tags",
         url: "Tags/",
@@ -34,6 +34,9 @@ export let tags:Ng2StateDeclaration[]= [
         name: "secure.Tags.index.owner",
         url: "self",
         component: OwnerComponent,
+        resolve: [
+            { token: 'userId', resolveFn: resolveOwnerId }
+        ]
     },
     {
         name: "secure.Tags.index.search",
@@ -61,10 +64,14 @@ export let tags:Ng2StateDeclaration[]= [
     },
 ]
 
-export function resolveTagName(trans:Transition) {
+export function resolveOwnerId() {
+    return 0;
+}
+
+export function resolveTagName(trans: Transition) {
     return decodeURIComponent(trans.params().tag_name);
 }
 
-export function resolveTagCat(trans:Transition) {
+export function resolveTagCat(trans: Transition) {
     return trans.params().cat_name;
 }
