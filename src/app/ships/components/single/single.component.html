@@ -5,16 +5,26 @@
 
   <div *ngIf="hangarAPI.currentSingleShipType | async as type" layoutMargin layoutPadding>
     <div *ngIf="hangarAPI.currentSingleShip.ship as ship">
-      <div class="ship-title" fxLayout="column" fxFlex>
-        <input type="text" [(ngModel)]="hangarAPI.currentSingleShip.ship.name" class="ship-name">
-        <em>SIBV-{{ship.id}} <span class="ship-type">{{type.name}}</span></em>
-        <div fxLayout="row">
-          <button md-button uiSref="secure.user" [uiParams]="{user_id: 9}">
-          <md-icon>account_circle</md-icon> Super d
-        </button>
+
+      <div class="ship-title align-parent">
+        <div style="position:relative; z-index:1" fxLayout="column" fxFlex>
+          <input type="text" [(ngModel)]="hangarAPI.currentSingleShip.ship.name" class="ship-name">
+          <em>SIBV-{{ship.id}} <span class="ship-type">{{type.name}}</span></em>
+          <div fxLayout="row">
+            <button md-button uiSref="secure.user" [uiParams]="{user_id: 9}">
+              <md-icon>account_circle</md-icon> Super d
+            </button>
+          </div>
+        </div>
+        <div class="ship-ico">
+          <img src="{{type.ico}}" JuAlignShipIco>
         </div>
       </div>
 
+      <ju-v3-sub-pannel fxLayout="column" fxLayoutWrap>
+        <ju-tag-owner [ship]="ship"></ju-tag-owner>
+      </ju-v3-sub-pannel>
+      
     </div>
   </div>
 </ju-v3-sub-pannel>

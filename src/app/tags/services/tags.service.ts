@@ -1,3 +1,5 @@
+import { AShip } from './../../ships/interfaces/a-ship';
+import { ShipModel } from './../../ships/interfaces/ship-model';
 import { Observable } from 'rxjs/Observable';
 import { StateService } from '@uirouter/angular';
 import { CompleterData } from 'ng2-completer';
@@ -43,6 +45,18 @@ export class TagsService {
   public getUserTags(user?: Number): Observable<ATag[]> {
     if (!user) user = 0;
     return this.api.post(this.apiNamespace + "tags_getphp", { user: user }).map(
+      data => data.data
+    );
+  }
+
+  public getShipTags(ship: AShip): Observable<ATag[]> {
+    return this.api.post(this.apiNamespace + "getTagsAShip", { ship: ship }).map(
+      data => data.data
+    );
+  }
+
+  public getShipModelTags(ship: ShipModel): Observable<ATag[]> {
+    return this.api.post(this.apiNamespace + "getTagsShipModel", { shipModel: ship }).map(
       data => data.data
     );
   }
@@ -106,23 +120,66 @@ export class TagsService {
     )
   }
 
+  /**
+   * Method to assign a tag to an user
+   * @see assignTagShip
+   * @see assignTagShipModel
+   */
   public assignTag(tag: ATag, target?: Number) {
     if (!target) target = 0;
-    this.api.get(this.apiNamespace + "affect", { id: tag.id, user_id: target }).subscribe(
+    return this.api.get(this.apiNamespace + "affect", { id: tag.id, user_id: target }).map(
       data => {
-        if (this.state.is("secure.Tags.view")) this.state.reload();
+        if(!data.error) return data.data;
       }
     )
   }
 
+
+  /**
+   * Method to assign a tag to an user
+   * @see unAssignTagShip
+   * @see unAssignTagShipModel
+   */
   public unAssignTag(tag: ATag, target?: Number) {
     if (!target) target = 0;
-    this.api.get(this.apiNamespace + "unaffect", { id: tag.id, user_id: target }).subscribe(
+    return this.api.post(this.apiNamespace + "unaffect", { id: tag.id, user_id: target }).map(
       data => {
-        if (this.state.is("secure.Tags.view")) this.state.reload();
+        if(!data.error) return data.data;
       }
     )
   }
+
+  public assignTagShip(tag: ATag, ship: AShip) {
+    return this.api.post(this.apiNamespace + "affectShip", { id: tag.id, ship: ship }).map(
+      data => {
+        if(!data.error) return data.data;
+      }
+    )
+  }
+  public unAssignTagShip(tag: ATag, ship: AShip) {
+    return this.api.post(this.apiNamespace + "unaffectShip", { id: tag.id, ship: ship }).map(
+      data => {
+        if(!data.error) return data.data;
+      }
+    )
+  }
+
+
+  public assignTagShipModel(tag: ATag, ship: ShipModel) {
+    return this.api.post(this.apiNamespace + "affectShipModel", { id: tag.id, shipModel: ship }).map(
+      data => {
+        if(!data.error) return data.data;
+      }
+    )
+  }
+  public unAssignTagShipModel(tag: ATag, ship: ShipModel) {
+    return this.api.get(this.apiNamespace + "unaffectShip", { id: tag.id, shipModel: ship }).map(
+      data => {
+        if(!data.error) return data.data;
+      }
+    )
+  }
+
 
   public updateTag(tag: ATag) {
     let t = Object.assign({}, tag);

@@ -13,17 +13,20 @@ export class TagListComponent implements OnInit {
 
   @Input("tags")
   /* The main tags list */
-  public tagList:ATag[];
+  public tagList: ATag[];
 
   @Input()
   /* Defined in a-tag.component.ts  */
-  protected mainList:Boolean = true;
-  @Input() 
+  protected mainList: Boolean = true;
+  @Input()
   /* Defined in a-tag.component.ts  */
-  protected editable:Boolean = false;
-  @Input() 
+  protected editable: Boolean = false;
+  @Input()
   /* Defined in a-tag.component.ts  */
-  protected userHas:Boolean = false;
+  protected userHas: Boolean = false;
+  @Input()
+  public busy: boolean = false;
+
 
   @Output("take")
   protected takeChange = new EventEmitter();
@@ -66,11 +69,11 @@ export class TagListComponent implements OnInit {
     else this.filter.type = this.filter.type == this.tagType[filterName] ? null : this.tagType[filterName];
   }
 
-  protected takeTag(tag:ATag) {
+  protected takeTag(tag: ATag) {
     this.takeChange.emit(tag);
   }
 
-  protected unTakeTag(tag:ATag) {
+  protected unTakeTag(tag: ATag) {
     this.unTakeChange.emit(tag);
   }
 
@@ -78,12 +81,12 @@ export class TagListComponent implements OnInit {
     checks if there is a tag with a name strictly matching the search 
     @return if there is a strict name match 
   */
-  public searchHasExactMatch():Boolean {
-    return this.tagList && this.tagList.filter( 
-      tag => tag.name && 
-             this.filter.name && 
-             tag.name.toLowerCase() === this.filter.name.toLowerCase().trim()
-      ).length > 0
+  public searchHasExactMatch(): Boolean {
+    return this.tagList && this.tagList.filter(
+      tag => tag.name &&
+        this.filter.name &&
+        tag.name.toLowerCase() === this.filter.name.toLowerCase().trim()
+    ).length > 0
   }
 
 }
