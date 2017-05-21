@@ -18,7 +18,6 @@ export class JulietShipsService {
   private apiNamespace = "Ships/";
   /** all the ship types that exists */
   private shipTypes: ShipModel[] = [];
-
   /** the currently selected ship in any view */
   private selectedShip: AShip = null;
 
