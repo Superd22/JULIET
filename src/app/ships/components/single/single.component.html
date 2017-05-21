@@ -4,27 +4,41 @@
   </ju-v3-heading>
 
   <div *ngIf="hangarAPI.currentSingleShipType | async as type" layoutMargin layoutPadding>
-    <div *ngIf="hangarAPI.currentSingleShip.ship as ship">
+    <div *ngIf="ship">
 
-      <div class="ship-title align-parent">
-        <div style="position:relative; z-index:1" fxLayout="column" fxFlex>
-          <input type="text" [(ngModel)]="hangarAPI.currentSingleShip.ship.name" class="ship-name">
-          <em>SIBV-{{ship.id}} <span class="ship-type">{{type.name}}</span></em>
-          <div fxLayout="row">
-            <button md-button uiSref="secure.user" [uiParams]="{user_id: 9}">
+      <ju-v3-sub-pannel fxLayout="column" fxLayoutWrap style="padding-bottom:10px;margin-bottom:20px;">
+        <div class="ship-title align-parent">
+          <div style="position:relative; z-index:1" fxLayout="column" fxFlex>
+            <input type="text" [(ngModel)]="hangarAPI.currentSingleShip.ship.name" class="ship-name">
+            <em>SIBV-{{ship.id}} <span class="ship-type">{{type.name}}</span></em>
+            <div fxLayout="row">
+              <button md-button uiSref="secure.user" [uiParams]="{user_id: 9}">
               <md-icon>account_circle</md-icon> Super d
             </button>
+            </div>
+          </div>
+          <div class="ship-ico">
+            <img src="{{type.ico}}" JuAlignShipIco>
           </div>
         </div>
-        <div class="ship-ico">
-          <img src="{{type.ico}}" JuAlignShipIco>
+
+        <div fxLayout="column" fxLayoutWrap>
+          <ju-tag-owner [ship]="ship"></ju-tag-owner>
         </div>
-      </div>
+      </ju-v3-sub-pannel>
 
       <ju-v3-sub-pannel fxLayout="column" fxLayoutWrap>
-        <ju-tag-owner [ship]="ship"></ju-tag-owner>
+        <ju-v3-heading fxFlex="100" layoutPadding layoutMargin>
+          <h4>Templates</h4>
+        </ju-v3-heading>
+
+        <p infoText layoutMargin><b><md-icon inlineIcon>info</md-icon>Que sont les templates ?</b> Les templates sont un moyen facile de représenter la diversité 
+        d'options qu'offre Star Citizen dans la conception de ses vaisseaux. Plutôt que d'indiquer un seul vaisseau, vous allez pouvoir indiquez toutes les configurations utiles de votre vaisseau.
+        <br />
+        Par exemple, vous pouvez créer un template "Exploration" pour l'équipement d'exploration de votre RSI Constellation, ainsi qu'un template "Combat" séparé pour l'équipement
+        d'exploration.</p>
       </ju-v3-sub-pannel>
-      
+
     </div>
   </div>
 </ju-v3-sub-pannel>

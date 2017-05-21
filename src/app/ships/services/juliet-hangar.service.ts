@@ -19,7 +19,6 @@ export class JulietHangarService {
     this._currentSingleShip = ship;
   }
 
-
   public get currentSingleShipType(): Observable<ShipModel> {
     if (this._currentSingleShip == null || this._currentSingleShip.ship == null) return null;
     return this.api.getShipType(this._currentSingleShip.ship);

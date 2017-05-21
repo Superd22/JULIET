@@ -17,16 +17,16 @@ import { Component, OnInit, Input, OnChanges, SimpleChanges, ViewChild, ViewChil
 export class SingleShipViewverComponent implements OnInit, OnChanges, AfterViewInit {
   @Input()
   public ship: AShip;
-  @Input()
+  @Input("shipId")
   private _shipID: number;
-  @Input()
+  @Input("shipComponent")
   public shipComponent: AShipLabelComponent;
   public currentUserCan = false;
 
   constructor(private api: JulietShipsService, public hangarAPI: JulietHangarService, public tagsAPI: TagsService, public rights: JulietRightsService) { }
 
   ngOnInit() {
-    console.log("TEST");
+    this.initShip();
   }
 
 
@@ -34,11 +34,12 @@ export class SingleShipViewverComponent implements OnInit, OnChanges, AfterViewI
   }
 
   private initShip() {
+    if (this.shipComponent) this.ship = this.shipComponent.ship;
     if (this.ship) this._shipID = this.ship.id;
-
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes);
+    if ('ship' in changes || 'shipComponent' in changes || 'shipId' in changes)
+      this.initShip();
   }
 }

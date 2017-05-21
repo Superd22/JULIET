@@ -20,6 +20,7 @@ import { ShipModelWithoutParentPipe } from './pipes/ship-model-without-parent.pi
 import { SingleShipViewverComponent } from './components/single/single.component';
 import { JulietHangarService } from "./services/juliet-hangar.service";
 import { AlignShipIcoDirective } from './directives/align-ship-ico.directive';
+import { SingleShipVariantsComponent } from './components/single/single-ship-variants/single-ship-variants.component';
 
 @NgModule({
   imports: [
@@ -39,7 +40,8 @@ import { AlignShipIcoDirective } from './directives/align-ship-ico.directive';
   declarations: [ HangarComponent, MyShipsComponent, AShipLabelComponent, MainViewComponent,
     AdminTypesComponent, HangarAdminTypesEditorComponent, HangarAdminATypeComponent, ShipModelWithoutParentPipe,
     SingleShipViewverComponent,
-    AlignShipIcoDirective],
+    AlignShipIcoDirective,
+    SingleShipVariantsComponent],
   exports: [MyShipsComponent],
 })
 export class ShipsModule { }

@@ -10,6 +10,26 @@
     margin: 14px !important;
 }
 
+[inlineIcon] {
+    line-height: 1rem;
+    height: 1rem !important;
+    width: 1rem !important;
+    vertical-align: middle;
+    vertical-align: middle;
+    &.mat-icon {
+        font-size: 1rem !important;
+    }
+}
+
+[infoText] {
+    text-align: justify;
+    font-size: 0.9rem;
+    line-height: 0.9rem;
+    padding: 10px 10px;
+    background: #2b3640;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
 .md-menu-content {
     & > div {
         overflow: hidden;
