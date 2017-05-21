@@ -50,6 +50,9 @@
     </div>
   </div>
 
+
+  <ju-tag-owner [shipModel]="shipForm" *ngIf="shipForm.id > 0"></ju-tag-owner>
+
   <md-progress-bar mode="indeterminate" *ngIf="busy"></md-progress-bar>
 
 </ju-v3-sub-pannel>

@@ -9,6 +9,10 @@
     <span fxFlex>{{tag.name}}</span>
 
 
+    <button md-icon-button *ngIf="shouldDisplayParent()" class="linked-tag" mdTooltip="Tag hérité de {{heritedTarget() | async}}" (click)="heritedFrom($event)">
+        <md-icon>link</md-icon>
+    </button>
+
     <button md-icon-button color="warn" class="removetag" *ngIf="shouldDisplayUnTake()" (click)="unTakeTag($event)" mdTooltip="Enlever ce T.A.G">
         <md-icon>clear</md-icon>
     </button>

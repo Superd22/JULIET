@@ -9,7 +9,6 @@ import { UIRouterModule } from '@uirouter/angular';
 import { JulietMaterialModule } from './../juliet-common/material/material.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ShipsComponent } from './ships.component';
 import { HangarComponent } from './components/hangar/hangar.component';
 import { MyShipsComponent } from './components/my-ships/my-ships.component';
 import { AShipLabelComponent } from './components/my-ships/a-ship-label/a-ship-label.component';
@@ -37,7 +36,7 @@ import { AlignShipIcoDirective } from './directives/align-ship-ico.directive';
     }),
   ],
   providers: [JulietShipsService, JulietHangarService],
-  declarations: [ShipsComponent, HangarComponent, MyShipsComponent, AShipLabelComponent, MainViewComponent,
+  declarations: [ HangarComponent, MyShipsComponent, AShipLabelComponent, MainViewComponent,
     AdminTypesComponent, HangarAdminTypesEditorComponent, HangarAdminATypeComponent, ShipModelWithoutParentPipe,
     SingleShipViewverComponent,
     AlignShipIcoDirective],
