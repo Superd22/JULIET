@@ -17,7 +17,8 @@ export function RouterConfig(router: UIRouter, injector: Injector) {
         parts.path = parts.path.substr(1);
 
         let match = router.urlRouter.match(parts);
-        match.rule.handler(match,parts,router);
+        
+        if(match) match.rule.handler(match,parts,router);
     }
 
 
