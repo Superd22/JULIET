@@ -5,7 +5,7 @@ import { Injector } from "@angular/core";
 import * as vis from '@uirouter/visualizer';
 
 export function RouterConfig(router: UIRouter, injector: Injector) {
-    
+
     /**
      * For some reason, on html5 loading the router doesn't trigger a state change
      * This function checks the current url, and re-sync ui-router.
@@ -17,8 +17,7 @@ export function RouterConfig(router: UIRouter, injector: Injector) {
         parts.path = parts.path.substr(1);
 
         let match = router.urlRouter.match(parts);
-        
-        if(match) match.rule.handler(match,parts,router);
+        if (match) match.rule.handler(match.match, parts, router);
     }
 
 
@@ -28,5 +27,5 @@ export function RouterConfig(router: UIRouter, injector: Injector) {
     if (!environment.production) vis.visualizer(router);
 
     const juCommon = injector.get(JulietCommonHelperService);
-    router.transitionService.onBefore({ to: "**" }, () =>{juCommon.closeSideNav()});
+    router.transitionService.onBefore({ to: "**" }, () => { juCommon.closeSideNav() });
 }
