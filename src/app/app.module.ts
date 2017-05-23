@@ -30,6 +30,10 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     MainSidenavComponent,
   ],
   imports: [
+    UIRouterModule.forRoot({
+      config: RouterConfig,
+      //useHash: !environment.production,
+    }),
     BrowserModule,
     JulietMaterialModule,
     FormsModule,
@@ -48,10 +52,6 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     UserModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
-    UIRouterModule.forRoot({
-      config: RouterConfig,
-      useHash: !environment.production,
-    }),
   ],
   providers: [],
   bootstrap: [AppComponent]
