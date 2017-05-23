@@ -31,6 +31,8 @@ export class SingleComponent implements OnInit {
   } = { parentSelect: null, rightsFromSelect: null };
 
   public shouldTransf: ATag = null;
+  public busy: boolean = false;
+
 
   private tagsList0;
   private tagsList1;
@@ -68,6 +70,10 @@ export class SingleComponent implements OnInit {
     return type;
   }
 
+  public isBusy() {
+    return this.busy;
+  }
+
   public doMigrate() {
     this.Tags.migrateTag(this.tagBackup, this.shouldTransf);
   }
@@ -77,7 +83,11 @@ export class SingleComponent implements OnInit {
   }
 
   public updateTag() {
-    this.Tags.updateTag(this.tag);
+    this.busy = true;
+    this.Tags.updateTag(this.tag).subscribe(() => {
+      this.busy = false;
+      this.generateBackUp();
+    });
   }
 
   public setParent($event) {
@@ -126,14 +136,17 @@ export class SingleComponent implements OnInit {
     return this.helper.hasChangedObj(this.tag, this.tagBackup, ["name", "img", "restricted", "type", "cat", "parent", "rights_from"]);
   }
 
+  protected generateBackUp() {
+    this.tagBackup = Object.assign({}, this.tag);
+  }
+
   ngOnInit() {
     if (this._tag) this.tag = this._tag;
     else
       this.Tags.getTag(this._tagName, this._tagCat).subscribe(
         data => {
           this.tag = data;
-          this.tagBackup = Object.assign({}, data);
-
+          this.generateBackUp();
           this.Tags.getTagNameById(data.parent).subscribe(
             data => data ? this.tagInfo.parentSelect = data : null
           );
