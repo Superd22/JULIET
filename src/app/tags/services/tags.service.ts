@@ -82,7 +82,7 @@ export class TagsService {
     if (tag.id) var _tagId = tag.name;
     else var _tagId = tag;
 
-    return this.api.get(this.apiNamespace + "tags_get_singlephp", { name: _tagId, category: _cat }).map(
+    return this.api.get(this.apiNamespace + "get", { name: _tagId, cat: _cat, all:true }).map(
       data => data.data
     );
   }

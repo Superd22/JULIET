@@ -8,6 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { TagsType } from './../../enums/tags-type.enum';
 import { CompleterService, CompleterData, CompleterItem, RemoteData } from "ng2-completer";
 import { StateService } from "@uirouter/angular";
+import { TagTarget } from '../../interfaces/tag-target';
 
 @Component({
   selector: 'tag-single',
@@ -32,6 +33,12 @@ export class SingleComponent implements OnInit {
 
   public shouldTransf: ATag = null;
   public busy: boolean = false;
+
+  public tagTargetUser:TagTarget[] = [];
+  public tagTargetShip:TagTarget[] = [];
+  public tagTargetShipType:TagTarget[] = [];
+  public tagTargetShipVariant:TagTarget[] = [];
+  public tagTargetRessources:TagTarget[] = [];
 
 
   private tagsList0;
@@ -140,12 +147,29 @@ export class SingleComponent implements OnInit {
     this.tagBackup = Object.assign({}, this.tag);
   }
 
+  /**
+   * Used to generate our arrays by filtering tag.target
+   */
+  protected generateTargetArrays() {
+    this.tag.targets.forEach( (target) => {
+      switch(target.type) {
+        case "user": this.tagTargetUser.push(target);  break;
+        case "ship":this.tagTargetShip.push(target);  break;
+        case "ship_type": this.tagTargetShipType.push(target);  break;
+        case "ship_variant": this.tagTargetShipVariant.push(target);  break;
+        case "ressource": this.tagTargetRessources.push(target);  break;
+      }
+    });
+  }
+
   ngOnInit() {
     if (this._tag) this.tag = this._tag;
     else
       this.Tags.getTag(this._tagName, this._tagCat).subscribe(
         data => {
           this.tag = data;
+
+          this.generateTargetArrays();
           this.generateBackUp();
           this.Tags.getTagNameById(data.parent).subscribe(
             data => data ? this.tagInfo.parentSelect = data : null
