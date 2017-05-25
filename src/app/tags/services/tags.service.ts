@@ -82,7 +82,7 @@ export class TagsService {
     if (tag.id) var _tagId = tag.name;
     else var _tagId = tag;
 
-    return this.api.get(this.apiNamespace + "tags_get_singlephp", { name: _tagId, category: _cat }).map(
+    return this.api.get(this.apiNamespace + "get", { name: _tagId, cat: _cat, all:true }).map(
       data => data.data
     );
   }
@@ -129,7 +129,7 @@ export class TagsService {
     if (!target) target = 0;
     return this.api.get(this.apiNamespace + "affect", { id: tag.id, user_id: target }).map(
       data => {
-        if(!data.error) return data.data;
+        if (!data.error) return data.data;
       }
     )
   }
@@ -144,7 +144,7 @@ export class TagsService {
     if (!target) target = 0;
     return this.api.post(this.apiNamespace + "unaffect", { id: tag.id, user_id: target }).map(
       data => {
-        if(!data.error) return data.data;
+        if (!data.error) return data.data;
       }
     )
   }
@@ -152,14 +152,14 @@ export class TagsService {
   public assignTagShip(tag: ATag, ship: AShip) {
     return this.api.post(this.apiNamespace + "affectShip", { id: tag.id, ship: ship }).map(
       data => {
-        if(!data.error) return data.data;
+        if (!data.error) return data.data;
       }
     )
   }
   public unAssignTagShip(tag: ATag, ship: AShip) {
     return this.api.post(this.apiNamespace + "unaffectShip", { id: tag.id, ship: ship }).map(
       data => {
-        if(!data.error) return data.data;
+        if (!data.error) return data.data;
       }
     )
   }
@@ -168,29 +168,26 @@ export class TagsService {
   public assignTagShipModel(tag: ATag, ship: ShipModel) {
     return this.api.post(this.apiNamespace + "affectShipModel", { id: tag.id, shipModel: ship }).map(
       data => {
-        if(!data.error) return data.data;
+        if (!data.error) return data.data;
       }
     )
   }
   public unAssignTagShipModel(tag: ATag, ship: ShipModel) {
     return this.api.get(this.apiNamespace + "unaffectShip", { id: tag.id, shipModel: ship }).map(
       data => {
-        if(!data.error) return data.data;
+        if (!data.error) return data.data;
       }
     )
   }
 
 
-  public updateTag(tag: ATag) {
+  public updateTag(tag: ATag): Observable<any> {
     let t = Object.assign({}, tag);
     t.restricted = Number(tag.restricted);
     t.count = null;
     t.INFO = null;
-    this.api.get(this.apiNamespace + "update", t).subscribe(
-      data => {
-        if (this.state.is("secure.Tags.view") && !this.state.is("secure.Tags.view", { tag_name: tag.name }))
-          this.state.go("secure.Tags.view", { tag_name: tag.name });
-      }
+    return this.api.get(this.apiNamespace + "update", t).map(
+      data => data
     )
   }
 

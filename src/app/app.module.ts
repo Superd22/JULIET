@@ -23,6 +23,7 @@ import { FlexLayoutModule } from '@angular/flex-layout'
 import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { MalihuScrollbarModule } from 'ngx-malihu-scrollbar';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     UserModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
+    MalihuScrollbarModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]

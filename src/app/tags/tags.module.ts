@@ -1,5 +1,5 @@
 import { TagsIndexComponent } from './components/main/tag-index.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { SingleComponent } from './components/single/single.component';
 import { ATagComponent } from './components/_common/a-tag/a-tag.component';
@@ -19,6 +19,10 @@ import { Ng2CompleterModule } from "ng2-completer";
 import { TagListComponent } from './components/_common/tag-list/tag-list.component';
 import { ExcludeTagsPipe } from './pipes/exclude-tags.pipe';
 import { JulietMaterialModule } from './../juliet-common/material/material.module';
+import { TagOwnerListComponent } from './components/single/tag-owner-list/tag-owner-list.component';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { TagOwnerTargetComponent } from './components/single/tag-owner-list/tag-owner-target/tag-owner-target.component';
+import { TargetListFilterPipe } from './pipes/target-list-filter.pipe';
 
 
 
@@ -30,15 +34,16 @@ import { JulietMaterialModule } from './../juliet-common/material/material.modul
     UIRouterModule.forChild({
       states: STATES,
     }),
-    
+    NgxDatatableModule,
     FlexLayoutModule,
     NgxPaginationModule,
     FormsModule,
+    ReactiveFormsModule,
     Ng2CompleterModule
   ],
   declarations: [
     TagsComponent, OwnerComponent, SearchComponent, ListComponent, ATagComponent, SingleComponent,
-    TagsIndexComponent, TagListComponent, ExcludeTagsPipe,
+    TagsIndexComponent, TagListComponent, ExcludeTagsPipe, TagOwnerListComponent, TagOwnerTargetComponent, TargetListFilterPipe,
   ],
   exports: [
     OwnerComponent, TagListComponent, ExcludeTagsPipe, ATagComponent
