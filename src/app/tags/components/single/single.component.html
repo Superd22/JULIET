@@ -30,44 +30,27 @@
             (click)="doMigrate()"> Transferer {{tagBackup.name}} vers {{shouldTransf.name}} </button>
         </ju-v3-heading>
 
-        <ju-tag-owner-list [tag]="tag">
-          
-        </ju-tag-owner-list>
-
-        <div fxFlex="100" layoutPadding>
-
-          <div layoutMargin fxFlex="100" fxLayout fxLayoutWrap fxLayoutAlign="space-between">
-            <div *ngFor="let user of tagTargetUser | paginate: { itemsPerPage: 20,  currentPage: page, totalItems: total }" fxFlex="25" fxFlex.sm="50"
-              fxFlex.xs="100" style="padding:0px 5px">
-              <div class="aUser" uiSref="secure.user" [uiParams]="{user_id: user.id}">
-                <img src="{{user.img}}"> <span>{{user.name}}</span>
-                <button md-icon-button color="warn" class="removetag" *ngIf="isEditable()" mdTooltip="Enlever ce T.A.G" (click)="removeUser(user.id, $event)">
-                  <md-icon>clear</md-icon>
-                </button>
-              </div>
-          </div>
-        </div>
-
-        <pagination-controls (pageChange)="page = $event" autoHide="true"></pagination-controls>
+        <ju-tag-owner-list fxFlex="100" [tag]="tag"></ju-tag-owner-list>
+        <hr />
         <button md-button (click)="assignTagToSelf()" color="accent">Prendre ce TAG</button>
         <ng2-completer *ngIf="isEditable()" fxFlex="50" fxFlex.sm="100" placeholder="Ajouter le tag à un joueur" [(ngModel)]="addingUser"
           [dataService]="userList" [minSearchLength]="0" (selected)="addUser($event)"></ng2-completer>
-    </div>
     <md-progress-bar mode="indeterminate" *ngIf="isBusy()"></md-progress-bar>
     </ju-v3-sub-pannel>
   </div>
   <div fxFlex="30" fxFlex.xs="100">
     <ju-v3-sub-pannel *ngIf="tag" layoutMargin fxLayout fxLayoutWrap>
-      <md-toolbar fxFlex="100">Informations supplémentaires</md-toolbar>
+      <md-toolbar fxFlex="100"><span>Informations supplémentaires</span></md-toolbar>
       <div layoutPadding fxLayout="row" fxFlex="100" fxLayoutWrap *ngIf="isEditable()">
         <div fxFlex="100" fxLayout fxLayoutWrap fxLayoutGap="10px">
-          <ng2-completer  [disabled]="isBusy()" fxFlex="50" fxFlex.sm="100" placeholder="Parent" [(ngModel)]="tagInfo.parentSelect" [dataService]="tagsList0"
-            [minSearchLength]="0" (selected)="setParent($event)"></ng2-completer>
-            <ng2-completer fxFlex  [disabled]="isBusy()" placeholder="Droits depuis" [(ngModel)]="tagInfo.rightsFromSelect" [dataService]="tagsList1" [minSearchLength]="0"
-              (selected)="setRights($event)"></ng2-completer>
+          <ng2-completer [disabled]="isBusy()" fxFlex="50" fxFlex.sm="100" placeholder="Parent" [(ngModel)]="tagInfo.parentSelect"
+            [dataService]="tagsList0" [minSearchLength]="0" (selected)="setParent($event)"></ng2-completer>
+          <ng2-completer fxFlex [disabled]="isBusy()" placeholder="Droits depuis" [(ngModel)]="tagInfo.rightsFromSelect" [dataService]="tagsList1"
+            [minSearchLength]="0" (selected)="setRights($event)"></ng2-completer>
         </div>
 
-        <md-checkbox name="restricted" [(ngModel)]="tag.restricted" fxFlex="100" style="margin-top: 20px;" [disabled]="isBusy()" ngDefaultControl> T.A.G Restreint </md-checkbox>
+        <md-checkbox name="restricted" [(ngModel)]="tag.restricted" fxFlex="100" style="margin-top: 20px;" [disabled]="isBusy()"
+          ngDefaultControl> T.A.G Restreint </md-checkbox>
         <md-select style="margin-top: 35px;" fxFlex='100' placeholder="Type de T.A.G" [(ngModel)]="tag.type" ngDefaultControl>
           <md-option *ngFor="let type of tagTypes | enumKeys" [value]="type.key" [disabled]="type.key < 0 || isBusy()"> {{ type.value }} </md-option>
         </md-select>
@@ -79,9 +62,9 @@
 
   <div fxFlex="100"></div>
   <button layoutMargin md-raised-button (click)="updateTag()" color="primary" *ngIf="isEditable() && hasTagChanged()" [disabled]="isBusy()"><md-icon>done</md-icon> Mettre à jour le tag</button>
-  <button layoutMargin md-button color="warn" mdTooltip="Supprimer définitivement ce tag" tooltip-position="below" (click)="deleteTag()"  [disabled]="isBusy()"
-    *ngIf="isEditable()">
+  <button layoutMargin md-button color="warn" mdTooltip="Supprimer définitivement ce tag" tooltip-position="below" (click)="deleteTag()"
+    [disabled]="isBusy()" *ngIf="isEditable()">
     <md-icon>delete_forever</md-icon> Supprimer le tag</button>
 
-    </div>
+  </div>
 </ju-v3-pannel>

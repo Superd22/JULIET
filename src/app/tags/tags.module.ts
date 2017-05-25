@@ -22,6 +22,7 @@ import { JulietMaterialModule } from './../juliet-common/material/material.modul
 import { TagOwnerListComponent } from './components/single/tag-owner-list/tag-owner-list.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { TagOwnerTargetComponent } from './components/single/tag-owner-list/tag-owner-target/tag-owner-target.component';
+import { TargetListFilterPipe } from './pipes/target-list-filter.pipe';
 
 
 
@@ -41,7 +42,7 @@ import { TagOwnerTargetComponent } from './components/single/tag-owner-list/tag-
   ],
   declarations: [
     TagsComponent, OwnerComponent, SearchComponent, ListComponent, ATagComponent, SingleComponent,
-    TagsIndexComponent, TagListComponent, ExcludeTagsPipe, TagOwnerListComponent, TagOwnerTargetComponent,
+    TagsIndexComponent, TagListComponent, ExcludeTagsPipe, TagOwnerListComponent, TagOwnerTargetComponent, TargetListFilterPipe,
   ],
   exports: [
     OwnerComponent, TagListComponent, ExcludeTagsPipe, ATagComponent
