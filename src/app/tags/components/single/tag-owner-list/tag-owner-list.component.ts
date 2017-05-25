@@ -13,16 +13,16 @@ export class TagOwnerListComponent implements OnInit {
 
   /** tag for this owner/target list */
   @Input("tag")
-  protected tag: ATag;
+  public tag: ATag;
   /** output of our current filters */
-  protected filteredTargets: {
+  public filteredTargets: {
     count: number,
     original: TagTarget[]
   } = { count: null, original: null };
   /** columns for the table */
-  protected columns;
+  public columns;
   /** current display filters */
-  protected filters = {
+  public filters = {
     type: null,
     name: null,
   };
@@ -30,7 +30,7 @@ export class TagOwnerListComponent implements OnInit {
   /** enum of human readable types */
   protected prettyTargetTypes = PrettyTagTargetTypes;
   /** the types that exists in the current targets */
-  protected availableTypes: string[] = [];
+  public availableTypes: string[] = [];
 
   constructor(protected mScrollbarService:MalihuScrollbarService) { }
 

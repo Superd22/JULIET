@@ -21,7 +21,7 @@
     </md-menu>
 </md-toolbar>
 <ngx-datatable LayoutPadding style="max-height:500px" [rows]="tag.targets | targetListFilter: filters.name: filters.type | Count: filteredTargets "
-    [columns]="columns" [columnMode]="force" [headerHeight]="50" [footerHeight]="50" [rowHeight]="35" [limit]="10">
+    [columns]="columns" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="35" [limit]="10">
     <!-- NOM  -->
     <ngx-datatable-column name="name">
         <ng-template let-column="column" ngx-datatable-header-template>
