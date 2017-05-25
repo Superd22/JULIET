@@ -16,7 +16,14 @@ export class AppComponent {
   constructor(protected juCommon: JulietCommonHelperService, protected mScrollbarService: MalihuScrollbarService) { }
 
   ngOnInit() {
-    setTimeout(() => this.mScrollbarService.initScrollbar('.mat-sidenav-container', { axis: 'y', theme: 'dark-thick', scrollInertia:0, scrollButtons: { enable: true } }),500);
+    $(window).on("load resize", () => {
+      var winWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+      if (winWidth > 640) {
+        this.mScrollbarService.initScrollbar('.mat-sidenav-container', { axis: 'y', theme: 'dark-thick', scrollInertia: 0, scrollButtons: { enable: true } });
+      } else {
+        this.mScrollbarService.destroy('.mat-sidenav-container');
+      }
+    });
     this.juCommon.registerSideNav(this.sideNav);
   }
 

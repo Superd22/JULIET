@@ -2,12 +2,35 @@
 @import 'assets/material/theme';
 @import 'assets/main';
 
+$break-small: 450px;
+
+body{
+    margin: 0;
+}
+.app-layout{
+    min-height:100vh;
+}
+
+.mat-sidenav-content{    
+    padding: 0px 30px;
+    flex:1;
+    @media screen and (max-width: $break-small) {
+        padding: 0px;
+    }
+}
+
 [layoutPadding] {
     padding: 5px 20px;
+    @media screen and (max-width: $break-small) {
+        padding: 4px;
+    }
 } 
 
 [layoutMargin] {
-    margin: 14px !important;
+    margin: 14px !important;    
+    @media screen and (max-width: $break-small) {
+        margin:4px !important;
+    }
 }
 
 .md-menu-content {
