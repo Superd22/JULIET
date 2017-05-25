@@ -1,3 +1,6 @@
+import { BaseUserInfo } from './../../../user/interfaces/base-user-info';
+import { FormControl } from '@angular/forms';
+import { JulietUserService } from './../../../user/services/juliet-user.service';
 import { JulietCommonHelperService } from './../../../juliet-common/services/juliet-common-helper.service';
 import { JulietRightsService } from './../../../juliet-common/services/juliet-rights.service';
 import { Observable } from 'rxjs/Observable';
@@ -27,36 +30,46 @@ export class SingleComponent implements OnInit {
   public tag: ATag;
   public tagBackup: ATag;
   public tagInfo: {
-    parentSelect: String,
-    rightsFromSelect: String,
+    parentSelect: string,
+    rightsFromSelect: string,
   } = { parentSelect: null, rightsFromSelect: null };
 
+  /** holds a matching tag for a change of name */
   public shouldTransf: ATag = null;
+  /** if we're loading something */
   public busy: boolean = false;
-
-  public tagTargetUser:TagTarget[] = [];
-  public tagTargetShip:TagTarget[] = [];
-  public tagTargetShipType:TagTarget[] = [];
-  public tagTargetShipVariant:TagTarget[] = [];
-  public tagTargetRessources:TagTarget[] = [];
-
 
   private tagsList0;
   private tagsList1;
-  private userList;
+
+  /** form controller for the user search */
+  private userCtrl: FormControl;
+  /** current feteched users for the search */
+  protected fetchedUsers: Observable<BaseUserInfo[]> = null;
+  /** the current input for adding user */
+  protected userAdd: string;
 
   private tagTypes = TagsType;
   private dialogRef;
 
-  private addingUser: String;
+  /** if current user has admin rights on this tag */
+  private hasR: boolean = false;
+  /** wether or not we already fetched our current rights */
+  private fetchedRights: boolean = false;
 
-  private hasR: Boolean = false;
-
-  constructor(private Tags: TagsService, private rights: JulietRightsService, private helper: JulietCommonHelperService, public state: StateService) {
+  constructor(private Tags: TagsService, private rights: JulietRightsService, private helper: JulietCommonHelperService, public state: StateService,
+    protected userAPI: JulietUserService) {
     this.tagsList0 = Tags.buildCompleter();
     this.tagsList1 = Tags.buildCompleter();
-    this.userList = helper.buildCompleter("username", `Common/UserSearch/?f=`);
-    // this.apiNamespace + `tags_searchphp?f=${term}`
+
+    this.generateUserCtrl();
+  }
+
+  private generateUserCtrl() {
+    this.userCtrl = new FormControl();
+    this.fetchedUsers = this.userCtrl.valueChanges
+      .startWith(null)
+      .switchMap(name => this.userAPI.searchUserByName(name));
   }
 
   public nameChanged(newName) {
@@ -108,20 +121,29 @@ export class SingleComponent implements OnInit {
   }
 
   public assignTagToSelf() {
+    this.busy = true;
     this.Tags.assignTag(this.tagBackup).subscribe(() => {
-      /** @todo find a better way */
-      this.state.reload();
+        this.fetchTagData(true);
+        this.busy = false;
     });
   }
 
   public addUser($event) {
-    this.Tags.assignTag(this.tag, Number($event.originalObject.user_id)).subscribe();
+    this.busy = true;
+    this.Tags.assignTag(this.tag, Number($event.user_id)).subscribe(
+      () => {
+        this.fetchTagData(true);
+        this.userAdd = "";
+        this.busy = false;
+      }
+    );
   }
 
   public removeUser(userId: Number, $event) {
+    this.busy = true;
     this.Tags.unAssignTag(this.tag, Number(userId)).subscribe(() => {
-      /** @todo find a better way */
-      this.state.reload();
+        this.fetchTagData(true);
+        this.busy = false;
     });
     if ($event) $event.stopPropagation();
   }
@@ -148,43 +170,39 @@ export class SingleComponent implements OnInit {
   }
 
   /**
-   * Used to generate our arrays by filtering tag.target
+   * Fetch the data for this single tag
+   * @param force_tag force the updating of the tag if we already have one cached.
+   * @param force_right force the updating of the rights if we already have some cached.
    */
-  protected generateTargetArrays() {
-    this.tag.targets.forEach( (target) => {
-      switch(target.type) {
-        case "user": this.tagTargetUser.push(target);  break;
-        case "ship":this.tagTargetShip.push(target);  break;
-        case "ship_type": this.tagTargetShipType.push(target);  break;
-        case "ship_variant": this.tagTargetShipVariant.push(target);  break;
-        case "ressource": this.tagTargetRessources.push(target);  break;
+  private fetchTagData(force_tag?: boolean, force_right?: boolean) {
+    if(this.tag == null || force_tag)
+    this.Tags.getTag(this._tagName, this._tagCat).subscribe(
+      data => {
+        this.tag = data;
+
+        this.generateBackUp();
+        this.Tags.getTagNameById(data.parent).subscribe(
+          data => data ? this.tagInfo.parentSelect = data : null
+        );
+
+        this.Tags.getTagNameById(data.rights_from).subscribe(
+          data => data ? this.tagInfo.rightsFromSelect = data : null
+        );
+
+        // Get rights
+        if (this.isEditable(true) && (!this.fetchedRights || force_right)) this.rights.user_can("USER_CAN_ADMIN_TAG", 0, this.tag.id).subscribe(
+          data => {
+            this.hasR = data.data;
+            this.fetchedRights = true;
+          }
+        );
       }
-    });
+    );
   }
 
   ngOnInit() {
     if (this._tag) this.tag = this._tag;
-    else
-      this.Tags.getTag(this._tagName, this._tagCat).subscribe(
-        data => {
-          this.tag = data;
-
-          this.generateTargetArrays();
-          this.generateBackUp();
-          this.Tags.getTagNameById(data.parent).subscribe(
-            data => data ? this.tagInfo.parentSelect = data : null
-          );
-
-          this.Tags.getTagNameById(data.rights_from).subscribe(
-            data => data ? this.tagInfo.rightsFromSelect = data : null
-          );
-
-          // Get rights
-          if (this.isEditable(true)) this.rights.user_can("USER_CAN_ADMIN_TAG", 0, this.tag.id).subscribe(
-            data => this.hasR = data.data
-          );
-        }
-      );
+    else this.fetchTagData();
   }
 
 }

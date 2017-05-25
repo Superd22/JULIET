@@ -1,5 +1,5 @@
 import { TagsIndexComponent } from './components/main/tag-index.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { SingleComponent } from './components/single/single.component';
 import { ATagComponent } from './components/_common/a-tag/a-tag.component';
@@ -38,6 +38,7 @@ import { TargetListFilterPipe } from './pipes/target-list-filter.pipe';
     FlexLayoutModule,
     NgxPaginationModule,
     FormsModule,
+    ReactiveFormsModule,
     Ng2CompleterModule
   ],
   declarations: [
