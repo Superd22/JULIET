@@ -29,6 +29,11 @@
           <button md-button *ngIf="shouldTransf" mdTooltip="{{shouldTransf.name}} existe déjà, clickez ici pour tout transférer." tooltip-position="below"
             (click)="doMigrate()"> Transferer {{tagBackup.name}} vers {{shouldTransf.name}} </button>
         </ju-v3-heading>
+
+        <ju-tag-owner-list [tag]="tag">
+          
+        </ju-tag-owner-list>
+
         <div fxFlex="100" layoutPadding>
 
           <div layoutMargin fxFlex="100" fxLayout fxLayoutWrap fxLayoutAlign="space-between">

@@ -20,6 +20,8 @@ import { TagListComponent } from './components/_common/tag-list/tag-list.compone
 import { ExcludeTagsPipe } from './pipes/exclude-tags.pipe';
 import { JulietMaterialModule } from './../juliet-common/material/material.module';
 import { TagOwnerListComponent } from './components/single/tag-owner-list/tag-owner-list.component';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { TagOwnerTargetComponent } from './components/single/tag-owner-list/tag-owner-target/tag-owner-target.component';
 
 
 
@@ -31,7 +33,7 @@ import { TagOwnerListComponent } from './components/single/tag-owner-list/tag-ow
     UIRouterModule.forChild({
       states: STATES,
     }),
-    
+    NgxDatatableModule,
     FlexLayoutModule,
     NgxPaginationModule,
     FormsModule,
@@ -39,7 +41,7 @@ import { TagOwnerListComponent } from './components/single/tag-owner-list/tag-ow
   ],
   declarations: [
     TagsComponent, OwnerComponent, SearchComponent, ListComponent, ATagComponent, SingleComponent,
-    TagsIndexComponent, TagListComponent, ExcludeTagsPipe, TagOwnerListComponent,
+    TagsIndexComponent, TagListComponent, ExcludeTagsPipe, TagOwnerListComponent, TagOwnerTargetComponent,
   ],
   exports: [
     OwnerComponent, TagListComponent, ExcludeTagsPipe, ATagComponent
