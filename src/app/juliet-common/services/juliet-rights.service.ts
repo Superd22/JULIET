@@ -2,16 +2,28 @@ import { Observable } from 'rxjs/Observable';
 import { JulietAPIService } from './juliet-api.service';
 import { Injectable } from '@angular/core';
 import { RemoteData } from 'ng2-completer';
+import { BehaviorSubject } from "rxjs/BehaviorSubject";
 
 @Injectable()
 export class JulietRightsService {
 
-  public userIsAuthorized: Boolean = false;
-  public userIsAdmin: Boolean = false;
-  public userId: Number = 0;
-  private _authorizePacket;
+  public userIsAuthorized: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  public userIsAdmin: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  public userId: number = 0;
+  private _authorizePacket: BehaviorSubject<any> = new BehaviorSubject(null);
 
-  constructor(public api: JulietAPIService) { }
+  constructor(public api: JulietAPIService) {
+
+    api.onErrorPacket.subscribe( (errorPacket) => {
+      if(errorPacket !== null && errorPacket.error === true) {
+        if(errorPacket.msg == "USER_NOT_LOGGED_IN") {
+          this.userIsAuthorized.next(false);
+          this._authorizePacket.next(errorPacket);
+        }
+      }
+    })
+
+  }
 
   public user_can(right: String, userId?: Number, target?: Number) {
     if (!userId) userId = 0;
@@ -21,18 +33,29 @@ export class JulietRightsService {
     );
   }
 
-  public can_see_juliet() {
-    return this.userIsAuthorized === true ? Observable.of(this._authorizePacket) : this.user_can("USER_CAN_SEE_JULIET").map(
-      data => {
-        if (data.data === true) {
-          this.userIsAuthorized = true;
-          this._authorizePacket = data;
+  public can_see_juliet(force?:boolean):BehaviorSubject<boolean> {
+
+    if (this.userIsAuthorized.getValue() === false || force === true) {
+       this.user_can("USER_CAN_SEE_JULIET").subscribe( (data) => {
+        if(data.data === true) {
+          this.userIsAuthorized.next(true);
+          this._authorizePacket.next(data);
           this.hydrateUserRights();
         }
+        else this.userIsAuthorized.next(false);
+       });
+    }
 
-        return data;
-      }
-    );
+    return this.userIsAuthorized;
+
+  }
+
+  public get authorizePacket():BehaviorSubject<any> {
+    return this._authorizePacket;
+  }
+
+  public set authorizePacket(authorizePacket) {
+    this._authorizePacket.next(authorizePacket);
   }
 
   public hydrateUserRights() {
@@ -46,10 +69,18 @@ export class JulietRightsService {
     );
   }
 
-  public can_admin_juliet(): Observable<boolean> {
-    return this.userIsAdmin === true ? Observable.of(true) : this.user_can("USER_IS_ADMIN").map(
-      data => this.userIsAdmin = data.data
-    );
+  /**
+   * Check if the current user is an admin
+   * @param force force update
+   * @return a BehaviorSubject, true = admin | false = non admin.
+   */
+  public can_admin_juliet(force?:boolean): BehaviorSubject<boolean> {
+    if(this.userIsAdmin.getValue() === false || force === true)
+      this.user_can("USER_IS_ADMIN").subscribe(
+        data => this.userIsAdmin.next(data.data)
+      );
+
+    return this.userIsAdmin;
   }
 
   public doLogin(pseudo: string, password: string): Observable<any> {
