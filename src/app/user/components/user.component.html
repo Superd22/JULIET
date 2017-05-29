@@ -9,8 +9,22 @@
     <ju-v3-sub-pannel class="user-section" fxLayout fxLayoutWrap LayoutPadding LayoutMargin fxFlex="100">
       <ju-user-rank-big fxFlex="100" [rank]="user.rank" (rank)="rankChanged($event)" [user]="user"></ju-user-rank-big>
     </ju-v3-sub-pannel>
-    
+
     <ju-v3-sub-pannel class="user-section" fxFlex="100" LayoutPadding LayoutMargin>
+
+      <div fxLayout="column" fxLayoutWrap fxLayoutAlign="stretch flex-start">
+        <a [href]="'https://starcitizen.fr/Forum/memberlist.php?mode=viewprofile&u='+user.id_forum" target="_blank">
+        <button md-icon-button color="primary" mdTooltip="Profil Forum">
+         <md-icon>account_box</md-icon>
+        </button>
+        </a>
+        <a [href]="'https://robertsspaceindustries.com/citizens/'+userBackup.handle" target="_blank">
+        <button md-icon-button color="primary" mdTooltip="Profil RSI"><md-icon>language</md-icon></button>
+        </a>
+        <a [href]="'https://starcitizen.fr/Forum/ucp.php?i=pm&mode=compose&u='+user.id_forum" target="_blank">
+        <button md-icon-button color="primary" mdTooltip="M.P Forum"><md-icon>email</md-icon></button>
+        </a>
+      </div>
 
       <md-input-container>
         <input mdInput [(ngModel)]="user.handle" placeholder="Handle RSI" [disabled]="!canEdit" />
