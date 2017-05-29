@@ -1,31 +1,33 @@
-<div fxFlex="100" fxLayout="row" fxLayoutWrap class="toolbar" fxLayoutAlign="center">
-    <md-input-container fxFlex fxFlex.xs="100">
-        <input mdInput [(ngModel)]="filter.name">
-        <span md-prefix><md-icon>search</md-icon> </span>
-    </md-input-container>
-    <button fxFlex.sm="50" md-button [mdMenuTriggerFor]="filterMenu" aria-label="Open basic menu">Filtres</button>
-    <button fxFlex.sm="50" md-button [mdMenuTriggerFor]="typeMenu" aria-label="Open basic menu">Types</button>
-    <button md-button disabled>{{filteredTags.count}} {{filteredTags.count > 1 ? "résultats" : "résultat"}}</button>
-</div>
-<md-menu #filterMenu="mdMenu">
-    <button md-menu-item (click)='toggleFilter("restricted")'> <md-icon>{{iconForFilter('restricted')}}</md-icon> <span>Restreint</span></button>
-    <button md-menu-item disabled class="separator"></button>
-    <button md-menu-item (click)='toggleFilter("tag")'> <md-icon>{{iconForFilter('tag')}}</md-icon> <span>Normal</span></button>
-    <button md-menu-item (click)='toggleFilter("officiel")'> <md-icon>{{iconForFilter('officiel')}}</md-icon> <span>Officiel</span></button>
-    <button md-menu-item (click)='toggleFilter("competence")'> <md-icon>{{iconForFilter('competence')}}</md-icon> <span>Compétence</span></button>
-    <button md-menu-item (click)='toggleFilter("recompense")'> <md-icon>{{iconForFilter('recompense')}}</md-icon> <span>Récompense</span></button>
-</md-menu>
-<md-menu #typeMenu="mdMenu">
-    <button md-menu-item (click)='toggleCat("tag")'> <md-icon>{{iconForCat('tag')}}</md-icon> <span>Normal</span></button>
-    <button md-menu-item (click)='toggleCat("ship")'> <md-icon>{{iconForCat('ship')}}</md-icon> <span>Vaisseau</span></button>
-    <button md-menu-item (click)='toggleCat("rank")'> <md-icon>{{iconForCat('rank')}}</md-icon> <span>Grade</span></button>
-</md-menu>
-<md-progress-bar mode="indeterminate" color="accent" *ngIf="busy" fxFlex="100"></md-progress-bar>
-
-<div fxLayout fxLayoutWrap fxFlex="100" *ngIf="tagList">
-    <div #tagList fxFlex="20" fxFlex.xs='100' *ngFor="let tag of tagList | Filter: filter | Count: filteredTags | paginate: { itemsPerPage: 25,  currentPage: page, totalItems: totalFiltered }; let last = last">
-        <a-tag [tag]="tag" [mainList]="mainList" [editable]="editable" [userHas]="userHas" (unTake)="unTakeTag($event)" (take)="takeTag($event)"></a-tag>
+<div fxLayout="column">
+    <div fxFlex="100" fxLayout="row" fxLayoutWrap class="toolbar" fxLayoutAlign="center">
+        <md-input-container fxFlex.lt-sm="100">
+            <input mdInput [(ngModel)]="filter.name">
+            <span md-prefix><md-icon>search</md-icon> </span>
+        </md-input-container>
+        <button fxFlex.lt-sm="50" md-button [mdMenuTriggerFor]="filterMenu" aria-label="Open basic menu">Filtres</button>
+        <button fxFlex.lt-sm="50" md-button [mdMenuTriggerFor]="typeMenu" aria-label="Open basic menu">Types</button>
+        <button md-button disabled>{{filteredTags.count}} {{filteredTags.count > 1 ? "résultats" : "résultat"}}</button>
     </div>
-    <div fxFlex="100"></div>
-    <pagination-controls (pageChange)="page = $event" autoHide="true"></pagination-controls>
+    <md-menu #filterMenu="mdMenu">
+        <button md-menu-item (click)='toggleFilter("restricted")'> <md-icon>{{iconForFilter('restricted')}}</md-icon> <span>Restreint</span></button>
+        <button md-menu-item disabled class="separator"></button>
+        <button md-menu-item (click)='toggleFilter("tag")'> <md-icon>{{iconForFilter('tag')}}</md-icon> <span>Normal</span></button>
+        <button md-menu-item (click)='toggleFilter("officiel")'> <md-icon>{{iconForFilter('officiel')}}</md-icon> <span>Officiel</span></button>
+        <button md-menu-item (click)='toggleFilter("competence")'> <md-icon>{{iconForFilter('competence')}}</md-icon> <span>Compétence</span></button>
+        <button md-menu-item (click)='toggleFilter("recompense")'> <md-icon>{{iconForFilter('recompense')}}</md-icon> <span>Récompense</span></button>
+    </md-menu>
+    <md-menu #typeMenu="mdMenu">
+        <button md-menu-item (click)='toggleCat("tag")'> <md-icon>{{iconForCat('tag')}}</md-icon> <span>Normal</span></button>
+        <button md-menu-item (click)='toggleCat("ship")'> <md-icon>{{iconForCat('ship')}}</md-icon> <span>Vaisseau</span></button>
+        <button md-menu-item (click)='toggleCat("rank")'> <md-icon>{{iconForCat('rank')}}</md-icon> <span>Grade</span></button>
+    </md-menu>
+    <md-progress-bar mode="indeterminate" color="accent" *ngIf="busy" fxFlex="100"></md-progress-bar>
+
+    <div fxLayout fxLayoutWrap fxFlex="100" *ngIf="tagList">
+        <div #tagList fxFlex="20" fxFlex.xs='100' *ngFor="let tag of tagList | Filter: filter | Count: filteredTags | paginate: { itemsPerPage: 25,  currentPage: page, totalItems: totalFiltered }; let last = last">
+            <a-tag [tag]="tag" [mainList]="mainList" [editable]="editable" [userHas]="userHas" (unTake)="unTakeTag($event)" (take)="takeTag($event)"></a-tag>
+        </div>
+        <div fxFlex="100"></div>
+        <pagination-controls (pageChange)="page = $event" autoHide="true"></pagination-controls>
+    </div>
 </div>
