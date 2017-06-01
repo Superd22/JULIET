@@ -12,14 +12,14 @@
   </div>
 
 
-  <div fxFlex="50" fxLayout="column" layoutPadding style="margin-bottom:30px;">
+  <div fxFlex.gt-sm="50" fxFlex.lt-sm="100" fxLayout="column" layoutPadding style="margin-bottom:30px;">
 
-    <md-input-container fxFlex layoutMargin>
+    <md-input-container fxFlex="100" layoutMargin>
       <input mdInput [(ngModel)]="shipForm.ico" placeholder="URL de l'image">
       <md-hint>Url pour l'icone à afficher, en cas de pépin utilisez celle du "Pas de vaisseau"</md-hint>
     </md-input-container>
 
-    <md-input-container fxFlex layoutMargin>
+    <md-input-container fxFlex="100" layoutMargin>
       <input mdInput [(ngModel)]="shipForm.type" placeholder="Type du vaisseau" [mdAutocomplete]="auto" [formControl]="typeCtrl">
       <md-hint>Le type du vaisseau que vous ajoutez (n'hésitez pas à en rajouter vous même en tapant simplement ce que vous voulez)</md-hint>
     </md-input-container>
@@ -33,7 +33,7 @@
 
   </div>
 
-  <div fxFlex="50" fxLayout="column" layoutPadding >
+  <div fxFlex.gt-sm="50" fxFlex.lt-sm="100" fxLayout="column" layoutPadding >
     <md-select placeholder="Vaisseau parent" [(ngModel)]="shipForm.parent" layoutMargin mdTooltip="Vaisseau parent s'il s'agit d'une variante (eg: le 'parent' du RSI Hornet Ghost est le RSI Hornet)">
       <md-option [value]='0' selected>Pas de parent</md-option>
       <md-option *ngFor="let ship of shipTypes | shipModelWithoutParent" [value]="ship.id">{{ ship.name }}</md-option>

@@ -1,4 +1,5 @@
 import { HeritedFromTag } from "./herited";
+import { TagTarget } from './tag-target';
 
 export interface ATag {
     id:number;
@@ -11,5 +12,6 @@ export interface ATag {
     rights_from?:number;
     count?: any;
     INFO?: any;
+    targets:TagTarget[];
     herited_from:HeritedFromTag;
 }

@@ -7,6 +7,8 @@ import { MdSidenav } from '@angular/material';
 export class JulietCommonHelperService {
 
   protected sideNav: MdSidenav;
+  /** if we need to display tuto tooltips */
+  private _tutorialMod: boolean = false;
 
   constructor(private completerService: CompleterService, private api: JulietAPIService) { }
   /**
@@ -24,6 +26,21 @@ export class JulietCommonHelperService {
       if (a[pp] != b[pp]) return true;
     }
     return false;
+  }
+
+  /**
+   * @see _tutorialMod
+   * @return true for template mode, false otherwise.
+   */
+  public get isTutorial(): boolean {
+    return this._tutorialMod;
+  }
+
+  /**
+   * @param tutorial new value for tutorial mod
+   */
+  public set isTutorial(tutorial: boolean) {
+    this._tutorialMod = tutorial;
   }
 
   /**

@@ -28,14 +28,12 @@ export class LoginComponent implements OnInit {
           data => {
             this.busy = false;
 
-            if (data.data) {
+            if (data) {
               this.snackBar.open("Vous êtes maintenant connecté", null, { duration: 5000 });
               this.states.go(this._targetState);
               return;
             }
-
-            if (data.msg == "USER_NOT_LOGGED_IN")
-              this.snackBar.open("Impossible de vous connecter, verifiez vos identifiants.", null, { duration: 5000 });
+            else this.snackBar.open("Impossible de vous connecter, verifiez vos identifiants.", null, { duration: 5000 });
           }
         )
       }

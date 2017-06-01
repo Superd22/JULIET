@@ -1,0 +1,48 @@
+<div fxLayout="column">
+    <md-toolbar fxLayout="row" fxLayoutWrap fxFlex="100" LayoutPadding style="font-size: 1rem;">
+        <md-input-container>
+            <input type="text" [(ngModel)]="filters.name" mdInput placeholder="Recherche">
+        </md-input-container>
+
+        <button md-button color="primary" [mdMenuTriggerFor]="filterMenu">
+        Types
+    </button>
+
+        <md-menu #filterMenu="mdMenu">
+            <div md-menu-item *ngFor="let type of availableTypes" (click)='toggleFilter(type)'>
+                <md-checkbox [checked]="isFilterActivated(type)">{{prettyTargetTypes[type]}}</md-checkbox>
+            </div>
+
+            <div *ngIf="filters.type">
+                <hr>
+                <button md-menu-item (click)="resetFilters()"><md-icon>clear_all</md-icon> Reset</button>
+                <button md-menu-item (click)="invertFilters()"><md-icon>sync</md-icon> Inverser</button>
+            </div>
+
+        </md-menu>
+    </md-toolbar>
+    <ngx-datatable LayoutPadding style="max-height:500px" [rows]="tag.targets | targetListFilter: filters.name: filters.type | Count: filteredTargets "
+        [columns]="columns" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="35" [limit]="10">
+        <!-- NOM  -->
+        <ngx-datatable-column name="name">
+            <ng-template let-column="column" ngx-datatable-header-template>
+                Nom
+            </ng-template>
+            <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+                <strong *ngIf="row.type == 'user'">{{value}}</strong>
+                <strong *ngIf="row.type == 'ship'">{{value != '' ? value : "SIBV-"+row.id}}</strong>
+                <strong *ngIf="row.type == 'ship_type'">{{value}}</strong>
+            </ng-template>
+        </ngx-datatable-column>
+
+        <!-- TYPE  -->
+        <ngx-datatable-column name="type">
+            <ng-template let-column="column" ngx-datatable-header-template>
+                <span mdTooltip="Type de cible">Type</span>
+            </ng-template>
+            <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+                {{prettyTargetTypes[value]}}
+            </ng-template>
+        </ngx-datatable-column>
+    </ngx-datatable>
+</div>

@@ -12,7 +12,7 @@
             <input type="text" [(ngModel)]="hangarAPI.currentSingleShip.ship.name" class="ship-name">
             <em>SIBV-{{ship.id}} <span class="ship-type">{{type.name}}</span></em>
             <div fxLayout="row">
-              <button md-button uiSref="secure.user" [uiParams]="{user_id: 9}">
+              <button md-button uiSref="secure.user" [uiParams]="{user_id: ship.owner}">
               <md-icon>account_circle</md-icon> Super d
             </button>
             </div>

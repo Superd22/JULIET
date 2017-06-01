@@ -6,14 +6,16 @@
   </div>
 
   <div fxLayout fxLayoutWrap LayoutMargin>
-    <div fxFlex="35" LayoutPadding>
+    <div fxFlex.gt-sm="35" fxFlex.lt-sm="100" LayoutPadding>
       <ju-v3-sub-pannel fxLayoutWrap>
 
         <ju-v3-heading layoutPadding layoutMargin fxLayout fxFlex="100">
           <h3>Vaisseaux Existants</h3>
         </ju-v3-heading>
         <div class="ships-wraper">
-          <ju-hangar-admin-a-type fxFlex="100" *ngFor="let type of shipTypes" [type]="type" [(active)]="activeShip"></ju-hangar-admin-a-type>
+          <div fxLayout="column">
+            <ju-hangar-admin-a-type fxFlex="100" *ngFor="let type of shipTypes" [type]="type" [(active)]="activeShip"></ju-hangar-admin-a-type>
+          </div>
         </div>
       </ju-v3-sub-pannel>
     </div>

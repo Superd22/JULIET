@@ -2,7 +2,7 @@
   <md-toolbar fxFlex="100">STATUT TEAMSPEAK</md-toolbar>
   <div fxFlex="100" layoutPadding *ngIf="!busy">
 
-    <div *ngIf="status">
+    <div *ngIf="status"  fxLayout="column">
       <button md-button disabled> <md-icon>checkbox</md-icon> Vous êtes bien inscrit sur T.S</button>
       <br />
       <div fxLayoutWrap layoutPadding class="userDetails" fxFlex="50" fxFlex.xs="100">

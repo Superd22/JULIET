@@ -17,7 +17,7 @@
     <div fxFlex.gt-sm="35" fxFlex.lt-sm="100" LayoutPadding>
       <ju-my-ships [hangar]="hangar" *ngIf="hangar" (activeShip)="setActiveShip($event)"></ju-my-ships>
     </div>
-    <div fxFlex LayoutPadding style="position: relative; z-index: 2;">
+    <div fxFlex.gt-sm="65" fxFlex.lt-sm="100" LayoutPadding style="position: relative; z-index: 2;">
       <ju-ship-single [shipComponent]="hangarAPI.currentSingleShip" fxFlex></ju-ship-single>
     </div>
   </div>

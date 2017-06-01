@@ -25,15 +25,9 @@ export class AlignShipIcoDirective {
 
       let pHeight:number = Number(parent.height.replace("px","")) + Number(parent.paddingTop.replace("px","")) + Number(parent.paddingBottom.replace("px",""));
 
-
-      console.log(height);
-      console.log(pHeight);
-
       let margin_top = 0;
       if (height < pHeight) margin_top = (pHeight - height) / 2;
-      
-      console.log("margintop:"+margin_top);
-      console.log("####");
+
       e.parentElement.style.marginTop = margin_top + "px";
     });
   }

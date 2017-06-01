@@ -34,15 +34,13 @@ export class RankBigComponent implements OnInit {
     if (this._rank) this.rank = this._rank;
     this._rankChange.emit(this.rank);
 
-    this.canEdit = this.rights.userIsAdmin || this.rights.userId == this.user.id_forum;
+    this.canEdit = this.rights.userIsAdmin.value || this.rights.userId == this.user.id_forum;
   }
 
   ngDoCheck() {
     if (this.rank) {
       if (this.rank.ID != this._rank.ID) {
         this._rank = this.rank;
-        console.log("emmiting");
-        console.log(this.rank);
         this._rankChange.emit(this.rank);
       }
     }

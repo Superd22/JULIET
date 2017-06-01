@@ -84,4 +84,18 @@ export class JulietUserService {
     )
   }
 
+  /**
+   * Helper function to search for a user by its username (on the forum)
+   * @param search the username to look for
+   * @return observable of the results
+   */
+  public searchUserByName(search: string): Observable<BaseUserInfo[]> {
+    if(search == null || search.length < 1) return Observable.of([]);
+    return this.api.get('Common/UserSearch/', { f: search }).map(
+      data => {
+        if (!data.error) return data.data;
+      }
+    )
+  }
+
 }
