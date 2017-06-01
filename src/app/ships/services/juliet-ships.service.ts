@@ -20,6 +20,8 @@ export class JulietShipsService {
   private shipTypes: ShipModel[] = [];
   /** the currently selected ship in any view */
   private selectedShip: AShip = null;
+  
+
 
   constructor(private api: JulietAPIService) { }
 

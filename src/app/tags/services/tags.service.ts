@@ -1,3 +1,4 @@
+import { AShipTemplate } from './../../ships/interfaces/a-template';
 import { AShip } from './../../ships/interfaces/a-ship';
 import { ShipModel } from './../../ships/interfaces/ship-model';
 import { Observable } from 'rxjs/Observable';
@@ -60,7 +61,7 @@ export class TagsService {
    * @param call the api call to make on update
    * @todo figure out if we need to buffer the maps > N entries
    */
-  private fetchAndCache(map: Map<number, ReplaySubject<ATag[]>>, key: number, force: boolean, call: Observable<any>): Observable<ATag[]> {
+  private fetchAndCache(map: Map<number, ReplaySubject<ATag[]>>, key: number, force: boolean, call: Observable<any>): ReplaySubject<ATag[]> {
     let cache = map.get(key);
 
     // Init our cache
@@ -73,7 +74,7 @@ export class TagsService {
     }
     else if (force) call.subscribe((data) => cache.next(data));
 
-    return cache.asObservable();
+    return cache;
   }
 
   /**
@@ -81,7 +82,7 @@ export class TagsService {
    * @param user the user_id to fetch for
    * @param force force the update (will use cache otherwise)
    */
-  public getUserTags(user?: number, force?: boolean): Observable<ATag[]> {
+  public getUserTags(user?: number, force?: boolean): ReplaySubject<ATag[]> {
     if (!user) user = 0;
 
     let call = this.api.post(this.apiNamespace + "tags_getphp", { user: user }).map(
@@ -96,7 +97,7 @@ export class TagsService {
    * @param ship the ship object to fetch for
    * @param force force the update (will use cache otherwise)
    */
-  public getShipTags(ship: AShip, force?: boolean): Observable<ATag[]> {
+  public getShipTags(ship: AShip, force?: boolean): ReplaySubject<ATag[]> {
     let call = this.api.post(this.apiNamespace + "getTagsAShip", { ship: ship }).map(
       data => data.data
     );
@@ -109,13 +110,27 @@ export class TagsService {
    * @param shipModel the model to fetch for
    * @param force force the update (will use cache otherwise)
    */
-  public getShipModelTags(shipModel: ShipModel, force?: boolean): Observable<ATag[]> {
+  public getShipModelTags(shipModel: ShipModel, force?: boolean): ReplaySubject<ATag[]> {
     let call = this.api.post(this.apiNamespace + "getTagsShipModel", { shipModel: shipModel }).map(
       data => data.data
     );
 
     return this.fetchAndCache(this._cacheShipModels, shipModel.id, force, call);
   }
+
+  /**
+   * Fetches all the tags belonging to a given ShipTemplate
+   * @param shipTemplate the template to fetch for
+   * @param force force the update (will use cache otherwise)
+   */
+  public getShipTemplateTags(shipTemplate: AShipTemplate, force?: boolean): ReplaySubject<ATag[]> {
+    let call = this.api.post(this.apiNamespace + "getTagsShipVariant", { shipTemplate: shipTemplate }).map(
+      data => data.data
+    );
+
+    return this.fetchAndCache(this._cacheShipTemplates, shipTemplate.id, force, call);
+  }
+
 
   public searchTags(search?: String, all?: boolean): Observable<ATag[]> {
     return this.api.post(this.apiNamespace + "tags_searchphp", { f: search, mod: all ? "ALL" : "" }).map(

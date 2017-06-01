@@ -1,3 +1,4 @@
+import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { ShipModel } from './../../../ships/interfaces/ship-model';
 import { AShip } from './../../../ships/interfaces/a-ship';
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
@@ -127,6 +128,20 @@ export class OwnerComponent implements OnInit {
    * will update tagList on each call.
    */
   protected fetchTagList() {
+    let call = this.getTagsFromCache();
+    if (call) {
+      this.busy = true;
+      call.subscribe(
+        data => {
+          this.tagsList = data;
+          this.busy = false;
+        }
+      );
+    }
+
+  }
+
+  private getTagsFromCache(): ReplaySubject<ATag[]> {
     let call = null;
     switch (this.getCurrentTargetType()) {
       case "user":
@@ -139,29 +154,38 @@ export class OwnerComponent implements OnInit {
         call = this.api.getShipModelTags(this.shipModel);
         break;
     }
-    if (call) {
-      this.busy = true;
-      console.log("subscribing");
-      call.subscribe(
-        data => {
-          this.tagsList = data;
-          this.busy = false;
-        }
-      );
-    }
 
+    return call;
   }
 
   /* Triggered when a given tag is taken by the user. */
   public tagTaken(tag: ATag) {
-    console.log(tag);
-    this.affectTag(tag).subscribe();
-    this.tagsList.push(tag);
+    this.busy = true;
+    this.affectTag(tag).subscribe(
+      (data) => {
+        this.tagsList.push(tag);
+        this.propagateCurrentTagList();
+        this.resetFilterName();
+      }
+    );
   }
 
   public tagUnTaken(tag: ATag) {
-    this.unAffectTag(tag).subscribe();
-    this.tagsList.splice(this.tagsList.findIndex(cur => cur.id === tag.id), 1);
+    this.busy = true;
+    this.unAffectTag(tag).subscribe((data) => {
+      this.tagsList.splice(this.tagsList.findIndex(cur => cur.id === tag.id), 1);
+      this.propagateCurrentTagList();
+      this.resetFilterName();
+    });
+  }
+
+  /**
+   * Propagates our current tag list to the service so that every other components 
+   * gets updated
+   */
+  private propagateCurrentTagList() {
+    this.getTagsFromCache().next(this.tagsList);
+    this.busy = false;
   }
 
   private affectTag(tag: ATag) {
@@ -181,13 +205,25 @@ export class OwnerComponent implements OnInit {
   }
 
   protected addTag() {
+    this.busy = true;
     this.api.createTag(this.tagList.filter.name).subscribe(
       tag => {
-        this.affectTag(tag).subscribe();
-        this.tagList.filter.name = "";
-        this.fetchTagList();
+        this.affectTag(tag).subscribe(
+          (data) => {
+            this.tagsList.push(tag);
+            this.propagateCurrentTagList();
+          }
+        );
+        this.resetFilterName();
       }
     );
+  }
+
+  /**
+   * Resets the filter input 
+   */
+  private resetFilterName() {
+    this.tagList.filter.name = "";
   }
 
   public shouldAddTag() {
