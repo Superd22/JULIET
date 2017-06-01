@@ -53,29 +53,7 @@ export class TagsService {
     );
   }
 
-  /**
-   * Helper function to catch and fetch 
-   * @param map the cache map
-   * @param key the key for the current cache entry
-   * @param force force update (otherwise use cache)
-   * @param call the api call to make on update
-   * @todo figure out if we need to buffer the maps > N entries
-   */
-  private fetchAndCache(map: Map<number, ReplaySubject<ATag[]>>, key: number, force: boolean, call: Observable<any>): ReplaySubject<ATag[]> {
-    let cache = map.get(key);
 
-    // Init our cache
-    if (cache == null) {
-      map.set(key, new ReplaySubject<ATag[]>(1));
-      cache = map.get(key);
-      call.subscribe((data) => {
-        cache.next(data);
-      });
-    }
-    else if (force) call.subscribe((data) => cache.next(data));
-
-    return cache;
-  }
 
   /**
    * Fetch all the tags beloging to an user
@@ -89,7 +67,7 @@ export class TagsService {
       data => data.data
     );
 
-    return this.fetchAndCache(this._cacheUsers, user, force, call);
+    return this.api.fetchAndCache(this._cacheUsers, user, force, call);
   }
 
   /**
@@ -102,7 +80,7 @@ export class TagsService {
       data => data.data
     );
 
-    return this.fetchAndCache(this._cacheShips, ship.id, force, call);
+    return this.api.fetchAndCache(this._cacheShips, ship.id, force, call);
   }
 
   /**
@@ -115,7 +93,7 @@ export class TagsService {
       data => data.data
     );
 
-    return this.fetchAndCache(this._cacheShipModels, shipModel.id, force, call);
+    return this.api.fetchAndCache(this._cacheShipModels, shipModel.id, force, call);
   }
 
   /**
@@ -128,7 +106,7 @@ export class TagsService {
       data => data.data
     );
 
-    return this.fetchAndCache(this._cacheShipTemplates, shipTemplate.id, force, call);
+    return this.api.fetchAndCache(this._cacheShipTemplates, shipTemplate.id, force, call);
   }
 
 
