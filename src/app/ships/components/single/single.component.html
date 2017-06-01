@@ -1,12 +1,15 @@
 <ju-v3-sub-pannel fxLayout="column" fxLayoutWrap>
   <ju-v3-heading fxFlex="100" layoutPadding layoutMargin>
-    <h3>Vue détaillée</h3>
+    <h3>Personalisateur</h3>
   </ju-v3-heading>
 
   <div *ngIf="hangarAPI.currentSingleShipType | async as type" layoutMargin layoutPadding>
     <div *ngIf="ship">
 
       <ju-v3-sub-pannel fxLayout="column" fxLayoutWrap style="padding-bottom:10px;margin-bottom:20px;">
+        <ju-v3-heading fxFlex="100" layoutPadding layoutMargin>
+          <h4>Détails du vaisseau</h4>
+        </ju-v3-heading>
         <div class="ship-title align-parent">
           <div style="position:relative; z-index:1" fxLayout="column" fxFlex>
             <input type="text" [(ngModel)]="hangarAPI.currentSingleShip.ship.name" class="ship-name">

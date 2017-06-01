@@ -51,7 +51,7 @@ export class JulietAPIService {
         let ret = res.json();
         this.mainErrorHandler(ret)
         return ret;
-      })
+      }).share()
       .catch((error: any) => Observable.throw( typeof error.json == "function" ? error.json().error : 'Server Error'));
   }
 

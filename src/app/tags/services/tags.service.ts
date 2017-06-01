@@ -9,6 +9,7 @@ import { ATag } from './../interfaces/a-tag';
 import { JulietAPIService } from './../../juliet-common/services/juliet-api.service';
 import { Injectable } from '@angular/core';
 import { JulietRightsService } from '../../juliet-common/services/juliet-rights.service';
+import { ReplaySubject } from "rxjs/ReplaySubject";
 
 @Injectable()
 export class TagsService {
@@ -16,6 +17,16 @@ export class TagsService {
   public tags: ATag[];
   public selectedTag: ATag;
   public isLad;
+
+  /** cache of the already polled users */
+  private _cacheUsers: Map<number, ReplaySubject<ATag[]>> = new Map<number, ReplaySubject<ATag[]>>();
+  /** cache of the already polled ships */
+  private _cacheShips: Map<number, ReplaySubject<ATag[]>> = new Map<number, ReplaySubject<ATag[]>>();
+  /** cache of the already polled shipModels */
+  private _cacheShipModels: Map<number, ReplaySubject<ATag[]>> = new Map<number, ReplaySubject<ATag[]>>();
+  /** cache of the already polled shipTemplates */
+  private _cacheShipTemplates: Map<number, ReplaySubject<ATag[]>> = new Map<number, ReplaySubject<ATag[]>>();
+
   private apiNamespace = "Tags/";
   private $http;
 
@@ -41,27 +52,72 @@ export class TagsService {
     );
   }
 
-  // Fetches all the tag for a given user
-  public getUserTags(user?: Number): Observable<ATag[]> {
+  /**
+   * Helper function to catch and fetch 
+   * @param map the cache map
+   * @param key the key for the current cache entry
+   * @param force force update (otherwise use cache)
+   * @param call the api call to make on update
+   * @todo figure out if we need to buffer the maps > N entries
+   */
+  private fetchAndCache(map: Map<number, ReplaySubject<ATag[]>>, key: number, force: boolean, call: Observable<any>): Observable<ATag[]> {
+    let cache = map.get(key);
+
+    // Init our cache
+    if (cache == null) {
+      map.set(key, new ReplaySubject<ATag[]>(1));
+      cache = map.get(key);
+      call.subscribe((data) => {
+        cache.next(data);
+      });
+    }
+    else if (force) call.subscribe((data) => cache.next(data));
+
+    return cache.asObservable();
+  }
+
+  /**
+   * Fetch all the tags beloging to an user
+   * @param user the user_id to fetch for
+   * @param force force the update (will use cache otherwise)
+   */
+  public getUserTags(user?: number, force?: boolean): Observable<ATag[]> {
     if (!user) user = 0;
-    return this.api.post(this.apiNamespace + "tags_getphp", { user: user }).map(
+
+    let call = this.api.post(this.apiNamespace + "tags_getphp", { user: user }).map(
       data => data.data
     );
+
+    return this.fetchAndCache(this._cacheUsers, user, force, call);
   }
 
-  public getShipTags(ship: AShip): Observable<ATag[]> {
-    return this.api.post(this.apiNamespace + "getTagsAShip", { ship: ship }).map(
+  /**
+   * Fetches all the tags belonging to a given Ship (instance)
+   * @param ship the ship object to fetch for
+   * @param force force the update (will use cache otherwise)
+   */
+  public getShipTags(ship: AShip, force?: boolean): Observable<ATag[]> {
+    let call = this.api.post(this.apiNamespace + "getTagsAShip", { ship: ship }).map(
       data => data.data
     );
+
+    return this.fetchAndCache(this._cacheShips, ship.id, force, call);
   }
 
-  public getShipModelTags(ship: ShipModel): Observable<ATag[]> {
-    return this.api.post(this.apiNamespace + "getTagsShipModel", { shipModel: ship }).map(
+  /**
+   * Fetches all the tags belonging to a given ShipModel
+   * @param shipModel the model to fetch for
+   * @param force force the update (will use cache otherwise)
+   */
+  public getShipModelTags(shipModel: ShipModel, force?: boolean): Observable<ATag[]> {
+    let call = this.api.post(this.apiNamespace + "getTagsShipModel", { shipModel: shipModel }).map(
       data => data.data
     );
+
+    return this.fetchAndCache(this._cacheShipModels, shipModel.id, force, call);
   }
 
-  public searchTags(search?: String, all?: Boolean): Observable<ATag[]> {
+  public searchTags(search?: String, all?: boolean): Observable<ATag[]> {
     return this.api.post(this.apiNamespace + "tags_searchphp", { f: search, mod: all ? "ALL" : "" }).map(
       data => data.data
     );
@@ -82,7 +138,7 @@ export class TagsService {
     if (tag.id) var _tagId = tag.name;
     else var _tagId = tag;
 
-    return this.api.get(this.apiNamespace + "get", { name: _tagId, cat: _cat, all:true }).map(
+    return this.api.get(this.apiNamespace + "get", { name: _tagId, cat: _cat, all: true }).map(
       data => data.data
     );
   }

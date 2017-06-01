@@ -141,6 +141,7 @@ export class OwnerComponent implements OnInit {
     }
     if (call) {
       this.busy = true;
+      console.log("subscribing");
       call.subscribe(
         data => {
           this.tagsList = data;
