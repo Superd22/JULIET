@@ -78,7 +78,6 @@ export class MyShipsComponent implements OnInit {
 
   private fetchHangarData() {
     this.api.getHangarOfPlayer(Number(this._userId)).subscribe((hangar) => {
-      console.log(hangar);
       this.hangar = hangar;
     });
   }

@@ -128,7 +128,7 @@ export class OwnerComponent implements OnInit {
 
       // Check whever we can edit those tags.
       this.rights.user_can("USER_CAN_ADMIN_TAGS", this._userId).subscribe(
-        data => this.currentUserCan = data.data
+        data => this.currentUserCan = data
       );
 
       this._fetchedFor = { type: "user", target: this._userId };
@@ -141,7 +141,7 @@ export class OwnerComponent implements OnInit {
 
       /** @todo handle ship template of model */
       this.rights.user_can("USER_CAN_EDIT_SHIP_TAGS", 0, this.shipTemplate.ship_id).subscribe(
-        data => this.currentUserCan = data.data
+        data => this.currentUserCan = data
       );
 
       this._fetchedFor = { type: "shipTemplate", target: this.shipTemplate.id };
@@ -153,7 +153,7 @@ export class OwnerComponent implements OnInit {
       this.fetchTagList();
 
       this.rights.user_can("USER_CAN_EDIT_SHIP_TAGS", 0, this.ship.id).subscribe(
-        data => this.currentUserCan = data.data
+        data => this.currentUserCan = data
       );
 
       this._fetchedFor = { type: "ship", target: this.ship.id };
@@ -165,7 +165,7 @@ export class OwnerComponent implements OnInit {
       this.fetchTagList();
 
       this.rights.user_can("USER_CAN_ADMIN_SHIPS").subscribe(
-        data => this.currentUserCan = data.data
+        data => this.currentUserCan = data
       );
 
       this._fetchedFor = { type: "shipModel", target: this.ship.id };

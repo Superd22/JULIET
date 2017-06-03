@@ -40,7 +40,6 @@ export class TagsService {
     public completerService: CompleterService, public state: StateService,
     public rights: JulietRightsService) {
     //this.isLad = false;
-    console.log(state);
   }
 
   /**
