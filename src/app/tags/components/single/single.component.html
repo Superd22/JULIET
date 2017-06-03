@@ -4,9 +4,11 @@
     <h2>T.A.G.S</h2>
   </div>
 
-  <button uiSref="secure.Tags.index.list" style="margin: 5px;margin-top: 20px;" mdTooltip="Retour à la liste des T.A.G.S" md-mini-fab>
-<md-icon>arrow_back</md-icon>
-</button>
+  <div>
+    <button uiSref="secure.Tags.index.list" style="margin: 5px;margin-top: 20px;" mdTooltip="Retour à la liste des T.A.G.S" md-button>
+      <md-icon>arrow_back</md-icon> Liste des T.A.G.S
+    </button>
+  </div>
 
   <ju-v3-blue-pannel *ngIf="tag && tag.cat != 'tag'" id="top-info" LayoutMargin>
     <div style="z-index:1; position: relative;">
@@ -35,7 +37,8 @@
         <button md-button (click)="assignTagToSelf()" color="accent">Prendre ce TAG</button>
 
         <md-input-container LayoutMargin>
-          <input mdInput placeholder="Ajouter le tag à un joueur" [mdAutocomplete]="auto" [formControl]="userCtrl" [disabled]="busy"  [(ngModel)]="userAdd" >
+          <input mdInput placeholder="Ajouter le tag à un joueur" [mdAutocomplete]="auto" [formControl]="userCtrl" [disabled]="busy"
+            [(ngModel)]="userAdd">
         </md-input-container>
 
         <md-autocomplete #auto="mdAutocomplete">

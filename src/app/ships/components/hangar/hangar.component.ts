@@ -1,3 +1,4 @@
+import { JulietHangarService } from './../../services/juliet-hangar.service';
 import { SingleShipViewverComponent } from './../single/single.component';
 import { AShip } from './../../interfaces/a-ship';
 import { Transition } from '@uirouter/angular';
@@ -26,7 +27,7 @@ export class HangarComponent implements OnInit {
   public currentUser: AUser;
   public activeShip: AShip;
 
-  constructor(protected api: JulietShipsService, private userAPI: JulietUserService, private trans: Transition) {
+  constructor(protected api: JulietShipsService, private userAPI: JulietUserService, private trans: Transition, private hangarAPI: JulietHangarService) {
     this.handleUser();
 
     userAPI.currentUser.subscribe((currentUser) => {

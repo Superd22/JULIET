@@ -30,7 +30,6 @@ export class HangarAdminATypeComponent implements OnInit, OnChanges {
   }
 
   public set shipType(ship: ShipModel) {
-    console.log("seter!!");
     this.type = ship;
     this.regenBackUp();
   }
@@ -54,7 +53,6 @@ export class HangarAdminATypeComponent implements OnInit, OnChanges {
   }
 
   public regenBackUp() {
-    console.log("regen ;)");
     this.typeBackUp = Object.assign({}, this.type);
   }
 

@@ -1,0 +1,36 @@
+<div fxFlex.gt-sm="30" fxFlex.lt-sm="100">
+  <ju-v3-sub-pannel fxLayout="column" fxLayoutWrap LayoutMargin>
+    <ju-v3-heading fxFlex="100" layoutPadding layoutMargin>
+      <h5>Gestion</h5>
+    </ju-v3-heading>
+
+    <div LayoutPadding>
+      <md-select [placeholder]="ship?.templates.length > 0 ? 'Templates' : 'Pas de Template'" [(ngModel)]="selectedTemplate" (change)="selectNewTemplate($event)">
+        <md-option *ngFor="let template of ship?.templates" [value]="template.id">{{ template.name }}</md-option>
+      </md-select>
+
+      <button md-button (click)="newTemplate()"><md-icon>add</md-icon> Nouveau Template</button>
+      <button md-raised-button color="primary" (click)="updateTemplate()" *ngIf="shouldDisplayUpdateButton()"><md-icon>save</md-icon> {{ currentTemplate?.id > 0 ? 'Mettre à jour' : 'Ajouter'}} ce template</button>
+      <button md-button color="warn" (click)="deleteTemplate()" *ngIf="shouldDisplayDeleteButton()"><md-icon>delete_forever</md-icon> Supprimer ce template</button>
+    </div>
+
+  </ju-v3-sub-pannel>
+</div>
+
+<div fxFlex.gt-sm="70" fxFlex.lt-sm="100">
+
+  <div LayoutMargin fxLayout="column" fxLayoutWrap *ngIf="currentTemplate">
+    <md-input-container>
+      <input mdInput placeholder="Nom du template" [(ngModel)]="currentTemplate.name">
+    </md-input-container>
+
+
+    <div>
+      
+      <ju-tag-owner *ngIf="currentTemplate.id > 0" [shipTemplate]="currentTemplate"></ju-tag-owner>
+
+    </div>
+
+  </div>
+
+</div>

@@ -1,3 +1,4 @@
+import { AShipTemplate } from './a-template';
 /**
  * Main type of ship information as registered in the front-end
  */
@@ -10,4 +11,6 @@ export interface AShip {
     type_id: number;
     /** the id of the owner of this ship */
     owner: number;
+    /** templates for this ship */
+    templates: AShipTemplate[];
 }

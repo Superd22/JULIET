@@ -7,6 +7,8 @@ import { MdSidenav } from '@angular/material';
 export class JulietCommonHelperService {
 
   protected sideNav: MdSidenav;
+  /** if we need to display tuto tooltips */
+  private _tutorialMod: boolean = false;
 
   constructor(private completerService: CompleterService, private api: JulietAPIService) { }
   /**
@@ -17,13 +19,28 @@ export class JulietCommonHelperService {
    * @param properties an array of property name to be checked
    * @return true if same object, false if missing or mismatching pp
    */
-  public hasChangedObj(a, b, properties): Boolean {
+  public hasChangedObj(a, b, properties: string[]): Boolean {
     if (!a || !b || !properties || properties.length == 0) return false;
     for (var i = 0; i < properties.length; i++) {
       let pp = properties[i];
       if (a[pp] != b[pp]) return true;
     }
     return false;
+  }
+
+  /**
+   * @see _tutorialMod
+   * @return true for template mode, false otherwise.
+   */
+  public get isTutorial(): boolean {
+    return this._tutorialMod;
+  }
+
+  /**
+   * @param tutorial new value for tutorial mod
+   */
+  public set isTutorial(tutorial: boolean) {
+    this._tutorialMod = tutorial;
   }
 
   /**

@@ -35,7 +35,6 @@ export class RankSelectorComponent implements OnInit {
   }
 
   ngOnChange(changes) {
-    console.log(changes);
   }
 
   private newRank(init?:Boolean) {

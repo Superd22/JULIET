@@ -28,7 +28,6 @@ export class UserComponent implements OnInit {
       data => {
         this.user = data;
         this.userBackup = Object.assign({}, data);
-        console.log(this.rights.userIsAdmin);
         this.canEdit = this.rights.userIsAdmin.value || this.rights.userId === this.user.id_forum;
         this.busy = false;
       }

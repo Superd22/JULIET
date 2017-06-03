@@ -72,6 +72,9 @@ export class ATagComponent implements OnInit {
         return map.get(this.tag.herited_from.id).name;
       });
     }
+    else if(this.tag.herited_from.target_type == "ship") {
+      return this.shipAPI.getShip(this.tag.herited_from.id).map( (ship) => ship.name ? ship.name : "SIBV-"+ship.id );
+    }
 
   }
 

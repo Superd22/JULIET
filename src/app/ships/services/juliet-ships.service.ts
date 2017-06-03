@@ -1,3 +1,5 @@
+import { AShipTemplate } from './../interfaces/a-template';
+import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { AShip } from './../interfaces/a-ship';
 import { ShipModel } from './../interfaces/ship-model';
 import { Hangar } from './../interfaces/hangar';
@@ -20,6 +22,11 @@ export class JulietShipsService {
   private shipTypes: ShipModel[] = [];
   /** the currently selected ship in any view */
   private selectedShip: AShip = null;
+  /** our cache of ships */
+  private _shipsCache: Map<number, ReplaySubject<AShip>> = new Map<number, ReplaySubject<AShip>>();
+  /** our cache of templates */
+  private _shipTemplatesCache: Map<number, ReplaySubject<AShipTemplate>> = new Map<number, ReplaySubject<AShipTemplate>>();
+
 
   constructor(private api: JulietAPIService) { }
 
@@ -43,10 +50,65 @@ export class JulietShipsService {
   public getHangarOfPlayer(user): Observable<Hangar> {
     if (typeof user != typeof 123) user = user.id_forum;
     return this.api.get(this.apiNamespace + "getPlayerHangar", { user_id: user }).map(
-      data => {
-        if (!data.error) return data.data;
+      (data: { data: { ships: AShip[] }, error: boolean }) => {
+        if (!data.error) {
+
+          // Cache our ships
+          data.data.ships.forEach((ship) => {
+            this.cacheAShip(ship);
+          });
+
+
+          return data.data;
+        }
       }
     );
+  }
+
+  /**
+   * Cache a given ship in memory
+   * @param ship the ship to cache
+   */
+  private cacheAShip(ship: AShip) {
+    this.api.fetchAndCache(this._shipsCache, ship.id, false, Observable.of(ship));
+
+    // Cache our templates (useful ?)
+    if (ship.templates != null && ship.templates.length > 0) {
+      ship.templates.forEach((shipTemplate) => {
+        if (shipTemplate && shipTemplate.id > 0)
+          this.api.fetchAndCache(this._shipTemplatesCache, shipTemplate.id, false, Observable.of(shipTemplate));
+      });
+    }
+
+  }
+
+  public getShipTemplate(shipTemplate: AShipTemplate, force?: boolean): ReplaySubject<AShipTemplate>;
+  public getShipTemplate(shipTemplateId: number, force?: boolean): ReplaySubject<AShipTemplate>;
+  public getShipTemplate(ship, force?: boolean): ReplaySubject<AShipTemplate> {
+    let tId = null;
+    if (typeof ship == typeof 123) tId = ship;
+    else tId = ship.id;
+
+    let call = this.api.get(this.apiNamespace + "getShipTemplate").map(
+      (data) => data.data
+    );
+
+    return this.api.fetchAndCache(this._shipTemplatesCache, tId, force, call);
+  }
+
+  public getShip(ship: AShip, force?: boolean): ReplaySubject<AShip>;
+  public getShip(shipId: number, force?: boolean): ReplaySubject<AShip>;
+  public getShip(ship, force?: boolean): ReplaySubject<AShip> {
+    let tId = null;
+    if (typeof ship == typeof 123) tId = ship;
+    else tId = ship.id;
+
+    let call = this.api.get(this.apiNamespace + "getShip").map(
+      (data) => data.data
+    );
+
+    return this.api.fetchAndCache(this._shipsCache, tId, force, call);
+
   }
 
   /**
@@ -128,10 +190,14 @@ export class JulietShipsService {
     );
   }
 
-  public updateShip(ship: AShip): Observable<any> {
+  public updateShip(ship: AShip): Observable<AShip> {
     return this.api.post(this.apiNamespace + "updateShip", { ship: ship }).map(
       data => {
-        if (!data.error) return data.data;
+        if (!data.error) {
+          this.cacheAShip(ship);
+          return data.data;
+        }
+        else return ship;
       }
     );
   }
@@ -157,4 +223,43 @@ export class JulietShipsService {
   }
 
 
+  /**
+   * Updates the given ship template in the db
+   * will perform an ADD operation if shipTemplate.id == 0
+   * @param shipTemplate the template to update
+   * @return the newly updated/inserted template
+   */
+  public updateShipTemplate(shipTemplate: AShipTemplate): Observable<AShipTemplate> {
+    return this.api.post(this.apiNamespace + "Template/update", { shipTemplate: shipTemplate }).map(
+      data => {
+        if (!data.error) {
+          this.updateShipTemplateCache(shipTemplate);
+          return data.data;
+        }
+        else return null;
+      }
+    );
+  }
+
+  /**
+   * Updates the cache for this given ship template
+   * @param shipTemplate 
+   */
+  public updateShipTemplateCache(shipTemplate: AShipTemplate) {
+      this.api.fetchAndCache(this._shipTemplatesCache, shipTemplate.id, false, Observable.of(shipTemplate));
+  }
+
+  /**
+   * Delete the given ship template in the db
+   * @param shipTemplate the template to delete
+   * @return true on success
+   */
+  public deleteShipTemplate(shipTemplate: AShipTemplate): Observable<boolean> {
+    return this.api.post(this.apiNamespace + "Template/delete", { shipTemplate: shipTemplate }).map(
+      data => {
+        if (!data.error) return data.data;
+        else return null;
+      }
+    );
+  }
 }

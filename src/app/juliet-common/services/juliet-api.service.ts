@@ -1,3 +1,4 @@
+import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { environment } from './../../../environments/environment';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
@@ -51,7 +52,7 @@ export class JulietAPIService {
         let ret = res.json();
         this.mainErrorHandler(ret)
         return ret;
-      })
+      }).share()
       .catch((error: any) => Observable.throw( typeof error.json == "function" ? error.json().error : 'Server Error'));
   }
 
@@ -63,6 +64,30 @@ export class JulietAPIService {
 
   public get onErrorPacket():BehaviorSubject<any> {
     return this._latestErrorReturn;
+  }
+
+    /**
+   * Helper function to fetch and catch data into a given map
+   * @param map the cache map
+   * @param key the key for the current cache entry
+   * @param force force update (otherwise use cache)
+   * @param call the api call to make on update
+   * @todo figure out if we need to buffer the maps > N entries
+   */
+  public fetchAndCache(map: Map<number, ReplaySubject<any>>, key: number, force: boolean, call: Observable<any>): ReplaySubject<any> {
+    let cache = map.get(key);
+
+    // Init our cache
+    if (cache == null) {
+      map.set(key, new ReplaySubject<any>(1));
+      cache = map.get(key);
+      call.subscribe((data) => {
+        cache.next(data);
+      });
+    }
+    else if (force) call.subscribe((data) => cache.next(data));
+
+    return cache;
   }
 
 }

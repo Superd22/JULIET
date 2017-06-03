@@ -192,7 +192,7 @@ export class SingleComponent implements OnInit {
         // Get rights
         if (this.isEditable(true) && (!this.fetchedRights || force_right)) this.rights.user_can("USER_CAN_ADMIN_TAG", 0, this.tag.id).subscribe(
           data => {
-            this.hasR = data.data;
+            this.hasR = data;
             this.fetchedRights = true;
           }
         );
