@@ -56,7 +56,7 @@ export class JulietShipsService {
   public getAllShipTypes(force?: boolean): Observable<ShipModel[]> {
     // If we're forcing or if don't have no data
     if (force || this.shipTypes.length == 0)
-      return this.api.get(this.apiNamespace + "getAllShipTypes").map(
+      return this.api.get(this.apiNamespace + "Model/getAll").map(
         data => {
           if (!data.error) {
             this.shipTypes = data.data;
@@ -141,7 +141,7 @@ export class JulietShipsService {
    * will execute an UPDATE if shipType
    */
   public updateShipType(shipType: ShipModel): Observable<ShipModel> {
-    return this.api.post(this.apiNamespace + "adminShipType", { shipType: shipType }).map(
+    return this.api.post(this.apiNamespace + "Model/update", { shipType: shipType }).map(
       data => {
         if (!data.error) return data.data;
       }
@@ -149,7 +149,7 @@ export class JulietShipsService {
   }
 
   public deleteShipType(shipType: ShipModel): Observable<any> {
-    return this.api.post(this.apiNamespace + "adminDeleteShipType", { shipTypeId: shipType.id }).map(
+    return this.api.post(this.apiNamespace + "Model/delete", { shipTypeId: shipType.id }).map(
       data => {
         if (!data.error) return data.data;
       }
