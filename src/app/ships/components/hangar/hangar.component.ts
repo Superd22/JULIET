@@ -27,7 +27,7 @@ export class HangarComponent implements OnInit {
   public currentUser: AUser;
   public activeShip: AShip;
 
-  constructor(protected api: JulietShipsService, private userAPI: JulietUserService, private trans: Transition, private hangarAPI: JulietHangarService) {
+  constructor(protected api: JulietShipsService, private userAPI: JulietUserService, private trans: Transition, public hangarAPI: JulietHangarService) {
     this.handleUser();
 
     userAPI.currentUser.subscribe((currentUser) => {
