@@ -223,4 +223,43 @@ export class JulietShipsService {
   }
 
 
+  /**
+   * Updates the given ship template in the db
+   * will perform an ADD operation if shipTemplate.id == 0
+   * @param shipTemplate the template to update
+   * @return the newly updated/inserted template
+   */
+  public updateShipTemplate(shipTemplate: AShipTemplate): Observable<AShipTemplate> {
+    return this.api.post(this.apiNamespace + "Template/update", { shipTemplate: shipTemplate }).map(
+      data => {
+        if (!data.error) {
+          this.updateShipTemplateCache(shipTemplate);
+          return data.data;
+        }
+        else return null;
+      }
+    );
+  }
+
+  /**
+   * Updates the cache for this given ship template
+   * @param shipTemplate 
+   */
+  public updateShipTemplateCache(shipTemplate: AShipTemplate) {
+      this.api.fetchAndCache(this._shipTemplatesCache, shipTemplate.id, false, Observable.of(shipTemplate));
+  }
+
+  /**
+   * Delete the given ship template in the db
+   * @param shipTemplate the template to delete
+   * @return true on success
+   */
+  public deleteShipTemplate(shipTemplate: AShipTemplate): Observable<boolean> {
+    return this.api.post(this.apiNamespace + "Template/delete", { shipTemplate: shipTemplate }).map(
+      data => {
+        if (!data.error) return data.data;
+        else return null;
+      }
+    );
+  }
 }

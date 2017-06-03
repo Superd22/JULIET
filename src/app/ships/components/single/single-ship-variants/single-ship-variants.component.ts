@@ -1,6 +1,9 @@
+import { JulietCommonHelperService } from './../../../../juliet-common/services/juliet-common-helper.service';
+import { AShipTemplate } from './../../../interfaces/a-template';
 import { JulietShipsService } from './../../../services/juliet-ships.service';
 import { AShip } from './../../../interfaces/a-ship';
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { MdSelectChange } from "@angular/material/";
 
 @Component({
   selector: 'ju-single-ship-variants',
@@ -14,9 +17,18 @@ export class SingleShipVariantsComponent implements OnInit, OnChanges {
   @Input("shipId")
   private _shipId: number;
 
-  public ship: AShip;
+  /** the template we're currently editing */
+  public currentTemplate: AShipTemplate = null;
 
-  constructor(protected api: JulietShipsService) { }
+  private backUpTemplate: AShipTemplate = null;
+
+  public ship: AShip;
+  /** our selected template id from the select element */
+  public selectedTemplate: number;
+
+  public busy: boolean = false;
+
+  constructor(protected api: JulietShipsService, protected helper: JulietCommonHelperService) { }
 
   ngOnInit() {
     this.init();
@@ -34,5 +46,83 @@ export class SingleShipVariantsComponent implements OnInit, OnChanges {
         (ship) => this.ship = ship
       )
     }
+    this.pickTemplate( this.ship.templates.find( (test) => test.id == this.selectedTemplate ) );
   }
+
+  public selectTemplate(template: AShipTemplate) {
+    this.currentTemplate = template;
+    this.generateTemplateBackUp();
+  }
+
+  private generateTemplateBackUp() {
+    this.backUpTemplate = Object.assign({}, this.currentTemplate);
+  }
+
+  public newTemplate() {
+    this.pickTemplate({
+      id: 0,
+      name: "",
+      ship_id: this._shipId,
+      ship_type_id: null,
+    });
+  }
+
+  public pickTemplate(template: AShipTemplate) {
+    this.currentTemplate = template;
+    this.generateTemplateBackUp();
+  }
+
+  public templateHasChanged() {
+    return this.helper.hasChangedObj(this.currentTemplate, this.backUpTemplate, ["name"]);
+  }
+
+  public canEdit() {
+    return true;
+  }
+
+  public deleteTemplate() {
+    this.busy = true;
+    this.api.deleteShipTemplate(this.currentTemplate).subscribe((done) => {
+      this.busy = false;
+      if (!done) return false;
+      else {
+        this.ship.templates.splice(this.ship.templates.findIndex((test) => test.id == this.currentTemplate.id), 1);
+        this.pickTemplate(null);
+      }
+    });
+  }
+
+  public updateTemplate() {
+    this.busy = true;
+    this.api.updateShipTemplate(this.currentTemplate).subscribe((newTemplate) => {
+      this.busy = false;
+
+      if (!newTemplate) return false;
+
+      if (this.currentTemplate.id == 0) {
+        this.ship.templates.push(newTemplate);
+        this.pickTemplate(newTemplate);
+      }
+      else {
+        let id = this.ship.templates.findIndex((test) => test.id == newTemplate.id);
+        this.ship.templates[id] = newTemplate;
+        this.pickTemplate(this.ship.templates[id]);
+      }
+
+    });
+  }
+
+  public selectNewTemplate(newTemplate: MdSelectChange) {
+    let id = this.ship.templates.findIndex((test) => test.id == newTemplate.value);
+    this.selectTemplate(this.ship.templates[id]);
+  }
+
+  public shouldDisplayUpdateButton() {
+    return this.canEdit() && this.templateHasChanged();
+  }
+  
+  public shouldDisplayDeleteButton() {
+    return this.canEdit() && this.currentTemplate && this.currentTemplate.id > 0;
+  }
+
 }
