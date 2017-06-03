@@ -17,7 +17,8 @@ export class UserComponent implements OnInit {
   public canEdit: Boolean = false;
 
   public user: AUserExtended;
-  protected userBackup: AUserExtended;
+  /** our backup */
+  public userBackup: AUserExtended;
 
   constructor(protected api: JulietUserService, public rights: JulietRightsService) { }
 
