@@ -1,3 +1,4 @@
+import { JulietRightsService } from './../../../../juliet-common/services/juliet-rights.service';
 import { JulietCommonHelperService } from './../../../../juliet-common/services/juliet-common-helper.service';
 import { AShipTemplate } from './../../../interfaces/a-template';
 import { JulietShipsService } from './../../../services/juliet-ships.service';
@@ -28,7 +29,9 @@ export class SingleShipVariantsComponent implements OnInit, OnChanges {
 
   public busy: boolean = false;
 
-  constructor(protected api: JulietShipsService, protected helper: JulietCommonHelperService) { }
+  public hasR: boolean = false;
+
+  constructor(protected api: JulietShipsService, protected helper: JulietCommonHelperService, protected rights: JulietRightsService) { }
 
   ngOnInit() {
     this.init();
@@ -46,7 +49,9 @@ export class SingleShipVariantsComponent implements OnInit, OnChanges {
         (ship) => this.ship = ship
       )
     }
-    this.pickTemplate( this.ship.templates.find( (test) => test.id == this.selectedTemplate ) );
+    this.pickTemplate(this.ship.templates.find((test) => test.id == this.selectedTemplate));
+
+    this.rights.user_can("USER_CAN_EDIT_SHIP_TAGS", 0, this.ship.id).subscribe((can) => this.hasR = can);
   }
 
   public selectTemplate(template: AShipTemplate) {
@@ -118,11 +123,11 @@ export class SingleShipVariantsComponent implements OnInit, OnChanges {
   }
 
   public shouldDisplayUpdateButton() {
-    return this.canEdit() && this.templateHasChanged();
+    return this.hasR && this.canEdit() && this.templateHasChanged();
   }
-  
+
   public shouldDisplayDeleteButton() {
-    return this.canEdit() && this.currentTemplate && this.currentTemplate.id > 0;
+    return this.hasR && this.canEdit() && this.currentTemplate && this.currentTemplate.id > 0;
   }
 
 }

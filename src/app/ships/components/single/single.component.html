@@ -12,7 +12,7 @@
         </ju-v3-heading>
         <div class="ship-title align-parent">
           <div style="position:relative; z-index:1" fxLayout="column" fxFlex>
-            <input type="text" [(ngModel)]="hangarAPI.currentSingleShip.ship.name" class="ship-name">
+            <input type="text" [(ngModel)]="hangarAPI.currentSingleShip.ship.name" class="ship-name" [disabled]="!hasR">
             <em>SIBV-{{ship.id}} <span class="ship-type">{{type.name}}</span></em>
             <div fxLayout="row">
               <button md-button uiSref="secure.user" [uiParams]="{user_id: ship.owner}">
