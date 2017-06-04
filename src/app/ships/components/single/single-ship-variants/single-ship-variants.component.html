@@ -21,7 +21,7 @@
 
   <div LayoutMargin fxLayout="column" fxLayoutWrap *ngIf="currentTemplate">
     <md-input-container>
-      <input mdInput placeholder="Nom du template" [(ngModel)]="currentTemplate.name">
+      <input mdInput placeholder="Nom du template" [(ngModel)]="currentTemplate.name" [disabled]="!hasR">
     </md-input-container>
 
 
