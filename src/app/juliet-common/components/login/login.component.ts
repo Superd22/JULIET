@@ -12,30 +12,34 @@ export class LoginComponent implements OnInit {
 
   public pseudo;
   public password;
-  public busy: Boolean = false;
+  public busy: boolean = false;
   @Input()
   protected _targetState;
 
-  constructor(protected rights: JulietRightsService, protected snackBar: MdSnackBar, protected states:StateService) { }
+  constructor(protected rights: JulietRightsService, protected snackBar: MdSnackBar, protected states: StateService) { }
 
-  ngOnInit() {  }
+  ngOnInit() {
+
+  }
 
   public doLogin() {
     this.busy = true;
     this.rights.doLogin(this.pseudo, this.password).subscribe(
-      data => {
-        this.rights.can_see_juliet().subscribe(
+      loggedIn => {
+        this.rights.can_see_juliet(true).subscribe(
           data => {
-            this.busy = false;
-
+            console.log("GOT DATA FROM CAN SEE", data);
             if (data) {
               this.snackBar.open("Vous êtes maintenant connecté", null, { duration: 5000 });
               this.states.go(this._targetState);
-              return;
             }
-            else this.snackBar.open("Impossible de vous connecter, verifiez vos identifiants.", null, { duration: 5000 });
+            else {
+              this.snackBar.open("Impossible de vous connecter, verifiez vos identifiants.", null, { duration: 5000 });
+              // This is not a mistake.
+              this.busy = false;
+            }
           }
-        )
+        );
       }
     );
   }

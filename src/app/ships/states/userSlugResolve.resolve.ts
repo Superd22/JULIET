@@ -11,7 +11,10 @@ export async function userSlugResolve(api: JulietUserService, transition: Transi
         return transition.router.stateService.go("secure.Hangar", null, { notify: false, reload: false });
     }
 
-    return api.getUserNameFromId(params.user_id).subscribe((info) => {
+    /**
+     * @todo FIX THIS
+     */
+    return api.getUserNameFromId(params.user_id, true).subscribe((info) => {
         params.user_slug = new SeoUrlPipe().transform(info.username);
         params.resolved = true;
         return transition.router.stateService.go(transition.$to().name, params, { notify: false, reload: false });

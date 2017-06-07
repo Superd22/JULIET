@@ -1,3 +1,4 @@
+import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { BaseUserInfo } from './../interfaces/base-user-info';
 import { AUserExtended } from './../interfaces/a-user-extended';
 import { Injectable } from '@angular/core';
@@ -12,6 +13,7 @@ export class JulietUserService {
   protected _namespace = "Users/";
   protected _rankNameSpace = "Ranks/";
   protected _currentUser: AUser = null;
+  protected _userNameCache: Map<number, ReplaySubject<BaseUserInfo>> = new Map<number, ReplaySubject<BaseUserInfo>>();
 
   constructor(protected api: JulietAPIService) { }
 
@@ -74,23 +76,57 @@ export class JulietUserService {
       });
   }
 
-  public getUserNameFromId(user_id: number): Observable<BaseUserInfo> {
-    return this.api.get("Common/getUserById", { ids: user_id }).map(
+  public getUserNameFromId(user_ids: number[], asObs?: boolean): Map<number, ReplaySubject<BaseUserInfo>>;
+  public getUserNameFromId(user_id: number, asObs?: boolean): Observable<BaseUserInfo>;
+  public getUserNameFromId(user, asObs) {
+    let returnWholeMap = false;
+    console.log(user);
+    let call = this.api.get("Common/getUserById", { ids: user }).map(
       data => {
         if (!data.error) {
-          return data.data[0];
+          /** Update our cache */
+          data.data.forEach((user: BaseUserInfo) => {
+            this._userNameCache.get(user.id).next(user);
+          });
+
         }
       }
-    )
+    );
+
+    let cacheHasNot = (user_id: number) => {
+      if (this._userNameCache.has(user_id)) return false;
+      this._userNameCache.set(user_id, new ReplaySubject<BaseUserInfo>(1));
+      return true;
+    }
+    console.log(typeof user);
+    if (!(typeof user == typeof 123)) {
+      returnWholeMap = true;
+      for (let i = 0; i < user.length; i++) {
+        if (cacheHasNot(user[i])) {
+          call.subscribe();
+          break;
+        }
+      }
+    }
+    else if (cacheHasNot(user)) {
+      call.subscribe();
+    }
+    if (returnWholeMap) return this._userNameCache;
+    else {
+      if (asObs) return this._userNameCache.get(user).asObservable();
+      else return this._userNameCache.get(user);
+    }
   }
+
 
   /**
    * Helper function to search for a user by its username (on the forum)
    * @param search the username to look for
    * @return observable of the results
+   * @todo convert to common cache with _userNameCache
    */
   public searchUserByName(search: string): Observable<BaseUserInfo[]> {
-    if(search == null || search.length < 1) return Observable.of([]);
+    if (search == null || search.length < 1) return Observable.of([]);
     return this.api.get('Common/UserSearch/', { f: search }).map(
       data => {
         if (!data.error) return data.data;

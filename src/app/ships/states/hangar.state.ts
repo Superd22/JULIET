@@ -18,7 +18,7 @@ export let HangarViewOther: Ng2StateDeclaration = {
         user_slug: "",
     },
     resolve: [
-        { token: "e", resolveFn: userSlugResolve, deps: [JulietUserService, Transition], policy: { when: "LAZY", async: "WAIT" } }
+        { token: "e", resolveFn: userSlugResolve, deps: [JulietUserService, Transition], policy: { when: "LAZY", async: "NOWAIT" } }
     ]
 }
 
