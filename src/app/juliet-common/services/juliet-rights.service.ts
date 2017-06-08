@@ -46,7 +46,7 @@ export class JulietRightsService {
   }
 
   public can_see_juliet(force?: boolean): Observable<boolean> {
-    this.user_can("USER_CAN_SEE_JULIET",null,null,force).asObservable().subscribe((data) => {
+    this.user_can("USER_CAN_SEE_JULIET", null, null, force).asObservable().subscribe((data) => {
       if (data === true) {
         this.userIsAuthorized.next(true);
         this._authorizePacket.next(data);
@@ -87,7 +87,9 @@ export class JulietRightsService {
   public can_admin_juliet(force?: boolean): BehaviorSubject<boolean> {
     if (this.userIsAdmin.getValue() === false || force === true)
       this.user_can("USER_IS_ADMIN").subscribe(
-        data => this.userIsAdmin.next(data.data)
+        data => {
+          this.userIsAdmin.next(data);
+        }
       );
 
     return this.userIsAdmin;

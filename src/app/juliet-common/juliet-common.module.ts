@@ -1,3 +1,4 @@
+import { ErrorUnauthorizedComponent } from './components/errors/unauthorized/unauthorized.component';
 import { SeoUrlPipe } from './pipes/seo-url.pipe';
 import { JulietMaterialModule } from './material/material.module';
 import { JulietCommonHelperService } from './services/juliet-common-helper.service';
@@ -29,6 +30,7 @@ import { SecureComponent } from './components/secure/secure.component';
 import { GoComponent } from './components/go/go.component';
 import { LayoutMarginDirective } from './directives/layout-margin.directive';
 import { LayoutPaddingDirective } from './directives/layout-padding.directive';
+import { ErrorsComponent } from './components/errors/errors.component';
 
 @NgModule({
   imports: [
@@ -48,7 +50,7 @@ import { LayoutPaddingDirective } from './directives/layout-padding.directive';
     JulietCommonComponent, AuthComponent, LoadingComponent, LoginComponent, SecureComponent,
     GoComponent, JuV3PannelComponent, V3PannelTitle, JuV3SubPannelComponent, JuV3TabComponent, EnumKeysPipe,
     JuV3HeadingComponent, FilterPipe, CountPipe, UnauthorizedComponent, SplashComponent, JuV3BluePannelComponent,
-    LayoutMarginDirective,LayoutPaddingDirective, SeoUrlPipe
+    LayoutMarginDirective,LayoutPaddingDirective, SeoUrlPipe, ErrorsComponent, ErrorUnauthorizedComponent
   ],
   providers: [
     JulietAPIService, JulietRightsService, JulietCommonHelperService

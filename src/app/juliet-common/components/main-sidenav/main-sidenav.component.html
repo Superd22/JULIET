@@ -1,6 +1,6 @@
 <div fxLayout fxLayoutWrap>
 
-  <div *ngIf="isSibylla"  fxLayout fxLayoutWrap>
+  <div *ngIf="isSibylla" fxLayout fxLayoutWrap>
     <button fxFlex="100" md-button uiSref="secure.Default" uiSrefActive="active">INDEX</button>
     <button fxFlex="100" md-button uiSref="secure.user" uiSrefActive="active">Mon profile</button>
     <button fxFlex="100" md-button uiSref="secure.Hangar" uiSrefActive="active">Hangar</button>
@@ -8,7 +8,7 @@
     <button fxFlex="100" md-button uiSref="secure.TS3" uiSrefActive="active">TeamSpeak</button>
   </div>
 
-  <div *ngIf="isAdmin">
+  <div *ngIf="isAdmin" fxLayout fxLayoutWrap fxFlex>
     <button fxFlex="100" md-button uiSref="secure.Hangar.adminTypes" uiSrefActive="active">Admin Vaisseaux</button>
   </div>
 </div>

@@ -1,3 +1,4 @@
+import { UIRouter, Transition } from '@uirouter/angular';
 import { JulietAPIService } from './juliet-api.service';
 import { CompleterData, CompleterService } from 'ng2-completer';
 import { Injectable } from '@angular/core';
@@ -9,8 +10,32 @@ export class JulietCommonHelperService {
   protected sideNav: MdSidenav;
   /** if we need to display tuto tooltips */
   private _tutorialMod: boolean = false;
+  private _latestTransition: Transition[] = [];
 
-  constructor(private completerService: CompleterService, private api: JulietAPIService) { }
+  constructor(private completerService: CompleterService, private api: JulietAPIService, private router: UIRouter) {
+    router.transitionService.onEnter({ to: "**" }, (call) => {
+    
+    })
+  }
+
+
+  /**
+   * A sorted stack of the 10 last transitions
+   */
+  public get transitionHistory(): Transition[] {
+    return this._latestTransition;
+  }
+
+  /**
+   * Get the nth-last transition in our history
+   * Currently limited to n < 10
+   * @param n 
+   */
+  public getNLatestTransition(n: number): Transition {
+    if (n >= 10) throw "LatestTransition only contains the 10 last transitions.";
+    return this._latestTransition.length >= n ? this._latestTransition[n] : null;
+  }
+
   /**
    * Check two objects to see if they have the same properties and propertie value
    * Usually used for checking if an object was changed by the user.
