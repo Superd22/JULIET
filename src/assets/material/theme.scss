@@ -43,10 +43,43 @@ $custom-blue-grey: (
   )
 );
 
+$custom-deep-orange: (
+  50: #f6e6e4,
+  100: #e9c0bd,
+  200: #db9691,
+  300: #cd6b64,
+  400: #c24c43,
+  500: #b72c22,
+  600: #b0271e,
+  700: #a72119,
+  800: #9f1b14,
+  900: #90100c,
+  A100: #ffc1bf,
+  A200: #ff8f8c,
+  A400: #ff5d59,
+  A700: #ff4440,
+  contrast: (
+    50: $black-87-opacity,
+    100: $black-87-opacity,
+    200: $black-87-opacity,
+    300: $black-87-opacity,
+    400: $black-87-opacity,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: $black-87-opacity,
+    A200: $black-87-opacity,
+    A400: white,
+    A700: white,
+  )
+);
+
 
  $dark-primary: mat-palette($custom-blue-grey);
  $dark-accent:  mat-palette($mat-light-blue, A200, A100, A400);
- $dark-warn:    mat-palette($mat-deep-orange);
+ $dark-warn:    mat-palette($custom-deep-orange);
 
 
 $mat-dark-theme-background: (

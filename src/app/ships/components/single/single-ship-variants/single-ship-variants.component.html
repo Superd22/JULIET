@@ -9,7 +9,7 @@
         <md-option *ngFor="let template of ship?.templates" [value]="template.id">{{ template.name }}</md-option>
       </md-select>
 
-      <button md-button (click)="newTemplate()"><md-icon>add</md-icon> Nouveau Template</button>
+      <button md-button (click)="newTemplate()" *ngIf="hasR"><md-icon>add</md-icon> Nouveau Template</button>
       <button md-raised-button color="primary" (click)="updateTemplate()" *ngIf="shouldDisplayUpdateButton()"><md-icon>save</md-icon> {{ currentTemplate?.id > 0 ? 'Mettre à jour' : 'Ajouter'}} ce template</button>
       <button md-button color="warn" (click)="deleteTemplate()" *ngIf="shouldDisplayDeleteButton()"><md-icon>delete_forever</md-icon> Supprimer ce template</button>
     </div>

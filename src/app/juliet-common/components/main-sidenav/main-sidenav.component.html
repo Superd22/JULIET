@@ -1,10 +1,14 @@
 <div fxLayout fxLayoutWrap>
-  <button fxFlex="100" md-button uiSref="secure.Default" uiSrefActive="active">INDEX</button>
-  <button fxFlex="100" md-button uiSref="secure.user" uiSrefActive="active">Mon profile</button>
-  <button fxFlex="100" md-button uiSref="secure.Hangar" uiSrefActive="active">Hangar</button>
-  <button fxFlex="100" md-button uiSref="secure.Tags.index.list" uiSrefActive="active">T.A.G.S</button>
-  <button fxFlex="100" md-button uiSref="secure.TS3" uiSrefActive="active">TeamSpeak</button>
 
+  <div *ngIf="isSibylla" fxLayout fxLayoutWrap>
+    <button fxFlex="100" md-button uiSref="secure.Default" uiSrefActive="active">INDEX</button>
+    <button fxFlex="100" md-button uiSref="secure.user" uiSrefActive="active">Mon profile</button>
+    <button fxFlex="100" md-button uiSref="secure.Hangar" uiSrefActive="active">Hangar</button>
+    <button fxFlex="100" md-button uiSref="secure.Tags.index.list" uiSrefActive="active">T.A.G.S</button>
+    <button fxFlex="100" md-button uiSref="secure.TS3" uiSrefActive="active">TeamSpeak</button>
+  </div>
 
-  <button fxFlex="100" md-button uiSref="secure.Hangar.adminTypes" uiSrefActive="active">Admin Vaisseaux</button>
+  <div *ngIf="isAdmin" fxLayout fxLayoutWrap fxFlex>
+    <button fxFlex="100" md-button uiSref="secure.Hangar.adminTypes" uiSrefActive="active">Admin Vaisseaux</button>
+  </div>
 </div>

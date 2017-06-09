@@ -45,20 +45,17 @@ export class JulietRightsService {
     return this.api.fetchAndCache(this._usersRightsCache.enforce_get_last_map(right, userId), target, force, call);
   }
 
-  public can_see_juliet(force?: boolean): BehaviorSubject<boolean> {
+  public can_see_juliet(force?: boolean): Observable<boolean> {
+    this.user_can("USER_CAN_SEE_JULIET", null, null, force).asObservable().subscribe((data) => {
+      if (data === true) {
+        this.userIsAuthorized.next(true);
+        this._authorizePacket.next(data);
+        this.hydrateUserRights();
+      }
+      else this.userIsAuthorized.next(false);
+    });
 
-    if (this.userIsAuthorized.getValue() === false || force === true) {
-      this.user_can("USER_CAN_SEE_JULIET").subscribe((data) => {
-        if (data === true) {
-          this.userIsAuthorized.next(true);
-          this._authorizePacket.next(data);
-          this.hydrateUserRights();
-        }
-        else this.userIsAuthorized.next(false);
-      });
-    }
-
-    return this.userIsAuthorized;
+    return this.userIsAuthorized.asObservable();
 
   }
 
@@ -76,7 +73,7 @@ export class JulietRightsService {
         if (data) {
           this._usersRightsCache.set_user_id(data.userId);
           this.userId = data.userId;
-          this.userIsAdmin = data.isAdmin;
+          this.userIsAdmin.next(data.isAdmin);
         }
       }
     );
@@ -88,9 +85,11 @@ export class JulietRightsService {
    * @return a BehaviorSubject, true = admin | false = non admin.
    */
   public can_admin_juliet(force?: boolean): BehaviorSubject<boolean> {
-    if (this.userIsAdmin.getValue() === false || force === true)
+    if ( !this.userIsAdmin || this.userIsAdmin.getValue() === false || force === true)
       this.user_can("USER_IS_ADMIN").subscribe(
-        data => this.userIsAdmin.next(data.data)
+        data => {
+          this.userIsAdmin.next(data);
+        }
       );
 
     return this.userIsAdmin;

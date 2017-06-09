@@ -8,10 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainSidenavComponent implements OnInit {
 
-  private _isAdmin: boolean = false;
+  /** if the current user is an admin */
+  public isAdmin: boolean = false;
+  /** if the current user is a sibylla logged-in user. */
+  public isSibylla: boolean = false;
 
   constructor(private rights: JulietRightsService) {
-    rights.can_admin_juliet().subscribe((canAdmin) => this._isAdmin = canAdmin);
+    rights.can_admin_juliet().subscribe((canAdmin) => this.isAdmin = canAdmin);
+    rights.can_see_juliet().subscribe((canSeeSibylla) => this.isSibylla = canSeeSibylla);
   }
 
   ngOnInit() {
