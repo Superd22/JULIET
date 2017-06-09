@@ -12,7 +12,7 @@ export class JulietAPIService {
   /** main api url for this env */
   public api = environment.julietAPI;
   /** latest callback with an error inside */
-  private _latestErrorReturn:BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  private _latestErrorReturn: BehaviorSubject<any> = new BehaviorSubject<any>(null);
 
   constructor(protected http: Http) { }
 
@@ -39,10 +39,10 @@ export class JulietAPIService {
       .catch((error: any) => Observable.throw(error.json().error || 'Server Error'));
   }
 
-  public post(url: string, params?: any, raw:boolean=true) {
+  public post(url: string, params?: any, raw: boolean = true) {
     let payload = params || {};
 
-    if(!raw) payload = this.buildParameters(payload);
+    if (!raw) payload = this.buildParameters(payload);
     if (environment.useDevDb) payload["UseDevDb"] = true;
 
     // TO DO Add headers
@@ -53,27 +53,27 @@ export class JulietAPIService {
         this.mainErrorHandler(ret)
         return ret;
       }).share()
-      .catch((error: any) => Observable.throw( typeof error.json == "function" ? error.json().error : 'Server Error'));
+      .catch((error: any) => Observable.throw(typeof error.json == "function" ? error.json().error : 'Server Error'));
   }
 
   private mainErrorHandler(ret) {
-    if(ret.error != null && ret.error == true) {
+    if (ret.error != null && ret.error == true) {
       this._latestErrorReturn.next(ret);
     }
   }
 
-  public get onErrorPacket():BehaviorSubject<any> {
+  public get onErrorPacket(): BehaviorSubject<any> {
     return this._latestErrorReturn;
   }
 
-    /**
-   * Helper function to fetch and catch data into a given map
-   * @param map the cache map
-   * @param key the key for the current cache entry
-   * @param force force update (otherwise use cache)
-   * @param call the api call to make on update
-   * @todo figure out if we need to buffer the maps > N entries
-   */
+  /**
+ * Helper function to fetch and catch data into a given map
+ * @param map the cache map
+ * @param key the key for the current cache entry
+ * @param force force update (otherwise use cache)
+ * @param call the api call to make on update
+ * @todo figure out if we need to buffer the maps > N entries
+ */
   public fetchAndCache(map: Map<number, ReplaySubject<any>>, key: number, force: boolean, call: Observable<any>): ReplaySubject<any> {
     let cache = map.get(key);
 

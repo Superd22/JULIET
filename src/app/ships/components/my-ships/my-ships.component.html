@@ -4,14 +4,14 @@
   </ju-v3-heading>
 
   <div *ngIf="hangar">
-    <ju-a-ship-label *ngFor="let ship of hangar.ships" [ship]="ship" (onDelete)="deleteShip($event)" [edit]="hangar.canAdmin"></ju-a-ship-label>
+    <ju-a-ship-label *ngFor="let ship of hangar.ships" [ship]="ship" (onDelete)="deleteShip($event)" [edit]="hangar?.canAdmin"></ju-a-ship-label>
   </div>
 
-  <md-input-container LayoutMargin class="ship-add">
+  <md-input-container LayoutMargin class="ship-add" *ngIf="hangar.canAdmin">
     <input mdInput placeholder="Ajouter un nouveau vaisseau" [mdAutocomplete]="auto" [formControl]="typeCtrl" [disabled]="busy">
   </md-input-container>
 
-  <md-autocomplete #auto="mdAutocomplete" [displayWith]="displayType">
+  <md-autocomplete #auto="mdAutocomplete" [displayWith]="displayType" >
     <md-option *ngFor="let type of filteredType | async" [value]="type" (onSelectionChange)="addShip(type)">
       {{ type.name }}
     </md-option>

@@ -1,7 +1,9 @@
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { StateService } from '@uirouter/angular';
 import { MalihuScrollbarService } from 'ngx-malihu-scrollbar';
 import { JulietShipsService } from './../../services/juliet-ships.service';
 import { ShipModel } from './../../interfaces/ship-model';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 
 @Component({
   selector: 'app-admin-types',
@@ -12,9 +14,14 @@ export class AdminTypesComponent implements OnInit, OnDestroy {
 
   public shipTypes: ShipModel[] = [];
   public activeShip: ShipModel = { id: -1, type: "", ico: "", parent: 0, name: "" };
-  constructor(private api: JulietShipsService, private mScrollbarService:MalihuScrollbarService) { }
+  @Input()
+  private _auth: BehaviorSubject<boolean>;
+  constructor(private api: JulietShipsService, private mScrollbarService: MalihuScrollbarService, private state: StateService) {
+
+  }
 
   ngOnInit() {
+    this.ensureAuthorize();
     this.fetchTypes();
     this.handleScrollBar(true);
   }
@@ -23,12 +30,19 @@ export class AdminTypesComponent implements OnInit, OnDestroy {
     this.handleScrollBar(false);
   }
 
+  private ensureAuthorize() {
+    if (this._auth.getValue()) return;
+    else {
+      this.state.go("secure.error.unauthorized", { required: "USER_IS_ADMIN" });
+    }
+  }
+
   /**
    * Register or de-register the custom scroll-bar for the types of ships
    * @param adding if we're adding the scroll bar or not (false for un-register)
    */
   private handleScrollBar(adding: boolean): void {
-    if(adding) 
+    if (adding)
       this.mScrollbarService.initScrollbar('.ships-wraper', { axis: 'y', theme: 'dark-thick', scrollInertia: 0, scrollButtons: { enable: true } });
     else this.mScrollbarService.destroy('.ships-wraper');
   }

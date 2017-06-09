@@ -17,13 +17,13 @@ export class TagListComponent implements OnInit {
 
   @Input()
   /* Defined in a-tag.component.ts  */
-  protected mainList: Boolean = true;
+  protected mainList: boolean = true;
   @Input()
   /* Defined in a-tag.component.ts  */
-  protected editable: Boolean = false;
+  protected editable: boolean = false;
   @Input()
   /* Defined in a-tag.component.ts  */
-  protected userHas: Boolean = false;
+  protected userHas: boolean = false;
   @Input()
   public busy: boolean = false;
 

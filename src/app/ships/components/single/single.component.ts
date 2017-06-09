@@ -22,6 +22,7 @@ export class SingleShipViewverComponent implements OnInit, OnChanges, AfterViewI
   @Input("shipComponent")
   public shipComponent: AShipLabelComponent;
   public currentUserCan = false;
+  public hasR: boolean = false;
 
   constructor(private api: JulietShipsService, public hangarAPI: JulietHangarService, public tagsAPI: TagsService, public rights: JulietRightsService) { }
 
@@ -36,6 +37,8 @@ export class SingleShipViewverComponent implements OnInit, OnChanges, AfterViewI
   private initShip() {
     if (this.shipComponent) this.ship = this.shipComponent.ship;
     if (this.ship) this._shipID = this.ship.id;
+
+    this.rights.user_can("USER_CAN_EDIT_SHIP_TAGS", 0, this.ship.id).subscribe((can) => this.hasR = can);
   }
 
   ngOnChanges(changes: SimpleChanges): void {

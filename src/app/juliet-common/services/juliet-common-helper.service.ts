@@ -1,3 +1,5 @@
+import { Location } from '@angular/common';
+import { UIRouter, Transition } from '@uirouter/angular';
 import { JulietAPIService } from './juliet-api.service';
 import { CompleterData, CompleterService } from 'ng2-completer';
 import { Injectable } from '@angular/core';
@@ -10,7 +12,9 @@ export class JulietCommonHelperService {
   /** if we need to display tuto tooltips */
   private _tutorialMod: boolean = false;
 
-  constructor(private completerService: CompleterService, private api: JulietAPIService) { }
+  constructor(private completerService: CompleterService, private api: JulietAPIService) {
+  }
+
   /**
    * Check two objects to see if they have the same properties and propertie value
    * Usually used for checking if an object was changed by the user.
