@@ -73,7 +73,7 @@ export class JulietRightsService {
         if (data) {
           this._usersRightsCache.set_user_id(data.userId);
           this.userId = data.userId;
-          this.userIsAdmin = data.isAdmin;
+          this.userIsAdmin.next(data.isAdmin);
         }
       }
     );
@@ -85,7 +85,7 @@ export class JulietRightsService {
    * @return a BehaviorSubject, true = admin | false = non admin.
    */
   public can_admin_juliet(force?: boolean): BehaviorSubject<boolean> {
-    if (this.userIsAdmin.getValue() === false || force === true)
+    if ( !this.userIsAdmin || this.userIsAdmin.getValue() === false || force === true)
       this.user_can("USER_IS_ADMIN").subscribe(
         data => {
           this.userIsAdmin.next(data);

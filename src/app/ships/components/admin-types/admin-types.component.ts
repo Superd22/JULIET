@@ -1,3 +1,4 @@
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { StateService } from '@uirouter/angular';
 import { MalihuScrollbarService } from 'ngx-malihu-scrollbar';
 import { JulietShipsService } from './../../services/juliet-ships.service';
@@ -14,8 +15,10 @@ export class AdminTypesComponent implements OnInit, OnDestroy {
   public shipTypes: ShipModel[] = [];
   public activeShip: ShipModel = { id: -1, type: "", ico: "", parent: 0, name: "" };
   @Input()
-  private _auth: boolean = false;
-  constructor(private api: JulietShipsService, private mScrollbarService: MalihuScrollbarService, private state: StateService) { }
+  private _auth: BehaviorSubject<boolean>;
+  constructor(private api: JulietShipsService, private mScrollbarService: MalihuScrollbarService, private state: StateService) {
+
+  }
 
   ngOnInit() {
     this.ensureAuthorize();
@@ -28,9 +31,9 @@ export class AdminTypesComponent implements OnInit, OnDestroy {
   }
 
   private ensureAuthorize() {
-    if (this._auth) return;
+    if (this._auth.getValue()) return;
     else {
-      this.state.go("secure.error.unauthorized", {required: "USER_IS_ADMIN"});
+      this.state.go("secure.error.unauthorized", { required: "USER_IS_ADMIN" });
     }
   }
 
