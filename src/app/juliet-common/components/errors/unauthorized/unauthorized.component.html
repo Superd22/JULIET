@@ -5,13 +5,14 @@
   <div fxLayout="column" fxFlex>
     <p layoutMargin layoutPadding>
       Vous n'avez pas les autorisations nécéssaires pour accéder à cette page. Si vous pensez qu'il s'agit d'une erreur, merci
-      de contacter un administrateur. <br />
-      <br /><em>Cet incident a été loggé.</em>
+      de contacter un administrateur.
     </p>
 
-    <p *ngIf="requiredRight">
-      {{requiredRight}}
+    <p  layoutMargin layoutPadding *ngIf="requiredRight">
+      <button md-button disabled>Droit requis: </button> <button md-button disabled>{{requiredRight}}</button>
     </p>
+    
+    <em layoutMargin layoutPadding>Cet incident a été loggé.</em>
 
     <button md-button (click)="getBack()"><md-icon>arrow_back</md-icon> {{ canGetBack() ? 'Retourner à la page précédente' : 'Retourner à l\'accueil' }}</button>
   </div>

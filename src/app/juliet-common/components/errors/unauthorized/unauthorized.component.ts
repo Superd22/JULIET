@@ -10,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 export class ErrorUnauthorizedComponent implements OnInit {
 
 
-  public requiredRight: string = null;
+  public requiredRight: string = "USER_NO_RIGHTS";
   private _backwards: Transition = null;
 
   constructor(private state: StateService, private helper: JulietCommonHelperService) { }
