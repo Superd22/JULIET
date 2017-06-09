@@ -17,7 +17,7 @@ export class ErrorUnauthorizedComponent implements OnInit {
 
   ngOnInit() {
     this.requiredRight = this.state.params.required;
-    this._backwards = this.helper.getNLatestTransition(2);
+    //this._backwards = this.helper.getNLatestTransition(2);
   }
 
   public getBack() {

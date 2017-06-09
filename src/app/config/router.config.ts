@@ -6,6 +6,8 @@ import * as vis from '@uirouter/visualizer';
 
 export function RouterConfig(router: UIRouter, injector: Injector) {
 
+    let uiTrans: boolean = false;
+
     /**
      * For some reason, on html5 loading the router doesn't trigger a state change
      * This function checks the current url, and re-sync ui-router.
@@ -23,9 +25,20 @@ export function RouterConfig(router: UIRouter, injector: Injector) {
 
     enforce_state();
 
+    /**
+     * For some reason html5 the router doesn't trigger for a prev/next browser either...
+     */
+    router.urlService.onChange((test) => {
+        if (!uiTrans) enforce_state();
+        uiTrans = false;
+    });
+
     // Dev StateTree Debug    
     if (!environment.production) vis.visualizer(router);
 
     const juCommon = injector.get(JulietCommonHelperService);
-    router.transitionService.onBefore({ to: "**" }, () => { juCommon.closeSideNav() });
+    router.transitionService.onBefore({ to: "**" }, () => {
+        juCommon.closeSideNav();
+        uiTrans = true;
+    });
 }
