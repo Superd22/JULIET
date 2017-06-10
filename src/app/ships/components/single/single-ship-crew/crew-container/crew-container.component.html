@@ -1,0 +1,5 @@
+<div class="crew-droppable-container" ngxDroppable fxLayout fxLayoutWrap [model]="crewManifest.positions">
+  <ng-container *ngFor="let pos of crewManifest.positions">
+    <ju-ship-template-crew-position ngxDraggable [model]="pos" [position]="pos" fxFlex></ju-ship-template-crew-position>
+  </ng-container>
+</div>

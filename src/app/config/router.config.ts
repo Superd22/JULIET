@@ -34,7 +34,7 @@ export function RouterConfig(router: UIRouter, injector: Injector) {
     });
 
     // Dev StateTree Debug    
-    if (!environment.production) vis.visualizer(router);
+    // if (!environment.production) vis.visualizer(router);
 
     const juCommon = injector.get(JulietCommonHelperService);
     router.transitionService.onBefore({ to: "**" }, () => {

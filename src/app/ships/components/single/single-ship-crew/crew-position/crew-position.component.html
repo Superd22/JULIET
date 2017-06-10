@@ -1,0 +1,18 @@
+<div class="position" mwlResizable [resizeEdges]="{right: true, left: true}" (resizing)="resize($event)" 
+[ngStyle]="{'min-width':minSize + 'px'}">
+  <md-toolbar>
+    <md-icon ngxDragHandle class="handle-button">more_vert</md-icon>
+    <md-input-container floatPlaceholder="never">
+      <input fxFlex="100" mdInput [(ngModel)]="position.name" mdTooltip="Nom de la position" placeholder="Nom de la position">
+    </md-input-container>
+  </md-toolbar>
+  <div layoutMargin layoutPadding>
+    <div class="a-pos-box" *ngFor="let i of colectionOf(position.amount)">
+
+    </div>
+  </div>
+  <md-input-container class="pos-amount">
+    <input mdInput type="number" [(ngModel)]="position.amount" mdTooltip="Nombre de postes" placeholder="Nombre de postes">
+  </md-input-container>
+
+</div>

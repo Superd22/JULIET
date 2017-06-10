@@ -1,0 +1,37 @@
+.position {
+    background-color: #1a1c22;
+    margin: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.24);
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.15);
+    min-width: 250px;
+    .a-pos-box {
+        width: 65px;
+        height: 65px;
+        border: 1px solid rgb(49, 49, 49);
+        background: #0f0f10;
+        display: inline-block;
+    }
+    .pos-amount .mat-input-wrapper {
+        margin: 0px;
+        margin-left: 1em;
+        margin-top: 1em;
+    }
+    .handle-button {
+        cursor: move;
+        cursor: grab;
+        &:active {
+            cursor: grabbing;
+        }
+    }
+}
+
+.gu-transit {
+    .position {
+        background-color:rgba(0,0,0,0.2);
+        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0);
+        border: 1px dotted rgba(255, 255, 255, 0.24);
+        .mat-toolbar {
+            opacity:0.5;
+        }
+    }
+}

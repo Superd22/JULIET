@@ -1,4 +1,19 @@
 <div class="crew-droppable-wrapper">
+
+  <div class="crew-edit-panel" [ngClass]="{active: editMod}">
+
+  </div>
   <div class="crew-droppable">
+    <div class="button-holder" fxLayout>
+      <button md-icon-button class="edit-toggle" color="primary" [ngClass]="{active: editMod}" (click)="toggleEditMod()"><md-icon>mode_edit</md-icon></button>
+      <button md-icon-button color="primary" (click)="addNewPosition()"><md-icon>add</md-icon></button>
+      <button md-icon-button color="primary"><md-icon>save</md-icon></button>
+      <button md-icon-button color="warn"><md-icon>cached</md-icon></button>
+    </div>
+
+    <ju-ship-template-crew-container [crewManifest]="template.crew_compliment"></ju-ship-template-crew-container>
+
   </div>
 </div>
+
+{{ template | json }}

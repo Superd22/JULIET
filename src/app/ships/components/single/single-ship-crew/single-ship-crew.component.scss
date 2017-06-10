@@ -1,12 +1,52 @@
+$anim_time: 0.5s;
 .crew-droppable-wrapper {
     display:flex;
     flex:1;
     min-height: 300px;
     max-height: 600px;
     overflow:auto;
+    position: relative;
+    .button-holder {
+        padding:5px;
+        width: 100%;
+        z-index:10;
+        position: relative;
+        .edit-toggle {
+            transition: $anim_time;
+            &.active {
+                color: #455a64;
+                transform: rotate(-45deg);
+            }
+        }
+    }
+
+
+    .crew-edit-panel {
+        $width:300px;
+        position:absolute;
+        top:0px;
+        left: -$width - 50px;
+        z-index:9;    
+        background: rgba(255, 255, 255, 0.26);
+        border-right: 1px solid rgba(255, 255, 255, 0.21);
+        box-shadow: 10px 0px 10px rgba(0, 0, 0, 0.05);
+        width: $width;
+        height: 100%;
+        transition: $anim_time;
+        &.active {
+            left:0px;
+        }
+    }
+
     .crew-droppable {
         background: #455a64;
         flex: 1;
         min-height: 300px;
+        .crew-droppable-container {
+            background: rgba(255,255,20,0.3);
+            padding:20px;
+            width:100%;
+            height:100%;
+        }
     }
 }
