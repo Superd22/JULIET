@@ -1,7 +1,7 @@
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { environment } from './../../../environments/environment';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs/Rx';
 import { Http, Response, Headers, URLSearchParams } from '@angular/http';
 import { JulietRightsService } from './juliet-rights.service';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -13,6 +13,9 @@ export class JulietAPIService {
   public api = environment.julietAPI;
   /** latest callback with an error inside */
   private _latestErrorReturn: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+
+  private lastCall: number = 0;
+  private callCount: number = 0;
 
   constructor(protected http: Http) { }
 
@@ -30,13 +33,15 @@ export class JulietAPIService {
   }
 
   public get(url: string, params?: {}) {
-    return this.http.get(environment.julietAPI + url, { search: this.buildParameters(params), withCredentials: true })
+    let call = this.http.get(environment.julietAPI + url, { search: this.buildParameters(params), withCredentials: true })
       .map((res) => {
         let ret = res.json();
         this.mainErrorHandler(ret)
         return ret;
       })
       .catch((error: any) => Observable.throw(error.json().error || 'Server Error'));
+
+    return this.sendOrDelayCall(call);
   }
 
   public post(url: string, params?: any, raw: boolean = true) {
@@ -47,13 +52,32 @@ export class JulietAPIService {
 
     // TO DO Add headers
 
-    return this.http.post(environment.julietAPI + url, payload, { withCredentials: true })
+    let call = this.http.post(environment.julietAPI + url, payload, { withCredentials: true })
       .map((res) => {
         let ret = res.json();
         this.mainErrorHandler(ret)
         return ret;
       }).share()
       .catch((error: any) => Observable.throw(typeof error.json == "function" ? error.json().error : 'Server Error'));
+
+    return this.sendOrDelayCall(call);
+  }
+
+  private sendOrDelayCall(call: Observable<any>) {
+    let now = new Date().getTime();
+    this.callCount = this.callCount + 1;
+    if (this.lastCall + 500 > now && this.callCount > 5) {
+      let wait = Observable.concat(Observable.timer(700),call);
+
+      return wait.last();
+    }
+    else {
+      if (this.lastCall + 500 <= now) {
+        this.callCount = 0;
+        this.lastCall = now;
+      }
+      return call;
+    }
   }
 
   private mainErrorHandler(ret) {

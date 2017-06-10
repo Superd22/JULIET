@@ -49,7 +49,7 @@ export class SingleShipVariantsComponent implements OnInit, OnChanges {
         (ship) => this.ship = ship
       )
     }
-    this.pickTemplate(this.ship.templates.find((test) => test.id == this.selectedTemplate));
+    if(this.ship.templates.length > 0) this.pickTemplate(this.ship.templates[this.ship.templates.length-1]);
 
     this.rights.user_can("USER_CAN_EDIT_SHIP_TAGS", 0, this.ship.id).subscribe((can) => this.hasR = can);
   }
@@ -69,11 +69,13 @@ export class SingleShipVariantsComponent implements OnInit, OnChanges {
       name: "",
       ship_id: this._shipId,
       ship_type_id: null,
+      crew_compliment: null,
     });
   }
 
   public pickTemplate(template: AShipTemplate) {
     this.currentTemplate = template;
+    this.selectedTemplate = template.id;
     this.generateTemplateBackUp();
   }
 

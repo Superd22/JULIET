@@ -1,0 +1,12 @@
+.crew-droppable-wrapper {
+    display:flex;
+    flex:1;
+    min-height: 300px;
+    max-height: 600px;
+    overflow:auto;
+    .crew-droppable {
+        background: #455a64;
+        flex: 1;
+        min-height: 300px;
+    }
+}

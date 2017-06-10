@@ -1,3 +1,4 @@
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { TagXTakenEventEmitter } from './../interfaces/tag-x-taken';
 import { AShipTemplate } from './../../ships/interfaces/a-template';
 import { AShip } from './../../ships/interfaces/a-ship';
@@ -16,7 +17,7 @@ import { ReplaySubject } from "rxjs/ReplaySubject";
 @Injectable()
 export class TagsService {
 
-  public tags: ATag[];
+  public tags: BehaviorSubject<ATag[]> = new BehaviorSubject<ATag[]>(null);
   public selectedTag: ATag;
   public isLad;
 
@@ -39,7 +40,8 @@ export class TagsService {
   constructor(private api: JulietAPIService,
     public completerService: CompleterService, public state: StateService,
     public rights: JulietRightsService) {
-    //this.isLad = false;
+
+    this.tags.next(null);
   }
 
   /**
@@ -65,10 +67,19 @@ export class TagsService {
   }
 
   // Gets all tags 
-  public getTags(update?: Boolean) {
-    if (!this.tags || update) this.api.get(this.apiNamespace + "tags_getphp").subscribe(
-      data => this.tags = data.data
+  public getTags(force?: boolean): BehaviorSubject<ATag[]> {
+    let call = this.api.get(this.apiNamespace + "tags_getphp").map(
+      data => this.tags.next(data.data)
     );
+
+
+    if(this.tags.getValue() == null || force) {
+      // Prevent more calls until we've fetched
+      if(this.tags.getValue() == null) this.tags.next([]);
+      call.subscribe();
+    }
+
+    return this.tags;
   }
 
 

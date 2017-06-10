@@ -21,6 +21,7 @@ import { SingleShipViewverComponent } from './components/single/single.component
 import { JulietHangarService } from "./services/juliet-hangar.service";
 import { AlignShipIcoDirective } from './directives/align-ship-ico.directive';
 import { SingleShipVariantsComponent } from './components/single/single-ship-variants/single-ship-variants.component';
+import { SingleShipCrewComponent } from './components/single/single-ship-crew/single-ship-crew.component';
 
 @NgModule({
   imports: [
@@ -41,7 +42,8 @@ import { SingleShipVariantsComponent } from './components/single/single-ship-var
     AdminTypesComponent, HangarAdminTypesEditorComponent, HangarAdminATypeComponent, ShipModelWithoutParentPipe,
     SingleShipViewverComponent,
     AlignShipIcoDirective,
-    SingleShipVariantsComponent],
+    SingleShipVariantsComponent,
+    SingleShipCrewComponent],
   exports: [MyShipsComponent],
 })
 export class ShipsModule { }

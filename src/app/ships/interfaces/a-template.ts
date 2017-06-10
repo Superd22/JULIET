@@ -1,3 +1,4 @@
+import { ATemplateCrew } from './crew/a-template-crew';
 /**
  * Declares a template for a ship or a ship type
  */
@@ -10,4 +11,6 @@ export interface AShipTemplate {
     ship_type_id:number;
     /** name of this template */
     name:string;
+    /** crew compliment for this template */
+    crew_compliment:ATemplateCrew;
 }   
