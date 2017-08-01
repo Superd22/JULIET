@@ -48,6 +48,9 @@ export class SingleShipCrewComponent implements OnInit {
       id:0,
       template_id:this.template.id,
       name:null,
+      parent:null,
+      size:1,
+      amount:1,
     };
 
     this.positions.push(position);

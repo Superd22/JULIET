@@ -10,5 +10,8 @@ export interface ACrewPosition {
     template_id: number;
     /** our daddy position */
     parent: number;
+    /** display size of this position */
     size: number;
+    /** amount of jobs avaliable in that position */
+    amount:number;
 }

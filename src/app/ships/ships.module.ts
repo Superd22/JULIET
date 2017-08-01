@@ -25,7 +25,6 @@ import { SingleShipCrewComponent } from './components/single/single-ship-crew/si
 import { NgxDnDModule } from '@swimlane/ngx-dnd';
 import { CrewPositionComponent } from './components/single/single-ship-crew/crew-position/crew-position.component';
 import { CrewContainerComponent } from './components/single/single-ship-crew/crew-container/crew-container.component';
-import { BlueResizableDirective } from './directives/blue-resizable.directive';
 import {ResizableModule} from 'angular-resizable-element';
 
 @NgModule({
@@ -53,7 +52,7 @@ import {ResizableModule} from 'angular-resizable-element';
     SingleShipCrewComponent,
     CrewPositionComponent,
     CrewContainerComponent,
-    BlueResizableDirective],
+    ],
   exports: [MyShipsComponent],
 })
 export class ShipsModule { }
