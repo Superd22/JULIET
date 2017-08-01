@@ -33,7 +33,7 @@ import { MalihuScrollbarModule } from 'ngx-malihu-scrollbar';
   imports: [
     UIRouterModule.forRoot({
       config: RouterConfig,
-      //useHash: !environment.production,
+      useHash: !environment.production,
     }),
     BrowserModule,
     JulietMaterialModule,
