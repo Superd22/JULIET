@@ -18,7 +18,7 @@
       <ju-my-ships [hangar]="hangar" *ngIf="hangar" (activeShip)="setActiveShip($event)"></ju-my-ships>
     </div>
     <div fxFlex.gt-sm="65" fxFlex.lt-sm="100" LayoutPadding style="position: relative; z-index: 2;">
-      <ju-ship-single [shipComponent]="hangarAPI.currentSingleShip" fxFlex></ju-ship-single>
+      <ju-ship-single [shipComponent]="hangarAPI?.currentSingleShip" fxFlex></ju-ship-single>
     </div>
   </div>
 </ju-v3-pannel>
