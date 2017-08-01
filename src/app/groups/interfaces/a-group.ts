@@ -1,8 +1,9 @@
 export interface AGroup {
     /* DB ID */
-    id:Number,
+    id: number,
     /* Full UTF8 Group Name */
-    nom:String,
+    nom: string,
     /* Full UTF8 Description */
-    description:String,
+    description: string,
+    members: string;
 }

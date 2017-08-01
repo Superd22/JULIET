@@ -1,3 +1,4 @@
+import { JulietMaterialModule } from './../juliet-common/material/material.module';
 import { JulietCommonModule } from './../juliet-common/juliet-common.module';
 import { STATES } from './states/_.states';
 import { UIRouterModule } from '@uirouter/angular';
@@ -14,7 +15,8 @@ import { JulietGroupsService } from './services/juliet-groups.service';
     UIRouterModule.forChild({
       states: STATES
     }),
-    JulietCommonModule
+    JulietCommonModule,
+    JulietMaterialModule
   ],
   declarations: [GroupsComponent, GroupComponent, ListeComponent],
   providers: [JulietGroupsService],

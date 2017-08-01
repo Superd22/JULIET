@@ -1,3 +1,4 @@
+import { CdkTableModule } from '@angular/cdk';
 import { JulietMaterialModule } from './juliet-common/material/material.module';
 import { TeamSpeakModule } from './team-speak/team-speak.module';
 import { MainSidenavComponent } from './juliet-common/components/main-sidenav/main-sidenav.component';
@@ -36,6 +37,7 @@ import { MalihuScrollbarModule } from 'ngx-malihu-scrollbar';
       useHash: !environment.production,
     }),
     BrowserModule,
+    CdkTableModule,
     JulietMaterialModule,
     FormsModule,
     HttpModule,
