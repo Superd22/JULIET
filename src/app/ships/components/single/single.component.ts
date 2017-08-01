@@ -38,6 +38,7 @@ export class SingleShipViewverComponent implements OnInit, OnChanges, AfterViewI
     if (this.shipComponent) this.ship = this.shipComponent.ship;
     if (this.ship) this._shipID = this.ship.id;
 
+    if(this.ship && this.ship.id)
     this.rights.user_can("USER_CAN_EDIT_SHIP_TAGS", 0, this.ship.id).subscribe((can) => this.hasR = can);
   }
 

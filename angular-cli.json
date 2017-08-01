@@ -52,6 +52,9 @@
       "style": false,
       "template": false
     },
+    "serve": {
+      "port": 1337
+    },
     "spec": {
       "class": false,
       "component": true,

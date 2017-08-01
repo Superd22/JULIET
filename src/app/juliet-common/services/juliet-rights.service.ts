@@ -1,6 +1,6 @@
 import { UsersRightsHash } from './../interfaces/users-rights-hash';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs/Rx';
 import { JulietAPIService } from './juliet-api.service';
 import { Injectable } from '@angular/core';
 import { RemoteData } from 'ng2-completer';
