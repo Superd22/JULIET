@@ -2,12 +2,58 @@
 @import 'assets/material/theme';
 @import 'assets/main';
 
+$break-small: 450px;
+
+body{
+    margin: 0;
+}
+.app-layout{
+    min-height:100vh;
+}
+
+.mat-sidenav {
+    height:100vh;
+}
+.mat-sidenav-content{    
+    padding: 0px 30px;
+    flex:1;
+    @media screen and (max-width: $break-small) {
+        padding: 0px;
+    }
+}
+
 [layoutPadding] {
     padding: 5px 20px;
+    @media screen and (max-width: $break-small) {
+        padding: 4px;
+    }
 } 
 
 [layoutMargin] {
-    margin: 14px !important;
+    margin: 14px !important;    
+    @media screen and (max-width: $break-small) {
+        margin:4px !important;
+    }
+}
+
+[inlineIcon] {
+    line-height: 1rem;
+    height: 1rem !important;
+    width: 1rem !important;
+    vertical-align: middle;
+    vertical-align: middle;
+    &.mat-icon {
+        font-size: 1rem !important;
+    }
+}
+
+[infoText] {
+    text-align: justify;
+    font-size: 0.9rem;
+    line-height: 0.9rem;
+    padding: 10px 10px;
+    background: #2b3640;
+    border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .md-menu-content {
@@ -20,6 +66,21 @@
         height: 5px;
     }
 }
+hr {
+    height: 1px;
+    border: 0px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    background: rgba(0, 0, 0, 0.23);
+}
+html {
+    height:100vh;
+    overflow:hidden;
+}
+.mat-sidenav-container {
+    .mCustomScrollBox {flex:1;}
+    overflow:auto;
+    height:100vh;
+}
 .completer-input {
     width: 100%;
     padding: 5px;
@@ -28,6 +89,13 @@
     border: none;
     border-bottom: 1px solid #404144;
     color: white;
+}
+.mat-toolbar {
+    span {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
 }
 
 a {
@@ -47,7 +115,6 @@ a {
 body {
     background: #1a1c22;
     font-family: "Electrolize";
-    overflow: hidden;
 }
 
 md-sidenav {
@@ -68,4 +135,53 @@ h3 {
     letter-spacing: 0.3em;
     font-weight: 100;
     text-shadow: 0px 0px 6px white;
+}
+
+.ju_tag_heading {
+        color: #d5d5d5;
+        background-color: rgba(29,36,40,0.62);
+        border-radius: 3px;
+        border: 1px solid rgba(115,115,115,0.25);
+        box-shadow: 0px 0px 10px rgba(0,0,0,0.46);
+        padding: 15px;
+        display:block;
+        height: 65px;
+
+        h2 {
+            font-size: 2rem;
+            font-weight: bolder;
+            text-transform: uppercase;
+            margin: 0px;
+            &:before {
+                content: '/ /';
+                display: inline-block;
+                margin-right: 15px;
+                font-weight: 900;
+                font-family: fantasy;
+                margin-top: 0px;
+                line-height: 1rem;
+                font-size: 1.9rem;
+                color: #40c4ff;
+            }
+        }
+
+        em {
+            font-style: normal;
+            letter-spacing: .3rem;
+            font-weight: 100;
+            margin-left: 45px;
+        }
+
+        .left {
+            float:left;
+        }
+        .right {
+            float:right;
+        }
+    }
+
+.mat-input-subscript-wrapper {
+    color: #778c8b;
+    font-family: electrolize;
+    text-align: justify;
 }

@@ -3,13 +3,14 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MaterialModule } from '@angular/material';
 import { JulietCommonModule } from './../juliet-common/juliet-common.module';
 import { STATES } from './states/_.states';
-import { UIRouterModule } from 'ui-router-ng2';
+import { UIRouterModule } from '@uirouter/angular';
 import { JulietTsService } from './services/juliet-ts.service';
 import { TsMainComponent } from './components/ts-main/ts-main.component';
 import { TsServerStatusComponent } from './components/ts-server-status/ts-server-status.component';
 import { TsRegisterStatusComponent } from './components/ts-register-status/ts-register-status.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { JulietMaterialModule } from './../juliet-common/material/material.module';
 
 @NgModule({
   imports: [
@@ -18,7 +19,7 @@ import { CommonModule } from '@angular/common';
       states: STATES,
     }),
     JulietCommonModule,
-    MaterialModule,
+    JulietMaterialModule,
     FlexLayoutModule,
     FormsModule,
   ],

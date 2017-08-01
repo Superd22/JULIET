@@ -1,5 +1,5 @@
 import { UserComponent } from '../components/user.component';
-import { Transition } from 'ui-router-ng2';
+import { Transition } from '@uirouter/angular';
 export let user = {
     main: {
         name: "secure.user",
@@ -12,10 +12,12 @@ export let user = {
             {
                 token: '_userId',
                 deps: [Transition],
-                resolveFn: function (trans) {
-                    return trans.params().user_id;
-                }
+                resolveFn: resolveUserId
             },
         ],
     }
+}
+
+export function resolveUserId(trans:Transition) {
+    return trans.params().user_id;
 }

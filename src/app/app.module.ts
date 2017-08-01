@@ -1,7 +1,8 @@
+import { JulietMaterialModule } from './juliet-common/material/material.module';
 import { TeamSpeakModule } from './team-speak/team-speak.module';
 import { MainSidenavComponent } from './juliet-common/components/main-sidenav/main-sidenav.component';
 import { RouterConfig } from './config/router.config';
-import { UIRouterModule } from 'ui-router-ng2';
+import { UIRouterModule } from '@uirouter/angular';
 import { StatsModule } from './stats/stats.module';
 import { ShipsModule } from './ships/ships.module';
 import { RightsModule } from './rights/rights.module';
@@ -17,13 +18,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { MaterialModule, MdMenuModule, MdMenuTrigger } from '@angular/material';
+import {  MdMenuModule, MdMenuTrigger } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout'
-
-
-import { IonicApp, IonicModule } from 'ionic-angular';
 import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { MalihuScrollbarModule } from 'ngx-malihu-scrollbar';
 
 @NgModule({
   declarations: [
@@ -31,9 +31,12 @@ import { environment } from '../environments/environment';
     MainSidenavComponent,
   ],
   imports: [
-    MaterialModule.forRoot(),
-    MdMenuModule,
-    IonicModule.forRoot(AppComponent),
+    UIRouterModule.forRoot({
+      config: RouterConfig,
+      //useHash: !environment.production,
+    }),
+    BrowserModule,
+    JulietMaterialModule,
     FormsModule,
     HttpModule,
     CalendarModule,
@@ -48,13 +51,11 @@ import { environment } from '../environments/environment';
     TeamSpeakModule,
     TagsModule,
     UserModule,
-    FlexLayoutModule.forRoot(),
-    UIRouterModule.forRoot({
-      configClass: RouterConfig,
-      useHash: !environment.production,
-    }),
+    BrowserAnimationsModule,
+    FlexLayoutModule,
+    MalihuScrollbarModule.forRoot(),
   ],
   providers: [],
-  bootstrap: [IonicApp]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

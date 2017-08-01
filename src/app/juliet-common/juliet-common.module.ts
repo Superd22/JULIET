@@ -1,3 +1,6 @@
+import { ErrorUnauthorizedComponent } from './components/errors/unauthorized/unauthorized.component';
+import { SeoUrlPipe } from './pipes/seo-url.pipe';
+import { JulietMaterialModule } from './material/material.module';
 import { JulietCommonHelperService } from './services/juliet-common-helper.service';
 import { JuV3BluePannelComponent } from './components/_exports/ju-v3-blue-pannel/ju-v3-blue-pannel.component';
 import { FormsModule } from '@angular/forms';
@@ -16,7 +19,7 @@ import { V3PannelTitle } from './components/_exports/ju-v3-pannel/title/title.co
 import { JuV3PannelComponent } from './components/_exports/ju-v3-pannel/ju-v3-pannel.component';
 import { MdProgressBarModule, MaterialModule } from '@angular/material';
 import { STATES } from './states/_.states';
-import { UIRouterModule } from 'ui-router-ng2';
+import { UIRouterModule } from '@uirouter/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { JulietCommonComponent } from './components/juliet-common.component';
@@ -25,6 +28,9 @@ import { LoadingComponent } from './components/loading/loading.component';
 import { LoginComponent } from './components/login/login.component';
 import { SecureComponent } from './components/secure/secure.component';
 import { GoComponent } from './components/go/go.component';
+import { LayoutMarginDirective } from './directives/layout-margin.directive';
+import { LayoutPaddingDirective } from './directives/layout-padding.directive';
+import { ErrorsComponent } from './components/errors/errors.component';
 
 @NgModule({
   imports: [
@@ -32,18 +38,19 @@ import { GoComponent } from './components/go/go.component';
     UIRouterModule.forChild({
       states: STATES
     }),
-    MaterialModule,
+    JulietMaterialModule,
     FlexLayoutModule,
     FormsModule,
   ],
   exports: [
     JuV3PannelComponent, V3PannelTitle, JuV3SubPannelComponent, JuV3TabComponent, EnumKeysPipe, JuV3HeadingComponent, FilterPipe, CountPipe,
-    SplashComponent, JuV3BluePannelComponent
+    SplashComponent, JuV3BluePannelComponent, SeoUrlPipe
   ],
   declarations: [
     JulietCommonComponent, AuthComponent, LoadingComponent, LoginComponent, SecureComponent,
     GoComponent, JuV3PannelComponent, V3PannelTitle, JuV3SubPannelComponent, JuV3TabComponent, EnumKeysPipe,
-    JuV3HeadingComponent, FilterPipe, CountPipe, UnauthorizedComponent, SplashComponent, JuV3BluePannelComponent
+    JuV3HeadingComponent, FilterPipe, CountPipe, UnauthorizedComponent, SplashComponent, JuV3BluePannelComponent,
+    LayoutMarginDirective,LayoutPaddingDirective, SeoUrlPipe, ErrorsComponent, ErrorUnauthorizedComponent
   ],
   providers: [
     JulietAPIService, JulietRightsService, JulietCommonHelperService

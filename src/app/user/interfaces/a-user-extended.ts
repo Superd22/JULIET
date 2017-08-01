@@ -3,19 +3,19 @@ import { JuWing } from '../enums/ju-wing.enum';
 import { ARank } from './a-rank';
 
 export interface AUserExtended extends AUser {
-    id_forum:Number,
-    id:Number,
-    fleet:JuWing,
-    avatar:String,
-    grade:Number,
-    rank:ARank,
-    prenom?:String,
-    handle?:String,
-    nom?:String;
-    squad?:Number;
-    callsign?:String;
-    description?:String;
-    pending:Boolean;
-    activite?:Number;
-    notif?:any;
+    id_forum: number,
+    id: number,
+    fleet: JuWing,
+    avatar: string,
+    grade: number,
+    rank: ARank,
+    prenom?: string,
+    handle?: string,
+    nom?: string;
+    squad?: number;
+    callsign?: string;
+    description?: string;
+    pending: boolean;
+    activite?: number;
+    notif?: any;
 }

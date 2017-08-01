@@ -9,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DefaultComponent implements OnInit {
 
-  private motr: string;
+  public motr: string;
   private words = [
     "🎶 tu sera biiiiienvenue chez nouuus 🎶",
     "🎶 Give it up, baby give it up 🎶",

@@ -1,3 +1,5 @@
+import { Location } from '@angular/common';
+import { UIRouter, Transition } from '@uirouter/angular';
 import { JulietAPIService } from './juliet-api.service';
 import { CompleterData, CompleterService } from 'ng2-completer';
 import { Injectable } from '@angular/core';
@@ -7,8 +9,12 @@ import { MdSidenav } from '@angular/material';
 export class JulietCommonHelperService {
 
   protected sideNav: MdSidenav;
+  /** if we need to display tuto tooltips */
+  private _tutorialMod: boolean = false;
 
-  constructor(private completerService: CompleterService, private api: JulietAPIService) { }
+  constructor(private completerService: CompleterService, private api: JulietAPIService) {
+  }
+
   /**
    * Check two objects to see if they have the same properties and propertie value
    * Usually used for checking if an object was changed by the user.
@@ -17,13 +23,28 @@ export class JulietCommonHelperService {
    * @param properties an array of property name to be checked
    * @return true if same object, false if missing or mismatching pp
    */
-  public hasChangedObj(a, b, properties): Boolean {
+  public hasChangedObj(a, b, properties: string[]): Boolean {
     if (!a || !b || !properties || properties.length == 0) return false;
     for (var i = 0; i < properties.length; i++) {
       let pp = properties[i];
       if (a[pp] != b[pp]) return true;
     }
     return false;
+  }
+
+  /**
+   * @see _tutorialMod
+   * @return true for template mode, false otherwise.
+   */
+  public get isTutorial(): boolean {
+    return this._tutorialMod;
+  }
+
+  /**
+   * @param tutorial new value for tutorial mod
+   */
+  public set isTutorial(tutorial: boolean) {
+    this._tutorialMod = tutorial;
   }
 
   /**
@@ -42,18 +63,18 @@ export class JulietCommonHelperService {
   }
 
   /**
- * Closes the main sidenav
- */
+  * Closes the main sidenav  
+  */
   public closeSideNav() {
-    if(this.sideNav) this.sideNav.close();
+    if (this.sideNav) this.sideNav.close();
   }
 
   public toggleSideNav() {
-    if(this.sideNav) this.sideNav.toggle();
+    if (this.sideNav) this.sideNav.toggle();
   }
 
   public openSideNav() {
-    if(this.sideNav) this.sideNav.open();
+    if (this.sideNav) this.sideNav.open();
   }
 
   /**

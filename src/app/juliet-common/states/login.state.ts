@@ -1,7 +1,8 @@
-import { Transition } from 'ui-router-ng2';
+import { Transition } from '@uirouter/angular';
 import { LoginComponent } from './../components/login/login.component';
+import { Ng2StateDeclaration } from '@uirouter/angular';
 
-export let loginState = {
+export let loginState:Ng2StateDeclaration = {
     name: "Login",
     url: "login",
     component: LoginComponent,
@@ -9,8 +10,10 @@ export let loginState = {
         targetState: "secure.Default",
     },
     resolve: {
-        "_targetState": [Transition, function (trans) {
-            return trans.params().targetState;
-        }],
+        "_targetState": [Transition, loginTrans],
     },
+}
+
+export function loginTrans(trans:Transition) {
+    return trans.params().targetState;
 }

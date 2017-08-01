@@ -1,45 +1,61 @@
 <ju-v3-pannel>
-  <ju-v3-pannel-title class="ju_tag_heading">
+  <div class="ju_tag_heading title">
     <span class='right'>v3.0</span>
     <h2>Fiche Administrative</h2>
     <em>Car je sais tout de toiiii.</em>
-  </ju-v3-pannel-title>
-  <div *ngIf="user && user.id">
+  </div>
+  <div *ngIf="user && user.id" fxLayout="row" fxLayoutWrap>
 
-    <ju-v3-sub-pannel class="user-section" fxLayout fxLayoutWrapLayoutPadding LayoutMargin>
-      <ju-user-rank-big fxFlex="100" [rank]="user.rank" (rank)="rankChanged($event)" [user]="user" fxFlex="100"></ju-user-rank-big>
+    <ju-v3-sub-pannel class="user-section" fxLayout fxLayoutWrap LayoutPadding LayoutMargin fxFlex="100">
+      <ju-user-rank-big fxFlex="100" [rank]="user.rank" (rank)="rankChanged($event)" [user]="user"></ju-user-rank-big>
     </ju-v3-sub-pannel>
-    
+
     <ju-v3-sub-pannel class="user-section" fxFlex="100" LayoutPadding LayoutMargin>
 
+      <div fxLayout="column" fxLayoutWrap fxLayoutAlign="stretch flex-start">
+        <a [href]="'https://starcitizen.fr/Forum/memberlist.php?mode=viewprofile&u='+user.id_forum" target="_blank">
+        <button md-icon-button color="primary" mdTooltip="Profil Forum">
+         <md-icon>account_box</md-icon>
+        </button>
+        </a>
+        <a [href]="'https://robertsspaceindustries.com/citizens/'+userBackup.handle" target="_blank">
+        <button md-icon-button color="primary" mdTooltip="Profil RSI"><md-icon>language</md-icon></button>
+        </a>
+        <a [href]="'https://starcitizen.fr/Forum/ucp.php?i=pm&mode=compose&u='+user.id_forum" target="_blank">
+        <button md-icon-button color="primary" mdTooltip="M.P Forum"><md-icon>email</md-icon></button>
+        </a>
+      </div>
+
       <md-input-container>
-        <input md-input [(ngModel)]="user.handle" placeholder="Handle RSI" [disabled]="!canEdit" />
+        <input mdInput [(ngModel)]="user.handle" placeholder="Handle RSI" [disabled]="!canEdit" />
       </md-input-container>
 
       <md-input-container>
-        <input md-input [(ngModel)]="user.prenom" placeholder="Prenom" [disabled]="!canEdit" />
+        <input mdInput [(ngModel)]="user.prenom" placeholder="Prenom" [disabled]="!canEdit" />
       </md-input-container>
 
       <md-input-container>
-        <input md-input [(ngModel)]="user.nom" placeholder="Nom" [disabled]="!canEdit" />
+        <input mdInput [(ngModel)]="user.nom" placeholder="Nom" [disabled]="!canEdit" />
       </md-input-container>
 
       <md-input-container>
-        <input md-input [(ngModel)]="user.callsign" placeholder="Callsign" [disabled]="!canEdit" />
+        <input mdInput [(ngModel)]="user.callsign" placeholder="Callsign" [disabled]="!canEdit" />
       </md-input-container>
 
       <md-input-container>
-        <textarea md-input [(ngModel)]="user.description" placeholder="Description" [disabled]="!canEdit"></textarea>
+        <textarea mdInput [(ngModel)]="user.description" placeholder="Description" [disabled]="!canEdit"></textarea>
       </md-input-container>
     </ju-v3-sub-pannel>
 
 
-    <div class="user-section" fxFlex="30" fxFlex.sm="100" fxLayoutMargin fxLayoutPadding></div>
+    <div class="user-section" fxFlex.gt-sm="30" fxFlex="100" LayoutMargin fxLayoutPadding>
+      <ju-my-ships [userId]="user.id_forum"></ju-my-ships>
+    </div>
 
     <div class="user-section" fxFlex fxFlex.sm="100" fxLayoutMargin fxLayoutPadding></div>
 
     <ju-v3-sub-pannel class="user-section" fxFlex="100" LayoutMargin *ngIf="user">
-      <ju-tag-owner [userId]="user.id_forum"></ju-tag-owner>
+      <ju-tag-owner [user]="user"></ju-tag-owner>
     </ju-v3-sub-pannel>
   </div>
   <div *ngIf="canEdit && hasMadeChanges() && !busy" fxFlex="100">

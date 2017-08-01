@@ -1,18 +1,25 @@
-<ju-big-splash></ju-big-splash>
-<md-card fxFlex="80" fxFlexOffset="10" style="padding:0px" >
-<md-toolbar color="primary">Connection</md-toolbar>
-<md-card-content style="padding:24px">
-    <p>Veuillez vous connecter pour accéder à l'interface JULIET.</p>
-    <form fxLayout fxLayoutWrap fxLayoutGap="10px">
-        <md-input-container fxFlex="50" fxFlex.sm="100">
-            <input md-input placeholder="Pseudo" [(ngModel)]="pseudo" name="pseudo" >
-        </md-input-container>
-        <md-input-container fxFlex>
-            <input md-input type="password" placeholder="Mot de passe" [(ngModel)]="password"  name="password">
-        </md-input-container>
-    </form>
-</md-card-content>
-<md-card-actions fxLayout fxLayoutWrap  style="padding:24px">
-    <button md-button color="accent" fxFlex="100" [disabled]="busy" (click)="doLogin()">Envoyer</button>
-</md-card-actions>
-</md-card>
+<div fxLayout="column" fxLayoutWrap>
+    <ju-big-splash></ju-big-splash>
+    <md-card fxFlex.gt-sm="80" fXflex.lt-sm="100" style="padding:0px">
+        <md-toolbar color="primary">
+            <span>Connection</span>
+        </md-toolbar>
+        <md-card-content style="padding:24px">
+            <p infoText><b>Veuillez vous connecter pour accéder à l'interface JULIET.</b><br />
+            <em>La connection JULIET est la même que la connection forum. Vous connecter sur JULIET vous connectera au forum Star Citizen.fr et réciproquement.
+                Vous devez donc utiliser votre nom d'utilisateur et mot de passe forum pour vous connecter.</em></p>
+            <form fxLayout fxLayoutWrap fxLayoutGap="10px">
+                <md-input-container fxFlex="50" fxFlex.sm="100">
+                    <input mdInput placeholder="Pseudo" [(ngModel)]="pseudo" name="pseudo">
+                </md-input-container>
+                <md-input-container fxFlex>
+                    <input mdInput type="password" placeholder="Mot de passe" [(ngModel)]="password" name="password">
+                </md-input-container>
+            </form>
+        </md-card-content>
+        <md-card-actions fxLayout fxLayoutWrap style="padding:24px">
+            <button md-button color="accent" fxFlex="100" [disabled]="busy" (click)="doLogin()">Envoyer</button>
+        </md-card-actions>
+        <md-progress-bar mode="indeterminate" color="primary" *ngIf="busy"></md-progress-bar>
+    </md-card>
+</div>

@@ -1,0 +1,40 @@
+.ship-title {
+    margin: 10px 0px;
+    margin-top:0px;
+    padding: 10px;
+    background: #1a1c22;
+    overflow:hidden;
+    position:relative;
+    .ship-ico {
+        display: flex;
+        z-index:0;
+        position:absolute;
+        top:0px;
+        right:0px;
+        background: #282b33;
+    }
+    .ship-name {
+        background: none;
+        border: 0px;
+        padding: 5px;
+        font-family: "Electrolize";
+        font-size: 2rem;
+        font-weight: bolder;
+        color: #ffdb98;
+        outline: none;
+        letter-spacing: 0.3rem;
+    }
+    .ship-type {
+        text-transform: uppercase;
+        color: white;
+        font-weight: bold;
+        font-style: initial;
+    }
+    em {
+        color: #d6d6d6;
+        font-family: "Electrolize";
+        letter-spacing: 0.4rem;
+        padding-left: 5px;
+        margin-top: -13px;
+    }
+}

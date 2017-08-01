@@ -1,9 +1,9 @@
-@import "~@angular/material/core/theming/all-theme";
+@import "~@angular/material/theming/";
 // Plus imports for other components in your app.
 
 // Include the base styles for Angular Material core. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
-@include md-core();
+@include mat-core();
 
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
@@ -16,7 +16,7 @@ $custom-blue-grey: (
   200: #849eaa,
   300: #5e7b88,
   400: #516a76,
-  500: #455a64,
+  500: #81999e,
   600: #384a52,
   700: #2c3940,
   800: #20292e,
@@ -43,24 +43,62 @@ $custom-blue-grey: (
   )
 );
 
-
- $dark-primary: md-palette($custom-blue-grey);
- $dark-accent:  md-palette($md-light-blue, A200, A100, A400);
- $dark-warn:    md-palette($md-deep-orange);
-
-
-$md-dark-theme-background: (
-  status-bar: black,
-  app-bar:    map_get($md-grey, 900),
-  background: #1a1c22,
-  hover:      rgba(white, 0.04), // TODO(kara): check style with Material Design UX
-  card:       map_get($md-grey, 800),
-  dialog:     map_get($md-grey, 800),
-  disabled-button: rgba(white, 0.12)
+$custom-deep-orange: (
+  50: #f6e6e4,
+  100: #e9c0bd,
+  200: #db9691,
+  300: #cd6b64,
+  400: #c24c43,
+  500: #b72c22,
+  600: #b0271e,
+  700: #a72119,
+  800: #9f1b14,
+  900: #90100c,
+  A100: #ffc1bf,
+  A200: #ff8f8c,
+  A400: #ff5d59,
+  A700: #ff4440,
+  contrast: (
+    50: $black-87-opacity,
+    100: $black-87-opacity,
+    200: $black-87-opacity,
+    300: $black-87-opacity,
+    400: $black-87-opacity,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: $black-87-opacity,
+    A200: $black-87-opacity,
+    A400: white,
+    A700: white,
+  )
 );
 
 
- $dark-theme: md-dark-theme($dark-primary, $dark-accent, $dark-warn);
+ $dark-primary: mat-palette($custom-blue-grey);
+ $dark-accent:  mat-palette($mat-light-blue, A200, A100, A400);
+ $dark-warn:    mat-palette($custom-deep-orange);
+
+
+$mat-dark-theme-background: (
+  status-bar: black,
+  app-bar:    map_get($mat-grey, 900),
+  background: #1a1c22,
+  hover:      rgba(white, 0.04), // TODO(kara): check style with Material Design UX
+  card:       map_get($mat-grey, 800),
+  dialog:     map_get($mat-grey, 800),
+  disabled-button: rgba(white, 0.12),
+  raised-button: map-get($mat-grey, 800),
+  focused-button: $white-6-opacity,
+  selected-button: map_get($mat-grey, 900),
+  selected-disabled-button: map_get($mat-grey, 800),
+  disabled-button-toggle: map_get($mat-grey, 1000),
+);
+
+
+ $dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
 
 
  @include angular-material-theme($dark-theme);   

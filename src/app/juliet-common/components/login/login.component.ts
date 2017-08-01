@@ -1,4 +1,4 @@
-import { StateService } from 'ui-router-ng2';
+import { StateService } from '@uirouter/angular';
 import { MdSnackBar } from '@angular/material';
 import { JulietRightsService } from './../../services/juliet-rights.service';
 import { Component, OnInit, Input } from '@angular/core';
@@ -10,34 +10,36 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  protected pseudo;
-  protected password;
-  protected busy: Boolean = false;
+  public pseudo;
+  public password;
+  public busy: boolean = false;
   @Input()
   protected _targetState;
 
-  constructor(protected rights: JulietRightsService, protected snackBar: MdSnackBar, protected states:StateService) { }
+  constructor(protected rights: JulietRightsService, protected snackBar: MdSnackBar, protected states: StateService) { }
 
-  ngOnInit() {  }
+  ngOnInit() {
 
-  private doLogin() {
+  }
+
+  public doLogin() {
     this.busy = true;
     this.rights.doLogin(this.pseudo, this.password).subscribe(
-      data => {
-        this.rights.can_see_juliet().subscribe(
+      loggedIn => {
+        this.rights.can_see_juliet(true).subscribe(
           data => {
-            this.busy = false;
-
-            if (data.data) {
+            console.log("GOT DATA FROM CAN SEE", data);
+            if (data) {
               this.snackBar.open("Vous êtes maintenant connecté", null, { duration: 5000 });
               this.states.go(this._targetState);
-              return;
             }
-
-            if (data.msg == "USER_NOT_LOGGED_IN")
+            else {
               this.snackBar.open("Impossible de vous connecter, verifiez vos identifiants.", null, { duration: 5000 });
+              // This is not a mistake.
+              this.busy = false;
+            }
           }
-        )
+        );
       }
     );
   }

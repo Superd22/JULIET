@@ -87,3 +87,9 @@
     z-index:2;
     transition:0.5s;
 }
+.linked-tag {
+    position: absolute;
+    top: -5px;
+    right: -6px;
+    transform: rotate(45deg);
+}

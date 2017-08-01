@@ -15,7 +15,7 @@ export class RankSelectorComponent implements OnInit {
   @Output()
   protected rankChange= new EventEmitter();
   @Input()
-  private canEdit:Boolean=false;
+  public canEdit:Boolean=false;
 
   protected possibleRanks:ARank[];
   protected possibleRanksFiltered:ARank[];
@@ -35,7 +35,6 @@ export class RankSelectorComponent implements OnInit {
   }
 
   ngOnChange(changes) {
-    console.log(changes);
   }
 
   private newRank(init?:Boolean) {

@@ -6,7 +6,10 @@ import {ViewEncapsulation} from '@angular/core';
   selector: 'ju-v3-pannel-title',
   templateUrl: './title.component.html',
   styleUrls: ['./title.component.scss'],
-  encapsulation: ViewEncapsulation.Native
+  /**
+   * FIREFOX DOESNT SUPPORT IT :(
+   * encapsulation: ViewEncapsulation.Emulated
+   */
 })
 export class V3PannelTitle implements OnInit {
 

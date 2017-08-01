@@ -5,5 +5,6 @@
 
 export const environment = {
   production: false,
+  useDevDb: true,
   julietAPI: "https://starcitizen.fr/API/Juliet/",
 };

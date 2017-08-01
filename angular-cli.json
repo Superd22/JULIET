@@ -18,13 +18,18 @@
       "prefix": "app",
       "mobile": false,
       "styles": [
-        "styles.scss"
+        "styles.scss",
+        "../node_modules/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css"
       ],
-      "scripts": [],
+      "scripts": [
+        "../node_modules/jquery/dist/jquery.js",
+        "../node_modules/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.js"
+      ],
+      "environmentSource": "environments/environment.ts",
       "environments": {
-        "source": "environments/environment.ts",
         "dev": "environments/environment.ts",
-        "prod": "environments/environment.prod.ts"
+        "prod": "environments/environment.prod.ts",
+        "scfr": "environments/environment.scfr.ts"
       }
     }
   ],

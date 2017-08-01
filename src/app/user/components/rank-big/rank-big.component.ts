@@ -13,40 +13,38 @@ import { JulietRightsService } from '../../../juliet-common/services/juliet-righ
 export class RankBigComponent implements OnInit {
 
   @Input("rankId")
-  private _rankId:Number;
+  private _rankId: Number;
   @Input("rank")
-  private _rank:ARank;
+  private _rank: ARank;
   @Output("rank")
-  protected _rankChange= new EventEmitter();
+  protected _rankChange = new EventEmitter();
   @Input()
-  protected user:AUser;
+  protected user: AUser;
 
-  protected rank:ARank;
-  protected showSelect:Boolean=false;
+  public rank: ARank;
+  public showSelect: Boolean = false;
 
-  private canEdit:Boolean=false;
+  private canEdit: Boolean = false;
 
-  constructor(protected api:JulietUserService, protected rights:JulietRightsService) { 
-    
+  constructor(protected api: JulietUserService, protected rights: JulietRightsService) {
+
   }
 
   ngOnInit() {
-    if(this._rank) this.rank = this._rank;
+    if (this._rank) this.rank = this._rank;
     this._rankChange.emit(this.rank);
 
-    this.canEdit = this.rights.userIsAdmin || this.rights.userId == this.user.id_forum;
-  }  
-  
+    this.canEdit = this.rights.userIsAdmin.value || this.rights.userId == this.user.id_forum;
+  }
+
   ngDoCheck() {
-    if(this.rank) {
-      if(this.rank.ID != this._rank.ID) {
+    if (this.rank) {
+      if (this.rank.ID != this._rank.ID) {
         this._rank = this.rank;
-        console.log("emmiting");
-        console.log(this.rank);
         this._rankChange.emit(this.rank);
       }
     }
-  }  
+  }
 
 
 }
