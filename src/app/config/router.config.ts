@@ -2,7 +2,7 @@ import { JulietCommonHelperService } from './../juliet-common/services/juliet-co
 import { environment } from './../../environments/environment';
 import { UIRouter, StateMatcher } from "@uirouter/angular";
 import { Injector } from "@angular/core";
-import * as vis from '@uirouter/visualizer';
+//import * as vis from '@uirouter/visualizer';
 
 export function RouterConfig(router: UIRouter, injector: Injector) {
 
@@ -34,7 +34,7 @@ export function RouterConfig(router: UIRouter, injector: Injector) {
     });
 
     // Dev StateTree Debug    
-    if (!environment.production) vis.visualizer(router);
+    //if (!environment.production) vis.visualizer(router);
 
     const juCommon = injector.get(JulietCommonHelperService);
     router.transitionService.onBefore({ to: "**" }, () => {

@@ -5,9 +5,9 @@ import { ShipModel } from './../interfaces/ship-model';
 import { Hangar } from './../interfaces/hangar';
 import { AUser } from './../../user/interfaces/a-user';
 import { JulietAPIService } from './../../juliet-common/services/juliet-api.service';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs/Rx';
 import { Injectable } from '@angular/core';
-import { Subscription } from "rxjs/Subscription";
+import { Subscription } from "rxjs/Rx";
 
 @Injectable()
 /**
@@ -50,7 +50,7 @@ export class JulietShipsService {
   public getHangarOfPlayer(user): Observable<Hangar> {
     if (typeof user != typeof 123) user = user.id_forum;
     return this.api.get(this.apiNamespace + "getPlayerHangar", { user_id: user }).map(
-      (data: { data: { ships: AShip[] }, error: boolean }) => {
+      (data: any) => {
         if (!data.error) {
 
           // Cache our ships
