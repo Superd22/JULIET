@@ -1,6 +1,6 @@
 {
-  "name": "juliet",
-  "version": "0.0.0",
+  "name": "@sibylla/juliet",
+  "version": "3.0.0",
   "license": "MIT",
   "angular-cli": {},
   "scripts": {
