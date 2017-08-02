@@ -1,4 +1,3 @@
-import { MalihuScrollbarService } from 'ngx-malihu-scrollbar';
 import { PrettyTagTargetTypes } from './../../../enums/pretty-tag-target-types.enum';
 import { TagTarget } from './../../../interfaces/tag-target';
 import { Component, OnInit, Input } from '@angular/core';
@@ -32,7 +31,7 @@ export class TagOwnerListComponent implements OnInit {
   /** the types that exists in the current targets */
   public availableTypes: string[] = [];
 
-  constructor(protected mScrollbarService:MalihuScrollbarService) { }
+  constructor() { }
 
   ngOnInit() {
     this.initList();
