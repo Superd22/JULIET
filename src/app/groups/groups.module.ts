@@ -1,3 +1,4 @@
+import { JulietCommonModule } from './../juliet-common/juliet-common.module';
 import { STATES } from './states/_.states';
 import { UIRouterModule } from '@uirouter/angular';
 import { NgModule } from '@angular/core';
@@ -11,8 +12,9 @@ import { ListeComponent } from './components/liste/liste.component';
     CommonModule,
     UIRouterModule.forChild({
       states: STATES
-    })
+    }),
+    JulietCommonModule
   ],
   declarations: [GroupsComponent, GroupComponent, ListeComponent]
 })
-export class GroupsModule { }
+export class JulietGroupsModule { }

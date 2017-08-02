@@ -50,4 +50,4 @@ import { TargetListFilterPipe } from './pipes/target-list-filter.pipe';
   ],
   providers: [TagsService]
 })
-export class TagsModule { }
+export class JulietTagsModule { }

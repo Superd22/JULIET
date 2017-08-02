@@ -1,3 +1,4 @@
+import { JulietCommonModule } from './../juliet-common/juliet-common.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RanksComponent } from './components/ranks.component';
@@ -11,7 +12,8 @@ import {STATES} from './states/_.states';
     UIRouterModule.forChild({
             states: STATES,
     }),
+    JulietCommonModule
   ],
   declarations: [RanksComponent]
 })
-export class RanksModule { }
+export class JulietRanksModule { }
