@@ -6,7 +6,7 @@ import { UIRouterModule } from '@uirouter/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GroupsComponent } from './components/groups/groups.component';
-import { GroupComponent } from './components/group/group.component';
+import { JuV3FullGroupComponent } from './components/group/group.component';
 import { ListeComponent } from './components/liste/liste.component';
 import { JulietGroupsService } from './services/juliet-groups.service';
 
@@ -19,7 +19,7 @@ import { JulietGroupsService } from './services/juliet-groups.service';
     JulietCommonModule,
     JulietMaterialModule
   ],
-  declarations: [GroupsComponent, GroupComponent, ListeComponent],
   providers: [JulietGroupsService],
+  declarations: [GroupsComponent, JuV3FullGroupComponent, ListeComponent]
 })
 export class JulietGroupsModule { }

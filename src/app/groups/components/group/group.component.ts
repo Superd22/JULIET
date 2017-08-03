@@ -1,11 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-group',
+  selector: 'ju-full-group',
   templateUrl: './group.component.html',
-  styleUrls: ['./group.component.css']
+  styleUrls: ['./group.component.scss']
 })
-export class GroupComponent implements OnInit {
+export class JuV3FullGroupComponent implements OnInit {
+
+  @Input("groupId")
+  private _groupId: number;
 
   constructor() { }
 
