@@ -1,0 +1,19 @@
+<div id="paypal_header">
+  <div class="moreinfo">
+
+    <p class='explain'>
+      Il est maintenant possible de faire un don PayPal pour soutenir Sibylla. <br /> C'est 100% facultatif, <a href="https://starcitizen.fr/Forum/viewtopic.php?f=28&t=12012">+ d'info ici</a>
+    </p>
+
+    <div class='buttons'>
+      <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=UPWMN5SVXT2VN" target="_blank"><button class="btn button bounce">Faire un don!</button></a>
+    </div>
+
+  </div>
+
+  <div class='progress'>
+    <div class="progress-bar" role="progressbar" [style.width]="getPercent()+'%'">
+      {{ammount}} / {{goal}} €
+    </div>
+  </div>
+</div>

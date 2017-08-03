@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs/Observable';
 import { JulietShipsService } from './../../../../ships/services/juliet-ships.service';
 import { ATag } from './../../../interfaces/a-tag';
-import { TagsModule } from './../../../tags.module';
+import { JulietTagsModule } from './../../../tags.module';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { TagsType } from './../../../enums/tags-type.enum'
 import { TagsService } from '../../../services/tags.service';

@@ -1,4 +1,4 @@
-import { ShipsModule } from './../ships/ships.module';
+import { JulietShipsModule } from './../ships/ships.module';
 import { StarsComponent } from './components/rank-big/stars/stars.component';
 import { RankSelectorComponent } from './components/rank-selector/rank-selector.component';
 import { RankBigComponent } from './components/rank-big/rank-big.component';
@@ -10,7 +10,7 @@ import { JulietCommonModule } from '../juliet-common/juliet-common.module';
 import { UIRouterModule } from '@uirouter/angular';
 import { STATES } from './states/_.states';
 import { UserComponent } from './components/user.component';
-import { TagsModule } from '../tags/tags.module';
+import { JulietTagsModule } from '../tags/tags.module';
 import { JulietUserService } from './services/juliet-user.service';
 import { FormsModule } from '@angular/forms';
 import { JulietMaterialModule } from './../juliet-common/material/material.module';
@@ -25,13 +25,13 @@ import { JulietMaterialModule } from './../juliet-common/material/material.modul
     UIRouterModule.forChild({
       states: STATES
     }),
-    TagsModule,
+    JulietTagsModule,
     FormsModule,
-    ShipsModule,
+    JulietShipsModule,
   ],
   providers: [JulietUserService],
   declarations: [
     UserComponent, RankBigComponent, RankSelectorComponent, StarsComponent
   ]
 })
-export class UserModule { }
+export class JulietUserModule { }

@@ -1,3 +1,4 @@
+
 import { JulietMaterialModule } from './../juliet-common/material/material.module';
 import { JulietCommonModule } from './../juliet-common/juliet-common.module';
 import { STATES } from './states/_.states';
@@ -21,4 +22,4 @@ import { JulietGroupsService } from './services/juliet-groups.service';
   declarations: [GroupsComponent, GroupComponent, ListeComponent],
   providers: [JulietGroupsService],
 })
-export class GroupsModule { }
+export class JulietGroupsModule { }

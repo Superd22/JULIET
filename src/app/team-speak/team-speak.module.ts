@@ -27,4 +27,4 @@ import { JulietMaterialModule } from './../juliet-common/material/material.modul
   declarations: [TsRegisterStatusComponent, TsServerStatusComponent, TsMainComponent],
   providers: [JulietTsService],
 })
-export class TeamSpeakModule { }
+export class JulietTeamSpeakModule { }

@@ -1,34 +1,34 @@
+import { JulietPaypalModule } from './paypal/paypal.module';
 import { CdkTableModule } from '@angular/cdk';
 import { JulietMaterialModule } from './juliet-common/material/material.module';
-import { TeamSpeakModule } from './team-speak/team-speak.module';
+import { JulietTeamSpeakModule } from './team-speak/team-speak.module';
 import { MainSidenavComponent } from './juliet-common/components/main-sidenav/main-sidenav.component';
 import { RouterConfig } from './config/router.config';
 import { UIRouterModule } from '@uirouter/angular';
-import { StatsModule } from './stats/stats.module';
-import { ShipsModule } from './ships/ships.module';
-import { RightsModule } from './rights/rights.module';
-import { RanksModule } from './ranks/ranks.module';
-import { NotifsModule } from './notifs/notifs.module';
-import { DefaultModule } from './default/default.module';
+import { JulietStatsModule } from './stats/stats.module';
+import { JulietShipsModule } from './ships/ships.module';
+import { JulietRightsModule } from './rights/rights.module';
+import { JulietRanksModule } from './ranks/ranks.module';
+import { JulietNotifsModule } from './notifs/notifs.module';
+import { JulietDefaultModule } from './default/default.module';
 import { JulietCommonModule } from './juliet-common/juliet-common.module';
-import { CalendarModule } from './calendar/calendar.module';
-import { UserModule } from './user/user.module';
-import { TagsModule } from './tags/tags.module';
-import { GroupsModule } from './groups/groups.module';
+import { JulietCalendarModule } from './calendar/calendar.module';
+import { JulietUserModule } from './user/user.module';
+import { JulietTagsModule } from './tags/tags.module';
+import { JulietGroupsModule } from './groups/groups.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import {  MdMenuModule, MdMenuTrigger } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout'
-import { AppComponent } from './app.component';
+import { JulietAppComponent } from './app.component';
 import { environment } from '../environments/environment';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { MalihuScrollbarModule } from 'ngx-malihu-scrollbar';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    JulietAppComponent,
     MainSidenavComponent,
   ],
   imports: [
@@ -41,23 +41,23 @@ import { MalihuScrollbarModule } from 'ngx-malihu-scrollbar';
     JulietMaterialModule,
     FormsModule,
     HttpModule,
-    CalendarModule,
-    DefaultModule,
-    GroupsModule,
+    JulietCalendarModule,
+    JulietDefaultModule,
+    JulietGroupsModule,
     JulietCommonModule,
-    NotifsModule,
-    RanksModule,
-    RightsModule,
-    ShipsModule,
-    StatsModule,
-    TeamSpeakModule,
-    TagsModule,
-    UserModule,
+    JulietNotifsModule,
+    JulietRanksModule,
+    JulietRightsModule,
+    JulietShipsModule,
+    JulietStatsModule,
+    JulietTeamSpeakModule,
+    JulietTagsModule,
+    JulietUserModule,
+    JulietPaypalModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
-    MalihuScrollbarModule.forRoot(),
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [JulietAppComponent]
 })
-export class AppModule { }
+export class JulietAppModule { }

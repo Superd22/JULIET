@@ -1,5 +1,5 @@
 import { NgxPaginationModule } from 'ngx-pagination';
-import { TagsModule } from './../tags/tags.module';
+import { JulietTagsModule } from './../tags/tags.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { JulietShipsService } from './services/juliet-ships.service';
@@ -30,7 +30,7 @@ import { SingleShipVariantsComponent } from './components/single/single-ship-var
     FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
-    TagsModule,
+    JulietTagsModule,
     NgxPaginationModule,
     UIRouterModule.forChild({
       states: STATES,
@@ -44,4 +44,4 @@ import { SingleShipVariantsComponent } from './components/single/single-ship-var
     SingleShipVariantsComponent],
   exports: [MyShipsComponent],
 })
-export class ShipsModule { }
+export class JulietShipsModule { }
