@@ -11,6 +11,7 @@ import { UIRouterModule } from '@uirouter/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DefaultComponent } from './components/default/default.component';
+import { FormsModule } from "@angular/forms/";
 
 @NgModule({
   imports: [
@@ -22,10 +23,11 @@ import { DefaultComponent } from './components/default/default.component';
     }),
     JulietPaypalModule,
     FlexLayoutModule,
-    JulietTeamSpeakModule
+    JulietTeamSpeakModule,
+    FormsModule
   ],
   declarations: [DefaultComponent],
-  bootstrap: [
-    ]
+  entryComponents: [],
+  bootstrap: [ ]
 })
 export class JulietDefaultModule { }

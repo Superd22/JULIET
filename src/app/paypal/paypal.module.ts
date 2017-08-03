@@ -10,5 +10,6 @@ import { PaypalForumHeaderComponent } from './components/paypal-forum-header/pay
   ],
   declarations: [PaypalForumHeaderComponent],
   exports: [PaypalForumHeaderComponent],
+  entryComponents: [PaypalForumHeaderComponent],
 })
 export class JulietPaypalModule { }
