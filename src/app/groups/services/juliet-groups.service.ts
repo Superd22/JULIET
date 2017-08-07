@@ -1,3 +1,5 @@
+import { SeoUrlPipe } from './../../juliet-common/pipes/seo-url.pipe';
+import { StateService } from '@uirouter/angular';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { Injectable } from '@angular/core';
@@ -7,7 +9,7 @@ import { AGroup } from '../interfaces/a-group';
 @Injectable()
 export class JulietGroupsService {
 
-  constructor(public api: JulietAPIService) { }
+  constructor(public api: JulietAPIService, public state: StateService) { }
   private _groupList: BehaviorSubject<AGroup[]> = new BehaviorSubject([]);
   public groupListCount;
   private namespace = "Groups/"
@@ -26,6 +28,19 @@ export class JulietGroupsService {
 
   public get groupList() {
     return this._groupList;
+  }
+
+  /**
+   * 
+   * @param id 
+   */
+  public getFullGroup(id: number) {
+
+  }
+
+  public goToSingleGroupState(group: AGroup) {
+    console.log("euh?!");
+    this.state.go("secure.Groups.single", { groupId: group.id, groupSlug: new SeoUrlPipe().transform(group.nom) });
   }
 
 

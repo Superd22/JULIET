@@ -11,7 +11,7 @@
     </ng-container>
 
     <md-header-row *cdkHeaderRowDef="displayedColumns"></md-header-row>
-    <md-row *cdkRowDef="let row; columns: displayedColumns;"></md-row>
+    <md-row *cdkRowDef="let row; columns: displayedColumns;" class="group-row" md-ripple (click)="groupApi.goToSingleGroupState(row)"></md-row>
 </md-table>
 
 <md-paginator #paginator [length]="groupApi?.groupListCount" [pageIndex]="0" [pageSize]="25" [pageSizeOptions]="[5, 10, 25, 100]">
