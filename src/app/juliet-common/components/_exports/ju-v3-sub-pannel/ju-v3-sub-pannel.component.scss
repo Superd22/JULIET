@@ -4,6 +4,11 @@
     box-shadow: 0px 0px 10px rgba(0,0,0,0.86);
     border-radius: 5px;
     display:flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    .ju-sub-pannel {
+        background:red;
+    }
     .error {
         display: inline-block;
         color: #b9b9b9;

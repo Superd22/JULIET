@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs/Observable';
 import { SeoUrlPipe } from './../../juliet-common/pipes/seo-url.pipe';
 import { StateService } from '@uirouter/angular';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -34,13 +35,17 @@ export class JulietGroupsService {
    * 
    * @param id 
    */
-  public getFullGroup(id: number) {
-
+  public getFullGroup(id: number): Observable<AGroup> {
+    return this.api.get(this.namespace + "Group/view", { groupId: id }).map(
+      (data) => {
+        return data.data;
+      }
+    )
   }
 
   public goToSingleGroupState(group: AGroup) {
     console.log("euh?!");
-    this.state.go("secure.Groups.single", { groupId: group.id, groupSlug: new SeoUrlPipe().transform(group.nom) });
+    this.state.go("secure.Groups.single", { group: group, groupId: group.id, groupSlug: new SeoUrlPipe().transform(group.nom) });
   }
 
 

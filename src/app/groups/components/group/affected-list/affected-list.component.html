@@ -1,0 +1,51 @@
+<div *ngIf="group">
+  <md-toolbar>
+    <h2>Affectations</h2>
+    <button md-button [mdMenuTriggerFor]="filterMenu">
+      Filtrer par type
+    </button>
+    <md-input-container>
+      <input mdInput placeholder="Rechercher" [(ngModel)]="search">
+    </md-input-container>
+
+    <button md-button disabled="true" *ngIf="displayObservable()">{{ (displayObservable()|async)?.length }} Résultats</button>
+  </md-toolbar>
+
+  <md-menu #filterMenu="mdMenu">
+    <button md-menu-item (click)='toggleFilter("users")'> <md-icon>{{iconForFilter('users')}}</md-icon> 
+      Joueurs 
+    </button>
+    <button md-menu-item (click)='toggleFilter("ships")'> <md-icon>{{iconForFilter('ships')}}</md-icon> 
+      Vaisseaux 
+    </button>
+    <button md-menu-item (click)='toggleFilter("ressources")'> <md-icon>{{iconForFilter('ressources')}}</md-icon> 
+      Ressources 
+    </button>
+  </md-menu>
+
+  <md-table #table [dataSource]="displayData">
+
+    <ng-container cdkColumnDef="type">
+      <md-header-cell *cdkHeaderCellDef> Type </md-header-cell>
+      <md-cell *cdkCellDef="let row"> {{row.type}} </md-cell>
+    </ng-container>
+
+    <ng-container cdkColumnDef="name">
+      <md-header-cell *cdkHeaderCellDef> Name </md-header-cell>
+      <md-cell *cdkCellDef="let row"> 
+        {{getAffectationDisplayName(row)}}
+      </md-cell>
+    </ng-container>
+
+    <ng-container cdkColumnDef="actions">
+      <md-header-cell *cdkHeaderCellDef> Actions </md-header-cell>
+      <md-cell *cdkCellDef="let row"> 
+        <button md-icon-button color="warn"><md-icon>close</md-icon></button>
+      </md-cell>
+    </ng-container>
+
+    <md-header-row *cdkHeaderRowDef="['name', 'type', 'actions']"></md-header-row>
+    <md-row *cdkRowDef="let row; columns: ['name', 'type', 'actions'];" md-ripple (dblclick)="extendRowPannel(row)" [id]="getIdOfRow(row)">
+    </md-row>
+  </md-table>
+</div>

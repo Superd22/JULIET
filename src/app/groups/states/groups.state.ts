@@ -18,6 +18,9 @@ export let GroupsState = {
     single: {
         url: '{groupId:int}-{groupSlug:string}',
         name: "secure.Groups.single",
+        params: {
+            group: null,
+        },
         component: JuV3FullGroupComponent,
     }
 }

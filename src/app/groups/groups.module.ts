@@ -9,6 +9,8 @@ import { GroupsComponent } from './components/groups/groups.component';
 import { JuV3FullGroupComponent } from './components/group/group.component';
 import { ListeComponent } from './components/liste/liste.component';
 import { JulietGroupsService } from './services/juliet-groups.service';
+import { FormsModule } from '@angular/forms';
+import { JuGroupAffectedListComponent } from './components/group/affected-list/affected-list.component';
 
 @NgModule({
   imports: [
@@ -17,9 +19,10 @@ import { JulietGroupsService } from './services/juliet-groups.service';
       states: STATES
     }),
     JulietCommonModule,
-    JulietMaterialModule
+    JulietMaterialModule,
+    FormsModule,
   ],
   providers: [JulietGroupsService],
-  declarations: [GroupsComponent, JuV3FullGroupComponent, ListeComponent]
+  declarations: [GroupsComponent, JuV3FullGroupComponent, ListeComponent, JuGroupAffectedListComponent]
 })
 export class JulietGroupsModule { }
