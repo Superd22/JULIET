@@ -45,7 +45,7 @@
     </ng-container>
 
     <md-header-row *cdkHeaderRowDef="['name', 'type', 'actions']"></md-header-row>
-    <md-row *cdkRowDef="let row; columns: ['name', 'type', 'actions'];" md-ripple (dblclick)="extendRowPannel(row)" [id]="getIdOfRow(row)">
+    <md-row md-ripple *cdkRowDef="let row; columns: ['name', 'type', 'actions'];" (dblclick)="extendRowPannel(row)" [id]="getIdOfRow(row)">
     </md-row>
   </md-table>
 </div>
