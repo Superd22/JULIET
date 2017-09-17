@@ -1,16 +1,16 @@
 <md-sidenav-container class="app-layout" fxLayoutWrap>
-	<md-sidenav #sidenav mode="over" class="main-sidenav" fxFlex="25" >
+	<md-sidenav #sidenav mode="over" class="main-sidenav" fxFlex="25">
 		<app-main-sidenav></app-main-sidenav>
 	</md-sidenav>
 
 
-<button md-icon-button (click)="sidenav.toggle()" color="accent" id="menuToggle"> <md-icon>menu</md-icon></button>
+	<button md-icon-button (click)="sidenav.toggle()" color="accent" id="menuToggle"> <md-icon>menu</md-icon></button>
 
-	<div class="content" style="margin-bottom: 90px; max-width: 100vw;">
+	<div fxFlex class="content" style="max-width: 100vw;">
 		<ui-view></ui-view>
-		
-  		<div style="clear:both"></div>
+
+		<div style="clear:both"></div>
 	</div>
 
-  <div style="clear:both"></div>
+	<div style="clear:both"></div>
 </md-sidenav-container>

@@ -168,7 +168,7 @@ export class OwnerComponent implements OnInit {
         data => this.currentUserCan = data
       );
 
-      this._fetchedFor = { type: "shipModel", target: this.ship.id };
+      this._fetchedFor = { type: "shipModel", target: this.shipModel.id };
     }
   }
 
