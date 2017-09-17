@@ -7,3 +7,14 @@
         }
     }
 }
+
+.mat-sidenav-content {
+    // width:100%;
+    // Workaround for position fixed & stick & aabsolute inside the content
+    // @see https://github.com/angular/material2/issues/998
+    transform: initial !important;
+}
+
+.mat-drawer-container {
+    background:transparent;
+}
