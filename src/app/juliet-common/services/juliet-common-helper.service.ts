@@ -1,9 +1,11 @@
+import { Observable } from 'rxjs/Observable';
 import { Location } from '@angular/common';
 import { UIRouter, Transition } from '@uirouter/angular';
 import { JulietAPIService } from './juliet-api.service';
 import { CompleterData, CompleterService } from 'ng2-completer';
 import { Injectable } from '@angular/core';
 import { MdSidenav } from '@angular/material';
+import { DataSource } from '@angular/cdk/table';
 
 @Injectable()
 export class JulietCommonHelperService {
@@ -60,6 +62,22 @@ export class JulietCommonHelperService {
     completer.dataField(dataField);
 
     return completer;
+  }
+
+  public static buildDataSourceFrom<T>(observable: Observable<T[]>): DataSource<T> {
+    return new class extends DataSource<T> {
+      constructor() {
+        super();
+      }
+      connect(): Observable<T[]> {
+        return observable;
+      }
+      disconnect() { }
+    };
+  }
+
+  public static buildDataSourceFromFunction<T>(fn: () => Observable<T[]>): DataSource<T> {
+    return JulietCommonHelperService.buildDataSourceFrom( fn() );
   }
 
   /**

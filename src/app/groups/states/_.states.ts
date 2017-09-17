@@ -1,5 +1,2 @@
-import { groupsListeState } from './liste.state';
-import { groupState } from './group.state';
-import { groupsState } from './groups.state';
-
-export let STATES = [groupState, groupsState, groupsListeState]
+import { GroupsState } from './groups.state';
+export let STATES = [GroupsState.index, GroupsState.list, GroupsState.single];

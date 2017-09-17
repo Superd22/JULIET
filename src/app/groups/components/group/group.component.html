@@ -1,3 +1,13 @@
-<p>
-  group works!
-</p>
+<ju-v3-sub-pannel *ngIf="group">
+
+    <div class="header" [style.background-image]="'url('+group.ban+')'">
+      <h2>{{ group.nom }}</h2>
+
+      <div class="details">
+        <input placeholder="Abréviation"  [(ngModel)]="group.abr">
+      </div>
+    </div>
+
+    <ju-group-affected-list [group]="group"></ju-group-affected-list>
+
+</ju-v3-sub-pannel>

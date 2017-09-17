@@ -1,5 +1,15 @@
-<p>
-  groups works!
-</p>
+<ju-v3-pannel>
+    <div class="ju_tag_heading title" LayoutMargin>
+        <span class='right'>v3.0</span>
+        <h2>Hangar</h2>
+        <em>Gestion de flotte universelle</em>
+    </div>
 
-<ui-view></ui-view>
+    <div fxLayout="row">
+        <app-ju-v3-tab uiSref=".list" uiSrefActive="active">Listes des groupes</app-ju-v3-tab>
+        <app-ju-v3-tab uiSref=".search" uiSrefActive="active" class="hidden">Recherche</app-ju-v3-tab>
+    </div>
+
+    <ui-view fxFlex="100"></ui-view>
+
+</ju-v3-pannel>

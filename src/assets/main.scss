@@ -1,0 +1,20 @@
+.mat-table {
+    background:transparent;
+    .mat-header-row {
+        background: rgba(0, 0, 0, 0.12);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+        .mat-header-cell {
+        }
+    }
+}
+
+.mat-sidenav-content {
+    // width:100%;
+    // Workaround for position fixed & stick & aabsolute inside the content
+    // @see https://github.com/angular/material2/issues/998
+    transform: initial !important;
+}
+
+.mat-drawer-container {
+    background:transparent;
+}

@@ -1,5 +1,5 @@
 import { JulietPaypalModule } from './paypal/paypal.module';
-import { CdkTableModule } from '@angular/cdk';
+import { CdkTableModule } from '@angular/cdk/table';
 import { JulietMaterialModule } from './juliet-common/material/material.module';
 import { JulietTeamSpeakModule } from './team-speak/team-speak.module';
 import { MainSidenavComponent } from './juliet-common/components/main-sidenav/main-sidenav.component';
@@ -37,6 +37,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
       useHash: !environment.production,
     }),
     BrowserModule,
+    CdkTableModule,
     JulietMaterialModule,
     FormsModule,
     HttpModule,

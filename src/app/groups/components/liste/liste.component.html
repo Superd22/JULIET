@@ -1,3 +1,18 @@
-<p>
-  liste works!
-</p>
+<md-table #table [dataSource]="dataGroups" mdSort>
+
+    <ng-container cdkColumnDef="nom">
+        <md-header-cell *cdkHeaderCellDef md-sort-header> Nom </md-header-cell>
+        <md-cell *cdkCellDef="let row"> {{row.nom}} </md-cell>
+    </ng-container>
+
+    <ng-container cdkColumnDef="members">
+        <md-header-cell *cdkHeaderCellDef md-sort-header> Nombre de membres </md-header-cell>
+        <md-cell *cdkCellDef="let row"> {{row.members.split(',').length}} {{row.max_members <= 0 ? '' : '/ '+row.max_members}} </md-cell>
+    </ng-container>
+
+    <md-header-row *cdkHeaderRowDef="displayedColumns"></md-header-row>
+    <md-row *cdkRowDef="let row; columns: displayedColumns;" class="group-row" md-ripple (click)="groupApi.goToSingleGroupState(row)"></md-row>
+</md-table>
+
+<md-paginator #paginator [length]="groupApi?.groupListCount" [pageIndex]="0" [pageSize]="25" [pageSizeOptions]="[5, 10, 25, 100]">
+</md-paginator> 
