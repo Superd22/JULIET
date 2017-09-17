@@ -3,7 +3,7 @@ import { AGroup } from './../../interfaces/a-group';
 import { JulietCommonHelperService } from './../../../juliet-common/services/juliet-common-helper.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { JulietGroupsService } from '../../services/juliet-groups.service';
-import { DataSource } from '@angular/cdk';
+import { DataSource } from '@angular/cdk/table';
 import { MdPaginator, MdSort } from "@angular/material";
 
 @Component({

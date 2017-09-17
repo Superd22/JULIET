@@ -5,7 +5,7 @@ import { JulietAPIService } from './juliet-api.service';
 import { CompleterData, CompleterService } from 'ng2-completer';
 import { Injectable } from '@angular/core';
 import { MdSidenav } from '@angular/material';
-import { DataSource } from '@angular/cdk';
+import { DataSource } from '@angular/cdk/table';
 
 @Injectable()
 export class JulietCommonHelperService {

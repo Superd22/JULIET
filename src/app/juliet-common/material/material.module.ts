@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MdButtonModule, MdSelectModule, MdSidenavModule, MdIconModule, MdProgressBarModule, MdInputModule, MdTooltipModule, MdMenuModule } from '@angular/material';
 import { MdProgressSpinnerModule, MdSnackBarModule, MdToolbarModule, MdAutocompleteModule, MdCheckboxModule } from '@angular/material';
 import { MdCardModule, MdTableModule, MdPaginatorModule, MdSortModule } from '@angular/material';
-import { CdkTableModule } from "@angular/cdk";
+import { CdkTableModule } from "@angular/cdk/table";
 
 
 

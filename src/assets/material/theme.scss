@@ -81,7 +81,13 @@ $custom-deep-orange: (
  $dark-accent:  mat-palette($mat-light-blue, A200, A100, A400);
  $dark-warn:    mat-palette($custom-deep-orange);
 
-
+ $candy-app-primary: mat-palette($mat-indigo);
+ $candy-app-accent:  mat-palette($mat-pink, A200, A100, A400);
+ 
+ // The warn palette is optional (defaults to red).
+ $candy-app-warn:    mat-palette($mat-red);
+ $candy-app-theme: mat-light-theme($candy-app-primary, $candy-app-accent, $candy-app-warn);
+ 
 $mat-dark-theme-background: (
   status-bar: black,
   app-bar:    map_get($mat-grey, 900),
@@ -94,7 +100,9 @@ $mat-dark-theme-background: (
   focused-button: $white-6-opacity,
   selected-button: map_get($mat-grey, 900),
   selected-disabled-button: map_get($mat-grey, 800),
-  disabled-button-toggle: map_get($mat-grey, 1000),
+  disabled-button-toggle: map_get($mat-grey, 900),
+  unselected-chip: map_get($mat-grey, 700),
+  disabled-list-option: black,
 );
 
 
