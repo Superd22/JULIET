@@ -3,7 +3,7 @@
     <h3>Liste des vaisseaux</h3>
   </ju-v3-heading>
 
-  <div *ngIf="hangar">
+  <div *ngIf="hangar" class="ships-holder">
     <ju-a-ship-label *ngFor="let ship of hangar.ships" [ship]="ship" (onDelete)="deleteShip($event)" [edit]="hangar?.canAdmin"></ju-a-ship-label>
   </div>
 

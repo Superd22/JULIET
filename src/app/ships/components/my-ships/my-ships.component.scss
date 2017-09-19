@@ -4,3 +4,10 @@
     border-radius: 3px;
     box-shadow: 0 0 3px black; */
 }
+
+.ships-holder {
+    height: 297px;
+    overflow: auto;
+    overflow-x: hidden;
+    margin-right: 5px;
+}

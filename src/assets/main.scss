@@ -18,3 +18,15 @@
 .mat-drawer-container {
     background:transparent;
 }
+
+::-webkit-scrollbar {
+    background: #111315; 
+    width: 5px;
+
+}
+[uiSref] {
+    cursor:pointer;
+}
+::-webkit-scrollbar-thumb  {    
+    background: #68838a;
+}
