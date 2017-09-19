@@ -10,7 +10,8 @@ import { DataSource } from '@angular/cdk/table';
 @Injectable()
 export class JulietCommonHelperService {
 
-  protected sideNav: MdSidenav;
+  protected _sideNav: MdSidenav;
+  public get sidenav(): MdSidenav { return this._sideNav; }
   /** if we need to display tuto tooltips */
   private _tutorialMod: boolean = false;
 
@@ -77,29 +78,29 @@ export class JulietCommonHelperService {
   }
 
   public static buildDataSourceFromFunction<T>(fn: () => Observable<T[]>): DataSource<T> {
-    return JulietCommonHelperService.buildDataSourceFrom( fn() );
+    return JulietCommonHelperService.buildDataSourceFrom(fn());
   }
 
   /**
   * Closes the main sidenav  
   */
   public closeSideNav() {
-    if (this.sideNav) this.sideNav.close();
+    if (this._sideNav) this._sideNav.close();
   }
 
   public toggleSideNav() {
-    if (this.sideNav) this.sideNav.toggle();
+    if (this._sideNav) this._sideNav.toggle();
   }
 
   public openSideNav() {
-    if (this.sideNav) this.sideNav.open();
+    if (this._sideNav) this._sideNav.open();
   }
 
   /**
    * Registers the main side-nav app-wide.
    */
   public registerSideNav(sidenav: MdSidenav) {
-    this.sideNav = sidenav;
+    this._sideNav = sidenav;
   }
 
 }

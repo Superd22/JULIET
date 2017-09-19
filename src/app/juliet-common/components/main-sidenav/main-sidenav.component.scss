@@ -1,0 +1,69 @@
+$active-color: #41c4ff;
+
+button {
+    font-family: Electrolize,sans-serif;
+    font-size: 17px;
+    text-align: left;
+    height: 44px;
+
+    &.active {
+        color:$active-color;
+    }
+}
+.floatMode {
+    button {text-align:center;}
+    .floaty {
+        position: fixed;
+        top: 88px;
+        button {
+            opacity:0;
+            transition:0.5s;
+            &.show {
+                animation: fadein 0.5s ease-in-out;
+                animation-iteration-count: 1;
+                opacity:1;
+            }
+            &.menu-toggle {
+                position: fixed;
+                top: -3px;
+            }
+        }
+
+    }
+}
+.logo-holder {
+    margin-bottom:24px;
+    width: 100%;
+    height: 64px;
+    display: flex;
+    
+    .menu-toggle {    
+        margin: auto;
+        text-align: center;
+    }
+    img {
+        max-height: 64px;
+        max-width: 80%;
+        flex: 1 1 80%;
+        margin: auto;
+        cursor: pointer;
+        opacity: 0.8;
+        transition:0.5s;
+        &:hover {opacity:1;}
+    }
+}
+
+hr {
+    margin: 12px 0px;
+    width: 100%;
+    opacity: .5;
+}
+
+@keyframes fadein {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}

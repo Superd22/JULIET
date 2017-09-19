@@ -38,9 +38,10 @@ export function RouterConfig(router: UIRouter, injector: Injector) {
 
     const juCommon = injector.get(JulietCommonHelperService);
     router.transitionService.onBefore({ to: "**" }, () => {
+        /**
         if (juCommon)
             (<any>juCommon).closeSideNav();
-
+*/
         uiTrans = true;
     });
 }

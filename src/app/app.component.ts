@@ -12,6 +12,9 @@ export class JulietAppComponent {
 
   @ViewChild(MdSidenav)
   protected sideNav: MdSidenav;
+
+  public sideNavOpened: boolean = true;
+
   constructor(protected juCommon: JulietCommonHelperService) { }
 
   ngOnInit() {

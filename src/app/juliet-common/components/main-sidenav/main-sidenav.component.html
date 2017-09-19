@@ -1,14 +1,40 @@
-<div fxLayout fxLayoutWrap>
-  <div *ngIf="isSibylla" fxLayout fxLayoutWrap>
-    <button fxFlex="100" md-button uiSref="secure.Default" uiSrefActive="active">INDEX</button>
-    <button fxFlex="100" md-button uiSref="secure.user" uiSrefActive="active">Mon profil</button>
-    <button fxFlex="100" md-button uiSref="secure.Hangar" uiSrefActive="active">Hangar</button>
-    <button fxFlex="100" md-button uiSref="secure.Groups.list" uiSrefActive="active">Groupes</button>
-    <button fxFlex="100" md-button uiSref="secure.Tags.index.list" uiSrefActive="active">T.A.G.S</button>
-    <button fxFlex="100" md-button uiSref="secure.TS3" uiSrefActive="active">TeamSpeak</button>
+<div fxLayout fxLayoutWrap [ngClass]="{floatMode: floatMode}">
+  <div class="logo-holder" *ngIf="!floatMode" fxLayout>
+    <button md-icon-button (click)="toggleSideNav()" color="accent" class="menu-toggle"><md-icon>menu</md-icon></button>
+    <img uiSref="secure.Default" src="/assets/images/main/juliet.png">
   </div>
 
-  <div *ngIf="isAdmin" fxLayout fxLayoutWrap fxFlex>
-    <button fxFlex="100" md-button uiSref="secure.Hangar.adminTypes" uiSrefActive="active">Admin Vaisseaux</button>
+  <ng-container *ngIf="!floatMode">
+    <md-nav-list *ngIf="isSibylla" fxLayout fxLayoutWrap>
+      <button *ngFor="let btn of globalLinks" md-list-item fxFlex="100" md-button [uiSref]="btn.targetState" uiSrefActive="active"
+        color="primary">
+        <md-icon>{{btn.icon}}</md-icon> {{btn.name}}
+    </button>
+    </md-nav-list>
+
+    <hr>
+
+    <div *ngIf="isAdmin" fxLayout fxLayoutWrap fxFlex>
+      <button *ngFor="let btn of adminLinks" md-list-item fxFlex="100" md-button [uiSref]="btn.targetState" uiSrefActive="active"
+        color="primary">
+        <md-icon>{{btn.icon}}</md-icon> {{btn.name}}
+    </button>
+    </div>
+  </ng-container>
+
+  <div class="floaty" *ngIf="floatMode" fxLayout="column">
+
+    <button md-icon-button (click)="toggleSideNav()" color="accent" [ngClass]="{show: show}" class="menu-toggle"><md-icon>menu</md-icon></button>
+
+    <ng-container *ngIf="isSibylla">
+      <button *ngFor="let btn of globalLinks" md-icon-button [ngClass]="{show: show}" [uiSref]="btn.targetState" uiSrefActive="active"
+        color="primary" [mdTooltip]="btn.name" mdTooltipPosition="right">
+            <md-icon>{{btn.icon}}</md-icon> 
+      </button>
+      <button *ngFor="let btn of adminLinks" md-icon-button [ngClass]="{show: show}" [uiSref]="btn.targetState" uiSrefActive="active"
+        color="primary" [mdTooltip]="btn.name" mdTooltipPosition="right">
+            <md-icon>{{btn.icon}}</md-icon> 
+      </button>
+    </ng-container>
   </div>
 </div>
